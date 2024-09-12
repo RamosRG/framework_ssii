@@ -24,3 +24,9 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('getAreas', 'AdminController::getAreas');
     $routes->delete('delete/(:num)', 'AdminController::delete/$1');
 });
+
+$routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
+    $routes->get('forgotPassword', 'UserController::forgotPassword');
+
+});
+

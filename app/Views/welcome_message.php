@@ -69,7 +69,7 @@
       </div>
       
       <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-        <span class="w3-right w3-padding w3-hide-small">Forgot <a href="<?= base_url('auth/forgotPassword') ?>">password?</a></span>
+        <span class="w3-right w3-padding w3-hide-small">Forgot <a href="user/forgotPassword">password?</a></span>
       </div>
     </div>
   </div>
