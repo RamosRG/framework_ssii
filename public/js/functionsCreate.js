@@ -1,3 +1,5 @@
+console.log('Script de funcionesCreate.js cargado');
+
 $(document).on('click', '#createUser .btnCreate', function (e) {
     e.preventDefault(); // Evita el comportamiento predeterminado del botón
 
@@ -38,4 +40,42 @@ $(document).on('click', '#createUser .btnCreate', function (e) {
             });
         }
     });
+    
 });
+
+$('#loginForm').on('submit', function (e) {
+    e.preventDefault(); // Evita el comportamiento predeterminado del formulario
+    console.log('Formulario de login enviado');
+
+    var formData = $(this).serialize(); // Serializa los datos del formulario
+
+    $.ajax({
+        url: '/framework_ssii/auth/login',
+        type: 'POST',
+        data: formData,
+        dataType: 'json',
+        success: function (response) {
+           // Muestra la respuesta en la consola
+            if (response.status === 'success') {
+                    window.location.href = './admin/home'; // Cambia la URL a la página de destino
+            } else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Seguro que eres tu? ' + response.message,
+                    icon: 'question',
+                    confirmButtonText: 'Ok'
+                });
+            }
+        },
+        error: function () {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Ocurrió un error al intentar iniciar sesión.',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+        }
+    });
+});
+
+

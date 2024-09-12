@@ -6,9 +6,6 @@ use App\Models\AreasModel;
 
 class AuthController extends BaseController
 {
-    public function forgotPassword(){
-        view('forgot_password');
-    }
     public function login()
     {
         $session = session();
@@ -23,11 +20,10 @@ class AuthController extends BaseController
         if ($user) {
             // Si las credenciales son correctas
             $session->set('email', $user['email']);
-            return redirect()->to('admin/home');
+            return $this->response->setJSON(['status'=>'success', 'message' => 'CREDENCIALES CORRECTAS']);
         } else {
             // Si las credenciales son incorrectas
-            echo('credenciales incorrectas');
-            return redirect()->back();
+            return $this->response->setJSON(['status'=> 'error', 'message' => 'CREDENCIALES INCORRECTAS']);
         }
         
     }

@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./public/assets/sweetalert2/sweetalert2.min.css">
   <style>
     html, body {
       height: 100%;
@@ -50,21 +50,21 @@
 </head>
 <body class="w3-theme-l7">
 
-  <div class="w3-container w3-content login-form w3-card w3-round w3-white">
+  <div id="login" class="w3-container w3-content login-form w3-card w3-round w3-white">
     <div class="w3-container">
       <div class="w3-section">
-        <form action="/framework_ssii/auth/login" method="POST">
-          <label for="username"><b>Username</b></label>
-          <input id="username" class="w3-input w3-border w3-margin-bottom w3-round" type="text" placeholder="Enter Username" name="email" required>
+        <form id="loginForm" action="/framework_ssii/auth/login" method="POST">
+          <label for="username"><b>EMAIL</b></label>
+          <input id="username" class="w3-input w3-border w3-margin-bottom w3-round" type="text" placeholder="Enter EMAIL" name="email" required>
           
-          <label for="password"><b>Password</b></label>
-          <input id="password" class="w3-input w3-border w3-round" type="password" placeholder="Enter Password" name="password" required>
+          <label for="password"><b>PASSWORD</b></label>
+          <input id="password" class="w3-input w3-border w3-round" type="password" placeholder="Enter PASSWORD" name="password" required>
           
           <label>
             <input class="w3-check w3-margin-top" type="checkbox" name="remember" checked="checked"> Remember me
           </label>
 
-          <button class="w3-button w3-green w3-section" type="submit">Login</button>
+          <button class="w3-button w3-green w3-section" id="btnLogin" type="submit">Login</button>
         </form>
       </div>
       
@@ -83,5 +83,9 @@
     <p>Powered by Orlando Ramos</p>
   </footer>
 
+  <!-- Incluir jQuery antes de tu script -->
+  <script src="./public/js/script.js"></script>
+  <script src="./public/assets/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="./public/js/functionsCreate.js"></script>
 </body>
 </html>
