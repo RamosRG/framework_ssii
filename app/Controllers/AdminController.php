@@ -9,6 +9,9 @@ use App\Models\AuthModel;
 
 class AdminController extends Controller
 {
+    public function addQuestion(){
+        return view('accions/add_question');
+    }
     //funcion pora obtener las areas
     public function getAreas()
     {

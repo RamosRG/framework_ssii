@@ -29,4 +29,8 @@ $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('forgotPassword', 'UserController::forgotPassword');
 
 });
+$routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) {
+    $routes->get('addQuestions', 'AccionsController::addQuestions');
+
+});
 
