@@ -8,5 +8,8 @@ class AccionsController extends BaseController
        return view('accions/add_questions');
     }
     
-    
+    public function addAudit(){
+       return view('accions/add_audit');
+        
+        }
 }

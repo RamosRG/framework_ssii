@@ -3,26 +3,35 @@
         <h1 class="w3-xxxlarge w3-text-indigo"><b>Add Questions</b></h1>
         <hr style="width:50px;border:5px solid indigo" class="w3-round">
         <div>
-            <form id="userForm" action="../admin/insertData" method="post">
+            <form id="auditForm" action="../accions/insertAudit" method="post">
                 <div style="display: flex; flex-wrap: wrap; gap: 15px;">
                     <div style="flex: 1;">
-                        <label for="email"><b>Email</b></label>
-                        <input id="email" class="w3-input w3-border w3-round" type="text" name="email" style="width:100%;" required>
-                    </div>
+                        <label for="maquinary"><b>Maquinary</b></label>
+                        <select id="area" name="area" class="w3-input w3-border w3-round">
+                            <option selected>Open this select menu</option>
+                            <option value=""></option>
+                        </select>
+                     </div>
                     <div style="flex: 1;">
-                        <label for="name"><b>Name</b></label>
-                        <input id="name" class="w3-input w3-border w3-round" type="text" name="name" style="width:100%;" required>
+                        <label for="shift"><b>Shift</b></label>
+                        <select id="area" name="area" class="w3-input w3-border w3-round">
+                            <option selected>Open this select menu</option>
+                            <option value=""></option>
+                        </select>
                     </div>
                 </div>
-                
+
                 <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
                     <div style="flex: 1;">
-                        <label for="firstname"><b>First Name</b></label>
-                        <input id="firstname" class="w3-input w3-border w3-round" type="text" name="firstName" style="width:100%;" required>
+                        <label for="date"><b>Date</b></label>
+                        <input id="date" class="w3-input w3-border w3-round" type="date" name="date" style="width:100%;" required>
                     </div>
                     <div style="flex: 1;">
-                        <label for="lastname"><b>Last Name</b></label>
-                        <input id="lastname" class="w3-input w3-border w3-round" type="text" name="lastName" style="width:100%;" required>
+                        <label for="departament"><b>Departament</b></label>
+                        <select id="area" name="area" class="w3-input w3-border w3-round">
+                            <option selected>Open this select menu</option>
+                            <option value=""></option>
+                        </select>
                     </div>
                 </div>
 
