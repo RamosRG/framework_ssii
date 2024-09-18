@@ -1,3 +1,48 @@
+//funcion para crear una nueva auditoria
+$(document).on('click', '#createAudit .btnAudit', function (e) {
+    e.preventDefault(); // Evita el comportamiento predeterminado del botón
+
+    var form = $('#auditForm'); // Encuentra el formulario
+    var formData = form.serialize(); // Serializa los datos del formulario
+    console.log(formData);
+    $.ajax({
+        url: '../accions/insertAudit', // URL de tu controlador que inserta los datos
+        type: 'POST',
+        data: formData, // Envía los datos serializados del formulario
+        dataType: 'json',
+        success: function (response) {
+            console.log(response);
+            if (response.status === 'success') {
+                Swal.fire({
+                    title: 'Éxito!',
+                    text: '¡Auditoria Creada con exito!',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                }).then(function () {
+                    // Redirige a otra página después de que el usuario cierre el mensaje de éxito
+                    window.location.href = '../accions/showAudit'; // Cambia esta URL a la página deseada
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Error al crear el Crear la auditoria: ' + response.message,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+            }
+        },
+        error: function () {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Ocurrió un error al intentar crear la auditoria.',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+        }
+    });
+});
+
+//funcion para crear un usuario
 $(document).on('click', '#createUser .btnCreate', function (e) {
     e.preventDefault(); // Evita el comportamiento predeterminado del botón
 
@@ -81,7 +126,6 @@ window.onload = function() {
     fetchShiftData();
     fetchDepartamentData();
 };
-
 
 //Funcion para mandar a llamar la maquinaria que se utilizara
 function fetchMachineryData() {
