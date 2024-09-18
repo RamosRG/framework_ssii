@@ -1,5 +1,3 @@
-console.log('Script de funcionesCreate.js cargado');
-
 $(document).on('click', '#createUser .btnCreate', function (e) {
     e.preventDefault(); // Evita el comportamiento predeterminado del botón
 
@@ -78,4 +76,116 @@ $('#loginForm').on('submit', function (e) {
     });
 });
 
+window.onload = function() {
+    fetchMachineryData();
+    fetchShiftData();
+    fetchDepartamentData();
+};
+
+
+//Funcion para mandar a llamar la maquinaria que se utilizara
+function fetchMachineryData() {
+    // Hacemos la solicitud AJAX
+    fetch('/framework_ssii/accions/getMachinery', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            let machinerySelect = document.getElementById('machinery-list');
+            machinerySelect.innerHTML = ''; // Limpiar las opciones anteriores
+            
+            // Añadimos de nuevo la opción inicial
+            let defaultOption = document.createElement('option');
+            defaultOption.text = "Open this select menu";
+            defaultOption.selected = true;
+            machinerySelect.appendChild(defaultOption);
+
+            // Llenar el select con los datos de maquinaria
+            data.machinery.forEach(item => {
+                let option = document.createElement('option');
+                option.value = item.id_machinery;  // Usamos id_machinery como valor
+                option.textContent = item.machinery;  // Usamos machinery como el nombre a mostrar
+                machinerySelect.appendChild(option);
+            });
+        } else {
+            console.error('Error al obtener datos de maquinaria');
+        }
+    })
+    .catch(error => console.error('Error en la solicitud:', error));
+}
+
+
+//Funcion para mandar a llamar los roles que se utilizan en la auditoria
+function fetchShiftData() {
+    // Hacemos la solicitud AJAX
+    fetch('/framework_ssii/accions/getShift', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            let shiftSelect = document.getElementById('shift-list');
+            shiftSelect.innerHTML = ''; // Limpiar las opciones anteriores
+            
+            // Añadimos de nuevo la opción inicial
+            let defaultOption = document.createElement('option');
+            defaultOption.text = "Open this select menu";
+            defaultOption.selected = true;
+            shiftSelect.appendChild(defaultOption);
+
+            // Llenar el select con los datos de maquinaria
+            data.shift.forEach(item => {
+                let option = document.createElement('option');
+                option.value = item.id_shift;  // Usamos id_shift como valor
+                option.textContent = item.shift;  // Usamos shift como el nombre a mostrar
+                shiftSelect.appendChild(option);
+            });
+        } else {
+            console.error('Error al obtener los turnos');
+        }
+    })
+    .catch(error => console.error('Error en la solicitud:', error));
+}
+
+
+function fetchDepartamentData() {
+    // Hacemos la solicitud AJAX
+    fetch('/framework_ssii/accions/getDepartament', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            let departamentSelect = document.getElementById('departament-list');
+            departamentSelect.innerHTML = ''; // Limpiar las opciones anteriores
+            
+            // Añadimos de nuevo la opción inicial
+            let defaultOption = document.createElement('option');
+            defaultOption.text = "Open this select menu";
+            defaultOption.selected = true;
+            departamentSelect.appendChild(defaultOption);
+
+            // Llenar el select con los datos de maquinaria
+            data.departament.forEach(item => {
+                let option = document.createElement('option');
+                option.value = item.id_departament;  // Usamos id_departament como valor
+                option.textContent = item.departament;  // Usamos departament como el nombre a mostrar
+                departamentSelect.appendChild(option);
+            });
+        } else {
+            console.error('Error al obtener los departamentos');
+        }
+    })
+    .catch(error => console.error('Error en la solicitud:', error));
+}
 

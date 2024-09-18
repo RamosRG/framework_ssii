@@ -17,8 +17,8 @@ class AuthModel extends Model
 
     // Dates
     protected $useTimestamps = true; // Correcto
-    protected $createdField = 'created_at';
-    protected $updatedField = 'updated_at';
+    protected $createdField = 'create_at';
+    protected $updatedField = 'update_at';
 
     public function authenticate($email, $password)
     {

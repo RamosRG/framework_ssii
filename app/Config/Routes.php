@@ -33,6 +33,10 @@ $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
 $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('addQuestions', 'AccionsController::addQuestions');
     $routes->get('addAudit', 'AccionsController::addAudit');
+    $routes->get('getMachinery', 'AccionsController::getMachinery');
+    $routes->get('getShift', 'AccionsController::getShift');
+    $routes->get('getDepartament', 'AccionsController::getDepartament');
+
 
 });
 
