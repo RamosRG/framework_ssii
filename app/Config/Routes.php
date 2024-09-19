@@ -37,7 +37,8 @@ $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) 
     $routes->get('getShift', 'AccionsController::getShift');
     $routes->get('getDepartament', 'AccionsController::getDepartament');
     $routes->post('insertAudit', 'AccionsController::insertAudit');
-    $routes->post('showAudits', 'AccionsController::showAudits');
+    $routes->get('showAudit', 'AccionsController::showAudit');
+    $routes->get('getAudits', 'AccionsController::getAudits');
 
 
 });

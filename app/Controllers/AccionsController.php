@@ -6,13 +6,20 @@ use App\Models\MachinaryModel;
 use App\Models\ShiftModel;
 use App\Models\DepartamentModel;
 use App\Models\AuditModel;
-use App\Models\AuditModelModel;
 
 class AccionsController extends BaseController
 {
+   public function getAudits()
+   {
+       $auditModel = new AuditModel();
+       $data = $auditModel->getDataOfAudits();
+   
+       return $this->response->setJSON($data); 
+   }
    public function showAudit()
    {
-      echo ('Hola desde show audits');
+
+      return view('accions/show_audit');
    }
 
    public function addQuestions()

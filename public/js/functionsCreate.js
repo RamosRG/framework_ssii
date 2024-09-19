@@ -120,7 +120,7 @@ $('#loginForm').on('submit', function (e) {
         }
     });
 });
-
+//funcion para cargar todas los select que se encuentran en la vista de create audit
 window.onload = function() {
     fetchMachineryData();
     fetchShiftData();
