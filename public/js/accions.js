@@ -55,7 +55,8 @@ $(document).ready(function() {
                 if (response.error) {
                     alert(response.error);
                 } else {
-                    console.log(response); // Mostrar los datos en la consola
+                    
+
                 }
             },
             error: function () {

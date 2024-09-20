@@ -39,7 +39,7 @@ $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) 
     $routes->post('insertAudit', 'AccionsController::insertAudit');
     $routes->get('showAudit', 'AccionsController::showAudit');
     $routes->get('getAudits', 'AccionsController::getAudits');
-    $routes->get('getAuditById/(:num)', 'AuthController::getAuditById/$1');
+    $routes->get('getAuditById/(:num)', 'AccionsController::getAuditById/$1');
 
 });
 
