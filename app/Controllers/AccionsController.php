@@ -9,6 +9,19 @@ use App\Models\AuditModel;
 
 class AccionsController extends BaseController
 {
+   public function getAuditById($id) {
+      $model = new AuditModel();
+    
+      // Obtener los datos de la auditoría
+      $audit = $model->getAuditByNumber($id); // Cambié a 'getAuditByNumber' por consistencia
+    
+      if ($audit && count($audit) > 0) {
+          return $this->response->setJSON($audit[0]); // Devolver solo el primer resultado
+      } else {
+          return $this->response->setJSON(['error' => 'Auditoría no encontrada']);
+      }
+  }
+  
    public function getAudits()
    {
        $auditModel = new AuditModel();

@@ -14,7 +14,7 @@ $(document).ready(function () {
             {
                 "data": "status",
                 "render": function (data) {
-                    return data == 1 ? '<i class="fa fa-check w3-green" style="font-size:24px"></i>' : '<i class="fa fa-remove w3-red" style="font-size:24px"></i>';
+                    return data == 1 ? '<i class="fa fa-check" style="font-size:24px;color:green">' : '<i class="fa fa-remove" style="font-size:24px;color:red">';
                 }
             },
             { "data": "created_at" },

@@ -9,7 +9,8 @@ use App\Models\AuthModel;
 
 class AdminController extends Controller
 {
-    public function addQuestion(){
+    public function addQuestion()
+    {
         return view('accions/add_question');
     }
     //funcion pora obtener las areas
@@ -23,7 +24,7 @@ class AdminController extends Controller
             'areas' => $data
         ]);
     }
-//cargar la vista de Home
+    //cargar la vista de Home
     public function home()
     {
         return view('admin/home');
@@ -34,7 +35,7 @@ class AdminController extends Controller
         $data['area'] = $areaModel->getArea();
         return view('admin/create', $data);
     }
-//Funcion para insertar un usuario dentro del controlador
+    //Funcion para insertar un usuario dentro del controlador
     public function insertData()
     {
         // Recolectar los datos del formulario
@@ -54,7 +55,7 @@ class AdminController extends Controller
         }
     }
 
-//Funcion para actualizar un usuario dentro del controlador
+    //Funcion para actualizar un usuario dentro del controlador
     public function update()
     {
         // Carga del modelo
@@ -86,7 +87,7 @@ class AdminController extends Controller
         }
     }
     //Funcion para eliminar un usuario dentro del controlador
-   /** public function delete($id)
+    /** public function delete($id)
     {
         $adminModel = new AdminModel();
         if ($adminModel->delete($id)) {

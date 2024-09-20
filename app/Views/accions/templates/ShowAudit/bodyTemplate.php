@@ -13,7 +13,7 @@
                         <th>MACHINERY</th>
                         <th>DEPARTAMENT</th>
                         <th>STATUS</th>
-                        <th>ACCIONS</th>
+                        <th>ADD QUESTIONS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,7 +27,7 @@
                         <th>MACHINERY</th>
                         <th>DEPARTAMENT</th>
                         <th>STATUS</th>
-                        <th>ACCIONS</th>
+                        <th>ADD QUESTIONS</th>
                     </tr>
                 </tfoot>
             </table>            

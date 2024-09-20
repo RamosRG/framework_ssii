@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataTables Example</title>
+    <title>Home</title>
     <!-- W3.CSS -->
     <link rel="stylesheet" href="../public/css/w3.css">
     <!-- Poppins Font -->
