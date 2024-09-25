@@ -38,22 +38,51 @@ class AdminController extends Controller
     //Funcion para insertar un usuario dentro del controlador
     public function insertData()
     {
+        helper('text'); // Para generar una cadena aleatoria
+        $token = bin2hex(random_bytes(32)); // Genera un token único para la verificación
+
         // Recolectar los datos del formulario
         $data = [
             'email' => $this->request->getPost('email'),
             'name' => $this->request->getPost('name'),
             'firstName' => $this->request->getPost('firstName'),
             'lastName' => $this->request->getPost('lastName'),
-            'password'  => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'fk_area'  => $this->request->getPost('area')
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'fk_area' => $this->request->getPost('area'),
+            'email_verified' => 0, // Por defecto no verificado
+            'verification_token' => $token // Guarda el token generado
         ];
+
         $adminModel = new AdminModel();
         if ($adminModel->insertUser($data)) {
-            return $this->response->setJSON(['status' => 'success', 'message' => 'User created succesfully']);
+            // Enviar correo de verificación
+            $this->sendVerificationEmail($data['email'], $token);
+
+            return $this->response->setJSON(['status' => 'success', 'message' => 'User created successfully. Check your email for verification.']);
         } else {
             return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to create the new user']);
         }
     }
+    private function sendVerificationEmail($email, $token)
+    {
+        $emailService = \Config\Services::email();
+        $emailService->setFrom('orlandoramosperez26@gmail.com', 'Orlando');
+        $emailService->setTo($email);
+
+        $emailService->setSubject('Email Verification');
+
+        // Puedes cambiar 'base_url' por tu URL base y agregar la ruta al controlador que verificará el token
+        $message = "Please click the following link to verify your email: " . base_url('verify-email/' . $token);
+
+        $emailService->setMessage($message);
+
+        if (!$emailService->send()) {
+            // Manejar errores de envío de correo
+            log_message('error', 'Email not sent: ' . $emailService->printDebugger());
+        }
+    }
+
+
 
     //Funcion para actualizar un usuario dentro del controlador
     public function update()

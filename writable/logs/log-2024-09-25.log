@@ -1,14 +1,66 @@
-INFO - 2024-09-25 14:21:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
-CRITICAL - 2024-09-25 15:55:08 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "audit}etails"
-[Method: GET, Route: accions/audit%7Details]
-in SYSTEMPATH\Router\Router.php on line 737.
- 1 SYSTEMPATH\Router\Router.php(204): CodeIgniter\Router\Router->checkDisallowedChars('accions/audit}etails')
- 2 SYSTEMPATH\CodeIgniter.php(834): CodeIgniter\Router\Router->handle('accions/audit}etails')
- 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
- 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
- 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
- 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
- 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-INFO - 2024-09-25 15:56:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
-INFO - 2024-09-25 15:56:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
-INFO - 2024-09-25 17:13:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-25 19:59:13 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-09-25 19:59:13 --> 220 smtp.gmail.com ESMTP 5614622812f47-3e293970318sm1236791b6e.55 - gsmtp
+
+hello: 250-smtp.gmail.com at your service, [136.226.0.250]
+250-SIZE 35882577
+250-8BITMIME
+250-STARTTLS
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+starttls: 220 2.0.0 Ready to start TLS
+
+hello: 250-smtp.gmail.com at your service, [136.226.0.250]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+Failed to authenticate password. Error: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 5614622812f47-3e293970318sm1236791b6e.55 - gsmtp
+
+ERROR - 2024-09-25 19:59:13 --> Email not sent: 220 smtp.gmail.com ESMTP 5614622812f47-3e293970318sm1236791b6e.55 - gsmtp
+<br><pre>hello: 250-smtp.gmail.com at your service, [136.226.0.250]
+250-SIZE 35882577
+250-8BITMIME
+250-STARTTLS
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+</pre><pre>starttls: 220 2.0.0 Ready to start TLS
+</pre><pre>hello: 250-smtp.gmail.com at your service, [136.226.0.250]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+</pre>Failed to authenticate password. Error: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 5614622812f47-3e293970318sm1236791b6e.55 - gsmtp
+<br>Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Wed, 25 Sep 2024 19:59:11 +0000
+From: &quot;Orlando&quot; &lt;orlandoramosperez26@gmail.com&gt;
+Return-Path: &lt;orlandoramosperez26@gmail.com&gt;
+To: orlandoramosperez26@gmail.com
+Subject: =?UTF-8?Q?Email=20Verification?=
+Reply-To: &lt;orlandoramosperez26@gmail.com&gt;
+User-Agent: CodeIgniter
+X-Sender: orlandoramosperez26@gmail.com
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;66f46b8f9f2f94.22088653@gmail.com&gt;
+Mime-Version: 1.0
+
+
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Please click the following link to verify your email:
+http://localhost/framework_ssii/verify-email/2f057a27000258cdf7c6456c2c8ad5c9b8e247ef52243c3d5921a862a7eed838
+</pre>

@@ -48,7 +48,7 @@ $(document).on('click', '#createUser .btnCreate', function (e) {
 
     var form = $('#userForm'); // Encuentra el formulario
     var formData = form.serialize(); // Serializa los datos del formulario
-
+console.log(formData);
     $.ajax({
         url: '../admin/insertData', // URL de tu controlador que inserta los datos
         type: 'POST',
@@ -162,7 +162,6 @@ function fetchMachineryData() {
     .catch(error => console.error('Error en la solicitud:', error));
 }
 
-
 //Funcion para mandar a llamar los roles que se utilizan en la auditoria
 function fetchShiftData() {
     // Hacemos la solicitud AJAX
@@ -197,7 +196,6 @@ function fetchShiftData() {
     })
     .catch(error => console.error('Error en la solicitud:', error));
 }
-
 
 function fetchDepartamentData() {
     // Hacemos la solicitud AJAX
