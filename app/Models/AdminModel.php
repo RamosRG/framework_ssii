@@ -36,7 +36,7 @@ class AdminModel extends Model
     {
     if ($id) {
         $this->where('id_user', $id); // Asegúrate de que 'id_user' sea el nombre correcto de la columna en la base de datos
-        return $this->delete('users'); // Cambia 'users' al nombre de tu tabla
+        return $this->delete('users'); 
     }
     return false;
 

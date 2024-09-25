@@ -31,15 +31,17 @@ $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
 
 });
 $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) {
-    $routes->get('addQuestions', 'AccionsController::addQuestions');
-    $routes->get('addAudit', 'AccionsController::addAudit');
+    $routes->get('addquestions', 'AccionsController::addquestions');
+    $routes->get('addaudit', 'AccionsController::addaudit');
     $routes->get('getMachinery', 'AccionsController::getMachinery');
     $routes->get('getShift', 'AccionsController::getShift');
     $routes->get('getDepartament', 'AccionsController::getDepartament');
     $routes->post('insertAudit', 'AccionsController::insertAudit');
-    $routes->get('showAudit', 'AccionsController::showAudit');
+    $routes->get('showaudit', 'AccionsController::showaudit');
     $routes->get('getAudits', 'AccionsController::getAudits');
     $routes->get('getAuditById/(:num)', 'AccionsController::getAuditById/$1');
+    $routes->get('auditdetails', 'AccionsController::auditdetails');
+
 
 });
 

@@ -6,9 +6,9 @@
     </div>
     <div class="w3-bar-block">
         <a href="../admin/home" class="w3-bar-item w3-button w3-hover-white">Home</a> 
-        <a href="../accions/addAudit" class="w3-bar-item w3-button w3-hover-white">Add Audit</a> 
-        <a href="../accions/addQuestions" class="w3-bar-item w3-button w3-hover-white">Add Question</a> 
-        <a href="../accions/showAudit" class="w3-bar-item w3-button w3-hover-white">Show Audit</a> 
+        <a href="../accions/addaudit" class="w3-bar-item w3-button w3-hover-white">Add Audit</a> 
+        <a href="../accions/addquestions" class="w3-bar-item w3-button w3-hover-white">Add Question</a> 
+        <a href="../accions/showaudit" class="w3-bar-item w3-button w3-hover-white">Show Audit</a> 
         <a href="#designers" class="w3-bar-item w3-button w3-hover-white">Designers</a> 
         <a href="#packages" class="w3-bar-item w3-button w3-hover-white">Packages</a> 
         <a href="../auth/logout" class="w3-bar-item w3-button w3-hover-white">Log Out</a>

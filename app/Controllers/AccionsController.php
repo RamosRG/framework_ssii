@@ -9,6 +9,13 @@ use App\Models\AuditModel;
 
 class AccionsController extends BaseController
 {
+   public function auditdetails()
+{
+    // Cargar la vista de detalles
+    return view('accions/audit_details');  
+}
+
+
    public function getAuditById($id) {
       $model = new AuditModel();
     
@@ -29,17 +36,17 @@ class AccionsController extends BaseController
    
        return $this->response->setJSON($data); 
    }
-   public function showAudit()
+   public function showaudit()
    {
 
       return view('accions/show_audit');
    }
 
-   public function addQuestions()
+   public function addquestions()
    {
       return view('accions/add_questions');
    }
-   public function addAudit()
+   public function addaudit()
    {
       return view('accions/add_audit');
    }
