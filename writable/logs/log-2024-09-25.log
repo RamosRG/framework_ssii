@@ -1,7 +1,7 @@
-ERROR - 2024-09-25 19:59:13 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
-ERROR - 2024-09-25 19:59:13 --> 220 smtp.gmail.com ESMTP 5614622812f47-3e293970318sm1236791b6e.55 - gsmtp
+ERROR - 2024-09-25 20:06:18 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-09-25 20:06:18 --> 220 smtp.gmail.com ESMTP 586e51a60fabf-283afabef55sm1520381fac.57 - gsmtp
 
-hello: 250-smtp.gmail.com at your service, [136.226.0.250]
+hello: 250-smtp.gmail.com at your service, [136.226.1.27]
 250-SIZE 35882577
 250-8BITMIME
 250-STARTTLS
@@ -12,7 +12,7 @@ hello: 250-smtp.gmail.com at your service, [136.226.0.250]
 
 starttls: 220 2.0.0 Ready to start TLS
 
-hello: 250-smtp.gmail.com at your service, [136.226.0.250]
+hello: 250-smtp.gmail.com at your service, [136.226.1.27]
 250-SIZE 35882577
 250-8BITMIME
 250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
@@ -22,10 +22,10 @@ hello: 250-smtp.gmail.com at your service, [136.226.0.250]
 250 SMTPUTF8
 
 Failed to authenticate password. Error: 535-5.7.8 Username and Password not accepted. For more information, go to
-535 5.7.8  https://support.google.com/mail/?p=BadCredentials 5614622812f47-3e293970318sm1236791b6e.55 - gsmtp
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 586e51a60fabf-283afabef55sm1520381fac.57 - gsmtp
 
-ERROR - 2024-09-25 19:59:13 --> Email not sent: 220 smtp.gmail.com ESMTP 5614622812f47-3e293970318sm1236791b6e.55 - gsmtp
-<br><pre>hello: 250-smtp.gmail.com at your service, [136.226.0.250]
+ERROR - 2024-09-25 20:06:18 --> Email not sent: 220 smtp.gmail.com ESMTP 586e51a60fabf-283afabef55sm1520381fac.57 - gsmtp
+<br><pre>hello: 250-smtp.gmail.com at your service, [136.226.1.27]
 250-SIZE 35882577
 250-8BITMIME
 250-STARTTLS
@@ -34,7 +34,7 @@ ERROR - 2024-09-25 19:59:13 --> Email not sent: 220 smtp.gmail.com ESMTP 5614622
 250-CHUNKING
 250 SMTPUTF8
 </pre><pre>starttls: 220 2.0.0 Ready to start TLS
-</pre><pre>hello: 250-smtp.gmail.com at your service, [136.226.0.250]
+</pre><pre>hello: 250-smtp.gmail.com at your service, [136.226.1.27]
 250-SIZE 35882577
 250-8BITMIME
 250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
@@ -43,8 +43,8 @@ ERROR - 2024-09-25 19:59:13 --> Email not sent: 220 smtp.gmail.com ESMTP 5614622
 250-CHUNKING
 250 SMTPUTF8
 </pre>Failed to authenticate password. Error: 535-5.7.8 Username and Password not accepted. For more information, go to
-535 5.7.8  https://support.google.com/mail/?p=BadCredentials 5614622812f47-3e293970318sm1236791b6e.55 - gsmtp
-<br>Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Wed, 25 Sep 2024 19:59:11 +0000
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 586e51a60fabf-283afabef55sm1520381fac.57 - gsmtp
+<br>Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Wed, 25 Sep 2024 20:06:15 +0000
 From: &quot;Orlando&quot; &lt;orlandoramosperez26@gmail.com&gt;
 Return-Path: &lt;orlandoramosperez26@gmail.com&gt;
 To: orlandoramosperez26@gmail.com
@@ -54,7 +54,7 @@ User-Agent: CodeIgniter
 X-Sender: orlandoramosperez26@gmail.com
 X-Mailer: CodeIgniter
 X-Priority: 3 (Normal)
-Message-ID: &lt;66f46b8f9f2f94.22088653@gmail.com&gt;
+Message-ID: &lt;66f46d37de2b95.41699561@gmail.com&gt;
 Mime-Version: 1.0
 
 
@@ -62,5 +62,20 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Please click the following link to verify your email:
-http://localhost/framework_ssii/verify-email/2f057a27000258cdf7c6456c2c8ad5c9b8e247ef52243c3d5921a862a7eed838
+http://localhost/framework_ssii/verify-email/805a6089a706a69081f4fa9d4ad90b85af044dff1e0be7b7c368fbdb01e2c938
 </pre>
+INFO - 2024-09-25 20:06:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-25 20:06:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-25 20:07:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-25 21:49:13 --> ParseError: syntax error, unexpected token "}", expecting ";"
+[Method: GET, Route: user/home]
+in APPPATH\Controllers\UserController.php on line 12.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\laragon\\www\\framework_ssii\\app\\Controllers\\UserController.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\UserController')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\UserController')
+ 4 SYSTEMPATH\CodeIgniter.php(887): class_exists('\\App\\Controllers\\UserController', true)
+ 5 SYSTEMPATH\CodeIgniter.php(496): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

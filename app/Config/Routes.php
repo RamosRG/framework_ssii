@@ -29,7 +29,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function($routes) {
 });
 
 $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
-    $routes->get('forgotPassword', 'UserController::forgotPassword');
+    $routes->get('forgotpassword', 'UserController::forgotpassword');
+    $routes->get('home', 'UserController::home');
 
 });
 $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) {
