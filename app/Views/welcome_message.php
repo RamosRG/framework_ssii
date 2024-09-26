@@ -28,7 +28,8 @@
             <form id="loginForm" action="/framework_ssii/auth/login" method="POST">
               <label for="username"><b>EMAIL</b></label>
               <input id="username" class="w3-input w3-border w3-margin-bottom w3-round" type="email" placeholder="Enter EMAIL" name="email" required>
-
+              <input type="hidden" id="privileges" name="privileges">
+              <input type="hidden" name="status" id="1" value="1">
               <label for="password"><b>PASSWORD</b></label>
               <input id="password" class="w3-input w3-border w3-round" type="password" placeholder="Enter PASSWORD" name="password" required>
 

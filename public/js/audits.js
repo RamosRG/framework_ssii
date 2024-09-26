@@ -46,6 +46,7 @@ function addRow() {
     cell4.innerHTML = '<input type="text" name="campo4[]">';
     cell5.innerHTML = '<input type="text" name="campo5[]">';
 }
+ 
 /*
 $(document).ready(function() {
     $('#search-select').select2({

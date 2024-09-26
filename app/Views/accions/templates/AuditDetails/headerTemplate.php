@@ -22,7 +22,12 @@
             width: 100%;
             position: absolute;
             bottom: 0;
+           
           }
+          #selected-frameworks {
+            margin-top: 20px;
+        }
+            
     </style>
 </head>
 <body>

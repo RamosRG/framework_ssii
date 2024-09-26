@@ -12,7 +12,7 @@ class AdminModel extends Model
 
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['email', 'name', 'firstName', 'lastName', 'password', 'fk_area', 'status', 'email_verified', 'verification_token', 'created_at', 'updated_at'];
+    protected $allowedFields = ['email', 'name', 'firstName', 'lastName', 'password', 'fk_area', 'status', 'email_verified', 'verification_token', 'privileges', 'created_at', 'updated_at'];
 
 
     protected bool $status = true;
@@ -22,6 +22,12 @@ class AdminModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
+
+    public function isEmailExist($email)
+    {
+        return $this->where('email', $email)->first() !== null;
+    }
+    
     public function insertUser($data)
     {
         return $this->insert($data);

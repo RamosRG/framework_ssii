@@ -11,7 +11,7 @@ class AuthModel extends Model
 
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['email', 'name', 'firstname', 'lastname', 'password']; // Correcto
+    protected $allowedFields = ['email', 'name', 'firstName', 'lastName', 'password', 'fk_area', 'status', 'email_verified', 'verification_token', 'privileges', 'created_at', 'updated_at']; // Correcto
 
     protected bool $status = true;
 
@@ -22,25 +22,30 @@ class AuthModel extends Model
 
     public function authenticate($email, $password)
     {
-        // Construiendo la consulta SQL directamente
+        // Construyendo la consulta SQL para buscar el usuario por email y estado activo
         $builder = $this->builder();
-        $builder->select('*');
+        $builder->select('email, password, privileges');
         $builder->where('email', $email);
-        $query = $builder->get();
+        $builder->where('status', 1); // Solo usuarios activos
+        $user = $builder->get()->getFirstRow(); // Obtiene el primer resultado de la consulta
 
-        $user = $query->getRowArray();
-        
+        // Verifica si se encontró el usuario
         if ($user) {
-            if (password_verify($password, $user['password'])) {
-                return $user;
+            // Verifica la contraseña utilizando password_verify
+            if (password_verify($password, $user->password)) {
+                return (array)$user; // Retorna el usuario si la contraseña es correcta como array
             }
         }
 
-        return false;
+        return false; // Retorna false si no se encontró el usuario o la contraseña es incorrecta
     }
+
+
+
     public function getUsers()
     {
-        return $this->select('area.id_area, area.area, users.email, users.id_user, users.`name`, users.lastName, users.firstName, users.`status`, users.created_at, users.updated_at')  // Selecciona todos los campos de ambas tablas
+        return $this->select('area.id_area, area.area, users.email, users.id_user, users.`name`, users.lastName, users.firstName, users.`status`, users.privileges,
+        users.created_at, users.updated_at')  // Selecciona todos los campos de ambas tablas
             ->join('area', 'users.fk_area = area.id_area') // Realiza el INNER JOIN
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
@@ -54,7 +59,4 @@ class AuthModel extends Model
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
     }
-    
-
 }
-

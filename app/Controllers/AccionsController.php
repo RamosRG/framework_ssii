@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\AdminModel;
 use App\Models\MachinaryModel;
 use App\Models\ShiftModel;
 use App\Models\DepartamentModel;
@@ -10,38 +11,35 @@ use App\Models\AuditModel;
 class AccionsController extends BaseController
 {
    public function auditdetails()
-{
-    // Cargar la vista de detalles
-    return view('accions/audit_details');  
-}
-
-
-   public function getAuditById($id) {
+   {
+      // Cargar la vista de detalles
+      return view('accions/audit_details');
+   }
+   public function getAuditById($id)
+   {
       $model = new AuditModel();
-    
+
       // Obtener los datos de la auditoría
       $audit = $model->getAuditByNumber($id); // Cambié a 'getAuditByNumber' por consistencia
-    
+
       if ($audit && count($audit) > 0) {
-          return $this->response->setJSON($audit[0]); // Devolver solo el primer resultado
+         return $this->response->setJSON($audit[0]); // Devolver solo el primer resultado
       } else {
-          return $this->response->setJSON(['error' => 'Auditoría no encontrada']);
+         return $this->response->setJSON(['error' => 'Auditoría no encontrada']);
       }
-  }
-  
+   }
    public function getAudits()
    {
-       $auditModel = new AuditModel();
-       $data = $auditModel->getDataOfAudits();
-   
-       return $this->response->setJSON($data); 
+      $auditModel = new AuditModel();
+      $data = $auditModel->getDataOfAudits();
+
+      return $this->response->setJSON($data);
    }
    public function showaudit()
    {
 
       return view('accions/show_audit');
    }
-
    public function addquestions()
    {
       return view('accions/add_questions');
@@ -50,7 +48,6 @@ class AccionsController extends BaseController
    {
       return view('accions/add_audit');
    }
-
    public function getMachinery()
    {
       $machinery = new MachinaryModel();
@@ -61,7 +58,6 @@ class AccionsController extends BaseController
          'machinery' => $data
       ]);
    }
-
    public function getShift()
    {
       $shift = new ShiftModel();

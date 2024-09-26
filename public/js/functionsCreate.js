@@ -88,43 +88,46 @@ console.log(formData);
 
 $('#loginForm').on('submit', function (e) {
     e.preventDefault(); // Evita el comportamiento predeterminado del formulario
-    console.log('Formulario de login enviado');
 
-    var formData = $(this).serialize(); // Serializa los datos del formulario
-
-    $.ajax({
-        url: '/framework_ssii/auth/login',
-        type: 'POST',
-        data: formData,
-        dataType: 'json',
-        success: function (response) {
-           // Muestra la respuesta en la consola
-            if (response.status === 'success') {
-                    window.location.href = './admin/home'; // Cambia la URL a la página de destino
-            } else {
+    // Llama a la función getPrivileges para asegurar que privileges tenga valor
+    getPrivileges().then(() => {
+        var formData = $(this).serialize(); // Serializa los datos del formulario
+console.log(formData);
+        $.ajax({
+            url: '/framework_ssii/auth/login',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 'success') {
+                    window.location.href = response.redirect; // Cambia la URL a la página de destino
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Credenciales incorrectas',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                }
+            },
+            error: function () {
                 Swal.fire({
                     title: 'Error!',
-                    text: 'Seguro que eres tu? ' + response.message,
-                    icon: 'question',
+                    text: 'Ocurrió un error al intentar iniciar sesión.',
+                    icon: 'error',
                     confirmButtonText: 'Ok'
                 });
             }
-        },
-        error: function () {
-            Swal.fire({
-                title: 'Error!',
-                text: 'Ocurrió un error al intentar iniciar sesión.',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            });
-        }
+        });
     });
 });
+
 //funcion para cargar todas los select que se encuentran en la vista de create audit
 window.onload = function() {
     fetchMachineryData();
     fetchShiftData();
     fetchDepartamentData();
+    getPrivileges();
 };
 
 //Funcion para mandar a llamar la maquinaria que se utilizara
@@ -231,3 +234,21 @@ function fetchDepartamentData() {
     .catch(error => console.error('Error en la solicitud:', error));
 }
 
+function getPrivileges() {
+    return fetch('/framework_ssii/auth/getPrivileges', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            let privilegesInput = document.getElementById('privileges'); // El campo input hidden
+            privilegesInput.value = data.privileges; // Asignar el valor de los privilegios directamente
+        } else {
+            console.error('Error al obtener los datos de privilegios');
+        }
+    })
+    .catch(error => console.error('Error en la solicitud:', error));
+}

@@ -10,6 +10,7 @@ $routes->get('/', 'Home::index');
 $routes->group('auth', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->post('login', 'AuthController::login');
     $routes->get('logout', 'AuthController::logout');
+    $routes->get('getPrivileges', 'AuthController::getPrivileges');
     
     $routes->get('forgotPassword', 'AuthController::forgotPassword');
     $routes->get('getData', 'AuthController::getData');

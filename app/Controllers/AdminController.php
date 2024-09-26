@@ -40,10 +40,11 @@ class AdminController extends Controller
     {
         helper('text'); // Para generar una cadena aleatoria
         $token = bin2hex(random_bytes(32)); // Genera un token único para la verificación
-
+    
         // Recolectar los datos del formulario
+        $email = $this->request->getPost('email'); // Obtenemos el email de la solicitud
         $data = [
-            'email' => $this->request->getPost('email'),
+            'email' => $email,
             'name' => $this->request->getPost('name'),
             'firstName' => $this->request->getPost('firstName'),
             'lastName' => $this->request->getPost('lastName'),
@@ -52,17 +53,25 @@ class AdminController extends Controller
             'email_verified' => 0, // Por defecto no verificado
             'verification_token' => $token // Guarda el token generado
         ];
-
+    
         $adminModel = new AdminModel();
+        
+        // Verificar si el correo ya existe
+        if ($adminModel->isEmailExist($email)) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'El correo electrónico ya está asociado.']);
+        }
+    
+        // Intentar insertar el nuevo usuario
         if ($adminModel->insertUser($data)) {
             // Enviar correo de verificación
-            $this->sendVerificationEmail($data['email'], $token);
-
-            return $this->response->setJSON(['status' => 'success', 'message' => 'User created successfully. Check your email for verification.']);
+            $this->sendVerificationEmail($email, $token);
+    
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Usuario creado con éxito. Verifica tu correo para la verificación.']);
         } else {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to create the new user']);
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Error al crear el nuevo usuario.']);
         }
     }
+    
     private function sendVerificationEmail($email, $token)
     {
         $emailService = \Config\Services::email();
@@ -81,9 +90,6 @@ class AdminController extends Controller
             log_message('error', 'Email not sent: ' . $emailService->printDebugger());
         }
     }
-
-
-
     //Funcion para actualizar un usuario dentro del controlador
     public function update()
     {
