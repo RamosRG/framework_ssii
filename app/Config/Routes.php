@@ -25,13 +25,13 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->post('update', 'AdminController::update');
     $routes->get('getAreas', 'AdminController::getAreas');
     $routes->delete('delete/(:num)', 'AdminController::delete/$1');
-    $routes->get('verify-email/(:any)', 'AdminController::verifyEmail/$1');
 
 });
 
 $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('forgotpassword', 'UserController::forgotpassword');
     $routes->get('home', 'UserController::home');
+    $routes->get('verify/(:any)', 'AdminController::verify/$1');
 
 });
 $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) {

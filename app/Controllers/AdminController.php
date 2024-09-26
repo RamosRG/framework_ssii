@@ -75,21 +75,46 @@ class AdminController extends Controller
     private function sendVerificationEmail($email, $token)
     {
         $emailService = \Config\Services::email();
-        $emailService->setFrom('orlandoramosperez26@gmail.com', 'Orlando');
+
+        $verificationLink = base_url('user/verify/' . $token); // Enlace de verificación
+
         $emailService->setTo($email);
+        $emailService->setFrom('no-reply@tuweb.com', 'Verificación de cuenta');
+        $emailService->setSubject('Verificación de correo electrónico');
+        $emailService->setMessage("Por favor, haz clic en el siguiente enlace para verificar tu cuenta: <a href='" . $verificationLink . "'>Verificar Cuenta</a>");
 
-        $emailService->setSubject('Email Verification');
-
-        // Puedes cambiar 'base_url' por tu URL base y agregar la ruta al controlador que verificará el token
-        $message = "Please click the following link to verify your email: " . base_url('verify-email/' . $token);
-
-        $emailService->setMessage($message);
-
+        // Enviar correo
         if (!$emailService->send()) {
-            // Manejar errores de envío de correo
-            log_message('error', 'Email not sent: ' . $emailService->printDebugger());
+            // Manejar errores si el correo no se pudo enviar
+            log_message('error', 'No se pudo enviar el correo de verificación a ' . $email);
         }
     }
+
+    // Método para manejar la verificación de correo
+    public function verify($token)
+    {
+        $adminModel = new AdminModel();
+
+        // Buscar el usuario por el token
+        $user = $adminModel->where('verification_token', $token)->first();
+
+        if ($user) {
+            // Actualizar el estado de verificación del usuario
+            $adminModel->updatedById($user['id_user'], ['email_verified' => 1, 'verification_token' => null]);
+
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Correo verificado correctamente.'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Token inválido o expirado.'
+            ]);
+        }
+    }
+
+
     //Funcion para actualizar un usuario dentro del controlador
     public function update()
     {

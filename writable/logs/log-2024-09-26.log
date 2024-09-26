@@ -1,110 +1,20 @@
-INFO - 2024-09-26 21:26:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
-CRITICAL - 2024-09-26 21:26:52 --> Error: Object of class App\Models\AdminModel could not be converted to string
-[Method: POST, Route: admin/insertData]
-in SYSTEMPATH\Database\Query.php on line 337.
- 1 SYSTEMPATH\Database\Query.php(337): strtr('SELECT *
-FROM `users`
-WHERE `email` = :email:
- LIMIT 1', [...])
- 2 SYSTEMPATH\Database\Query.php(312): CodeIgniter\Database\Query->matchNamedBinds('SELECT *
-FROM `users`
-WHERE `email` = :email:
- LIMIT 1', [...])
- 3 SYSTEMPATH\Database\Query.php(163): CodeIgniter\Database\Query->compileBinds()
- 4 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\Query->getQuery()
- 5 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
-FROM `users`
-WHERE `email` = :email:
- LIMIT 1', [...], false)
- 6 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
- 7 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
- 8 APPPATH\Models\AdminModel.php(28): CodeIgniter\BaseModel->first()
- 9 APPPATH\Controllers\AdminController.php(58): App\Models\AdminModel->isEmailExist(Object(App\Models\AdminModel))
-10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->insertData()
-11 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
-12 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-13 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
-14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
-15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-INFO - 2024-09-26 21:28:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
-CRITICAL - 2024-09-26 21:28:19 --> Error: Object of class App\Models\AdminModel could not be converted to string
-[Method: POST, Route: admin/insertData]
-in SYSTEMPATH\Database\Query.php on line 337.
- 1 SYSTEMPATH\Database\Query.php(337): strtr('SELECT *
-FROM `users`
-WHERE `email` = :email:
- LIMIT 1', [...])
- 2 SYSTEMPATH\Database\Query.php(312): CodeIgniter\Database\Query->matchNamedBinds('SELECT *
-FROM `users`
-WHERE `email` = :email:
- LIMIT 1', [...])
- 3 SYSTEMPATH\Database\Query.php(163): CodeIgniter\Database\Query->compileBinds()
- 4 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\Query->getQuery()
- 5 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
-FROM `users`
-WHERE `email` = :email:
- LIMIT 1', [...], false)
- 6 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
- 7 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
- 8 APPPATH\Models\AdminModel.php(28): CodeIgniter\BaseModel->first()
- 9 APPPATH\Controllers\AdminController.php(58): App\Models\AdminModel->isEmailExist(Object(App\Models\AdminModel))
-10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->insertData()
-11 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
-12 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
-13 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
-14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
-15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
-INFO - 2024-09-26 21:31:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
-ERROR - 2024-09-26 21:32:10 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
-ERROR - 2024-09-26 21:32:10 --> 220 smtp.gmail.com ESMTP 5614622812f47-3e3935984d0sm190004b6e.28 - gsmtp
-
-hello: 250-smtp.gmail.com at your service, [136.226.1.35]
-250-SIZE 35882577
-250-8BITMIME
-250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
-250-ENHANCEDSTATUSCODES
-250-PIPELINING
-250-CHUNKING
-250 SMTPUTF8
-
-Failed to authenticate password. Error: 535-5.7.8 Username and Password not accepted. For more information, go to
-535 5.7.8  https://support.google.com/mail/?p=BadCredentials 5614622812f47-3e3935984d0sm190004b6e.28 - gsmtp
-
-ERROR - 2024-09-26 21:32:10 --> Email not sent: 220 smtp.gmail.com ESMTP 5614622812f47-3e3935984d0sm190004b6e.28 - gsmtp
-<br><pre>hello: 250-smtp.gmail.com at your service, [136.226.1.35]
-250-SIZE 35882577
-250-8BITMIME
-250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
-250-ENHANCEDSTATUSCODES
-250-PIPELINING
-250-CHUNKING
-250 SMTPUTF8
-</pre>Failed to authenticate password. Error: 535-5.7.8 Username and Password not accepted. For more information, go to
-535 5.7.8  https://support.google.com/mail/?p=BadCredentials 5614622812f47-3e3935984d0sm190004b6e.28 - gsmtp
-<br>Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Thu, 26 Sep 2024 21:32:08 +0000
-From: &quot;Orlando&quot; &lt;orlandoramosperez26@gmail.com&gt;
-Return-Path: &lt;orlandoramosperez26@gmail.com&gt;
-To: orlandoramosperezqq26@gmail.com
-Subject: =?UTF-8?Q?Email=20Verification?=
-Reply-To: &lt;orlandoramosperez26@gmail.com&gt;
-User-Agent: CodeIgniter
-X-Sender: orlandoramosperez26@gmail.com
-X-Mailer: CodeIgniter
-X-Priority: 3 (Normal)
-Message-ID: &lt;66f5d2d8914f71.34410265@gmail.com&gt;
-Mime-Version: 1.0
-
-
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-Please click the following link to verify your email:
-http://localhost/framework_ssii/verify-email/aea0d0a14e17733c7646ce2a91396fe7b4690f8ef680a3a01aed579232ad0f20
-</pre>
-INFO - 2024-09-26 21:36:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
-INFO - 2024-09-26 21:36:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
-INFO - 2024-09-26 21:36:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
-INFO - 2024-09-26 21:36:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
-INFO - 2024-09-26 21:36:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
-INFO - 2024-09-26 21:36:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
-INFO - 2024-09-26 21:36:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-26 22:26:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-26 22:27:06 --> Email: sendWithSmtp throwed ErrorException: fsockopen(): SSL: Se ha forzado la interrupción de una conexión existente por el host remoto in C:\laragon\www\framework_ssii\system\Email\Email.php:1896
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fsockopen(): SS...', 'C:\\laragon\\www\\...', 1896)
+#1 C:\laragon\www\framework_ssii\system\Email\Email.php(1896): fsockopen('ssl://smtp.gmai...', 465, NULL, NULL, 5)
+#2 C:\laragon\www\framework_ssii\system\Email\Email.php(1809): CodeIgniter\Email\Email->SMTPConnect()
+#3 C:\laragon\www\framework_ssii\system\Email\Email.php(1694): CodeIgniter\Email\Email->sendWithSmtp()
+#4 C:\laragon\www\framework_ssii\system\Email\Email.php(1589): CodeIgniter\Email\Email->spoolEmail()
+#5 C:\laragon\www\framework_ssii\app\Controllers\AdminController.php(87): CodeIgniter\Email\Email->send()
+#6 C:\laragon\www\framework_ssii\app\Controllers\AdminController.php(67): App\Controllers\AdminController->sendVerificationEmail('orlandoramosper...', '2140f66be5f6da6...')
+#7 C:\laragon\www\framework_ssii\system\CodeIgniter.php(933): App\Controllers\AdminController->insertData()
+#8 C:\laragon\www\framework_ssii\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#9 C:\laragon\www\framework_ssii\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\framework_ssii\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\framework_ssii\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\framework_ssii\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+ERROR - 2024-09-26 22:27:06 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-09-26 22:27:06 --> 
+ERROR - 2024-09-26 22:27:06 --> No se pudo enviar el correo de verificación a orlandoramosperez26@gmail.com
