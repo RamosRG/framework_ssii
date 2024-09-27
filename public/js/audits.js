@@ -15,38 +15,60 @@ $(document).ready(function () {
     } 
 });
 
-function addRow() {
-    // Obtener la tabla y su cuerpo
-    var table = document.getElementById("dynamicTable").getElementsByTagName('tbody')[0];
 
-    // Crear una nueva fila
-    var newRow = table.insertRow();
-
-    // Agregar las 6 celdas
-    var cell1 = newRow.insertCell(0);
-    var cell2 = newRow.insertCell(1);
-    var cell3 = newRow.insertCell(2);
-    var cell4 = newRow.insertCell(3);
-    var cell5 = newRow.insertCell(4);
-
-    // Insertar contenido en las celdas
-    cell1.innerHTML = '<input type="text" name="campo1[]">';
-    cell2.innerHTML = `
-        <select name="campo2[]">
-            <option value="opcion1">Opción 1</option>
-            <option value="opcion2">Opción 2</option>
-            <option value="opcion3">Opción 3</option>
-        </select>`;
-    cell3.innerHTML = `
-        <select name="campo3[]">
-            <option value="opcionA">Opción A</option>
-            <option value="opcionB">Opción B</option>
-            <option value="opcionC">Opción C</option>
-        </select>`;
-    cell4.innerHTML = '<input type="text" name="campo4[]">';
-    cell5.innerHTML = '<input type="text" name="campo5[]">';
-}
  
+function generarCheckboxes(selectId) {
+  const select1 = document.getElementById(selectId);
+  const checkboxSelectContainer = document.getElementById('checkboxSelectContainer');
+  const checkboxSelect = document.getElementById('checkboxSelect');
+
+  // Evento change para el select
+  select1.addEventListener('change', function() {
+      // Limpiar el contenedor de los checkbox
+      checkboxSelect.innerHTML = '';
+
+      if (this.value !== '') {
+          // Mostrar el contenedor con los checkbox
+          checkboxSelectContainer.style.display = 'block';
+
+          // Opciones con checkbox según la selección
+          let opciones = [];
+
+          if (this.value === 'opcion1') {
+              opciones = ['Sub Opción 1.1', 'Sub Opción 1.2', 'Sub Opción 1.3'];
+          } else if (this.value === 'opcion2') {
+              opciones = ['Sub Opción 2.1', 'Sub Opción 2.2', 'Sub Opción 2.3'];
+          }
+
+          // Generar checkbox por cada opción
+          opciones.forEach(function(opcion) {
+              const div = document.createElement('div');
+              div.className = 'checkbox-option';
+
+              const checkbox = document.createElement('input');
+              checkbox.type = 'checkbox';
+              checkbox.id = opcion;
+              checkbox.value = opcion;
+
+              const label = document.createElement('label');
+              label.setAttribute('for', opcion);
+              label.textContent = opcion;
+
+              div.appendChild(checkbox);
+              div.appendChild(label);
+              checkboxSelect.appendChild(div);
+          });
+      } else {
+          // Ocultar el contenedor si no se selecciona nada
+          checkboxSelectContainer.style.display = 'none';
+      }
+  });
+}
+
+// Llamada a la función
+generarCheckboxes('select1');
+
+
 /*
 $(document).ready(function() {
     $('#search-select').select2({

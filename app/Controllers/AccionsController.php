@@ -7,9 +7,64 @@ use App\Models\MachinaryModel;
 use App\Models\ShiftModel;
 use App\Models\DepartamentModel;
 use App\Models\AuditModel;
+use App\Models\CategoryModel;
+use App\Models\FountainModel;
+use App\Models\QuestionsModel;
 
 class AccionsController extends BaseController
 {
+   public function showQuestion()
+   {
+       $model = new QuestionsModel();
+   
+       // Llamamos al método del modelo para obtener las preguntas activas
+       $questions = $model->showAllQuestions();
+   
+       // Devolvemos los datos en formato JSON para DataTables
+       return $this->response->setJSON($questions);
+   }
+   
+   public function insertQuestions()
+   {
+
+      $data = [
+         'fk_category' => $this->request->getPost('fk_category'), // Asegúrate de que coincida con el formulario
+         'question' => $this->request->getPost('question'),
+         'create_for' => $this->request->getPost('create_for'),
+         'fk_fountain' => $this->request->getPost('fk_fountain') // Asegúrate de que coincida con el formulario
+      ];
+
+      try {
+         $questionsModel = new QuestionsModel();
+         if ($questionsModel->insertQuestion($data)) {
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Question created successfully']);
+         } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to create the new Question']);
+         }
+      } catch (\Exception $e) {
+         return $this->response->setJSON(['status' => 'error', 'message' => $e->getMessage()]);
+      }
+   }
+   public function getFountain()
+   {
+      $fountain = new FountainModel();
+      $data = $fountain->findAll();
+
+      return $this->response->setJSON([
+         'status' => 'success',
+         'fountain' => $data
+      ]);
+   }
+   public function getCategory()
+   {
+      $category = new CategoryModel();
+      $data = $category->findAll();
+
+      return $this->response->setJSON([
+         'status' => 'success',
+         'category' => $data
+      ]);
+   }
    public function auditdetails()
    {
       // Cargar la vista de detalles
@@ -34,6 +89,11 @@ class AccionsController extends BaseController
       $data = $auditModel->getDataOfAudits();
 
       return $this->response->setJSON($data);
+   }
+   public function showquestions()
+   {
+
+      return view('accions/show_questions');
    }
    public function showaudit()
    {

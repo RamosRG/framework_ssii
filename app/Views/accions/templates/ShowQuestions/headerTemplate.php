@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="../public/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="../public/css/font-awesome.min.css">
     <link rel="stylesheet" href="../public/assets/sweetalert2/sweetalert2.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css"  />
 
 
     <style>
@@ -22,37 +21,9 @@
             width: 100%;
             position: absolute;
             bottom: 0;
-           
           }
-          #selected-frameworks {
-            margin-top: 20px;
-            /* Estilos para el select y los checkbox */
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-}
+        
 
-select {
-    margin-bottom: 10px;
-    padding: 5px;
-}
-
-#checkboxSelectContainer {
-    margin-top: 10px;
-}
-
-.checkbox-option {
-    display: flex;
-    align-items: center;
-    margin: 5px 0;
-}
-
-.checkbox-option input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-        }
-            
     </style>
 </head>
 <body>

@@ -1,57 +1,29 @@
-<div id="createUser" class="w3-main">
+<div id="createQuestion" class="w3-main">
     <div class="w3-container" id="contact" style="margin-top:75px">
         <h1 class="w3-xxxlarge w3-text-indigo"><b>Add Questions</b></h1>
         <hr style="width:50px;border:5px solid indigo" class="w3-round">
         <div>
-            <form id="auditForm" action="../accions/insertAudit" method="post">
+            <form id="questionForm" action="../accions/insertQuestions" method="post">
                 <div style="display: flex; flex-wrap: wrap; gap: 15px;">
-                    <div style="flex: 1;">
-                        <label for="maquinary"><b>Maquinary</b></label>
-                        <select id="area" name="area" class="w3-input w3-border w3-round">
-                            <option selected>Open this select menu</option>
-                            <option value=""></option>
-                        </select>
-                     </div>
-                    <div style="flex: 1;">
-                        <label for="shift"><b>Shift</b></label>
-                        <select id="area" name="area" class="w3-input w3-border w3-round">
-                            <option selected>Open this select menu</option>
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
+                    <label for="category"><b>Category</b></label>
+                    <select id="category-list" name="fk_category" class="w3-input w3-border w3-round" required>
+                        <option value="" disabled selected>Open this select menu</option>
+                        <!-- Aquí debes agregar las opciones de categorías -->
+                    </select>
 
-                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
-                    <div style="flex: 1;">
-                        <label for="date"><b>Date</b></label>
-                        <input id="date" class="w3-input w3-border w3-round" type="date" name="date" style="width:100%;" required>
-                    </div>
-                    <div style="flex: 1;">
-                        <label for="departament"><b>Departament</b></label>
-                        <select id="area" name="area" class="w3-input w3-border w3-round">
-                            <option selected>Open this select menu</option>
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
+                    <label for="question"><b>Question</b></label>
+                    <input id="question" class="w3-input w3-border w3-round" type="text" name="question" style="width:100%;" required>
 
-                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
-                    <div style="flex: 1;">
-                        <label for="password"><b>Password</b></label>
-                        <input id="password" class="w3-input w3-border w3-round" type="password" name="password" style="width:100%;" required>
-                    </div>
-                </div>
+                    <label for="create_for"><b>Create For</b></label>
+                    <input id="create_for" class="w3-input w3-border w3-round" type="text" name="create_for" style="width:100%;" required>
 
-                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
-                    <div style="flex: 1;">
-                        <label for="area"><b>Select Area</b></label>
-                        <select id="area" name="area" class="w3-input w3-border w3-round">
-                            <option selected>Open this select menu</option>
-                            <option value=""></option>
-                        </select>
-                    </div>
+                    <label for="fountain"><b>Select Fountain</b></label>
+                    <select id="fountain-list" name="fk_fountain" class="w3-input w3-border w3-round" required>
+                        <option value="" disabled selected>Open this select menu</option>
+                        <!-- Aquí debes agregar las opciones de fuentes -->
+                    </select>
                 </div>
-                <button class="w3-button w3-block w3-green w3-section w3-padding btnCreate" type="button" id="btnCreate">Add</button>
+                <button class="w3-button w3-block w3-green w3-section w3-padding btnQuestion" type="submit">Add</button>
             </form>
         </div>
     </div>

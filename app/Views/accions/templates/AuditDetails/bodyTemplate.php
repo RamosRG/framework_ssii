@@ -33,7 +33,21 @@
             </div>
             <br>
             <h2 class="w3-container w3-center">  Select her questions</h2>
-           
+            <div>
+                <label for="select1">Selecciona una opción:</label>
+                <select id="select1">
+                    <option value="">Selecciona una opción</option>
+                    <option value="opcion1">Opción 1</option>
+                    <option value="opcion2">Opción 2</option>
+                </select>
+            </div>
+        
+            <div id="checkboxSelectContainer" style="display: none;">
+                <label>Opciones adicionales:</label>
+                <div id="checkboxSelect">
+                    <!-- Aquí se mostrarán las opciones con checkbox -->
+                </div>
+            </div>
     </div>
 </div>
 </div>

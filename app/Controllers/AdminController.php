@@ -114,7 +114,6 @@ class AdminController extends Controller
         }
     }
 
-
     //Funcion para actualizar un usuario dentro del controlador
     public function update()
     {

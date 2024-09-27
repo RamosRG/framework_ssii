@@ -40,11 +40,16 @@ $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) 
     $routes->get('getMachinery', 'AccionsController::getMachinery');
     $routes->get('getShift', 'AccionsController::getShift');
     $routes->get('getDepartament', 'AccionsController::getDepartament');
+    $routes->get('getCategory', 'AccionsController::getCategory');
+    $routes->get('getFountain', 'AccionsController::getFountain');
     $routes->post('insertAudit', 'AccionsController::insertAudit');
     $routes->get('showaudit', 'AccionsController::showaudit');
     $routes->get('getAudits', 'AccionsController::getAudits');
     $routes->get('getAuditById/(:num)', 'AccionsController::getAuditById/$1');
     $routes->get('auditdetails', 'AccionsController::auditdetails');
+    $routes->post('insertQuestions', 'AccionsController::insertQuestions');
+    $routes->get('showquestions', 'AccionsController::showquestions');
+    $routes->get('showQuestion', 'AccionsController::showQuestion');
 
 
 });
