@@ -13,17 +13,39 @@ use App\Models\QuestionsModel;
 
 class AccionsController extends BaseController
 {
+
+   public function updateStatus($id)
+{
+    $model = new QuestionsModel();
+
+    // Obtener el nuevo estado desde el formulario o AJAX
+    $status = $this->request->getPost('status');
+
+    // Validamos el status, debe ser 0 o 1
+    if ($status != 0 && $status != 1) {
+        return $this->response->setJSON(['error' => 'Status inválido']);
+    }
+
+    // Actualizar el estado de la pregunta por ID
+    if ($model->update($id, ['status' => $status])) {
+        return $this->response->setJSON(['success' => 'El estado ha sido actualizado correctamente']);
+    } else {
+        return $this->response->setJSON(['error' => 'No se pudo actualizar el estado']);
+    }
+}
+
+   
+
    public function showQuestion()
    {
-       $model = new QuestionsModel();
-   
-       // Llamamos al método del modelo para obtener las preguntas activas
-       $questions = $model->showAllQuestions();
-   
-       // Devolvemos los datos en formato JSON para DataTables
-       return $this->response->setJSON($questions);
+      $model = new QuestionsModel();
+
+      // Llamamos al método del modelo para obtener las preguntas activas
+      $questions = $model->showAllQuestions();
+
+      // Ver el resultado en la consola para verificar el formato JSON
+      echo json_encode($questions);
    }
-   
    public function insertQuestions()
    {
 

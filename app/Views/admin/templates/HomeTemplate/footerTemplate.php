@@ -5,6 +5,7 @@
 
 <!-- Scripts -->
 <script src="../public/js/script.js"></script>
+
 <script src="../public/js/jquery.dataTables.min.js"></script>
 <script src="../public/assets/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="../public/js/functions.js"></script>

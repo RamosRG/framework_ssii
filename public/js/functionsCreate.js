@@ -1,51 +1,57 @@
 $(document).ready(function () {
     var table = $('#questionTable').DataTable({
         "ajax": {
-            "url": "/framework_ssii/accions/showQuestion", // URL de la función que devuelve los datos
-            "dataSrc": "" // Asegúrate de que los datos vienen directamente en formato JSON
+            "url": "/framework_ssii/accions/showQuestion",
+            "dataSrc": ""
         },
         "columns": [
-            { "questions": "id_question" },
-            { "questions": "fk_category" },
-            { "questions": "question" },
+            { "data": "id_question" },
+            { "data": "category" },
+            { "data": "question" },
             {
-                "questions": "status",
-                "render": function (questions) {
-                    return questions == 1 ? '<i class="fa fa-check" style="font-size:24px;color:green"></i>' : '<i class="fa fa-remove" style="font-size:24px;color:red"></i>';
+                "data": "status",
+                "render": function (data) {
+                    return data == 1 ? '<i class="fa fa-check" style="font-size:24px;color:green"></i>' : '<i class="fa fa-remove" style="font-size:24px;color:red"></i>';
                 }
             },
-            { "questions": "create_for" },
-            { "questions": "fk_fountain" },
+            { "data": "create_for" },
+            { "data": "fountain" },
             {
-                "defaultContent": '<button class="btn-edit w3-button w3-yellow w3-round fa fa-edit"></button>'
+                "data": "id_question",
+                "render": function (data, type, row) {
+                    var statusText = row.status == 1 ? 'Desactivar' : 'Activar';
+                    var newStatus = row.status == 1 ? 0 : 1; // Cambia el estado
+                    return `
+                        <button class="btn-update-status w3-button w3-red" data-id="${data}" data-status="${newStatus}">
+                            ${statusText}
+                        </button>
+                    `;
+                }
             }
         ]
     });
-    });
 
+    // Manejar el evento de clic en el botón para actualizar el estado
+    $('#questionTable').on('click', '.btn-update-status', function () {
+        var questionId = $(this).data('id');
+        var newStatus = $(this).data('status');
 
-// Función para eliminar una pregunta (ejemplo)
-function deleteQuestion(id) {
-    if (confirm("¿Estás seguro de que deseas eliminar esta pregunta?")) {
-        fetch(`/framework_ssii/accions/deleteQuestion/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert('Pregunta eliminada correctamente');
-                    $('#questionsTable').DataTable().ajax.reload(); // Recarga la tabla después de eliminar
+        // Enviar solicitud AJAX para actualizar el estado
+        $.ajax({
+            url: '/framework_ssii/accions/updateStatus/' + questionId, // Ruta al método en el controlador
+            method: 'POST',
+            data: { status: newStatus }, // Enviar el nuevo estado
+            success: function (response) {
+                if (response.success) {
+                    alert('Estado actualizado correctamente');
+                    table.ajax.reload(); // Recargar la tabla
                 } else {
-                    alert('Error al eliminar la pregunta');
+                    alert('Error: ' + response.error);
                 }
-            })
-            .catch(error => console.error('Error en la solicitud:', error));
-    }
-}
-
+            }
+        });
+    });
+});
 
 
 $(document).on('click', '#createQuestion .btnQuestion', function (e) {

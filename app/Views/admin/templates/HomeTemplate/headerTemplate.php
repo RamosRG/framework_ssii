@@ -11,6 +11,7 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="../public/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <link rel="stylesheet" href="../public/assets/sweetalert2/sweetalert2.min.css">
 
     <style>

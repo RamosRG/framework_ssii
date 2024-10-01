@@ -50,6 +50,8 @@ $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) 
     $routes->post('insertQuestions', 'AccionsController::insertQuestions');
     $routes->get('showquestions', 'AccionsController::showquestions');
     $routes->get('showQuestion', 'AccionsController::showQuestion');
+    $routes->post('updateStatus/(:num)', 'AccionsController::updateStatus/$1');
+
 
 
 });
