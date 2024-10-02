@@ -10,32 +10,52 @@ use App\Models\AuditModel;
 use App\Models\CategoryModel;
 use App\Models\FountainModel;
 use App\Models\QuestionsModel;
+use CodeIgniter\CLI\Console;
 
 class AccionsController extends BaseController
 {
 
+   public function getQuestionsByCategory()
+   {
+      $categoryId = $this->request->getPost('id_category'); // Cambiar 'category_id' por 'id_category'
+
+      if (!$categoryId) {
+         return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'No category ID provided.'
+         ]);
+      }
+
+      $model = new QuestionsModel();
+      $questions = $model->getQuestionsByCategory($categoryId);
+
+      return $this->response->setJSON([
+         'status' => 'success',
+         'data' => [
+            'questions' => $questions
+         ]
+      ]);
+   }
+
    public function updateStatus($id)
-{
-    $model = new QuestionsModel();
+   {
+      $model = new QuestionsModel();
 
-    // Obtener el nuevo estado desde el formulario o AJAX
-    $status = $this->request->getPost('status');
+      // Obtener el nuevo estado desde el formulario o AJAX
+      $status = $this->request->getPost('status');
 
-    // Validamos el status, debe ser 0 o 1
-    if ($status != 0 && $status != 1) {
-        return $this->response->setJSON(['error' => 'Status inválido']);
-    }
+      // Validamos el status, debe ser 0 o 1
+      if ($status != 0 && $status != 1) {
+         return $this->response->setJSON(['error' => 'Status inválido']);
+      }
 
-    // Actualizar el estado de la pregunta por ID
-    if ($model->update($id, ['status' => $status])) {
-        return $this->response->setJSON(['success' => 'El estado ha sido actualizado correctamente']);
-    } else {
-        return $this->response->setJSON(['error' => 'No se pudo actualizar el estado']);
-    }
-}
-
-   
-
+      // Actualizar el estado de la pregunta por ID
+      if ($model->update($id, ['status' => $status])) {
+         return $this->response->setJSON(['success' => 'El estado ha sido actualizado correctamente']);
+      } else {
+         return $this->response->setJSON(['error' => 'No se pudo actualizar el estado']);
+      }
+   }
    public function showQuestion()
    {
       $model = new QuestionsModel();

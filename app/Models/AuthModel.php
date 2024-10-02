@@ -40,12 +40,10 @@ class AuthModel extends Model
         return false; // Retorna false si no se encontró el usuario o la contraseña es incorrecta
     }
 
-
-
     public function getUsers()
     {
-        return $this->select('area.id_area, area.area, users.email, users.id_user, users.`name`, users.lastName, users.firstName, users.`status`, users.privileges,
-        users.created_at, users.updated_at')  // Selecciona todos los campos de ambas tablas
+        return $this->select('area.id_area, area.area, users.email, users.id_user, users.`name`, users.lastName, users.firstName, users.`status`,
+         users.privileges, users.password, users.created_at, users.updated_at')  // Selecciona todos los campos de ambas tablas
             ->join('area', 'users.fk_area = area.id_area') // Realiza el INNER JOIN
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
@@ -53,7 +51,8 @@ class AuthModel extends Model
 
     public function getUsersByNumbre($id)
     {
-        return $this->select('area.id_area, area.area, users.email, users.id_user, users.name, users.lastName, users.firstName, users.fk_area, users.status, users.created_at, users.updated_at')
+        return $this->select('area.id_area, area.area, users.email, users.id_user, users.name, users.lastName, users.firstName,
+        users.fk_area, users.status, users.created_at, users.updated_at, users.privileges, users.password')
             ->join('area', 'users.fk_area = area.id_area') // Realiza el INNER JOIN
             ->where('users.id_user', $id)  // Usa coma en lugar de => para el método where
             ->get()

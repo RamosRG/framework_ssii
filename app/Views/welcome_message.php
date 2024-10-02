@@ -10,7 +10,7 @@
 <body>
     <div class="page-container">
         <header class="header">
-            <img src="" alt="Left Logo">
+            <img src="./public/images/LogoDart.jpg" alt="Left Logo">
             <img src="" alt="Right Logo">
         </header>
 
@@ -42,7 +42,7 @@
         </main>
 
         <footer>
-            <h5>Footer</h5>
+            <h5>DART ATLACOMULCO</h5>
             <p>Powered by Orlando Ramos</p>
         </footer>
     </div>

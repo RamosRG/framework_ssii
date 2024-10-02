@@ -12,7 +12,6 @@
         <a href="../accions/showquestions" class="w3-bar-item w3-button w3-hover-white">Show Questions</a> 
         <a href="#packages" class="w3-bar-item w3-button w3-hover-white">Packages</a> 
         <a href="../auth/logout" class="w3-bar-item w3-button w3-hover-white">Log Out</a>
-    </div><ref="../auth/logout" class="w3-bar-item w3-button w3-hover-white">Log Out</a>
     </div>
 </nav>
 <header class="w3-container w3-top w3-hide-large w3-indigo w3-xlarge w3-padding">

@@ -18,7 +18,7 @@ class AuditModel extends Model
     protected $createdField = 'create_at';
     protected $updatedField = 'update_at';
 
-
+   
     public function insertAudit($data)
     {
         return $this->insert($data);
@@ -49,7 +49,5 @@ class AuditModel extends Model
                     ->get()
                     ->getResultArray(); // Devuelve el resultado como un array
     }
-    
-    
-    
+       
 }

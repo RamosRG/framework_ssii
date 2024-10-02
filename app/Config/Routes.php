@@ -33,6 +33,7 @@ $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('home', 'UserController::home');
     $routes->get('verify/(:any)', 'AdminController::verify/$1');
 
+    
 });
 $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('addquestions', 'AccionsController::addquestions');
@@ -50,9 +51,8 @@ $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) 
     $routes->post('insertQuestions', 'AccionsController::insertQuestions');
     $routes->get('showquestions', 'AccionsController::showquestions');
     $routes->get('showQuestion', 'AccionsController::showQuestion');
+    $routes->post('getQuestionsByCategory', 'AccionsController::getQuestionsByCategory');
     $routes->post('updateStatus/(:num)', 'AccionsController::updateStatus/$1');
-
-
 
 });
 

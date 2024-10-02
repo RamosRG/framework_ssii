@@ -51,30 +51,45 @@
       </div>
 
       <form id="updateUserForm" class="w3-container" action="./update" method="POST">
-        <div class="w3-section">
-          <label><b>EMAIL</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" name="email" id=email required>
-          <input type="hidden" id="id_user" name="id_user" value="id_user">
-          <input type="hidden" id="fk_area" name="fk_area" value="fk_area">
-          <label><b>NAME</b></label>
-          <input class="w3-input w3-border" type="text" name="name" id="name" required>
-          <label><b>FIRSTNAME</b></label>
-          <input class="w3-input w3-border" type="text" name="firstName" id="firstName" required>
-          <label><b>LASTNAME</b></label>
-          <input class="w3-input w3-border" type="text" name="lastName" id="lastName" required>
+      <div class="w3-section">
+          <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
+              <div style="flex: 1;">
+                <label><b>EMAIL</b></label>
+                  <input class="w3-input w3-border w3-margin-bottom" type="text" name="email" id=email required>
+                  <input type="hidden" id="id_user" name="id_user" value="id_user">
+                  <input type="hidden" id="fk_area" name="fk_area" value="fk_area">
+              </div>
+              <div style="flex: 1;">
+                <label><b>NAME</b></label>
+                <input class="w3-input w3-border" type="text" name="name" id="name" required>
+              </div>
+           </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
+              <div style="flex: 1;">
+              <label><b>FIRSTNAME</b></label>
+                <input class="w3-input w3-border" type="text" name="firstName" id="firstName" required>
+              </div>
+              <div style="flex: 1;">
+                <label><b>LASTNAME</b></label>
+                  <input class="w3-input w3-border" type="text" name="lastName" id="lastName" required>
+                </div>
+          </div>
           <label><b>STATUS</b></label>
-          <input class="w3-input w3-border" type="number" min="0" max="1" name="status" id="status" required>
-          <label for="area"><b>AREA</b></label>
-          <select id="area" name="area" class="w3-input w3-border w3-round">
-            
-        </select>
-          <label><b>CREATED</b></label>
-          <input class="w3-input w3-border" type="text" name="created_at" id="created_at" required>
-          <label><b>UPDATED</b></label>
-          <input class="w3-input w3-border" type="date" name="updated_at" value="updated_at" required>
-
-          <button class="w3-button w3-block w3-green w3-section w3-padding" id="updateBtn">UPDATE USER</button>
-          <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
+            <input class="w3-input w3-border" type="number" min="0" max="1" name="status" id="status" required>
+            <label for="area"><b>AREA</b></label>
+              <select id="area" name="area" class="w3-input w3-border w3-round">
+              </select>
+        <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
+            <div style="flex: 1;">
+              <label><b>CREATED</b></label>
+                <input class="w3-input w3-border" type="text" name="created_at" id="created_at" required>
+            </div>
+            <div style="flex: 1;">
+              <label><b>UPDATED</b></label>
+                <input class="w3-input w3-border" type="date" name="updated_at" value="updated_at" required>
+            </div>
+        <button class="w3-button w3-block w3-green w3-section w3-padding" id="updateBtn">UPDATE USER</button>
+        </div>
         </div>
       </form>
 

@@ -35,19 +35,23 @@
             <h2 class="w3-container w3-center">  Select her questions</h2>
             <div>
                 <label for="select1">Selecciona una opción:</label>
-                <select id="select1">
+                <select class="w3-padding w3-block" id="select1">
                     <option value="">Selecciona una opción</option>
-                    <option value="opcion1">Opción 1</option>
-                    <option value="opcion2">Opción 2</option>
+                    <!-- Las opciones se cargarán dinámicamente aquí -->
                 </select>
             </div>
+            <div id="questionsList"></div>
+
+  <!-- Contenedor para mostrar las preguntas seleccionadas -->
+  <div id="selectedQuestions">
+    <div id="selectedQuestionsTitle">Preguntas seleccionadas:</div>
+    <div id="selectedQuestionsList"></div>
+  </div>
+
+              
+              
+            
         
-            <div id="checkboxSelectContainer" style="display: none;">
-                <label>Opciones adicionales:</label>
-                <div id="checkboxSelect">
-                    <!-- Aquí se mostrarán las opciones con checkbox -->
-                </div>
-            </div>
-    </div>
+            
 </div>
 </div>

@@ -22,7 +22,6 @@ class CategoryModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
-   
     
 
 }

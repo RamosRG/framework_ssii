@@ -20,7 +20,13 @@ class QuestionsModel extends Model
     protected $createdField = 'create_at';
     protected $updatedField = 'update_at';
 
-
+    public function getQuestionsByCategory($categoryId)
+    {
+        return $this->where('fk_category', $categoryId)
+                    ->where('status', 1)
+                    ->findAll();
+    }
+    
     public function updateQuestionById($id, $data)
     {
         return $this->update($id, $data); // Actualiza el registro con el nuevo status
