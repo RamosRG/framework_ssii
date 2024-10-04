@@ -14,10 +14,12 @@ use CodeIgniter\CLI\Console;
 
 class AccionsController extends BaseController
 {
-
+   public function saveAudit() {
+      var_dump($_POST);
+   }
    public function getQuestionsByCategory()
    {
-      $categoryId = $this->request->getPost('id_category'); // Cambiar 'category_id' por 'id_category'
+      $categoryId = $this->request->getPost('category_id'); // Cambiar 'category_id' por 'id_category'
 
       if (!$categoryId) {
          return $this->response->setJSON([
@@ -36,7 +38,6 @@ class AccionsController extends BaseController
          ]
       ]);
    }
-
    public function updateStatus($id)
    {
       $model = new QuestionsModel();

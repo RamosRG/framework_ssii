@@ -1,6 +1,6 @@
 <div class="w3-main">
     <div class="w3-container" id="contact" style="margin-top:75px">
-       
+        <form action="../accions/saveAudit" method="POST">
             <div id="auditData"></div>
             <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
                 <div style="flex: 1;">
@@ -14,6 +14,7 @@
                 <div style="flex: 1;">
                     <label for="auditor"><b>Auditor</b></label>
                     <input id="auditor" class="w3-input w3-border w3-round" type="text" name="auditor" required>
+                    <input id="id_audit" class="w3-input w3-border w3-round" type="hidden" name="id_audit" required>
                 </div> 
             </div>
             
@@ -47,11 +48,8 @@
     <div id="selectedQuestionsTitle">Preguntas seleccionadas:</div>
     <div id="selectedQuestionsList"></div>
   </div>
-
-              
-              
-            
-        
-            
-</div>
-</div>
+  <br>
+  <button class="w3-button w3-green w3-block w3-padding w3-round-large" id="btnSaveQuestions">Button</button>
+</form> 
+    </div>
+    </div>

@@ -53,6 +53,7 @@ $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) 
     $routes->get('showQuestion', 'AccionsController::showQuestion');
     $routes->post('getQuestionsByCategory', 'AccionsController::getQuestionsByCategory');
     $routes->post('updateStatus/(:num)', 'AccionsController::updateStatus/$1');
+    $routes->post('saveAudit', 'AccionsController::saveAudit');
 
 });
 
