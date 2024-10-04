@@ -20,13 +20,22 @@ class QuestionsModel extends Model
     protected $createdField = 'create_at';
     protected $updatedField = 'update_at';
 
+    public function getAudit($idAudit)
+    {
+        return $this->select('category.category ,questions.question, questions.create_at, fountain.fountain')
+            ->join('fountain', 'fountain.id_fountain = questions.fk_fountain') // Realiza el INNER JOIN
+            ->join('category', 'category.id_category = questions.fk_category') // Realiza el INNER JOIN
+            ->where('questions.fk_audit', $idAudit) // Filtra por el id de la auditoria
+            ->get()
+            ->getResultArray(); // Devuelve el resultado como un array
+    }
     public function getQuestionsByCategory($categoryId)
     {
         return $this->where('fk_category', $categoryId)
-                    ->where('status', 1)
-                    ->findAll();
+            ->where('status', 1)
+            ->findAll();
     }
-    
+
     public function updateQuestionById($id, $data)
     {
         return $this->update($id, $data); // Actualiza el registro con el nuevo status
@@ -49,9 +58,8 @@ class QuestionsModel extends Model
         }
     }
 
-
-    public function insertQuestion($data)
+    public function insertBatchQuestions($data)
     {
-        return $this->insert($data);
+        return $this->insertBatch($data); // Insertar múltiples preguntas a la vez
     }
 }

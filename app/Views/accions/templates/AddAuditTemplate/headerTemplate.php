@@ -22,6 +22,24 @@
             position: absolute;
             bottom: 0;
           }
+          .label-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .label-container hr {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .input-field {
+            margin-bottom: 10px;
+        }
+
+        .question-section {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>

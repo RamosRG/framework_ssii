@@ -33,23 +33,12 @@
                 </div>
             </div>
             <br>
-            <h2 class="w3-container w3-center">  Select her questions</h2>
-            <div>
-                <label for="select1">Selecciona una opción:</label>
-                <select class="w3-padding w3-block" id="select1">
-                    <option value="">Selecciona una opción</option>
-                    <!-- Las opciones se cargarán dinámicamente aquí -->
-                </select>
-            </div>
-            <div id="questionsList"></div>
 
-  <!-- Contenedor para mostrar las preguntas seleccionadas -->
-  <div id="selectedQuestions">
-    <div id="selectedQuestionsTitle">Preguntas seleccionadas:</div>
-    <div id="selectedQuestionsList"></div>
-  </div>
-  <br>
-  <button class="w3-button w3-green w3-block w3-padding w3-round-large" id="btnSaveQuestions">Button</button>
 </form> 
+<div id="audit-questions-list" class="w3-ul w3-card-4">
+    <!-- Aquí se llenarán los detalles de las preguntas de la auditoría -->
+</div>
+
+
     </div>
     </div>

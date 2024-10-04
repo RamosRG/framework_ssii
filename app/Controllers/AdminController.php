@@ -9,6 +9,16 @@ use App\Models\AuthModel;
 
 class AdminController extends Controller
 {
+    public function getUsers()
+    {
+        $adminModel = new AdminModel();
+        $data = $adminModel->findAll(); // Obtén todas las áreas
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'user' => $data
+        ]);
+    }
     public function addQuestion()
     {
         return view('accions/add_question');

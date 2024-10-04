@@ -14,66 +14,63 @@
 
 
     <style>
-        /* Estilos para la lista de preguntas */
-    #questionsList {
-      padding: 10px;
-      border: 1px solid #ccc;
-      background-color: #f9f9f9;
-      border-radius: 5px;
-      margin-top: 10px;
-      max-height: 300px;
-      overflow-y: auto; /* Para hacer scroll si hay muchas preguntas */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 20px;
     }
 
-    /* Estilos para los checkboxes y las etiquetas */
-    .question-item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 8px;
-      padding: 5px;
-      border-bottom: 1px solid #eee;
+    h1 {
+        text-align: center;
+        color: #333;
     }
 
-    /* Estilo para los checkboxes */
-    .question-item input[type="checkbox"] {
-      margin-right: 10px;
-      width: 20px;
-      height: 20px;
+    #audit-select {
+        display: block;
+        width: 50%;
+        margin: 20px auto;
+        padding: 10px;
+        font-size: 16px;
     }
 
-    /* Estilo para las etiquetas */
-    .question-item label {
-      font-size: 16px;
-      color: #333;
-      cursor: pointer;
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background-color: white;
     }
 
-    /* Efecto hover sobre los elementos */
-    .question-item:hover {
-      background-color: #f1f1f1;
+    th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
     }
 
-    /* Estilos para las preguntas seleccionadas */
-    #selectedQuestions {
-      padding: 10px;
-      margin-top: 20px;
-      border: 1px solid #ccc;
-      background-color: #e9f5e9;
-      border-radius: 5px;
-      min-height: 50px;
+    th {
+        background-color: #4CAF50;
+        color: white;
     }
 
-    /* Estilo para el título de preguntas seleccionadas */
-    #selectedQuestionsTitle {
-      font-weight: bold;
-      margin-bottom: 10px;
+    tr:hover {
+        background-color: #f1f1f1;
     }
 
-    /* Estilo para cada pregunta seleccionada */
-    .selected-question-item {
-      font-size: 16px;
-      color: #333;
-      margin-bottom: 5px;
+    .category-section {
+        margin: 20px 0;
+    }
+
+    .category-title {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #2c3e50;
+    }
+
+    .no-data {
+        text-align: center;
+        color: #888;
+        margin: 20px;
     }
         body,h1,h2,h3,h4,h5 {font-family:'Courier New', Courier, monospace}
         body {font-size:16px;}

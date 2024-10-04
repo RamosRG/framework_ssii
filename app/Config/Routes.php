@@ -24,6 +24,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->post('insertData', 'AdminController::insertData');
     $routes->post('update', 'AdminController::update');
     $routes->get('getAreas', 'AdminController::getAreas');
+    $routes->get('getUsers', 'AdminController::getUsers');
     $routes->delete('delete/(:num)', 'AdminController::delete/$1');
 
 });
@@ -53,7 +54,9 @@ $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) 
     $routes->get('showQuestion', 'AccionsController::showQuestion');
     $routes->post('getQuestionsByCategory', 'AccionsController::getQuestionsByCategory');
     $routes->post('updateStatus/(:num)', 'AccionsController::updateStatus/$1');
-    $routes->post('saveAudit', 'AccionsController::saveAudit');
+    $routes->get('getAudit/(:num)', 'AccionsController::getAudit/$1');
+
+
 
 });
 
