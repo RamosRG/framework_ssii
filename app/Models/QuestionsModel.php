@@ -62,4 +62,18 @@ class QuestionsModel extends Model
     {
         return $this->insertBatch($data); // Insertar múltiples preguntas a la vez
     }
+    public function auditForUser($idUser, $idAudit)
+    {
+        return $this->select('category.category ,questions.question, questions.create_at, fountain.fountain, audit.no_audit,
+                                audit.id_audit, audit.fk_user, audit.`status`, audit.id_audit')
+            ->join('fountain', 'departament.id_departament = audit.fk_departament') // Realiza el INNER JOIN
+            ->join('category', 'category.id_category = questions.fk_category') // Realiza el INNER JOIN
+            ->join('audit', 'shift.id_shift = audit.fk_shift') // Realiza el INNER JOIN
+            ->join('users', 'users.id_user = audit.fk_user') // Realiza el INNER JOIN
+            ->where('audit.id_audit', $idAudit) // Filtra por el estado de la auditoría
+            ->where('audit.fk_user', $idUser) // Filtra por el id del usuario
+            ->where('audit.`status`', 1) // Filtra por el estado de la auditoria
+            ->get()
+            ->getResultArray(); // Devuelve el resultado como un array
+    }
 }

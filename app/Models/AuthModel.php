@@ -24,7 +24,7 @@ class AuthModel extends Model
     {
         // Construyendo la consulta SQL para buscar el usuario por email y estado activo
         $builder = $this->builder();
-        $builder->select('email, password, privileges');
+        $builder->select('id_user, email, name, firstName, lastName, status, password, privileges');
         $builder->where('email', $email);
         $builder->where('status', 1); // Solo usuarios activos
         $user = $builder->get()->getFirstRow(); // Obtiene el primer resultado de la consulta

@@ -13,7 +13,7 @@
                         <th>MACHINERY</th>
                         <th>DEPARTAMENT</th>
                         <th>STATUS</th>
-                        <th>ADD QUESTIONS</th>
+                        <th>SELECT AUDIT</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,7 +27,7 @@
                         <th>MACHINERY</th>
                         <th>DEPARTAMENT</th>
                         <th>STATUS</th>
-                        <th>ADD QUESTIONS</th>
+                        <th>SELECT AUDITX</th>
                     </tr>
                 </tfoot>
             </table>            

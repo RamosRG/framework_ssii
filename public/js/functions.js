@@ -135,8 +135,4 @@ $(document).ready(function () {
             alert('Error al obtener las áreas.');
         }
     });
-
-
-
-
 });

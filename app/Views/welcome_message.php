@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/css/user/welcome_message.css">
-
     <title>Login | Auditoria Capas</title>
 </head>
 <body>
@@ -21,9 +20,8 @@
                     <label for="username"><b>EMAIL</b></label>
                     <input id="username" type="email" placeholder="Enter EMAIL" name="email" required>
                     
-                    <input type="hidden" id="privileges" name="privileges">
-                    <input type="hidden" name="status" id="1" value="1">
-                    
+                    <!-- Eliminado el campo oculto innecesario -->
+
                     <label for="password"><b>PASSWORD</b></label>
                     <input id="password" type="password" placeholder="Enter PASSWORD" name="password" required>
 
@@ -49,6 +47,7 @@
 
     <script src="./public/js/script.js"></script>
     <script src="./public/assets/sweetalert2/sweetalert2.all.min.js"></script>
-    <script src="./public/js/functionsCreate.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./public/js/functionsUser.js"></script>
 </body>
 </html>

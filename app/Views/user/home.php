@@ -8,22 +8,29 @@
 </head>
 <body>
     <header>
-        <h2>WELCOME</h2>
+        <h2 id="welcome-message">WELCOME </h2>
     </header>
 
     <main>
-        <div class="container">
-            <h1>Home</h1>
-            <div class="button-container">
-                <button hr class="button">Audit Weekly</button>
-                <button class="button">Dashboard</button>
-                <button class="button">Add Question</button>
-            </div>
+    <div class="container">
+        <h1>Home</h1>
+        <!-- Input oculto para almacenar el ID del usuario -->
+        <input type="hidden" id="userId"> <!-- Reemplaza "12345" con el valor real del ID -->
+        <div class="button-container">
+            <button class="button" id="auditForWeek">Audit Weekly</button>
+            <button class="button">Dashboard</button>
+            <button class="button">Add Question</button>
         </div>
-    </main>
+    </div>
+</main>
+
 
     <footer>
         <p>&copy; 2024 DART CONTAINER. All rights reserved to Orlando Ramos.</p>
     </footer>
+
+    <!-- Archivo de JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./../public/js/functionsUser.js"></script>
 </body>
 </html>

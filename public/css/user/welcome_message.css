@@ -96,3 +96,7 @@ footer {
     text-align: center;
     padding: 1rem;
 }
+#welcome-message {
+    white-space: pre-line; /* Esto hace que respete los saltos de línea en el texto */
+    text-align: center; /* Opcional, para centrar el texto */
+}

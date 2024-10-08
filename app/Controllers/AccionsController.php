@@ -15,22 +15,21 @@ class AccionsController extends BaseController
 {
    //funcion para obtener la auditoria para los detalles de la auditoria por el ID
    public function getAudit($data)
-{
-    $model = new QuestionsModel();
+   {
+      $model = new QuestionsModel();
 
-    // Obtener los datos de la auditoría
-    $audit = $model->getAudit($data); 
+      // Obtener los datos de la auditoría
+      $audit = $model->getAudit($data);
 
-    if ($audit && count($audit) > 0) {
-        return $this->response->setJSON([
+      if ($audit && count($audit) > 0) {
+         return $this->response->setJSON([
             'status' => 'success',
             'data' => $audit
-        ]); // Devolver los datos completos de la auditoría
-    } else {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Auditoría no encontrada']);
-    }
-}
-
+         ]); // Devolver los datos completos de la auditoría
+      } else {
+         return $this->response->setJSON(['status' => 'error', 'message' => 'Auditoría no encontrada']);
+      }
+   }
    //Actualizar el estatus de las preguntas
    public function updateStatus($id)
    {

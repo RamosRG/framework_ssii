@@ -188,41 +188,6 @@ $(document).on('click', '#createUser .btnCreate', function (e) {
 
 });
 
-$('#loginForm').on('submit', function (e) {
-    e.preventDefault(); // Evita el comportamiento predeterminado del formulario
-
-    // Llama a la función getPrivileges para asegurar que privileges tenga valor
-    getPrivileges().then(() => {
-        var formData = $(this).serialize(); // Serializa los datos del formulario
-        console.log(formData);
-        $.ajax({
-            url: '/framework_ssii/auth/login',
-            type: 'POST',
-            data: formData,
-            dataType: 'json',
-            success: function (response) {
-                if (response.status === 'success') {
-                    window.location.href = response.redirect; // Cambia la URL a la página de destino
-                } else {
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Credenciales incorrectas',
-                        icon: 'error',
-                        confirmButtonText: 'Ok'
-                    });
-                }
-            },
-            error: function () {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Ocurrió un error al intentar iniciar sesión.',
-                    icon: 'error',
-                    confirmButtonText: 'Ok'
-                });
-            }
-        });
-    });
-});
 
 function createDynamicSections() {
     const container = document.getElementById('dynamic-sections');

@@ -7,7 +7,7 @@ use CodeIgniter\Email\Email;
 
 class AuthController extends BaseController
 {
-   
+
 
     public function getPrivileges()
     {
@@ -41,25 +41,32 @@ class AuthController extends BaseController
 
         // Autenticar al usuario
         $user = $model->authenticate($email, $password);
-
         if ($user) {
-            // Guardar el email y los privilegios en la sesión
+            // Guardar el email, nombre y los privilegios en la sesión
             $session->set([
                 'email' => $user['email'],
                 'privileges' => $user['privileges'],
+                'username' => $user['name'], // Aquí puedes cambiarlo por un campo 'nombre' si tienes
+                'id_user' => $user['id_user'], // Aquí puedes cambiarlo por un campo 'id_user' si tienes
                 'logged_in' => true
             ]);
 
             // Redirigir según los privilegios
-            if ($user['privileges'] === '1') { // Verificar si es un string
+            if ($user['privileges'] === '1') {
                 return $this->response->setJSON([
                     'status' => 'success',
+                    'username' => $user['email'], // Asegúrate de que 'username' esté en la respuesta
+                    'username' => $user['name'], // Aquí puedes cambiarlo por un campo 'nombre' si tienes
+                    'id_user' => $user['id_user'], // Aquí puedes cambiarlo por un campo 'id_user' si tienes
                     'message' => 'Bienvenido Admin',
                     'redirect' => './admin/home'
                 ]);
             } else {
                 return $this->response->setJSON([
                     'status' => 'success',
+                    'username' => $user['email'], // Asegúrate de que 'username' esté en la respuesta
+                    'username' => $user['name'], // Aquí puedes cambiarlo por un campo 'nombre' si tienes
+                    'id_user' => $user['id_user'], // Aquí puedes cambiarlo por un campo 'id_user' si tienes
                     'message' => 'Bienvenido Usuario',
                     'redirect' => './user/home'
                 ]);
@@ -72,6 +79,7 @@ class AuthController extends BaseController
             ]);
         }
     }
+
     public function logout()
     {
         $session = session();
@@ -83,7 +91,7 @@ class AuthController extends BaseController
 
         $model = new AuthModel();
         $data = $model->getUsers();
-        
+
         return $this->response->setJSON($data);
     }
     public function getUserById($id)
