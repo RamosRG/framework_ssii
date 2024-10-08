@@ -13,6 +13,23 @@ use App\Models\QuestionsModel;
 
 class AccionsController extends BaseController
 {
+  
+   public function auditForUsers($data)
+   {
+      $model = new AuditModel();
+
+      // Obtener los datos de la auditoría
+      $audit = $model->getAuditByStatus($data);
+
+      if ($audit && count($audit) > 0) {
+         return $this->response->setJSON([
+            'status' => 'success',
+            'data' => $audit
+         ]); // Devolver los datos completos de la auditoría
+      } else {
+         return $this->response->setJSON(['status' => 'error', 'message' => 'Auditoría no encontrada por usuario']);
+      }
+   }
    //funcion para obtener la auditoria para los detalles de la auditoria por el ID
    public function getAudit($data)
    {

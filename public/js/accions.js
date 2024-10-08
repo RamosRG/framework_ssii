@@ -63,7 +63,6 @@ $(document).ready(function () {
             // Redirigir a la vista de detalles
             window.location.href = "/framework_ssii/accions/auditdetails";
           } else {
-            alert("Error al almacenar los datos de la auditoría.");
           }
         }
       },
@@ -89,7 +88,6 @@ $(document).ready(function () {
     $("#machinery").val(audit.machinery);
     $("#shift").val(audit.shift);
   } else {
-    alert("No se encontraron datos de auditoría.");
   }
 });
 

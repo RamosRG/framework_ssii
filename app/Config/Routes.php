@@ -26,13 +26,17 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('getAreas', 'AdminController::getAreas');
     $routes->get('getUsers', 'AdminController::getUsers');
     $routes->delete('delete/(:num)', 'AdminController::delete/$1');
+    $routes->get('verify/(:any)', 'AdminController::verify/$1');
+
 
 });
 
 $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('forgotpassword', 'UserController::forgotpassword');
     $routes->get('home', 'UserController::home');
-    $routes->get('verify/(:any)', 'AdminController::verify/$1');
+    $routes->get('Assignedaudit', 'UserController::Assignedaudit');
+    $routes->post('auditDetails', 'UserController::auditDetails');
+    $routes->get('showAudit', 'UserController::showAudit');
 
     
 });
@@ -55,5 +59,6 @@ $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) 
     $routes->post('getQuestionsByCategory', 'AccionsController::getQuestionsByCategory');
     $routes->post('updateStatus/(:num)', 'AccionsController::updateStatus/$1');
     $routes->get('getAudit/(:num)', 'AccionsController::getAudit/$1');
+    $routes->get('auditForUsers/(:num)', 'AccionsController::auditForUsers/$1');
 });
 

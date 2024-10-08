@@ -1,83 +1,164 @@
-$('#loginForm').on('submit', function (e) {
-    e.preventDefault();
+$(document).ready(function () {
+    // Manejar el envío del formulario de inicio de sesión
+    $('#loginForm').on('submit', function (e) {
+        e.preventDefault();
 
-    var formData = $(this).serialize();
+        var formData = $(this).serialize();
 
-    $.ajax({
-        url: '/framework_ssii/auth/login',
-        type: 'POST',
-        data: formData,
-        dataType: 'json',
-        success: function (response) {
-            sessionStorage.setItem('id_user', response.id_user);
-            if (response.status === 'success') {
-                // Asegúrate de que 'username' (en este caso el email) esté presente en la respuesta
-
-                // Almacena el email como 'username' en sessionStorage
-                if (response.username) {
-                    sessionStorage.setItem('username', response.username);
-
+        $.ajax({
+            url: '/framework_ssii/auth/login',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function (response) {
+                sessionStorage.setItem('id_user', response.id_user);
+                if (response.status === 'success') {
+                    if (response.username) {
+                        sessionStorage.setItem('username', response.username);
+                    }
+                    // Redirige al home
+                    window.location.href = response.redirect;
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: response.message,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
                 }
-
-                // Redirige al home
-                window.location.href = response.redirect;
-            } else {
+            },
+            error: function () {
                 Swal.fire({
                     title: 'Error!',
-                    text: response.message,
+                    text: 'Ocurrió un error al intentar iniciar sesión.',
                     icon: 'error',
                     confirmButtonText: 'Ok'
                 });
             }
-        },
-        error: function () {
-            Swal.fire({
-                title: 'Error!',
-                text: 'Ocurrió un error al intentar iniciar sesión.',
-                icon: 'error',
-                confirmButtonText: 'Ok'
+        });
+    });
+
+    // Mostrar el nombre de usuario
+    var username = sessionStorage.getItem('username');
+    $('#welcome-message').text(username ? `WELCOME\n${username}` : 'WELCOME\nGuest');
+
+    // Evento para obtener las auditorías de la semana
+    $('#auditForWeek').on('click', function () {
+        var userId = sessionStorage.getItem('id_user');
+
+        if (userId) {
+            $.ajax({
+                url: '../accions/auditForUsers/' + userId,
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status === 'success') {
+                        var auditDetails = response.data; // Array con todas las auditorías
+                        
+                        // Almacenar los detalles de las auditorías en sessionStorage
+                        sessionStorage.setItem('auditDetails', JSON.stringify(auditDetails));
+    
+                        // Redirigir a la página de auditorías
+                        window.location.href = '../user/Assignedaudit';
+                    }
+                },
+                error: function () {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'No se pudieron obtener las auditorías.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                }
             });
         }
     });
 
+    // Generar las tarjetas dinámicamente
+    function generateAuditCards(auditDetails) {
+        var container = document.getElementById('auditCardsContainer');
+        container.innerHTML = ''; // Limpiar el contenedor antes de generar las tarjetas
 
-});
+        auditDetails.forEach(function (audit) {
+            var card = document.createElement('div');
+            card.classList.add('card');
+            card.setAttribute('data-id-audit', audit.id_audit);
+        console.log(audit.idAudit);
+            fetchAuditDetails(audit.id_audit);
 
-$(document).ready(function () {
-    // Recupera el username de sessionStorage
-    var username = sessionStorage.getItem('username');
-    // Si el username (email) existe, lo mostramos. Si no, mostramos 'Guest'
-    if (username) {
-        $('#welcome-message').text('WELCOME\n' + username);
-    } else {
-        $('#welcome-message').text('WELCOME\nGuest');
+            // Contenido de la tarjeta
+            card.innerHTML = `
+                <h2>Audit Details</h2>
+                <p><strong>Auditor:</strong> ${audit.auditor}</p>
+                <p><strong>Date:</strong> ${audit.DATE}</p>
+            `;
+
+            // Añadir funcionalidad de selección a la tarjeta
+            card.addEventListener('click', function() {
+                var id_audit = audit.id_audit;
+                // Redirigir a otra URL pasando el ID de la auditoría por POST
+                $.ajax({
+                    url: '../user/auditDetails', // URL de destino para la solicitud POST
+                    type: 'POST',
+                    data: { id_audit: id_audit }, // Enviar el ID de la auditoría
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Redirigir a la página de detalles
+                            window.location.href = response.redirect_url; // Cambia la URL según sea necesario
+                        } else {
+                            alert('Error: ' + response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Error al enviar los datos.');
+                    }
+                });
+            });
+            
+            container.appendChild(card);
+        });
     }
-});
 
+    // Llamar a la función para generar las tarjetas
+    var auditDetails = JSON.parse(sessionStorage.getItem('auditDetails'));
+    if (auditDetails) {
+        generateAuditCards(auditDetails);
+    } else {
+    }
 
-$('#auditForWeek').on('click', function () {
-    // Obtener el ID del usuario desde sessionStorage
-    var userId = sessionStorage.getItem('id_user');
-
-    // Asegurarse de que el userId está presente
-    if (userId) {
-        // Realizar la llamada AJAX enviando el userId
+    function fetchAuditDetails(idAudit) {
         $.ajax({
-            url: './../accions/getAudit/', // Cambia esto a la URL de tu API
-            method: 'GET',
-            data: { userId: userId }, // Enviar el userId en la solicitud
+            url: '../accions/getAudit/' + idAudit,
+            type: 'GET',
+            dataType: 'json',
             success: function (response) {
-                // Manejar la respuesta del servidor
-                console.log('Response from server:', response);
+                if (response.status === 'success') {
+                    var auditDetails = response.data;
+    
+                    // Limpiar la tabla antes de agregar nuevas filas
+                    $("#audit-questions-list").empty();
+    
+                    // Rellenar la tabla con los datos recibidos
+                    auditDetails.forEach(function (detail) {
+                        var row = `
+                            <tr>
+                                <td>${detail.category}</td>
+                                <td>${detail.question}</td>
+                                <td>${detail.create_at}</td>
+                                <td>${detail.fountain}</td>
+                                <td>${detail.compliance}</td>
+                                <td>${detail.findings}</td>
+                            </tr>
+                        `;
+                        $("#audit-questions-list").append(row);
+                    });
+                } else {
+                    console.error('Error al obtener los detalles de la auditoría');
+                }
             },
-            error: function (error) {
-                console.error('Error:', error);
+            error: function (xhr, status, error) {
+                console.error('Error en la solicitud AJAX:', error);
             }
         });
-    } else {
-        alert('User ID not found');
     }
 });
-
-
-

@@ -18,7 +18,14 @@ class AuditModel extends Model
     protected $createdField = 'create_at';
     protected $updatedField = 'update_at';
 
-
+    public function getAuditByStatus($idUser)
+    {
+        return $this->select('id_audit, no_audit, fk_machinery, fk_shift, DATE,id_audit fk_departament, auditor, STATUS, fk_user ')
+            ->where('audit.fk_user', $idUser) // Filtra por el id del usuario
+            ->where('audit.`status`', 1) // Filtra por el estado de la auditoria
+            ->get()
+            ->getResultArray(); // Devuelve el resultado como un array
+    }
     public function insertAudit($data)
     {
         return $this->insert($data);
@@ -49,5 +56,6 @@ class AuditModel extends Model
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
     }   
+
    
 }
