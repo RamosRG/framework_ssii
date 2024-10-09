@@ -36,7 +36,7 @@ $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('home', 'UserController::home');
     $routes->get('Assignedaudit', 'UserController::Assignedaudit');
     $routes->post('auditDetails', 'UserController::auditDetails');
-    $routes->get('showAudit', 'UserController::showAudit');
+    $routes->get('showAudit/(:num)', 'UserController::showAudit/$1');
 
     
 });

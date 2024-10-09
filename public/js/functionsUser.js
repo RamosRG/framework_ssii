@@ -57,7 +57,7 @@ $(document).ready(function () {
                         
                         // Almacenar los detalles de las auditorías en sessionStorage
                         sessionStorage.setItem('auditDetails', JSON.stringify(auditDetails));
-    
+
                         // Redirigir a la página de auditorías
                         window.location.href = '../user/Assignedaudit';
                     }
@@ -78,21 +78,19 @@ $(document).ready(function () {
     function generateAuditCards(auditDetails) {
         var container = document.getElementById('auditCardsContainer');
         container.innerHTML = ''; // Limpiar el contenedor antes de generar las tarjetas
-
+    
         auditDetails.forEach(function (audit) {
             var card = document.createElement('div');
             card.classList.add('card');
             card.setAttribute('data-id-audit', audit.id_audit);
-        console.log(audit.idAudit);
-            fetchAuditDetails(audit.id_audit);
-
+    
             // Contenido de la tarjeta
             card.innerHTML = `
-                <h2>Audit Details</h2>
+                <h2>Detalles de la Auditoría</h2>
                 <p><strong>Auditor:</strong> ${audit.auditor}</p>
-                <p><strong>Date:</strong> ${audit.DATE}</p>
+                <p><strong>Fecha:</strong> ${audit.DATE}</p>
             `;
-
+    
             // Añadir funcionalidad de selección a la tarjeta
             card.addEventListener('click', function() {
                 var id_audit = audit.id_audit;
@@ -103,10 +101,11 @@ $(document).ready(function () {
                     data: { id_audit: id_audit }, // Enviar el ID de la auditoría
                     success: function(response) {
                         if (response.status === 'success') {
-                            // Redirigir a la página de detalles
-                            window.location.href = response.redirect_url; // Cambia la URL según sea necesario
+                            // Aquí puedes redirigir a la página de detalles o manejar la respuesta
+                            // Por ejemplo, redirigir a una nueva página y pasar datos en la URL
+                            window.location.href = '../user/showAudit?id_audit=' + id_audit; // Cambia esta URL a donde necesites
                         } else {
-                            alert('Error: ' + response.message);
+                            alert(response.message);
                         }
                     },
                     error: function() {
@@ -114,51 +113,15 @@ $(document).ready(function () {
                     }
                 });
             });
-            
+    
             container.appendChild(card);
         });
     }
+    
 
     // Llamar a la función para generar las tarjetas
     var auditDetails = JSON.parse(sessionStorage.getItem('auditDetails'));
     if (auditDetails) {
         generateAuditCards(auditDetails);
-    } else {
-    }
-
-    function fetchAuditDetails(idAudit) {
-        $.ajax({
-            url: '../accions/getAudit/' + idAudit,
-            type: 'GET',
-            dataType: 'json',
-            success: function (response) {
-                if (response.status === 'success') {
-                    var auditDetails = response.data;
-    
-                    // Limpiar la tabla antes de agregar nuevas filas
-                    $("#audit-questions-list").empty();
-    
-                    // Rellenar la tabla con los datos recibidos
-                    auditDetails.forEach(function (detail) {
-                        var row = `
-                            <tr>
-                                <td>${detail.category}</td>
-                                <td>${detail.question}</td>
-                                <td>${detail.create_at}</td>
-                                <td>${detail.fountain}</td>
-                                <td>${detail.compliance}</td>
-                                <td>${detail.findings}</td>
-                            </tr>
-                        `;
-                        $("#audit-questions-list").append(row);
-                    });
-                } else {
-                    console.error('Error al obtener los detalles de la auditoría');
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error('Error en la solicitud AJAX:', error);
-            }
-        });
     }
 });

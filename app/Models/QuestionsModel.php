@@ -65,8 +65,8 @@ class QuestionsModel extends Model
     public function auditForUser($id_audit)
     {
         return $this->select('audit.audit_tittle, audit.auditor, shift.shift, machinery.machinery, departament.departament,
-category.category, questions.question, questions.create_at, fountain.fountain, audit.no_audit,
-audit.id_audit, audit.fk_user, audit.`status`, audit.id_audit')
+                            category.category, questions.question, questions.create_at, fountain.fountain, audit.no_audit,
+                            audit.id_audit, audit.fk_user, audit.`status`, audit.id_audit')
             ->join('fountain', 'fountain.id_fountain = questions.fk_fountain') // INNER JOIN
             ->join('category', 'category.id_category = questions.fk_category') // INNER JOIN
             ->join('audit', 'questions.fk_audit = audit.id_audit') // INNER JOIN
