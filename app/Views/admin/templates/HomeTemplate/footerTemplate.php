@@ -10,8 +10,6 @@
 <script src="../public/assets/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="../public/js/functions.js"></script>
 <script>
-
-
     function w3_open() {
         if (window.innerWidth <= 600) {
             document.getElementById("mySidebar").style.width = "100%";
@@ -29,4 +27,5 @@
 </script>
 
 </body>
+
 </html>

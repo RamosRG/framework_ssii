@@ -9,36 +9,29 @@ use App\Models\QuestionsModel;
 class UserController extends BaseController
 {
     
-    public function auditDetails()
+    public function showAudit()
     {
-        // Verifica si el id_audit llega correctamente
-        $id_audit = $this->request->getPost('id_audit');
+        return view('user/show_audit');
 
+    }
+    public function auditDetails($id_audit)
+    {
         $model = new QuestionsModel();
         $audit = $model->auditForUser($id_audit);
-
+    
         if ($audit && count($audit) > 0) {
-            
             return $this->response->setJSON([
                 'status' => 'success',
-                'data' => $audit,
-                
+                'data' => $audit
             ]);
         } else {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Auditoría no encontrada']);
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Auditoría no encontrada'
+            ]);
         }
     }
-   public function showAudit($id_audit)
-    {
-        $model = new QuestionsModel();
-        $audit = $model->auditForUser($id_audit);
-
-        if ($audit && count($audit) > 0) {
-            return view('auditDetails', ['audit' => $audit]);
-        } else {
-            return redirect()->to('Assignedaudit')->with('error', 'Auditoría no encontrada');
-        }
-    }
+    
     public function Assignedaudit()
     {
         return view('user/audit_user');

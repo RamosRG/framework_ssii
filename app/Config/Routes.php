@@ -35,11 +35,10 @@ $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('forgotpassword', 'UserController::forgotpassword');
     $routes->get('home', 'UserController::home');
     $routes->get('Assignedaudit', 'UserController::Assignedaudit');
-    $routes->post('auditDetails', 'UserController::auditDetails');
-    $routes->get('showAudit/(:num)', 'UserController::showAudit/$1');
-
-    
+    $routes->get('auditDetails/(:num)', 'UserController::auditDetails/$1');
+    $routes->get('showAudit', 'UserController::showAudit');
 });
+
 $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('addquestions', 'AccionsController::addquestions');
     $routes->get('addaudit', 'AccionsController::addaudit');

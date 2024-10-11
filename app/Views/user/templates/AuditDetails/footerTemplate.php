@@ -7,7 +7,7 @@
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
-<script src="../public/js/functionsUser.js"></script>
+<script src="../public/js/auditDetails.js"></script>
 
 <script>
 function w3_open() {

@@ -11,7 +11,7 @@ class AuditModel extends Model
 
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['id_audit', 'no_audit', 'fk_machinery', 'fk_shift', 'date', 'fk_departament', 'auditor', 'date_reviewed', 'fk_user'];
+    protected $allowedFields = ['id_audit', 'no_audit', 'audit_tittle', 'fk_machinery', 'fk_shift', 'date', 'fk_departament', 'auditor', 'date_reviewed', 'fk_user'];
 
     // Dates
     protected $useTimestamps = true; // Correcto
@@ -20,8 +20,8 @@ class AuditModel extends Model
 
     public function getAuditByStatus($idUser)
     {
-        return $this->select('id_audit, no_audit, fk_machinery, fk_shift, DATE,id_audit fk_departament, auditor, STATUS, fk_user ')
-            ->where('audit.fk_user', $idUser) // Filtra por el id del usuario
+        return $this->select('id_audit, no_audit, audit_tittle, fk_machinery, fk_shift, DATE, fk_departament, auditor, STATUS, fk_user ')
+            ->where('audit.fk_user', value: $idUser) // Filtra por el id del usuario
             ->where('audit.`status`', 1) // Filtra por el estado de la auditoria
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array

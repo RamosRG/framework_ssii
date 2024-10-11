@@ -3,44 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create AUDIT</title>
-    <!-- W3.CSS -->
-    <link rel="stylesheet" href="../public/css/w3.css">
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="../public/css/dataTables.dataTables.css">
-    <link rel="stylesheet" href="../public/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../public/assets/sweetalert2/sweetalert2.min.css">
-
-
+    <title>AUDIT | Add AUDITS</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        body,h1,h2,h3,h4,h5 {font-family:'Courier New', Courier, monospace}
-        body {font-size:16px;}
-        .w3-sidebar {width:300px;}
-        .w3-main {margin-left:21rem;margin-right:1rem;}
-        #footer {
+        body, h1, h2, h3, h4, h5 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            font-size: 16px;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .w3-sidebar {
+            width: 250px;
+            background-color: #3f51b5;
+            color: white;
+        }
+        .w3-main {
+            margin-left: 120px;
+            padding: 2rem;
+            transition: margin-left .4s;
+        }
+        @media (max-width: 600px) {
+            .w3-main {
+                margin-left: 0;
+            }
+        }
+        .w3-bar-item {
+            padding: 16px;
+        }
+        .w3-bar-item:hover {
+            background-color: #303f9f !important;
+        }
+        table {
             width: 100%;
-            position: absolute;
-            bottom: 0;
-          }
-          .label-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-
-        .label-container hr {
-            flex: 1;
-            margin: 0 10px;
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
         }
-
-        .input-field {
-            margin-bottom: 10px;
+        th {
+            background-color: #3f51b5;
+            color: white;
         }
-
-        .question-section {
-            margin-bottom: 20px;
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .w3-input, .w3-select {
+            margin-top: 0.5rem;
+        }
+        .responsive-table {
+            overflow-x: auto;
         }
     </style>
 </head>
 <body>
-    

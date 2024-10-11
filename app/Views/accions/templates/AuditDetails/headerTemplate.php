@@ -22,7 +22,7 @@
             color: white;
         }
         .w3-main {
-            margin-left: 250px;
+            margin-left: 120px;
             padding: 2rem;
             transition: margin-left .4s;
         }

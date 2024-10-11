@@ -1,0 +1,164 @@
+INFO - 2024-10-10 17:29:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 17:29:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 17:29:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 17:30:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 17:30:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 17:55:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 17:56:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 17:57:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 17:57:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 17:57:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-10-10 17:57:31 --> mysqli_sql_exception: Column 'auditor' cannot be null in C:\laragon\www\framework_ssii\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\framework_ssii\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `au...', 0)
+#1 C:\laragon\www\framework_ssii\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `au...')
+#2 C:\laragon\www\framework_ssii\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `au...')
+#3 C:\laragon\www\framework_ssii\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `au...', Array, false)
+#4 C:\laragon\www\framework_ssii\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\framework_ssii\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\framework_ssii\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\framework_ssii\app\Models\AuditModel.php(31): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\framework_ssii\app\Controllers\AccionsController.php(211): App\Models\AuditModel->insertAudit(Array)
+#9 C:\laragon\www\framework_ssii\system\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+#10 C:\laragon\www\framework_ssii\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#11 C:\laragon\www\framework_ssii\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\laragon\www\framework_ssii\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#13 C:\laragon\www\framework_ssii\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\laragon\www\framework_ssii\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+CRITICAL - 2024-10-10 17:57:31 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'auditor' cannot be null
+[Method: POST, Route: accions/insertAudit]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (:fk_machinery:, :fk_shift:, :fk_departament:, :auditor:, :date:, :fk_user:, :create_at:, :update_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Models\AuditModel.php(31): CodeIgniter\Model->insert([...])
+ 6 APPPATH\Controllers\AccionsController.php(211): App\Models\AuditModel->insertAudit([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-10 17:57:31 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'auditor' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (\'Open this select menu\', \'Open this select menu\', \'Open this select menu\', NULL, \'2024-10-10\', \'28\', \'2024-10-10 17:57:31\', \'2024-10-10 17:57:31\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (\'Open this select menu\', \'Open this select menu\', \'Open this select menu\', NULL, \'2024-10-10\', \'28\', \'2024-10-10 17:57:31\', \'2024-10-10 17:57:31\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (:fk_machinery:, :fk_shift:, :fk_departament:, :auditor:, :date:, :fk_user:, :create_at:, :update_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Models\AuditModel.php(31): CodeIgniter\Model->insert([...])
+ 8 APPPATH\Controllers\AccionsController.php(211): App\Models\AuditModel->insertAudit([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-10 17:57:31 --> [Caused by] mysqli_sql_exception: Column 'auditor' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (\'Open this select menu\', \'Open this select menu\', \'Open this select menu\', NULL, \'2024-10-10\', \'28\', \'2024-10-10 17:57:31\', \'2024-10-10 17:57:31\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (\'Open this select menu\', \'Open this select menu\', \'Open this select menu\', NULL, \'2024-10-10\', \'28\', \'2024-10-10 17:57:31\', \'2024-10-10 17:57:31\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (\'Open this select menu\', \'Open this select menu\', \'Open this select menu\', NULL, \'2024-10-10\', \'28\', \'2024-10-10 17:57:31\', \'2024-10-10 17:57:31\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (:fk_machinery:, :fk_shift:, :fk_departament:, :auditor:, :date:, :fk_user:, :create_at:, :update_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Models\AuditModel.php(31): CodeIgniter\Model->insert([...])
+ 9 APPPATH\Controllers\AccionsController.php(211): App\Models\AuditModel->insertAudit([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+11 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+12 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-10-10 18:52:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 18:58:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 18:58:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 18:58:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 18:59:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 19:01:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 19:01:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 19:02:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 19:02:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 19:02:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 19:04:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-10-10 19:05:22 --> mysqli_sql_exception: Column 'auditor' cannot be null in C:\laragon\www\framework_ssii\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\framework_ssii\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `au...', 0)
+#1 C:\laragon\www\framework_ssii\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `au...')
+#2 C:\laragon\www\framework_ssii\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `au...')
+#3 C:\laragon\www\framework_ssii\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `au...', Array, false)
+#4 C:\laragon\www\framework_ssii\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\framework_ssii\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\framework_ssii\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\framework_ssii\app\Models\AuditModel.php(31): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\framework_ssii\app\Controllers\AccionsController.php(211): App\Models\AuditModel->insertAudit(Array)
+#9 C:\laragon\www\framework_ssii\system\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+#10 C:\laragon\www\framework_ssii\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#11 C:\laragon\www\framework_ssii\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\laragon\www\framework_ssii\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#13 C:\laragon\www\framework_ssii\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\laragon\www\framework_ssii\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+CRITICAL - 2024-10-10 19:05:22 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'auditor' cannot be null
+[Method: POST, Route: accions/insertAudit]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (:fk_machinery:, :fk_shift:, :fk_departament:, :auditor:, :date:, :fk_user:, :create_at:, :update_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Models\AuditModel.php(31): CodeIgniter\Model->insert([...])
+ 6 APPPATH\Controllers\AccionsController.php(211): App\Models\AuditModel->insertAudit([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-10 19:05:22 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'auditor' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (\'Open this select menu\', \'Open this select menu\', \'Open this select menu\', NULL, \'2024-10-10\', \'18\', \'2024-10-10 19:05:22\', \'2024-10-10 19:05:22\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (\'Open this select menu\', \'Open this select menu\', \'Open this select menu\', NULL, \'2024-10-10\', \'18\', \'2024-10-10 19:05:22\', \'2024-10-10 19:05:22\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (:fk_machinery:, :fk_shift:, :fk_departament:, :auditor:, :date:, :fk_user:, :create_at:, :update_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Models\AuditModel.php(31): CodeIgniter\Model->insert([...])
+ 8 APPPATH\Controllers\AccionsController.php(211): App\Models\AuditModel->insertAudit([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-10 19:05:22 --> [Caused by] mysqli_sql_exception: Column 'auditor' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (\'Open this select menu\', \'Open this select menu\', \'Open this select menu\', NULL, \'2024-10-10\', \'18\', \'2024-10-10 19:05:22\', \'2024-10-10 19:05:22\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (\'Open this select menu\', \'Open this select menu\', \'Open this select menu\', NULL, \'2024-10-10\', \'18\', \'2024-10-10 19:05:22\', \'2024-10-10 19:05:22\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (\'Open this select menu\', \'Open this select menu\', \'Open this select menu\', NULL, \'2024-10-10\', \'18\', \'2024-10-10 19:05:22\', \'2024-10-10 19:05:22\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`fk_machinery`, `fk_shift`, `fk_departament`, `auditor`, `date`, `fk_user`, `create_at`, `update_at`) VALUES (:fk_machinery:, :fk_shift:, :fk_departament:, :auditor:, :date:, :fk_user:, :create_at:, :update_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Models\AuditModel.php(31): CodeIgniter\Model->insert([...])
+ 9 APPPATH\Controllers\AccionsController.php(211): App\Models\AuditModel->insertAudit([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+11 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+12 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-10-10 19:10:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 19:15:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 19:15:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 19:15:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 19:15:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 19:15:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 19:24:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 19:24:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 21:53:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 21:57:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-10 21:57:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
