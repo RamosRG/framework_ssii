@@ -44,23 +44,88 @@ $(document).ready(function () {
 
                         // Llenar la tabla de preguntas
                         auditDetails.forEach(function (detail) {
+                            // Inicialmente todas las casillas están marcadas
+                            var isChecked = 'checked';
+
+                            // Ícono de cámara para subir foto
+                            var cameraIcon = `
+                                <button class="camera-button" style="display: none;">
+                                    <i class="fa fa-camera"></i>
+                                </button>
+                            `;
+
                             var complianceCheckbox = `
-                            <input type="checkbox" class="w3-check" ${detail.is_fulfilled === 1 ? 'checked' : ''} >
-                        `; // Muestra cada detalle de la pregunta
-                        var findingsText = `
-                            <input type="text" class="w3-text" ${detail.answer} >
-                        `; // Muestra cada detalle de la pregunta
+                            <input type="checkbox" class="w3-check" ${isChecked} data-question-id="${detail.id_question}">
+                        `;
+
+                            var findingsText = `
+                                <input type="text" class="w3-text">
+                            `;
+
                             var row = `
                                 <tr>
                                     <td>${detail.category}</td>
                                     <td>${detail.question}</td>
                                     <td>${detail.create_at}</td>
                                     <td>${detail.fountain}</td>
-                                    <td>${complianceCheckbox}</td> <!-- Checkbox en lugar de valor -->
+                                    <td>${complianceCheckbox}</td>
                                     <td>${findingsText}</td>
+                                    <td>${cameraIcon}</td>
                                 </tr>
                             `;
+
                             $("#audit-questions-list").append(row);
+                        });
+
+                        // Evento para los checkboxes: Mostrar ícono de cámara si se desmarca la casilla
+                        $("#audit-questions-list").on("change", ".w3-check", function () {
+                            var isChecked = $(this).is(":checked");
+                            var cameraButton = $(this).closest("tr").find(".camera-button");
+                            cameraButton.toggle(!isChecked); // Mostrar botón si está desmarcado
+                        });
+
+                        // Abrir modal para subir/tomar foto cuando se presiona el botón de la cámara
+                        $("#audit-questions-list").on("click", ".camera-button", function () {
+                            var questionId = $(this).closest("tr").find(".w3-check").data("question-id");
+                            if (questionId !== undefined) {
+                                $('#photoModal').data('question-id', questionId).modal('show');
+                            } else {
+                                alert("No se encontró el ID de la pregunta.");
+                            }
+                        });
+
+                        // Manejar la vista previa de la imagen seleccionada
+                        $("#photoInput").on("change", function () {
+                            var file = this.files[0];
+                            if (file) {
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    $("#photoPreview").attr("src", e.target.result);
+                                    $("#preview").show(); // Mostrar la vista previa
+                                };
+                                reader.readAsDataURL(file);
+                            }
+                        });
+
+                        // Guardar la foto seleccionada
+                        $("#savePhoto").on("click", function () {
+                            var questionId = $('#photoModal').data('question-id');
+                            var fileInput = $("#photoInput")[0].files[0];
+
+                            if (fileInput) {
+                                // Aquí podrías hacer un AJAX para subir la imagen al servidor
+                                console.log("Foto seleccionada para la pregunta ID: " + questionId);
+
+                                // Simulación de subida
+                                alert("Foto subida para la pregunta ID: " + questionId);
+
+                                // Cerrar el modal
+                                $('#photoModal').modal('hide');
+                                $("#photoInput").val(""); // Limpiar el campo de archivo
+                                $("#preview").hide(); // Ocultar la vista previa
+                            } else {
+                                alert("Por favor, selecciona una foto antes de guardar.");
+                            }
                         });
                     } else {
                         console.error('No se encontraron detalles de auditoría.');

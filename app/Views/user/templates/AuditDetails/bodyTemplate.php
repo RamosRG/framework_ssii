@@ -6,7 +6,7 @@
 
     <div class="w3-container" id="contact" style="margin-top: 75px">
         <h2 class="w3-border-bottom w3-border-light-grey w3-padding-16">Mantenimiento Preventivo / Casa de Fuerza - Auditoría por Capas</h2>
-        
+
         <form action="../accions/saveAudit" method="POST" class="w3-container">
             <div class="w3-row-padding">
                 <div class="w3-third form-group">
@@ -50,6 +50,7 @@
                                 <th>Fuente</th>
                                 <th>Se cumplió?</th>
                                 <th>Qué se encontró y recomendación</th>
+                                <th>Evidencia</th>
                             </tr>
                         </thead>
                         <tbody id="audit-questions-list">
@@ -123,4 +124,9 @@
 
             <button class="w3-button w3-indigo w3-right w3-margin-top" type="submit">Submit Audit</button>
         </form>
+        <!-- Modal para subir/tomar foto -->
+
     </div>
+    
+</div>
+    
