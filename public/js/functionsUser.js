@@ -6,7 +6,7 @@ $(document).ready(function () {
         var formData = $(this).serialize();
 
         $.ajax({
-            url: '/framework_ssii/auth/login',
+            url: '/capas.com/auth/login',
             type: 'POST',
             data: formData,
             dataType: 'json',

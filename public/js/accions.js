@@ -1,5 +1,5 @@
 $.ajax({
-  url: "/framework_ssii/accions/getAudits",
+  url: "/capas.com/accions/getAudits",
   success: function (response) {
     console.log(response);  // Verifica si la respuesta es correcta
   }
@@ -8,7 +8,7 @@ $.ajax({
 $(document).ready(function () {
   var table = $('#auditTable').DataTable({
     "ajax": {
-      "url": "/framework_ssii/accions/getAudits", // URL de la función que devuelve los datos
+      "url": "/capas.com/accions/getAudits", // URL de la función que devuelve los datos
       "dataSrc": "" // Fuente de los datos (en tu caso es 'data')
     },
     "columns": [
@@ -47,7 +47,7 @@ $(document).ready(function () {
 
     // Realizar la solicitud AJAX para obtener los datos de la auditoría
     $.ajax({
-      url: "/framework_ssii/accions/getAuditById/" + userId,
+      url: "/capas.com/accions/getAuditById/" + userId,
       type: "GET",
       dataType: "json",
       success: function (response) {
@@ -61,7 +61,7 @@ $(document).ready(function () {
           // Confirmar si los datos fueron almacenados en localStorage
           if (localStorage.getItem("auditData")) {
             // Redirigir a la vista de detalles
-            window.location.href = "/framework_ssii/accions/auditdetails";
+            window.location.href = "/capas.com/accions/auditdetails";
           } else {
           }
         }

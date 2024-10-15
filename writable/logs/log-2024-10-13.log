@@ -1,0 +1,75 @@
+CRITICAL - 2024-10-13 20:00:29 --> ErrorException: require_once(../framework_ssii/app/Views/admin/templates/HomeTemplate/headerTemplate.php): Failed to open stream: No such file or directory
+[Method: GET, Route: admin/home]
+in APPPATH\Views\admin\home.php on line 3.
+ 1 APPPATH\Views\admin\home.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require_once(../framework_ssii/app/Views/admin/templates/HomeTemplate/headerTemplate.php): Failed to open stream: No such file or directory', 'D:\\laragon\\www\\framework_ssii.com\\app\\Views\\admin\\home.php', 3)
+ 2 APPPATH\Views\admin\home.php(3): require_once()
+ 3 SYSTEMPATH\View\View.php(234): include('D:\\laragon\\www\\framework_ssii.com\\app\\Views\\admin\\home.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('admin/home', [], true)
+ 6 APPPATH\Controllers\AdminController.php(40): view('admin/home')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->home()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-13 20:04:52 --> ErrorException: require_once(../framework_ssii/app/Views/admin/templates/HomeTemplate/headerTemplate.php): Failed to open stream: No such file or directory
+[Method: GET, Route: admin/home]
+in APPPATH\Views\admin\home.php on line 3.
+ 1 APPPATH\Views\admin\home.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require_once(../framework_ssii/app/Views/admin/templates/HomeTemplate/headerTemplate.php): Failed to open stream: No such file or directory', 'D:\\laragon\\www\\framework_ssii.com\\app\\Views\\admin\\home.php', 3)
+ 2 APPPATH\Views\admin\home.php(3): require_once()
+ 3 SYSTEMPATH\View\View.php(234): include('D:\\laragon\\www\\framework_ssii.com\\app\\Views\\admin\\home.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('admin/home', [], true)
+ 6 APPPATH\Controllers\AdminController.php(40): view('admin/home')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->home()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-13 20:05:09 --> ErrorException: require_once(../framework_ssii/app/Views/admin/templates/HomeTemplate/headerTemplate.php): Failed to open stream: No such file or directory
+[Method: GET, Route: admin/home]
+in APPPATH\Views\admin\home.php on line 3.
+ 1 APPPATH\Views\admin\home.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require_once(../framework_ssii/app/Views/admin/templates/HomeTemplate/headerTemplate.php): Failed to open stream: No such file or directory', 'D:\\laragon\\www\\framework_ssii.com\\app\\Views\\admin\\home.php', 3)
+ 2 APPPATH\Views\admin\home.php(3): require_once()
+ 3 SYSTEMPATH\View\View.php(234): include('D:\\laragon\\www\\framework_ssii.com\\app\\Views\\admin\\home.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('admin/home', [], true)
+ 6 APPPATH\Controllers\AdminController.php(40): view('admin/home')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->home()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-13 20:05:11 --> ErrorException: require_once(../framework_ssii/app/Views/admin/templates/HomeTemplate/headerTemplate.php): Failed to open stream: No such file or directory
+[Method: GET, Route: admin/home]
+in APPPATH\Views\admin\home.php on line 3.
+ 1 APPPATH\Views\admin\home.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require_once(../framework_ssii/app/Views/admin/templates/HomeTemplate/headerTemplate.php): Failed to open stream: No such file or directory', 'D:\\laragon\\www\\framework_ssii.com\\app\\Views\\admin\\home.php', 3)
+ 2 APPPATH\Views\admin\home.php(3): require_once()
+ 3 SYSTEMPATH\View\View.php(234): include('D:\\laragon\\www\\framework_ssii.com\\app\\Views\\admin\\home.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('admin/home', [], true)
+ 6 APPPATH\Controllers\AdminController.php(40): view('admin/home')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->home()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-13 20:05:36 --> ErrorException: require_once(../framework_ssii/app/Views/admin/templates/HomeTemplate/headerTemplate.php): Failed to open stream: No such file or directory
+[Method: GET, Route: admin/home]
+in APPPATH\Views\admin\home.php on line 3.
+ 1 APPPATH\Views\admin\home.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require_once(../framework_ssii/app/Views/admin/templates/HomeTemplate/headerTemplate.php): Failed to open stream: No such file or directory', 'D:\\laragon\\www\\framework_ssii.com\\app\\Views\\admin\\home.php', 3)
+ 2 APPPATH\Views\admin\home.php(3): require_once()
+ 3 SYSTEMPATH\View\View.php(234): include('D:\\laragon\\www\\framework_ssii.com\\app\\Views\\admin\\home.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('admin/home', [], true)
+ 6 APPPATH\Controllers\AdminController.php(40): view('admin/home')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->home()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

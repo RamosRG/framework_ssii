@@ -2,7 +2,7 @@ $(document).ready(function () {
     // Inicializa DataTable solo una vez
     var table = $('#userTable').DataTable({
         "ajax": {
-            "url": "/framework_ssii/auth/getData", // URL de la función que devuelve los datos
+            "url": "/capas.com/auth/getData", // URL de la función que devuelve los datos
             "dataSrc": "" // Fuente de los datos
         },
         "columns": [
@@ -77,7 +77,7 @@ $(document).ready(function () {
         var userId = data.id_user; // Obtener el ID del usuario de la fila
 
         $.ajax({
-            url: '/framework_ssii/auth/getUserById/' + userId,
+            url: '/capas.com/auth/getUserById/' + userId,
             type: 'GET',
             dataType: 'json',
             success: function (response) {
@@ -112,7 +112,7 @@ $(document).ready(function () {
 
     // Llamada AJAX para obtener las áreas y mostrarlas en el select
     $.ajax({
-        url: '/framework_ssii/admin/getAreas', // URL para obtener las áreas
+        url: '/capas.com/admin/getAreas', // URL para obtener las áreas
         type: 'GET',
         dataType: 'json',
         success: function (response) {

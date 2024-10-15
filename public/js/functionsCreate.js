@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var table = $('#questionTable').DataTable({
         "ajax": {
-            "url": "/framework_ssii/accions/showQuestion",
+            "url": "/capas.com/accions/showQuestion",
             "dataSrc": ""
         },
         "columns": [
@@ -38,7 +38,7 @@ $(document).ready(function () {
 
         // Enviar solicitud AJAX para actualizar el estado
         $.ajax({
-            url: '/framework_ssii/accions/updateStatus/' + questionId, // Ruta al método en el controlador
+            url: '/capas.com/accions/updateStatus/' + questionId, // Ruta al método en el controlador
             method: 'POST',
             data: { status: newStatus }, // Enviar el nuevo estado
             success: function (response) {
@@ -239,7 +239,7 @@ function createDynamicSections() {
 }
 //funcion para obtener al usuario
 function fetchUserData() {
-    fetch('/framework_ssii/admin/getUsers', {
+    fetch('/capas.com/admin/getUsers', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -272,7 +272,7 @@ function fetchUserData() {
 }
 // Función para llenar el select con datos de la fuente
 function fetchFountainData(selectElement) {
-    fetch('/framework_ssii/accions/getFountain', {
+    fetch('/capas.com/accions/getFountain', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -305,7 +305,7 @@ function fetchFountainData(selectElement) {
 //Funcion para mandar a llamar la maquinaria que se utilizara
 function fetchMachineryData() {
     // Hacemos la solicitud AJAX
-    fetch('/framework_ssii/accions/getMachinery', {
+    fetch('/capas.com/accions/getMachinery', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -339,7 +339,7 @@ function fetchMachineryData() {
 //Funcion para mandar a llamar los roles que se utilizan en la auditoria
 function fetchShiftData() {
     // Hacemos la solicitud AJAX
-    fetch('/framework_ssii/accions/getShift', {
+    fetch('/capas.com/accions/getShift', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -373,7 +373,7 @@ function fetchShiftData() {
 //Funcion para mandar a llamar los departamentos que se utilizan en la auditoria
 function fetchDepartamentData() {
     // Hacemos la solicitud AJAX
-    fetch('/framework_ssii/accions/getDepartament', {
+    fetch('/capas.com/accions/getDepartament', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -406,7 +406,7 @@ function fetchDepartamentData() {
 }
 //Funcion para mandar a llamar los privilegios que se utilizan en la auditoria
 function getPrivileges() {
-    return fetch('/framework_ssii/auth/getPrivileges', {
+    return fetch('/capas.com/auth/getPrivileges', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -426,7 +426,7 @@ function getPrivileges() {
 //Funcion para mandar a llamar la categoria que se utilizan en la auditoria
 function fetchCategoryData() {
     // Hacemos la solicitud AJAX
-    fetch('/framework_ssii/accions/getCategory', {
+    fetch('/capas.com/accions/getCategory', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

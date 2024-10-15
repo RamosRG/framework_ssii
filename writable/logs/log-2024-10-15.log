@@ -1,0 +1,715 @@
+CRITICAL - 2024-10-15 01:03:58 --> ErrorException: require_once(../framework_ssii/app/Views/admin/templates/HomeTemplate/headerTemplate.php): Failed to open stream: No such file or directory
+[Method: GET, Route: admin/home]
+in APPPATH\Views\admin\home.php on line 3.
+ 1 APPPATH\Views\admin\home.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require_once(../framework_ssii/app/Views/admin/templates/HomeTemplate/headerTemplate.php): Failed to open stream: No such file or directory', 'D:\\laragon\\www\\framework_ssii.com\\app\\Views\\admin\\home.php', 3)
+ 2 APPPATH\Views\admin\home.php(3): require_once()
+ 3 SYSTEMPATH\View\View.php(234): include('D:\\laragon\\www\\framework_ssii.com\\app\\Views\\admin\\home.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('admin/home', [], true)
+ 6 APPPATH\Controllers\AdminController.php(40): view('admin/home')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->home()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-10-15 01:11:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-15 01:11:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-15 01:12:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-15 01:12:36 --> ErrorException: require_once(../framework_ssii/app/Views/accions/templates/AddAuditTemplate/headerTemplate.php): Failed to open stream: No such file or directory
+[Method: GET, Route: accions/addaudit]
+in APPPATH\Views\accions\add_audit.php on line 3.
+ 1 APPPATH\Views\accions\add_audit.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require_once(../framework_ssii/app/Views/accions/templates/AddAuditTemplate/headerTemplate.php): Failed to open stream: No such file or directory', 'D:\\laragon\\www\\capas.com\\app\\Views\\accions\\add_audit.php', 3)
+ 2 APPPATH\Views\accions\add_audit.php(3): require_once()
+ 3 SYSTEMPATH\View\View.php(234): include('D:\\laragon\\www\\capas.com\\app\\Views\\accions\\add_audit.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('accions/add_audit', [], true)
+ 6 APPPATH\Controllers\AccionsController.php(162): view('accions/add_audit')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->addaudit()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:16:41 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "admin/templates/AddAuditTemplate/selectionLeft.php"
+[Method: GET, Route: accions/addaudit]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('admin/templates/AddAuditTemplate/selectionLeft.php')
+ 2 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('admin/templates/AddAuditTemplate/selectionLeft', [], true)
+ 3 APPPATH\Views\accions\add_audit.php(3): view('admin/templates/AddAuditTemplate/selectionLeft')
+ 4 SYSTEMPATH\View\View.php(234): include('D:\\laragon\\www\\capas.com\\app\\Views\\accions\\add_audit.php')
+ 5 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('accions/add_audit', [], true)
+ 7 APPPATH\Controllers\AccionsController.php(162): view('accions/add_audit')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->addaudit()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-10-15 01:16:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-15 01:17:29 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "accions/templates/AddQuestionTemplate/headerTemplate.php"
+[Method: GET, Route: accions/addquestions]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('accions/templates/AddQuestionTemplate/headerTemplate.php')
+ 2 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('accions/templates/AddQuestionTemplate/headerTemplate', [], true)
+ 3 APPPATH\Views\accions\add_questions.php(2): view('accions/templates/AddQuestionTemplate/headerTemplate')
+ 4 SYSTEMPATH\View\View.php(234): include('D:\\laragon\\www\\capas.com\\app\\Views\\accions\\add_questions.php')
+ 5 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('accions/add_questions', [], true)
+ 7 APPPATH\Controllers\AccionsController.php(158): view('accions/add_questions')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->addquestions()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-10-15 01:17:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-15 01:17:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-15 01:17:45 --> ErrorException: require_once(../framework_ssii/app/Views/accions/templates/ShowAudit/headerTemplate.php): Failed to open stream: No such file or directory
+[Method: GET, Route: accions/showaudit]
+in APPPATH\Views\accions\show_audit.php on line 3.
+ 1 APPPATH\Views\accions\show_audit.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require_once(../framework_ssii/app/Views/accions/templates/ShowAudit/headerTemplate.php): Failed to open stream: No such file or directory', 'D:\\laragon\\www\\capas.com\\app\\Views\\accions\\show_audit.php', 3)
+ 2 APPPATH\Views\accions\show_audit.php(3): require_once()
+ 3 SYSTEMPATH\View\View.php(234): include('D:\\laragon\\www\\capas.com\\app\\Views\\accions\\show_audit.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('accions/show_audit', [], true)
+ 6 APPPATH\Controllers\AccionsController.php(154): view('accions/show_audit')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->showaudit()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:19:05 --> ErrorException: require_once(../framework_ssii/app/Views/accions/templates/ShowAudit/headerTemplate.php): Failed to open stream: No such file or directory
+[Method: GET, Route: accions/showaudit]
+in APPPATH\Views\accions\show_audit.php on line 3.
+ 1 APPPATH\Views\accions\show_audit.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require_once(../framework_ssii/app/Views/accions/templates/ShowAudit/headerTemplate.php): Failed to open stream: No such file or directory', 'D:\\laragon\\www\\capas.com\\app\\Views\\accions\\show_audit.php', 3)
+ 2 APPPATH\Views\accions\show_audit.php(3): require_once()
+ 3 SYSTEMPATH\View\View.php(234): include('D:\\laragon\\www\\capas.com\\app\\Views\\accions\\show_audit.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('accions/show_audit', [], true)
+ 6 APPPATH\Controllers\AccionsController.php(154): view('accions/show_audit')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->showaudit()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-10-15 01:20:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-15 01:20:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-15 01:20:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-15 01:20:16 --> ErrorException: require_once(../framework_ssii/app/Views/accions/templates/ShowQuestions/headerTemplate.php): Failed to open stream: No such file or directory
+[Method: GET, Route: accions/showquestions]
+in APPPATH\Views\accions\show_questions.php on line 3.
+ 1 APPPATH\Views\accions\show_questions.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require_once(../framework_ssii/app/Views/accions/templates/ShowQuestions/headerTemplate.php): Failed to open stream: No such file or directory', 'D:\\laragon\\www\\capas.com\\app\\Views\\accions\\show_questions.php', 3)
+ 2 APPPATH\Views\accions\show_questions.php(3): require_once()
+ 3 SYSTEMPATH\View\View.php(234): include('D:\\laragon\\www\\capas.com\\app\\Views\\accions\\show_questions.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('accions/show_questions', [], true)
+ 6 APPPATH\Controllers\AccionsController.php(149): view('accions/show_questions')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->showquestions()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-10-15 01:20:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-15 01:24:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-15 01:24:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-10-15 01:24:20 --> mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audi...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audi...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audi...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audi...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\app\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', Array)
+#6 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+#7 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-10-15 01:24:20 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+[Method: GET, Route: accions/auditForUsers/18]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 2 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:24:20 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 4 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 6 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:24:20 --> [Caused by] mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 5 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-10-15 01:25:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-15 01:25:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-15 01:25:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-15 01:28:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-15 01:34:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-15 01:35:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-10-15 01:35:15 --> mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audi...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audi...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audi...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audi...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\app\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', Array)
+#6 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+#7 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-10-15 01:35:15 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+[Method: GET, Route: accions/auditForUsers/18]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 2 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:35:15 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 4 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 6 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:35:15 --> [Caused by] mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 5 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-15 01:35:16 --> mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audi...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audi...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audi...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audi...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\app\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', Array)
+#6 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+#7 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-10-15 01:35:16 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+[Method: GET, Route: accions/auditForUsers/18]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 2 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:35:16 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 4 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 6 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:35:16 --> [Caused by] mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 5 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-15 01:35:16 --> mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audi...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audi...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audi...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audi...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\app\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', Array)
+#6 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+#7 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-10-15 01:35:16 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+[Method: GET, Route: accions/auditForUsers/18]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 2 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:35:16 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 4 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 6 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:35:16 --> [Caused by] mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 5 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-15 01:35:16 --> mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audi...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audi...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audi...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audi...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\app\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', Array)
+#6 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+#7 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-10-15 01:35:16 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+[Method: GET, Route: accions/auditForUsers/18]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 2 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:35:16 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 4 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 6 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:35:16 --> [Caused by] mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 5 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-15 01:38:32 --> mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audi...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audi...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audi...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audi...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\app\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', Array)
+#6 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+#7 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-10-15 01:38:32 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+[Method: GET, Route: accions/auditForUsers/18]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 2 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:38:32 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 4 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 6 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:38:32 --> [Caused by] mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 5 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-15 01:38:36 --> mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audi...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audi...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audi...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audi...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\app\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', Array)
+#6 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+#7 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-10-15 01:38:36 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+[Method: GET, Route: accions/auditForUsers/18]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 2 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:38:36 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 4 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 6 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:38:36 --> [Caused by] mysqli_sql_exception: Unknown column 'audit_tittle' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = \'18\'
+AND `audit`.`status` = 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `id_audit`, `no_audit`, `audit_tittle`, `fk_machinery`, `fk_shift`, `DATE`, `fk_departament`, `auditor`, `STATUS`, `fk_user`
+FROM `audit`
+WHERE `audit`.`fk_user` = :audit.fk_user:
+AND `audit`.`status` = :audit.`status`:', [...], false)
+ 5 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AuditModel.php(26): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\AccionsController.php(22): App\Models\AuditModel->getAuditByStatus('18')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->auditForUsers('18')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-15 01:42:54 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "users/templates/AuditDetailsTemplate/headerTemplate.php"
+[Method: GET, Route: user/showAudit]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('users/templates/AuditDetailsTemplate/headerTemplate.php')
+ 2 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('users/templates/AuditDetailsTemplate/headerTemplate', [], true)
+ 3 APPPATH\Views\user\show_audit.php(2): view('users/templates/AuditDetailsTemplate/headerTemplate')
+ 4 SYSTEMPATH\View\View.php(234): include('D:\\laragon\\www\\capas.com\\app\\Views\\user\\show_audit.php')
+ 5 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('user/show_audit', [], true)
+ 7 APPPATH\Controllers\UserController.php(14): view('user/show_audit')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->showAudit()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

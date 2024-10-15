@@ -1,16 +1,5 @@
 
-<?php
-require_once('../framework_ssii/app/Views/accions/templates/AddAuditTemplate/headerTemplate.php');
-?>
-<!-- Top menu on small screens -->
-<?php
-require_once('../framework_ssii/app/Views/accions/templates/AddAuditTemplate/selectionLeft.php');
-?>
-<!-- Page content -->
-<?php
-require_once('../framework_ssii/app/Views/accions/templates/AddAuditTemplate/bodyTemplate.php');
-?>
-<!--FooterTemplate-->
-<?php
-require_once('../framework_ssii/app/Views/accions/templates/AddAuditTemplate/footerTemplate.php');
-?>
+<?= view('accions/templates/AddAuditTemplate/headerTemplate') ?>
+<?= view('accions/templates/AddAuditTemplate/selectionLeft') ?>
+<?= view('accions/templates/AddAuditTemplate/bodyTemplate') ?>
+<?= view('accions/templates/AddAuditTemplate/footerTemplate') ?>

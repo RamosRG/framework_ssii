@@ -1,16 +1,5 @@
 
-<?php
-require_once('../framework_ssii/app/Views/accions/templates/AddQuestionsTemplate/headerTemplate.php');
-?>
-<!-- Top menu on small screens -->
-<?php
-require_once('../framework_ssii/app/Views/accions/templates/AddQuestionsTemplate/selectionLeft.php');
-?>
-<!-- Page content -->
-<?php
-require_once('../framework_ssii/app/Views/accions/templates/AddQuestionsTemplate/bodyTemplate.php');
-?>
-<!--FooterTemplate-->
-<?php
-require_once('../framework_ssii/app/Views/accions/templates/AddQuestionsTemplate/footerTemplate.php');
-?>
+<?= view('accions/templates/AddQuestionsTemplate/headerTemplate') ?>
+<?= view('accions/templates/AddQuestionsTemplate/selectionLeft') ?>
+<?= view('accions/templates/AddQuestionsTemplate/bodyTemplate') ?>
+<?= view('accions/templates/AddQuestionsTemplate/footerTemplate') ?>
