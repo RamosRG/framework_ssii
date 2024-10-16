@@ -55,9 +55,11 @@ $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) 
     $routes->post('insertQuestions', 'AccionsController::insertQuestions');
     $routes->get('showquestions', 'AccionsController::showquestions');
     $routes->get('showQuestion', 'AccionsController::showQuestion');
+    $routes->get('getArea', 'AccionsController::getArea');
     $routes->post('getQuestionsByCategory', 'AccionsController::getQuestionsByCategory');
     $routes->post('updateStatus/(:num)', 'AccionsController::updateStatus/$1');
     $routes->get('getAudit/(:num)', 'AccionsController::getAudit/$1');
     $routes->get('auditForUsers/(:num)', 'AccionsController::auditForUsers/$1');
+    $routes->get('getDepartamentById/(:num)', 'AccionsController::getDepartamentById/$1');
 });
 

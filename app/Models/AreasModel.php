@@ -28,8 +28,18 @@ class AreasModel extends Model
         $query = $builder->get();
 
         $area = $query->getResultArray();
-        
+
         return $area;
     }
+    public function getDepartamentById($idArea)
+    {
+
+        return $this->select('area.id_area, area.area, area.`status`, department.id_department, department.department')
+            ->join('department', 'department.fk_area = area.id_area') // Realiza el INNER JOIN
+            ->where('area.id_area', $idArea) // Filtra por el estado de la auditoría
+            ->where('area.`status`', 1) // Filtra por el estado del departamento
+            ->where('department.`status', 1) // Filtra por el estado del departamento
+            ->get()
+            ->getResultArray(); // Devuelve el resultado como un array
+    }
 }
- ?>

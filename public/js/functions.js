@@ -11,6 +11,7 @@ $(document).ready(function () {
             { "data": "firstName" },
             { "data": "lastName" },
             { "data": "area" },
+            { "data": "department" },
             {
                 "data": "status",
                 "render": function (data) {

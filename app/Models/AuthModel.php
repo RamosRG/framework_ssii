@@ -42,9 +42,9 @@ class AuthModel extends Model
 
     public function getUsers()
     {
-        return $this->select('area.id_area, area.area, users.email, users.id_user, users.`name`, users.lastName, users.firstName, users.`status`,
-         users.privileges, users.password, users.created_at, users.updated_at')  // Selecciona todos los campos de ambas tablas
-            ->join('area', 'users.fk_area = area.id_area') // Realiza el INNER JOIN
+        return $this->select('users.email, users.name, users.firstName, users.lastName, area.area, department.department, users.`status`, users.created_at, users.updated_at')  // Selecciona todos los campos de ambas tablas
+            ->join('department', 'department.id_department = users.fk_department') // Realiza el INNER JOIN
+            ->join('area', 'area.id_area = department.fk_area') // Realiza el INNER JOIN
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
     }

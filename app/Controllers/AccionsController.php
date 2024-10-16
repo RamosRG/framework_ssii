@@ -10,10 +10,31 @@ use App\Models\AuditModel;
 use App\Models\CategoryModel;
 use App\Models\FountainModel;
 use App\Models\QuestionsModel;
+use App\Models\AreasModel;
 
 class AccionsController extends BaseController
 {
-  
+   public function getDepartamentById($idArea)
+   {
+       $departments = new AreasModel();
+       $data = $departments->getDepartamentById($idArea); // Usar la función del modelo
+
+       return $this->response->setJSON([
+           'status' => 'success',
+           'departments' => $data
+       ]);
+   }
+   public function getArea()
+   {
+      $areas = new AreasModel();
+      $data = $areas->findAll();
+
+      return $this->response->setJSON([
+         'status' => 'success',
+         'areas' => $data  // Aquí usas 'areas'
+      ]);
+      
+   }
    public function auditForUsers($data)
    {
       $model = new AuditModel();
@@ -108,6 +129,7 @@ class AccionsController extends BaseController
          'fountain' => $data
       ]);
    }
+
    public function getCategory()
    {
       $category = new CategoryModel();

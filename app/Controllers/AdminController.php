@@ -48,6 +48,7 @@ class AdminController extends Controller
     //Funcion para insertar un usuario dentro del controlador
     public function insertData()
     {
+        
         helper('text'); // Para generar una cadena aleatoria
         $token = bin2hex(random_bytes(32)); // Genera un token único para la verificación
     
@@ -59,11 +60,10 @@ class AdminController extends Controller
             'firstName' => $this->request->getPost('firstName'),
             'lastName' => $this->request->getPost('lastName'),
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'fk_area' => $this->request->getPost('area'),
+            'fk_department' => $this->request->getPost('department'),
             'email_verified' => 0, // Por defecto no verificado
             'verification_token' => $token // Guarda el token generado
         ];
-    
         $adminModel = new AdminModel();
         
         // Verificar si el correo ya existe
@@ -155,13 +155,5 @@ class AdminController extends Controller
             return $this->response->setJSON(['status' => 'error', 'message' => 'User ID is required']);
         }
     }
-    //Funcion para eliminar un usuario dentro del controlador
-    /** public function delete($id)
-    {
-        $adminModel = new AdminModel();
-        if ($adminModel->delete($id)) {
-            return $this->response->setJSON(['status' => 'success', 'message' => 'User deleted succesfully']);
-        } else
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to delete user']);
-    } */
+
 }

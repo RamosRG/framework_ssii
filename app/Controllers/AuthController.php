@@ -91,7 +91,6 @@ class AuthController extends BaseController
 
         $model = new AuthModel();
         $data = $model->getUsers();
-
         return $this->response->setJSON($data);
     }
     public function getUserById($id)

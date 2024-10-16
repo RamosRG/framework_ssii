@@ -1,0 +1,484 @@
+ERROR - 2024-10-16 22:36:12 --> mysqli_sql_exception: Unknown column 'users.fk_area' in 'on clause' in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `area`.`...', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `area`.`...')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `area`.`...')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `area`.`...', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\app\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', Array)
+#6 C:\laragon\www\capas.com\app\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+#7 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+#9 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-10-16 22:36:12 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.fk_area' in 'on clause'
+[Method: GET, Route: auth/getData]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `area`.`id_area`, `area`.`area`, `users`.`email`, `users`.`id_user`, `users`.`name`, `users`.`lastName`, `users`.`firstName`, `users`.`status`, `users`.`privileges`, `users`.`password`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 2 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-16 22:36:12 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.fk_area' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `area`.`id_area`, `area`.`area`, `users`.`email`, `users`.`id_user`, `users`.`name`, `users`.`lastName`, `users`.`firstName`, `users`.`status`, `users`.`privileges`, `users`.`password`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `area`.`id_area`, `area`.`area`, `users`.`email`, `users`.`id_user`, `users`.`name`, `users`.`lastName`, `users`.`firstName`, `users`.`status`, `users`.`privileges`, `users`.`password`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `area`.`id_area`, `area`.`area`, `users`.`email`, `users`.`id_user`, `users`.`name`, `users`.`lastName`, `users`.`firstName`, `users`.`status`, `users`.`privileges`, `users`.`password`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 4 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 6 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-16 22:36:12 --> [Caused by] mysqli_sql_exception: Unknown column 'users.fk_area' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `area`.`id_area`, `area`.`area`, `users`.`email`, `users`.`id_user`, `users`.`name`, `users`.`lastName`, `users`.`firstName`, `users`.`status`, `users`.`privileges`, `users`.`password`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `area`.`id_area`, `area`.`area`, `users`.`email`, `users`.`id_user`, `users`.`name`, `users`.`lastName`, `users`.`firstName`, `users`.`status`, `users`.`privileges`, `users`.`password`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `area`.`id_area`, `area`.`area`, `users`.`email`, `users`.`id_user`, `users`.`name`, `users`.`lastName`, `users`.`firstName`, `users`.`status`, `users`.`privileges`, `users`.`password`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `area`.`id_area`, `area`.`area`, `users`.`email`, `users`.`id_user`, `users`.`name`, `users`.`lastName`, `users`.`firstName`, `users`.`status`, `users`.`privileges`, `users`.`password`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 5 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-16 22:51:27 --> mysqli_sql_exception: Unknown column 'users.fk_area' in 'on clause' in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`....', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`....')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`....')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`....', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\app\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', Array)
+#6 C:\laragon\www\capas.com\app\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+#7 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+#9 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-10-16 22:51:27 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.fk_area' in 'on clause'
+[Method: GET, Route: auth/getData]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 2 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-16 22:51:27 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.fk_area' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 4 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 6 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-16 22:51:27 --> [Caused by] mysqli_sql_exception: Unknown column 'users.fk_area' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 5 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-16 22:51:54 --> mysqli_sql_exception: Unknown column 'users.fk_area' in 'on clause' in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`....', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`....')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`....')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`....', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\app\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', Array)
+#6 C:\laragon\www\capas.com\app\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+#7 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+#9 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-10-16 22:51:54 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.fk_area' in 'on clause'
+[Method: GET, Route: auth/getData]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 2 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-16 22:51:54 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.fk_area' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 4 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 6 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-16 22:51:54 --> [Caused by] mysqli_sql_exception: Unknown column 'users.fk_area' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 5 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-16 22:52:17 --> mysqli_sql_exception: Unknown column 'users.fk_area' in 'on clause' in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`....', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`....')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`....')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`....', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\app\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', Array)
+#6 C:\laragon\www\capas.com\app\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+#7 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+#9 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-10-16 22:52:17 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.fk_area' in 'on clause'
+[Method: GET, Route: auth/getData]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 2 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-16 22:52:17 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.fk_area' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 4 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 6 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-16 22:52:17 --> [Caused by] mysqli_sql_exception: Unknown column 'users.fk_area' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 5 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-16 22:52:52 --> mysqli_sql_exception: Unknown column 'users.fk_area' in 'on clause' in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`....', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`....')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`....')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`....', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\app\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', Array)
+#6 C:\laragon\www\capas.com\app\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+#7 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+#9 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-10-16 22:52:52 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.fk_area' in 'on clause'
+[Method: GET, Route: auth/getData]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 2 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-16 22:52:52 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.fk_area' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 4 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 6 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-16 22:52:52 --> [Caused by] mysqli_sql_exception: Unknown column 'users.fk_area' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 5 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-16 22:53:04 --> mysqli_sql_exception: Unknown column 'users.fk_area' in 'on clause' in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`....', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`....')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`....')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`....', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\app\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', Array)
+#6 C:\laragon\www\capas.com\app\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+#7 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+#9 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2024-10-16 22:53:04 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.fk_area' in 'on clause'
+[Method: GET, Route: auth/getData]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 2 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 4 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-16 22:53:04 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.fk_area' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 4 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 6 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-16 22:53:04 --> [Caused by] mysqli_sql_exception: Unknown column 'users.fk_area' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`email`, `users`.`name`, `users`.`firstName`, `users`.`lastName`, `area`.`area`, `department`.`department`, `users`.`status`, `users`.`created_at`, `users`.`updated_at`
+FROM `users`
+JOIN `department` ON `department`.`id_department` = `users`.`fk_department`
+JOIN `area` ON `users`.`fk_area` = `area`.`id_area`', [], false)
+ 5 SYSTEMPATH\Model.php(930): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Models\AuthModel.php(48): CodeIgniter\Model->__call('get', [])
+ 7 APPPATH\Controllers\AuthController.php(93): App\Models\AuthModel->getUsers()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->getData()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
