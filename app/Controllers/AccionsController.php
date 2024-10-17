@@ -217,15 +217,19 @@ class AccionsController extends BaseController
    {
       // Recoger datos del formulario para crear la auditoría
       $auditData = [
+
+         'name-of-audit' => $this->request->getPost('audit_title'),
          'fk_machinery' => $this->request->getPost('machinery'),
          'fk_shift' => $this->request->getPost('shift'),
          'fk_departament' => $this->request->getPost('departament'),
          'auditor' => $this->request->getPost('auditor'),
          'date' => $this->request->getPost('date'),
          'fk_user' => $this->request->getPost('email'),
+         'fk_user' => $this->request->getPost('email'),
          // Asumiendo que el select envía el id_user como valor
 
       ];
+      var_dump($auditData);
 
       try {
          // Insertar la auditoría y obtener el ID de la auditoría insertada

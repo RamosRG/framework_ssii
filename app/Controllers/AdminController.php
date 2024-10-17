@@ -138,11 +138,11 @@ class AdminController extends Controller
             'firstName'  => $this->request->getPost('firstName'),
             'lastName'   => $this->request->getPost('lastName'),
             'status'     => $this->request->getPost('status'),
-            'area'       => $this->request->getPost('area'),
-            'fk_area'    => $this->request->getPost('area'),
+            'fk_department'       => $this->request->getPost('department'),
             'created_at' => $this->request->getPost('created_at'),
             'updated_at' => $this->request->getPost('updated_at')
         ];
+        
         //Funcion para eliminar un usuario dentro del controlador
         // me debo de asegúrate de que el ID esté presente
         if (!empty($id)) {

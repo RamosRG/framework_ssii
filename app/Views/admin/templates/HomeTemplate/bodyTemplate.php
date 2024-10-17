@@ -78,9 +78,20 @@
         </div>
         <label><b>STATUS</b></label>
         <input class="w3-input w3-border" type="number" min="0" max="1" name="status" id="status" required>
-        <label for="area"><b>AREA</b></label>
-        <select id="area" name="area" class="w3-input w3-border w3-round">
-        </select>
+        <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
+          <div style="flex: 1;">
+            <label for="area"><b>AREA</b></label>
+            <select id="area-list" name="area" class="w3-input w3-border w3-round">
+              <option selected>Open this select menu</option>
+            </select>
+          </div>
+          <div style="flex: 1;">
+            <label for="department"><b>DEPARTMENT</b></label>
+            <select id="department-list" name="department" class="w3-input w3-border w3-round">
+              <option selected>Seleccione un departamento</option>
+            </select>
+          </div>
+        </div>
         <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
           <div style="flex: 1;">
             <label><b>CREATED</b></label>
@@ -90,8 +101,8 @@
             <label><b>UPDATED</b></label>
             <input class="w3-input w3-border" type="date" name="updated_at" value="updated_at" required>
           </div>
-          <button class="w3-button w3-block w3-green w3-section w3-padding" id="updateBtn">UPDATE USER</button>
         </div>
+        <button class="w3-button w3-block w3-green w3-section w3-padding" id="updateBtn">UPDATE USER</button>
       </div>
     </form>
 

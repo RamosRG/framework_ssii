@@ -6,12 +6,12 @@ use CodeIgniter\Model;
 
 class DepartamentModel extends Model
 {
-    protected $table = 'departament';
-    protected $primaryKey = 'id_departament'; // Correcto
+    protected $table = 'department';
+    protected $primaryKey = 'id_department'; // Correcto
 
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['departament', 'status'];
+    protected $allowedFields = ['department', 'status'];
 
     // Dates
     protected $useTimestamps = true; // Correcto

@@ -84,9 +84,8 @@ function fetchShiftData() {
         .catch(error => console.error('Error en la solicitud:', error));
 }
 //Funcion para mandar a llamar los departamentos que se utilizan en la auditoria
-function fetchDepartamentData() {
-    // Hacemos la solicitud AJAX
-    fetch('/capas.com/accions/getDepartament', {
+function fetchAreaData() {
+    fetch('/capas.com/accions/getArea', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -95,28 +94,65 @@ function fetchDepartamentData() {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                let departamentSelect = document.getElementById('departament-list');
-                departamentSelect.innerHTML = ''; // Limpiar las opciones anteriores
+                let areaSelect = document.getElementById('area-list');
+                areaSelect.innerHTML = ''; // Limpiar las opciones anteriores
 
-                // Añadimos de nuevo la opción inicial
+                // Añadimos la opción inicial
                 let defaultOption = document.createElement('option');
                 defaultOption.text = "Open this select menu";
                 defaultOption.selected = true;
-                departamentSelect.appendChild(defaultOption);
+                areaSelect.appendChild(defaultOption);
 
-                // Llenar el select con los datos de maquinaria
-                data.departament.forEach(item => {
+                // Llenar el select con los datos de áreas
+                data.areas.forEach(item => {
                     let option = document.createElement('option');
-                    option.value = item.id_departament;  // Usamos id_departament como valor
-                    option.textContent = item.departament;  // Usamos departament como el nombre a mostrar
-                    departamentSelect.appendChild(option);
+                    option.value = item.id_area;  // Usamos id_area como valor
+                    option.textContent = item.area;  // Usamos area como el nombre a mostrar
+                    areaSelect.appendChild(option);
                 });
             } else {
-                console.error('Error al obtener los departamentos');
+                console.error('Error al obtener las áreas');
             }
         })
         .catch(error => console.error('Error en la solicitud:', error));
 }
+
+document.getElementById('area-list').addEventListener('change', function () {
+    let areaId = this.value;  // Obtener el ID del área seleccionada
+
+    if (areaId) {
+        fetch(`/capas.com/accions/getDepartamentById/${areaId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    let departmentSelect = document.getElementById('department-list');
+                    departmentSelect.innerHTML = ''; // Limpiar las opciones anteriores
+
+                    // Añadimos la opción inicial
+                    let defaultOption = document.createElement('option');
+                    defaultOption.text = "Seleccione un departamento";
+                    defaultOption.selected = true;
+                    departmentSelect.appendChild(defaultOption);
+
+                    // Llenar el select con los datos de departamentos
+                    data.departments.forEach(item => {
+                        let option = document.createElement('option');
+                        option.value = item.id_department;  // Usamos id_department como valor
+                        option.textContent = item.department;  // Usamos department como el nombre a mostrar
+                        departmentSelect.appendChild(option);
+                    });
+                } else {
+                    console.error('Error al obtener los departamentos');
+                }
+            })
+            .catch(error => console.error('Error en la solicitud:', error));
+    }
+});
 //Funcion para mandar a llamar la maquinaria que se utilizara
 function fetchMachineryData() {
     // Hacemos la solicitud AJAX
@@ -226,8 +262,8 @@ function fetchFountainData(selectElement) {
             // Llenar select con fuentes
             data.fountain.forEach(item => {
                 let option = document.createElement('option');
-                option.value = item.id_fountain;
-                option.textContent = item.fountain;
+                option.value = item.id_source;
+                option.textContent = item.source;
                 selectElement.appendChild(option);
             });
         } else {
@@ -330,7 +366,7 @@ function fetchUserData() {
 //funcion para cargar todas los select que se encuentran en la vista de create audit
 window.onload = function () {
     fetchShiftData();
-    fetchDepartamentData();
+    fetchAreaData();
     fetchMachineryData();
     fetchCategoryData();
     getPrivileges();

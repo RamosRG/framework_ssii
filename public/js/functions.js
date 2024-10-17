@@ -49,7 +49,7 @@ $(document).ready(function () {
                         // Actualiza la DataTable
                         table.ajax.reload(); // Recarga los datos de la tabla
                         // Cierra el modal
-                        $('#id01').hide(); 
+                        $('#id01').hide();
                     });
                 } else {
                     Swal.fire({
@@ -111,29 +111,81 @@ $(document).ready(function () {
         });
     });
 
-    // Llamada AJAX para obtener las áreas y mostrarlas en el select
-    $.ajax({
-        url: '/capas.com/admin/getAreas', // URL para obtener las áreas
-        type: 'GET',
-        dataType: 'json',
-        success: function (response) {
-            var $areaSelect = $('#area');
-            $areaSelect.empty(); // Limpiar las opciones actuales
+  //Funcion para mandar a llamar los departamentos que se utilizan en la auditoria
+function fetchAreaData() {
+    fetch('/capas.com/accions/getArea', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                let areaSelect = document.getElementById('area-list');
+                areaSelect.innerHTML = ''; // Limpiar las opciones anteriores
 
-            if (response.status == 'success') {
-                // Llenar el select con las áreas
-                $.each(response.areas, function (index, area) {
-                    $areaSelect.append($('<option>', {
-                        value: area.id_area,  // valor de la opción
-                        text: area.area       // texto que se muestra
-                    }));
+                // Añadimos la opción inicial
+                let defaultOption = document.createElement('option');
+                defaultOption.text = "Open this select menu";
+                defaultOption.selected = true;
+                areaSelect.appendChild(defaultOption);
+
+                // Llenar el select con los datos de áreas
+                data.areas.forEach(item => {
+                    let option = document.createElement('option');
+                    option.value = item.id_area;  // Usamos id_area como valor
+                    option.textContent = item.area;  // Usamos area como el nombre a mostrar
+                    areaSelect.appendChild(option);
                 });
             } else {
-                alert('Error al cargar las áreas.');
+                console.error('Error al obtener las áreas');
             }
-        },
-        error: function () {
-            alert('Error al obtener las áreas.');
-        }
-    });
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
+}
+
+document.getElementById('area-list').addEventListener('change', function () {
+    let areaId = this.value;  // Obtener el ID del área seleccionada
+
+    if (areaId) {
+        fetch(`/capas.com/accions/getDepartamentById/${areaId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    let departmentSelect = document.getElementById('department-list');
+                    departmentSelect.innerHTML = ''; // Limpiar las opciones anteriores
+
+                    // Añadimos la opción inicial
+                    let defaultOption = document.createElement('option');
+                    defaultOption.text = "Seleccione un departamento";
+                    defaultOption.selected = true;
+                    departmentSelect.appendChild(defaultOption);
+
+                    // Llenar el select con los datos de departamentos
+                    data.departments.forEach(item => {
+                        let option = document.createElement('option');
+                        option.value = item.id_department;  // Usamos id_department como valor
+                        option.textContent = item.department;  // Usamos department como el nombre a mostrar
+                        departmentSelect.appendChild(option);
+                    });
+                } else {
+                    console.error('Error al obtener los departamentos');
+                }
+            })
+            .catch(error => console.error('Error en la solicitud:', error));
+    }
+});
+
+//funcion para cargar todas los select que se encuentran en la vista de create audit
+window.onload = function () {
+
+    fetchAreaData();
+
+};
 });

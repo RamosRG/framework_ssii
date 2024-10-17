@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 
 class FountainModel extends Model
 {
-    protected $table = 'fountain';
-    protected $primaryKey = 'id_fountain'; // Correcto
+    protected $table = 'source';
+    protected $primaryKey = 'id_source'; // Correcto
 
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['fountain','status'];
+    protected $allowedFields = ['source','status'];
 
 
     protected bool $status = true;
