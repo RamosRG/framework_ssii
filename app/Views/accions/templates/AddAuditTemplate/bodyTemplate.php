@@ -40,10 +40,7 @@
                         </select>
                     </div>
                 </div>
-                <div style="flex: 1;">
-                    <label for="auditor"><b>AUDITOR'S NAME</b></label>
-                    <input id="audit" class="w3-input w3-border w3-round" type="text" name="auditor" required>
-                </div>
+               
                 <br>
                 <h2 class="w3-container w3-center">Select her questions</h2>
                 <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">

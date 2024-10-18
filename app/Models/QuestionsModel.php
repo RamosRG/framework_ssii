@@ -22,8 +22,8 @@ class QuestionsModel extends Model
 
     public function getAudit($idAudit)
     {
-        return $this->select('category.category ,questions.question, questions.create_at, fountain.fountain')
-            ->join('fountain', 'fountain.id_fountain = questions.fk_fountain') // Realiza el INNER JOIN
+        return $this->select('questions.question, questions.create_at, source.source')
+            ->join('source', 'source.id_source = questions.fk_source') // Realiza el INNER JOIN
             ->join('category', 'category.id_category = questions.fk_category') // Realiza el INNER JOIN
             ->where('questions.fk_audit', $idAudit) // Filtra por el id de la auditoria
             ->get()

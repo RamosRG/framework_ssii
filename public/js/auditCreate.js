@@ -49,6 +49,38 @@ $(document).on('click', '#createAudit .btnAudit', function (e) {
         }
     });
 });
+function fetchUsersData() {
+    fetch('/capas.com/accions/getUsers', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                let userSelect = document.getElementById('user-list');
+                userSelect.innerHTML = ''; // Limpiar las opciones anteriores
+
+                // Añadimos la opción inicial
+                let defaultOption = document.createElement('option');
+                defaultOption.text = "Open this select menu";
+                defaultOption.selected = true;
+                userSelect.appendChild(defaultOption);
+
+                // Llenar el select con los datos de áreas
+                data.users.forEach(item => {
+                    let option = document.createElement('option');
+                    option.value = item.id_user;  // Usamos id_area como valor
+                    option.textContent = item.area;  // Usamos area como el nombre a mostrar
+                    userSelect.appendChild(option);
+                });
+            } else {
+                console.error('Error al obtener las áreas');
+            }
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
+}
 //Funcion para mandar a llamar los roles que se utilizan en la auditoria
 function fetchShiftData() {
     // Hacemos la solicitud AJAX

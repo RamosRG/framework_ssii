@@ -14,15 +14,25 @@ use App\Models\AreasModel;
 
 class AccionsController extends BaseController
 {
+   public function getUser()
+   {
+      $areas = new AdminModel();
+      $data = $areas->findAll();
+
+      return $this->response->setJSON([
+         'status' => 'success',
+         'areas' => $data  // Aquí usas 'areas'
+      ]);
+   }
    public function getDepartamentById($idArea)
    {
-       $departments = new AreasModel();
-       $data = $departments->getDepartamentById($idArea); // Usar la función del modelo
+      $departments = new AreasModel();
+      $data = $departments->getDepartamentById($idArea); // Usar la función del modelo
 
-       return $this->response->setJSON([
-           'status' => 'success',
-           'departments' => $data
-       ]);
+      return $this->response->setJSON([
+         'status' => 'success',
+         'departments' => $data
+      ]);
    }
    public function getArea()
    {
@@ -33,7 +43,6 @@ class AccionsController extends BaseController
          'status' => 'success',
          'areas' => $data  // Aquí usas 'areas'
       ]);
-      
    }
    public function auditForUsers($data)
    {
@@ -58,7 +67,7 @@ class AccionsController extends BaseController
 
       // Obtener los datos de la auditoría
       $audit = $model->getAudit($data);
-
+ 
       if ($audit && count($audit) > 0) {
          return $this->response->setJSON([
             'status' => 'success',
@@ -129,7 +138,6 @@ class AccionsController extends BaseController
          'fountain' => $data
       ]);
    }
-
    public function getCategory()
    {
       $category = new CategoryModel();
@@ -162,7 +170,6 @@ class AccionsController extends BaseController
    {
       $auditModel = new AuditModel();
       $data = $auditModel->getDataOfAudits();
-
       return $this->response->setJSON($data);
    }
    public function showquestions()
@@ -215,21 +222,17 @@ class AccionsController extends BaseController
    }
    public function insertAudit()
    {
+
       // Recoger datos del formulario para crear la auditoría
       $auditData = [
-
-         'name-of-audit' => $this->request->getPost('audit_title'),
+         'audit_title' => $this->request->getPost('name-of-audit'),
          'fk_machinery' => $this->request->getPost('machinery'),
          'fk_shift' => $this->request->getPost('shift'),
-         'fk_departament' => $this->request->getPost('departament'),
-         'auditor' => $this->request->getPost('auditor'),
+         'fk_department' => $this->request->getPost('departament'),
+         'fk_auditor' => $this->request->getPost('email'),  // Correctamente capturamos el id del auditor
          'date' => $this->request->getPost('date'),
-         'fk_user' => $this->request->getPost('email'),
-         'fk_user' => $this->request->getPost('email'),
-         // Asumiendo que el select envía el id_user como valor
-
       ];
-      var_dump($auditData);
+
 
       try {
          // Insertar la auditoría y obtener el ID de la auditoría insertada

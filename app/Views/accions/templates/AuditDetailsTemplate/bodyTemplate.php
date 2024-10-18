@@ -5,7 +5,7 @@
     </header>
 
     <div class="w3-container" id="contact" style="margin-top: 75px">
-        <h2 class="w3-border-bottom w3-border-light-grey w3-padding-16">Mantenimiento Preventivo / Casa de Fuerza - Auditoría por Capas</h2>
+        <h2 class="w3-border-bottom w3-border-light-grey w3-padding-16" id="audit_title"></h2>
         
         <form action="../accions/saveAudit" method="POST" class="w3-container">
             <div class="w3-row-padding">

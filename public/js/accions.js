@@ -13,11 +13,15 @@ $(document).ready(function () {
     },
     "columns": [
       { "data": "no_audit" },       // Coincide con la propiedad en el JSON
-      { "data": "auditor" },        // Coincide con la propiedad en el JSON
+      {
+        "data": function(row) {
+            return row.firstName + " " + row.lastName + " " + row.name;
+        }
+    },            // Coincide con la propiedad en el JSON
       { "data": "date" },           // Coincide con la propiedad en el JSON
       { "data": "shift" },          // Coincide con la propiedad en el JSON
       { "data": "machinery" },      // Coincide con la propiedad en el JSON
-      { "data": "departament" },    // Coincide con la propiedad en el JSON
+      { "data": "department" },    // Coincide con la propiedad en el JSON
       {
         "data": "status",   // Cambiar "status" por "audit_status" para que coincida
         "render": function (data) {
