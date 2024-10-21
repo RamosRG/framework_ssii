@@ -124,36 +124,20 @@
 
             <button class="w3-button w3-indigo w3-right w3-margin-top" type="submit">Submit Audit</button>
         </form>
-        <!-- Modal para Subir/Tomar Foto -->
-        <div id="photoModal" class="w3-modal">
-            <div class="w3-modal-content w3-card-4 w3-animate-opacity" style="max-width:500px;">
-                <div class="w3-center">
-                    <span onclick="document.getElementById('photoModal').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright">&times;</span>
-                    <h3>Subir o Tomar Foto</h3>
-                </div>
-                <div class="w3-container">
-                    <form id="photoForm">
-                        <!-- Opción para subir una imagen -->
-                        <label for="photoInput"><b>Selecciona una imagen</b></label>
-                        <input id="photoInput" class="w3-input w3-border" type="file" accept="image/*">
-                        <div class="w3-center w3-margin-top">
-                            <!-- Vista previa de la imagen seleccionada -->
-                            <img id="photoPreview" src="" style="display:none; width: 100%; max-width: 300px;" class="w3-margin-top">
-                        </div>
-                        <div class="w3-margin-top">
-                            <!-- Botón para tomar foto usando la cámara (en dispositivos móviles) -->
-                            <button type="button" id="openCamera" class="w3-button w3-green w3-block">Tomar Foto</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-                    <button id="savePhoto" class="w3-button w3-indigo">Guardar Foto</button>
-                    <button class="w3-button w3-red" onclick="document.getElementById('photoModal').style.display='none'">Cancelar</button>
-                </div>
+
+        <div id="photoModal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <h2>Capturar o Seleccionar Foto</h2>
+                <video id="video" width="100%" autoplay style="display:none;"></video>
+                <canvas id="canvas" style="display:none;"></canvas>
+                <button id="takePhoto">Tomar Foto</button>
+                <input type="file" id="photoInput" accept="image/*" style="display:none;">
+                <label for="photoInput" class="btn">Seleccionar Foto</label>
+                <img id="photoPreview" src="" alt="Vista previa" style="display:none;">
+                <button id="savePhoto">Guardar Foto</button>
             </div>
         </div>
-
-
 
     </div>
 

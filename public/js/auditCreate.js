@@ -1,11 +1,13 @@
-//funcion para crear una nueva auditoria
 $(document).on('click', '#createAudit .btnAudit', function (e) {
     e.preventDefault(); // Evita el comportamiento predeterminado del botón
     var form = $('#auditForm'); // Encuentra el formulario
     var formData = form.serializeArray(); // Serializa los datos del formulario como un array
 
+    // Mostrar todos los datos del formulario para ver si se capturan correctamente
+    console.log(formData);
+
     // Crear un nuevo array para filtrar valores vacíos
-    var filteredData = formData.filter(function(item) {
+    var filteredData = formData.filter(function (item) {
         return item.value.trim() !== ""; // Mantiene solo aquellos inputs que no están vacíos
     });
 
@@ -23,11 +25,10 @@ $(document).on('click', '#createAudit .btnAudit', function (e) {
             if (response.status === 'success') {
                 Swal.fire({
                     title: 'Éxito!',
-                    text: '¡Auditoria Creada con éxito!',
+                    text: '¡Auditoría Creada con éxito!',
                     icon: 'success',
                     confirmButtonText: 'Ok'
                 }).then(function () {
-                    // Redirige a otra página después de que el usuario cierre el mensaje de éxito
                     window.location.href = '../accions/showaudit'; // Cambia esta URL a la página deseada
                 });
             } else {
@@ -49,6 +50,7 @@ $(document).on('click', '#createAudit .btnAudit', function (e) {
         }
     });
 });
+
 function fetchUsersData() {
     fetch('/capas.com/accions/getUsers', {
         method: 'GET',
@@ -280,34 +282,34 @@ function fetchFountainData(selectElement) {
             'Content-Type': 'application/json'
         }
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success' && Array.isArray(data.fountain)) {
-            selectElement.innerHTML = ''; // Limpia opciones anteriores
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success' && Array.isArray(data.fountain)) {
+                selectElement.innerHTML = ''; // Limpia opciones anteriores
 
-            // Opción por defecto
-            let defaultOption = document.createElement('option');
-            defaultOption.text = "Selecciona una fuente";
-            defaultOption.value = '';
-            selectElement.appendChild(defaultOption);
+                // Opción por defecto
+                let defaultOption = document.createElement('option');
+                defaultOption.text = "Selecciona una fuente";
+                defaultOption.value = '';
+                selectElement.appendChild(defaultOption);
 
-            // Llenar select con fuentes
-            data.fountain.forEach(item => {
-                let option = document.createElement('option');
-                option.value = item.id_source;
-                option.textContent = item.source;
-                selectElement.appendChild(option);
-            });
-        } else {
-            console.error('Error al obtener datos de fuentes');
-        }
-    })
-    .catch(error => console.error('Error en la solicitud:', error));
+                // Llenar select con fuentes
+                data.fountain.forEach(item => {
+                    let option = document.createElement('option');
+                    option.value = item.id_source;
+                    option.textContent = item.source;
+                    selectElement.appendChild(option);
+                });
+            } else {
+                console.error('Error al obtener datos de fuentes');
+            }
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
 }
 //categorias utilizadas en la base de datos
 const categories = [
-    { name: "SEGURIDAD", value: "1",  questions: ["Pregunta 1", "Pregunta 2", "Pregunta 3", "Pregunta 4", "Pregunta 5", "Pregunta 6", "Pregunta 7"] },
-    { name: "CALIDAD", value: "2",questions: ["Pregunta 1", "Pregunta 2", "Pregunta 3", "Pregunta 4", "Pregunta 5", "Pregunta 6", "Pregunta 7"] },
+    { name: "SEGURIDAD", value: "1", questions: ["Pregunta 1", "Pregunta 2", "Pregunta 3", "Pregunta 4", "Pregunta 5", "Pregunta 6", "Pregunta 7"] },
+    { name: "CALIDAD", value: "2", questions: ["Pregunta 1", "Pregunta 2", "Pregunta 3", "Pregunta 4", "Pregunta 5", "Pregunta 6", "Pregunta 7"] },
     { name: "PRODUCCION", value: "3", questions: ["Pregunta 1", "Pregunta 2", "Pregunta 3", "Pregunta 4", "Pregunta 5", "Pregunta 6", "Pregunta 7"] },
     { name: "PERSONAL O PROCESO", value: "4", questions: ["Pregunta 1", "Pregunta 2", "Pregunta 3", "Pregunta 4", "Pregunta 5", "Pregunta 6", "Pregunta 7"] },
     { name: "COSTO", value: "5", questions: ["Pregunta 1", "Pregunta 2", "Pregunta 3", "Pregunta 4", "Pregunta 5", "Pregunta 6", "Pregunta 7"] }
@@ -337,11 +339,13 @@ function createDynamicSections() {
             input.type = 'text';
             input.placeholder = question;
             input.required = true;
+            input.name = `question_${category.value}_${questionIndex}`; // Asegúrate de que el name sea correcto
 
             // Select para la fuente
             const select = document.createElement('select');
             select.className = 'w3-select w3-border w3-round';
             select.style.display = 'none'; // Se mostrará después de que se escriba en el input
+            select.name = `source_${category.value}_${questionIndex}`; // Asegúrate de que el name sea correcto
 
             // Llenar select cuando se escribe en el input
             input.addEventListener('input', function () {
@@ -361,6 +365,7 @@ function createDynamicSections() {
         container.appendChild(section);
     });
 }
+
 //funcion para obtener al usuario
 function fetchUserData() {
     fetch('/capas.com/admin/getUsers', {
@@ -369,30 +374,30 @@ function fetchUserData() {
             'Content-Type': 'application/json'
         }
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            let userSelect = document.getElementById('user-list');
-            userSelect.innerHTML = ''; // Limpiar las opciones anteriores
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                let userSelect = document.getElementById('user-list');
+                userSelect.innerHTML = ''; // Limpiar las opciones anteriores
 
-            // Añadir de nuevo la opción inicial
-            let defaultOption = document.createElement('option');
-            defaultOption.text = "Open this select menu";
-            defaultOption.selected = true;
-            userSelect.appendChild(defaultOption);
+                // Añadir de nuevo la opción inicial
+                let defaultOption = document.createElement('option');
+                defaultOption.text = "Open this select menu";
+                defaultOption.selected = true;
+                userSelect.appendChild(defaultOption);
 
-            // Llenar el select con los datos de los usuarios
-            data.user.forEach(item => {  // Aquí cambiamos `machinery` por `users`
-                let option = document.createElement('option');
-                option.value = item.id_user;  // Usamos id_user como valor
-                option.textContent = item.email;  // Usamos email como el nombre a mostrar
-                userSelect.appendChild(option);
-            });
-        } else {
-            console.error('Error al obtener datos de los usuarios');
-        }
-    })
-    .catch(error => console.error('Error en la solicitud:', error));
+                // Llenar el select con los datos de los usuarios
+                data.user.forEach(item => {  // Aquí cambiamos `machinery` por `users`
+                    let option = document.createElement('option');
+                    option.value = item.id_user;  // Usamos id_user como valor
+                    option.textContent = item.email;  // Usamos email como el nombre a mostrar
+                    userSelect.appendChild(option);
+                });
+            } else {
+                console.error('Error al obtener datos de los usuarios');
+            }
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
 }
 
 //funcion para cargar todas los select que se encuentran en la vista de create audit

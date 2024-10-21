@@ -29,7 +29,7 @@ $(document).ready(function () {
         }
       },
       {
-        "defaultContent": '<button class="btn-getAudit w3-button w3-yellow w3-round fa fa-address-book-o"></button>'
+        "defaultContent": '<button class=" fa fa-arrow-right btn-getAudit w3-button w3-yellow w3-round fa fa-address-book-o"></button>'
       }
     ]
   });
@@ -92,6 +92,7 @@ $(document).ready(function () {
     $("#machinery").val(audit.machinery);
     $("#shift").val(audit.shift);
   } else {
+    alert("dont data");
   }
 });
 

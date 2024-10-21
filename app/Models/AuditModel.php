@@ -20,9 +20,12 @@ class AuditModel extends Model
 
     public function getAuditByStatus($idUser)
     {
-        return $this->select('id_audit, no_audit, audit_tittle, fk_machinery, fk_shift, DATE, fk_department, auditor, STATUS, fk_user ')
-            ->where('audit.fk_user', value: $idUser) // Filtra por el id del usuario
+        return $this->select('audit.id_audit, audit.no_audit, audit.audit_title, audit.fk_machinery, audit.fk_shift, audit.DATE, audit.fk_department,
+                                    audit.status, audit.fk_auditor, users.name, users.firstName, users.lastName ')
+            ->join('users', 'users.id_user = audit.fk_auditor')  // Asegura que el auditor esté relacionado
+            ->where('audit.fk_auditor', value: $idUser) // Filtra por el id del usuario
             ->where('audit.`status`', 1) // Filtra por el estado de la auditoria
+
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
     }
@@ -60,15 +63,14 @@ class AuditModel extends Model
             ->getResultArray(); // Devuelve el resultado como un array
     }
     public function getLastAuditNumber()
-{
-    $auditModel = new AuditModel();
+    {
+        $auditModel = new AuditModel();
 
-    // Obtener el último número de auditoría de la base de datos
-    $lastAudit = $auditModel->select('no_audit')
-                            ->orderBy('id_audit', 'DESC')
-                            ->first(); // Obtiene la última auditoría creada
-    
-    return $this->response->setJSON($lastAudit);
-}
+        // Obtener el último número de auditoría de la base de datos
+        $lastAudit = $auditModel->select('no_audit')
+            ->orderBy('id_audit', 'DESC')
+            ->first(); // Obtiene la última auditoría creada
 
+        return $this->response->setJSON($lastAudit);
+    }
 }

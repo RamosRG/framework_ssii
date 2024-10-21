@@ -67,7 +67,7 @@ class AccionsController extends BaseController
 
       // Obtener los datos de la auditoría
       $audit = $model->getAudit($data);
- 
+
       if ($audit && count($audit) > 0) {
          return $this->response->setJSON([
             'status' => 'success',
@@ -222,57 +222,49 @@ class AccionsController extends BaseController
    }
    public function insertAudit()
    {
+     
 
-      // Recoger datos del formulario para crear la auditoría
       $auditData = [
          'audit_title' => $this->request->getPost('name-of-audit'),
          'fk_machinery' => $this->request->getPost('machinery'),
          'fk_shift' => $this->request->getPost('shift'),
          'fk_department' => $this->request->getPost('departament'),
-         'fk_auditor' => $this->request->getPost('email'),  // Correctamente capturamos el id del auditor
+         'fk_auditor' => $this->request->getPost('email'),
          'date' => $this->request->getPost('date'),
       ];
 
-
       try {
-         // Insertar la auditoría y obtener el ID de la auditoría insertada
          $auditModel = new AuditModel();
          $auditId = $auditModel->insertAudit($auditData);
 
          if ($auditId) {
-            // Si la auditoría se ha creado con éxito, ahora inserta las preguntas asociadas
-
-            // Obtener la fecha y el usuario (email) desde el formulario
-            $date = $this->request->getPost('date');
-
-            // Procesar preguntas
             $questionsData = [];
-            for ($i = 1; $i <= 5; $i++) { // Asumiendo que hay 5 categorías
-               for ($j = 0; $j <= 6; $j++) { // Asumiendo que hay 7 preguntas por categoría
-                  $questionKey = "question_" . $i . "_" . $j;
-                  $sourceKey = "source_" . $i . "_" . $j;
 
-                  $question = $this->request->getPost($questionKey);
-                  $source = $this->request->getPost($sourceKey);
+            // Recorre las categorías y preguntas enviadas
+            for ($i = 1; $i <= 5; $i++) {
+               for ($j = 0; $j <= 6; $j++) {
+                  $question = $this->request->getPost("question_{$i}_{$j}");
+                  $source = $this->request->getPost("source_{$i}_{$j}");
 
                   if ($question) {
                      $questionsData[] = [
-                        'fk_audit' => $auditId, // Relaciona la pregunta con la auditoría
-                        'fk_category' => $i, // ID de la categoría
+                        'fk_audit' => $auditId,
+                        'fk_category' => $i,
                         'question' => $question,
-                        'create_at' => $date, // Usa la fecha obtenida
-                        'fk_fountain' => $source, // Fuente de la pregunta
-                        'create_for' => $this->request->getPost('auditor'),
-                        'status' => 1, // Activo
+                        'status' => 1,
+                        'create_at' => $this->request->getPost('date'),
+                        'fk_source' => $source ?? null,
                      ];
                   }
+
                }
             }
-
-            // Insertar preguntas en la base de datos
+            
             $questionsModel = new QuestionsModel();
             if (!empty($questionsData)) {
-               $questionsModel->insertBatch($questionsData); // Inserta todas las preguntas de una vez
+               if (!$questionsModel->insertBatch($questionsData)) {
+                  throw new \Exception('Error al insertar las preguntas');
+               }
             }
 
             return $this->response->setJSON(['status' => 'success', 'message' => 'Audit and questions created successfully']);

@@ -37,6 +37,8 @@ $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('Assignedaudit', 'UserController::Assignedaudit');
     $routes->get('auditDetails/(:num)', 'UserController::auditDetails/$1');
     $routes->get('showAudit', 'UserController::showAudit');
+    $routes->post('uploadPhoto', 'UserController::uploadPhoto');
+
 });
 
 $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) {

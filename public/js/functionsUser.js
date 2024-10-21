@@ -86,8 +86,8 @@ $(document).ready(function () {
 
             // Contenido de la tarjeta
             card.innerHTML = `
-                <h2>${audit.audit_tittle}</h2>
-                <p><strong>Auditor:</strong> ${audit.auditor}</p>
+                <h2>${audit.audit_title}</h2>
+                <p><strong>Auditor:</strong> ${audit.name} ${audit.firstName} ${audit.lastName}</p>
                 <p><strong>Fecha:</strong> ${audit.DATE}</p>
             `;
 

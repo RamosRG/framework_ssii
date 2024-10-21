@@ -8,35 +8,37 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.min.js"></script>
 <script src="../public/js/auditDetails.js"></script>
 
 <script>
-function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
-}
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+    }
 
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-}
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+    }
 
-$(document).ready(function() {
-    $('#example').DataTable();
+    $(document).ready(function() {
+        $('#example').DataTable();
 
-    // Add more rows to tables
-    $('.add-row').click(function() {
-        var table = $(this).closest('table');
-        var newRow = table.find('tbody tr:last').clone();
-        newRow.find('input').val('');
-        table.find('tbody').append(newRow);
+        // Add more rows to tables
+        $('.add-row').click(function() {
+            var table = $(this).closest('table');
+            var newRow = table.find('tbody tr:last').clone();
+            newRow.find('input').val('');
+            table.find('tbody').append(newRow);
+        });
+
+        // Remove row from tables
+        $('table').on('click', '.remove-row', function() {
+            $(this).closest('tr').remove();
+        });
     });
-
-    // Remove row from tables
-    $('table').on('click', '.remove-row', function() {
-        $(this).closest('tr').remove();
-    });
-});
 </script>
 </body>
+
 </html>
