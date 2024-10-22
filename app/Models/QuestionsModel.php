@@ -79,9 +79,5 @@ class QuestionsModel extends Model
             ->findAll();
     }
 
-    public function addEvidenceToQuestion($questionId, $data)
-    {
-        return $this->update($questionId, $data); // Actualizar el campo de evidencia con el nombre de archivo
-    }
     
 }

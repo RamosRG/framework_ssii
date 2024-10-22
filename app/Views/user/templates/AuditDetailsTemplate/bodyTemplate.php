@@ -61,81 +61,77 @@
             </div>
 
             <div class="w3-container w3-card w3-white w3-margin-bottom">
-                <h3 class="w3-text-indigo">Acciones Tomadas</h3>
-                <div class="responsive-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Número</th>
-                                <th>Acción</th>
-                                <th>Responsable</th>
-                                <th>Fecha</th>
-                                <th>Verificado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><input type="text" class="w3-input w3-border w3-round" value="Se continua retroalimentando a personal"></td>
-                                <td><input type="text" class="w3-input w3-border w3-round" value="Rosendo Miranda"></td>
-                                <td><input type="date" class="w3-input w3-border w3-round"></td>
-                                <td><input type="checkbox" class="w3-check"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="w3-container w3-card w3-white w3-margin-bottom">
+                    <h3 class="w3-text-indigo">Acciones Tomadas</h3>
+                    <div class="responsive-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Número</th>
+                                    <th>Pregunta</th>
+                                    <th>Acción</th>
+                                    <th>Responsable</th>
+                                    <th>Fecha</th>
+                                    <th>Evidencia</th>
+                                    <th>Verificado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="taken-actions-list">
+                                <!-- Aquí se inyectarán dinámicamente las acciones tomadas -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
 
-            <div class="w3-container w3-card w3-white">
-                <h3 class="w3-text-indigo">Verificación y Seguimiento</h3>
-                <div class="responsive-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Número de línea</th>
-                                <th>Verificación de acciones</th>
-                                <th>Descripción</th>
-                                <th>Implementado</th>
-                                <th>Mejorado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><input type="text" class="w3-input w3-border w3-round"></td>
-                                <td><input type="text" class="w3-input w3-border w3-round"></td>
-                                <td>
-                                    <select class="w3-select w3-border">
-                                        <option value="Sí">Sí</option>
-                                        <option value="No">No</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="w3-select w3-border">
-                                        <option value="Sí">Sí</option>
-                                        <option value="No">No</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="w3-container w3-card w3-white">
+                    <h3 class="w3-text-indigo">Verificación y Seguimiento</h3>
+                    <div class="responsive-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Número de línea</th>
+                                    <th>Verificación de acciones</th>
+                                    <th>Descripción</th>
+                                    <th>Implementado</th>
+                                    <th>Mejorado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><input type="text" class="w3-input w3-border w3-round"></td>
+                                    <td><input type="text" class="w3-input w3-border w3-round"></td>
+                                    <td>
+                                        <select class="w3-select w3-border">
+                                            <option value="Sí">Sí</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="w3-select w3-border">
+                                            <option value="Sí">Sí</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
 
-            <button class="w3-button w3-indigo w3-right w3-margin-top" type="submit">Submit Audit</button>
+                <button class="w3-button w3-indigo w3-right w3-margin-top" type="submit">Submit Audit</button>
         </form>
 
+        <!-- Modal -->
         <div id="photoModal" class="modal" style="display:none;">
             <div class="modal-content">
-                <span class="close" id="closeModal">&times;</span>
-                <h2>Capturar o Seleccionar Foto</h2>
-                <video id="video" width="100%" autoplay style="display:none;"></video>
+                <span id="closePhotoModal" class="close">&times;</span>
+                <h2>Captura de Foto</h2>
+                <video id="video" style="width:100%; display:block;"></video>
                 <canvas id="canvas" style="display:none;"></canvas>
-                <button id="takePhoto">Tomar Foto</button>
-                <input type="file" id="photoInput" accept="image/*" style="display:none;">
-                <label for="photoInput" class="btn">Seleccionar Foto</label>
-                <img id="photoPreview" src="" alt="Vista previa" style="display:none;">
-                <button id="savePhoto">Guardar Foto</button>
+                <img id="photoPreview" src="" alt="Vista previa" style="width:100%; display:none;">
+                <button id="takePhoto" class="w3-button w3-indigo">Tomar Foto</button>
+                <button id="uploadPhotoBtn" class="w3-button w3-indigo" style="display:none;">Subir Foto</button>
             </div>
         </div>
 

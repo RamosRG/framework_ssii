@@ -37,12 +37,15 @@ $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('Assignedaudit', 'UserController::Assignedaudit');
     $routes->get('auditDetails/(:num)', 'UserController::auditDetails/$1');
     $routes->get('showAudit', 'UserController::showAudit');
+    $routes->get('takenActions/(:num)', 'UserController::takenActions/$1');
     $routes->post('uploadPhoto', 'UserController::uploadPhoto');
+
 
 });
 
 $routes->group('accions', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('addquestions', 'AccionsController::addquestions');
+    $routes->get('dashboard', 'AccionsController::dashboard');
     $routes->get('addaudit', 'AccionsController::addaudit');
     $routes->get('getMachinery', 'AccionsController::getMachinery');
     $routes->get('getShift', 'AccionsController::getShift');

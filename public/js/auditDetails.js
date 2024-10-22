@@ -1,12 +1,22 @@
 $(document).ready(function () {
-    // Obtener el ID de auditoría de la URL
-    var urlParams = new URLSearchParams(window.location.search);
-    var id_audit = urlParams.get("id_audit");
+    function getCurrentWeek() {
+        const today = new Date();
+        const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        const dayOfWeek = firstDayOfMonth.getDay();
+        const adjustedDate = today.getDate() + dayOfWeek - 1;
+        return Math.ceil(adjustedDate / 7);
+    }
 
-    // Verificar si existe el id_audit
+    const currentWeek = getCurrentWeek();
+    $("#no_audit").val(currentWeek);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const id_audit = urlParams.get("id_audit");
+    let takenQuestions = [];
+
     if (id_audit) {
-        console.log("ID de auditoría encontrado: " + id_audit);
         fetchAuditDetails(id_audit);
+        fetchTakenActions(id_audit);
     } else {
         console.error("No se encontró el ID de auditoría en la URL.");
     }
@@ -17,123 +27,10 @@ $(document).ready(function () {
             type: "GET",
             dataType: "json",
             success: function (response) {
-                if (response.status === "success") {
-                    var auditDetails = response.data;
-
-                    if (auditDetails.length > 0) {
-                        var audit = auditDetails[0];
-
-                        // Rellenar los campos de la auditoría
-                        $("#no_audit").val(audit.no_audit);
-                        $("#date").val(audit.date);
-                        $("#auditor").val(audit.name + " " + audit.firstName + " " + audit.lastName);
-                        $("#status").val(audit.status);
-                        $("#departament").val(audit.department);
-                        $("#machinery").val(audit.machinery);
-                        $("#shift").val(audit.shift);
-
-                        // Limpiar la tabla antes de agregar nuevas filas
-                        $("#audit-questions-list").empty();
-
-                        // Llenar la tabla de preguntas
-                        auditDetails.forEach(function (detail) {
-                            var isChecked = "checked";
-                            var complianceCheckbox = `
-                              <input type="checkbox" class="w3-check" ${isChecked} data-question-id="${detail.id_question}">
-                          `;
-                            var row = `
-                              <tr>
-                                  <td>${detail.category}</td>
-                                  <td>${detail.question}</td>
-                                  <td>${detail.create_at}</td>
-                                  <td>${detail.source}</td>
-                                  <td>${complianceCheckbox}</td>
-                                  <td><input type="text" class="w3-text"></td>
-                                  <td><button class="camera-button" style="display:none;" data-question-id="${detail.id_question}"><i class="fa fa-camera"></i></button></td>
-                              </tr>
-                          `;
-                            $("#audit-questions-list").append(row);
-                        });
-
-                        // Evento para los checkboxes
-                        $("#audit-questions-list").on("change", ".w3-check", function () {
-                            var isChecked = $(this).is(":checked");
-                            var cameraButton = $(this).closest('tr').find('.camera-button');
-                            cameraButton.toggle(!isChecked); // Alternar visibilidad
-                        });
-
-                        // Manejar clic en el botón de la cámara
-                        $("#audit-questions-list").on("click", ".camera-button", function (e) {
-                            e.preventDefault();
-                            var questionId = $(this).data("question-id");
-                            $("#photoModal").data("question-id", questionId).show(); // Mostrar modal
-                            startCamera(); // Iniciar la cámara al abrir el modal
-                        });
-
-                        // Tomar foto con la cámara
-                        $("#takePhoto").on("click", function () {
-                            var canvas = document.getElementById("canvas");
-                            var video = document.getElementById("video");
-                            canvas.width = 640;
-                            canvas.height = 480;
-                            var context = canvas.getContext("2d");
-                            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                            
-                            // Convertir el canvas a Blob
-                            canvas.toBlob(function(blob) {
-                                // Obtener el ID de la pregunta
-                                var questionId = $("#photoModal").data("question-id");
-                                uploadPhoto(questionId, blob); // Llama a la función de carga aquí
-                            }, 'image/png');
-                            
-                            $("#photoPreview").attr("src", canvas.toDataURL("image/png")).show();
-                        });
-
-                        // Limpiar y detener la cámara al cerrar el modal
-                        $("#photoModal").on("hidden.bs.modal", function () {
-                            stopCamera(); // Detener la cámara
-                            $("#photoPreview").hide(); // Ocultar la vista previa
-                        });
-
-                        // Cerrar el modal
-                        $("#closeModal").on("click", function () {
-                            $("#photoModal").hide(); // Cerrar el modal
-                            stopCamera(); // Detener la cámara
-                            $("#photoPreview").hide(); // Ocultar la vista previa
-                        });
-
-                        // Función para iniciar la cámara
-                        function startCamera() {
-                            navigator.mediaDevices.getUserMedia({ video: true })
-                                .then(function (stream) {
-                                    var video = document.getElementById("video");
-                                    video.srcObject = stream;
-                                    video.style.display = "block"; // Mostrar el video
-                                })
-                                .catch(function (error) {
-                                    console.error("Error al acceder a la cámara: ", error);
-                                    alert("No se puede acceder a la cámara.");
-                                });
-                        }
-
-                        // Función para detener la cámara
-                        function stopCamera() {
-                            var video = document.getElementById("video");
-                            var stream = video.srcObject;
-                            if (stream) {
-                                var tracks = stream.getTracks();
-                                tracks.forEach(function (track) {
-                                    track.stop();
-                                });
-                                video.srcObject = null;
-                                video.style.display = "none"; // Ocultar el video
-                            }
-                        }
-                    } else {
-                        console.error("No se encontraron detalles de auditoría.");
-                    }
+                if (response.status === "success" && response.data.length > 0) {
+                    populateAuditDetails(response.data);
                 } else {
-                    console.error("Error al obtener los detalles de la auditoría");
+                    console.error("No se encontraron detalles de auditoría.");
                 }
             },
             error: function (xhr, status, error) {
@@ -142,33 +39,196 @@ $(document).ready(function () {
         });
     }
 
-    // Modificar la función de subida de fotos para enviar el Blob directamente
-    function uploadPhoto(questionId, photoBlob) {
-        var formData = new FormData();
-        formData.append('question_id', questionId);
-        formData.append('photo', photoBlob, 'photo.png'); // Añadir el Blob al FormData con un nombre de archivo
-    
+    function populateAuditDetails(auditDetails) {
+        const audit = auditDetails[0];
+        $("#date").val(audit.date);
+        $("#auditor").val(`${audit.name} ${audit.firstName} ${audit.lastName}`);
+        $("#status").val(audit.status);
+        $("#departament").val(audit.department);
+        $("#machinery").val(audit.machinery);
+        $("#shift").val(audit.shift);
+        $("#audit-questions-list").empty();
+
+        auditDetails.forEach(detail => {
+            const isTaken = takenQuestions.includes(detail.id_question);
+            const complianceCheckbox = `<input type="checkbox" class="w3-check" ${isTaken ? "disabled" : "checked"} data-question-id="${detail.id_question}">`;
+            const row = `
+                <tr data-question-id="${detail.id_question}">
+                    <td>${detail.category}</td>
+                    <td>${detail.question}</td>
+                    <td>${detail.create_at}</td>
+                    <td>${detail.source}</td>
+                    <td>${complianceCheckbox}</td>
+                    <td><input type="text" class="w3-text answer-input"></td>
+                    <td>
+                        <button class="camera-button" style="display:${isTaken ? "none" : "block"};" data-question-id="${detail.id_question}">
+                            <i class="fa fa-camera"></i>
+                        </button>
+                        <input type="file" class="file-input" accept="image/*" data-question-id="${detail.id_question}" style="display:none;">
+                        <button class="select-photo-button" data-question-id="${detail.id_question}">Seleccionar Foto</button>
+                    </td>
+                </tr>
+            `;
+            $("#audit-questions-list").append(row);
+        });
+
+        // Event listeners
+        setupEventListeners();
+    }
+
+    function setupEventListeners() {
+        $("#audit-questions-list").on("change", ".w3-check", function () {
+            const isChecked = $(this).is(":checked");
+            const cameraButton = $(this).closest('tr').find('.camera-button');
+            cameraButton.toggle(!isChecked);
+        });
+
+        // Abrir cámara
+        $("#audit-questions-list").on("click", ".camera-button", function (e) {
+            e.preventDefault();
+            const questionId = $(this).data("question-id");
+            $("#photoModal").data("question-id", questionId).show();
+            startCamera();
+        });
+
+        // Seleccionar foto desde sistema
+        $("#audit-questions-list").on("click", ".select-photo-button", function () {
+            $(this).siblings('.file-input').trigger('click');
+        });
+
+        // Cargar archivo seleccionado
+        $("#audit-questions-list").on("change", ".file-input", handleFileChange);
+
+        $("#takePhoto").on("click", function () {
+            const questionId = $("#photoModal").data("question-id");
+            takePhotoAndUpload(questionId);
+        });
+
+        $("#photoModal").on("hide", function () {
+            stopCamera();
+            $("#photoPreview").hide();
+        });
+    }
+
+    function handleFileChange(event) {
+        const file = event.target.files[0];
+        const questionId = $(this).data("question-id");
+        if (file) {
+            previewAndUploadPhoto(file, questionId);
+        }
+    }
+
+    function fetchTakenActions(idAudit) {
         $.ajax({
-            url: "../user/uploadPhoto", // Cambia esta URL a tu endpoint
+            url: "../user/takenActions/" + idAudit,
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                if (response.status === "success") {
+                    populateTakenActions(response.data);
+                } else {
+                    console.error("Error al obtener las acciones tomadas");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error en la solicitud AJAX:", error);
+            },
+        });
+    }
+
+    function populateTakenActions(actions) {
+        $("#taken-actions-list").empty();
+        takenQuestions = [];
+
+        actions.forEach(action => {
+            takenQuestions.push(action.id_question);
+            const row = `
+                <tr>
+                    <td>${action.id_question}</td>
+                    <td>${action.question}</td>
+                    <td>${action.answer}</td>
+                    <td>${action.responsable}</td>
+                    <td>${action.create_at}</td>
+                    <td>
+                        ${action.evidence ? `<img src="${action.evidence}" alt="Evidencia" style="width: 100px; height: auto;">` : 'Sin evidencia'}
+                    </td>
+                    <td>${action.is_complete ? 'Sí' : 'No'}</td>
+                </tr>
+            `;
+            $("#taken-actions-list").append(row);
+        });
+
+        fetchAuditDetails(id_audit);
+    }
+
+    function startCamera() {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                const video = document.getElementById("video");
+                video.srcObject = stream;
+                video.style.display = "block";
+                video.stream = stream; // Guardar el stream para detenerlo después
+            })
+            .catch(error => {
+                console.error("Error al acceder a la cámara: ", error);
+                alert("No se puede acceder a la cámara.");
+            });
+    }
+
+    function stopCamera() {
+        const video = document.getElementById("video");
+        const stream = video.stream;
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+            video.srcObject = null;
+            video.style.display = "none";
+        }
+    }
+
+    function takePhotoAndUpload(questionId) {
+        const canvas = document.getElementById("canvas");
+        const video = document.getElementById("video");
+        canvas.width = 640;
+        canvas.height = 480;
+        const context = canvas.getContext("2d");
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        canvas.toBlob(blob => {
+            uploadPhoto(questionId, blob);
+        }, 'image/png');
+    }
+
+    function previewAndUploadPhoto(file, questionId) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            $("#photoPreview").attr("src", e.target.result).show();
+            uploadPhoto(questionId, file);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function uploadPhoto(questionId, photoBlob) {
+        const formData = new FormData();
+        const checkbox = $(`input[data-question-id="${questionId}"]`);
+        const isComplete = checkbox.is(":checked") ? 1 : 0;
+        const answerText = checkbox.closest('tr').find('.answer-input').val();
+
+        formData.append('fk_question', questionId);
+        formData.append('is_complete', isComplete);
+        formData.append('answer', answerText);
+        formData.append('photo', photoBlob, 'photo.png');
+
+        $.ajax({
+            url: "../user/uploadPhoto",
             type: "POST",
             data: formData,
-            contentType: false, // Importante para enviar el archivo
-            processData: false, // No procesar los datos
+            contentType: false,
+            processData: false,
             success: function (response) {
-                // Utilizar SweetAlert para mostrar un mensaje de éxito
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡Éxito!',
-                    text: 'Foto guardada exitosamente.',
-                    confirmButtonText: 'Aceptar'
-                }).then(() => {
-                    $("#photoModal").hide(); // Cerrar el modal
-                    $("#photoPreview").hide(); // Ocultar la vista previa
-                });
+                handleUploadResponse(response);
             },
             error: function (error) {
                 console.error("Error al guardar la foto:", error);
-                // Utilizar SweetAlert para mostrar un mensaje de error
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
@@ -177,5 +237,29 @@ $(document).ready(function () {
                 });
             }
         });
-    }    
+    }
+
+    function handleUploadResponse(response) {
+        if (response.status === "success") {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: 'Foto guardada exitosamente.',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                $("#photoModal").hide();
+                $("#photoPreview").hide();
+                stopCamera();
+                fetchTakenActions(id_audit);
+            });
+        } else {
+            console.error("Error al guardar la foto:", response.message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo guardar la foto. Intenta nuevamente.',
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    }
 });
