@@ -1,0 +1,976 @@
+INFO - 2024-10-23 00:35:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 00:36:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:07:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:08:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:08:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:08:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:09:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:09:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:10:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:10:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:10:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:12:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-10-23 01:12:55 --> mysqli_sql_exception: Unknown column 'category.category' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `categor...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `categor...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `categor...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `categor...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\laragon\www\capas.com\app\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+#7 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-10-23 01:12:55 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+[Method: GET, Route: accions/getAudit/7]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:12:55 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:12:55 --> [Caused by] mysqli_sql_exception: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-23 01:13:39 --> mysqli_sql_exception: Unknown column 'category.category' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `categor...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `categor...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `categor...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `categor...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\laragon\www\capas.com\app\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+#7 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-10-23 01:13:39 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+[Method: GET, Route: accions/getAudit/7]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:13:39 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:13:39 --> [Caused by] mysqli_sql_exception: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-23 01:13:56 --> mysqli_sql_exception: Unknown column 'questions.create_for' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `questio...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `questio...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `questio...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `questio...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\laragon\www\capas.com\app\Models\QuestionsModel.php(57): CodeIgniter\BaseModel->findAll()
+#7 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(108): App\Models\QuestionsModel->showAllQuestions()
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->showQuestion()
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-10-23 01:13:56 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'questions.create_for' in 'field list'
+[Method: GET, Route: accions/showQuestion]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = :questions.status:
+ORDER BY `category`.`category` ASC', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\QuestionsModel.php(57): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(108): App\Models\QuestionsModel->showAllQuestions()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->showQuestion()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:13:56 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'questions.create_for' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = 1
+ORDER BY `category`.`category` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = 1
+ORDER BY `category`.`category` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = :questions.status:
+ORDER BY `category`.`category` ASC', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\QuestionsModel.php(57): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(108): App\Models\QuestionsModel->showAllQuestions()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->showQuestion()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:13:56 --> [Caused by] mysqli_sql_exception: Unknown column 'questions.create_for' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = 1
+ORDER BY `category`.`category` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = 1
+ORDER BY `category`.`category` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = 1
+ORDER BY `category`.`category` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = :questions.status:
+ORDER BY `category`.`category` ASC', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\QuestionsModel.php(57): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(108): App\Models\QuestionsModel->showAllQuestions()
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->showQuestion()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-23 01:14:22 --> mysqli_sql_exception: Unknown column 'questions.create_for' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `questio...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `questio...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `questio...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `questio...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\laragon\www\capas.com\app\Models\QuestionsModel.php(57): CodeIgniter\BaseModel->findAll()
+#7 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(108): App\Models\QuestionsModel->showAllQuestions()
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->showQuestion()
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-10-23 01:14:22 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'questions.create_for' in 'field list'
+[Method: GET, Route: accions/showQuestion]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = :questions.status:
+ORDER BY `category`.`category` ASC', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\QuestionsModel.php(57): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(108): App\Models\QuestionsModel->showAllQuestions()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->showQuestion()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:14:22 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'questions.create_for' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = 1
+ORDER BY `category`.`category` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = 1
+ORDER BY `category`.`category` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = :questions.status:
+ORDER BY `category`.`category` ASC', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\QuestionsModel.php(57): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(108): App\Models\QuestionsModel->showAllQuestions()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->showQuestion()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:14:22 --> [Caused by] mysqli_sql_exception: Unknown column 'questions.create_for' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = 1
+ORDER BY `category`.`category` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = 1
+ORDER BY `category`.`category` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = 1
+ORDER BY `category`.`category` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `questions`.`id_question`, `questions`.`question`, `questions`.`create_for`, `questions`.`status`, `source`.`source`, `category`.`category`
+FROM `questions`
+JOIN `category` ON `questions`.`fk_category` = `category`.`id_category`
+JOIN `source` ON `questions`.`fk_source` = `source`.`id_source`
+WHERE `questions`.`status` = :questions.status:
+ORDER BY `category`.`category` ASC', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\QuestionsModel.php(57): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(108): App\Models\QuestionsModel->showAllQuestions()
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->showQuestion()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-23 01:18:21 --> mysqli_sql_exception: Unknown column 'category.category' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `categor...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `categor...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `categor...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `categor...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\laragon\www\capas.com\app\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+#7 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-10-23 01:18:21 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+[Method: GET, Route: accions/getAudit/7]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:18:21 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:18:21 --> [Caused by] mysqli_sql_exception: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-23 01:18:54 --> mysqli_sql_exception: Unknown column 'category.category' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `categor...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `categor...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `categor...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `categor...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\laragon\www\capas.com\app\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+#7 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-10-23 01:18:54 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+[Method: GET, Route: accions/getAudit/7]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:18:54 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:18:54 --> [Caused by] mysqli_sql_exception: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-23 01:19:02 --> mysqli_sql_exception: Unknown column 'category.category' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `categor...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `categor...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `categor...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `categor...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\laragon\www\capas.com\app\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+#7 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-10-23 01:19:02 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+[Method: GET, Route: accions/getAudit/7]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:19:02 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:19:02 --> [Caused by] mysqli_sql_exception: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-23 01:19:09 --> mysqli_sql_exception: Unknown column 'category.category' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `categor...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `categor...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `categor...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `categor...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\laragon\www\capas.com\app\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+#7 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-10-23 01:19:09 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+[Method: GET, Route: accions/getAudit/7]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:19:09 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:19:09 --> [Caused by] mysqli_sql_exception: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-10-23 01:19:27 --> mysqli_sql_exception: Unknown column 'category.category' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `categor...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `categor...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `categor...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `categor...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\laragon\www\capas.com\app\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+#7 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-10-23 01:19:27 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+[Method: GET, Route: accions/getAudit/7]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:19:27 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:19:27 --> [Caused by] mysqli_sql_exception: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-10-23 01:26:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-10-23 01:28:08 --> mysqli_sql_exception: Unknown column 'category.category' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `categor...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `categor...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `categor...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `categor...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\laragon\www\capas.com\app\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+#7 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-10-23 01:28:08 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+[Method: GET, Route: accions/getAudit/7]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:28:08 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-23 01:28:08 --> [Caused by] mysqli_sql_exception: Unknown column 'category.category' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = \'7\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `category`.`category`, `questions`.`question`, `questions`.`create_at`, `source`.`source`
+FROM `questions`
+JOIN `source` ON `source`.`id_source` = `questions`.`fk_source`
+JOIN `category` ON `category`.`id_category` = `questions`.`fk_category`
+WHERE `questions`.`fk_audit` = :questions.fk_audit:', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\QuestionsModel.php(36): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(72): App\Models\QuestionsModel->getAudit('7')
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getAudit('7')
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-10-23 01:29:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:30:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:31:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:31:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:31:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:31:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-23 01:34:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
