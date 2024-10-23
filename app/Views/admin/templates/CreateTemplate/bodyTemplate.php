@@ -36,14 +36,14 @@
                 <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
                     <div style="flex: 1;">
                         <label for="area"><b>Área</b></label>
-                        <select id="area-list" name="area" class="w3-input w3-border w3-round">
+                        <select id="area-list" name="area" class="w3-input w3-border w3-round" required>
                             <option selected>Open this select menu</option>
                         </select>
                     </div>
 
                     <div style="flex: 1;">
                         <label for="department"><b>Departamento</b></label>
-                        <select id="department-list" name="department" class="w3-input w3-border w3-round">
+                        <select id="department-list" name="department" class="w3-input w3-border w3-round" required>
                             <option selected>Seleccione un departamento</option>
                         </select>
                     </div>

@@ -21,7 +21,8 @@
             <div class="button-container">
                 <button class="button" id="auditForWeek">Audit Weekly</button>
                 <button class="button">Dashboard</button>
-                <button class="button">Add Question</button>
+                <a href="createQuestion" class="button">Add Question</a>
+
             </div>
         </div>
     </main>
@@ -32,7 +33,7 @@
     </footer>
 
     <!-- Archivo de JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../public/js/framework/jquery-3.6.0.min.js"></script>
     <script src="../public/assets/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="./../public/js/functionsUser.js"></script>
 </body>

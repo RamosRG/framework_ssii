@@ -36,7 +36,7 @@ class AuditModel extends Model
 
     public function getDataOfAudits()
     {
-        return $this->select('audit.id_audit, audit.no_audit, audit.audit_title, users.firstName, users.lastName, 
+        return $this->select('audit.id_audit, audit.no_audit, audit.audit_title, users.name,users.firstName, users.lastName, 
             audit.date, audit.fk_auditor, audit.status, department.department, machinery.machinery, shift.shift')
             ->join('users', 'users.id_user = audit.fk_auditor')  // Asegura que el auditor esté relacionado
             ->join('department', 'department.id_department = audit.fk_department') // Realiza el INNER JOIN

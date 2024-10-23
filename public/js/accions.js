@@ -15,7 +15,7 @@ $(document).ready(function () {
       { "data": "no_audit" },       // Coincide con la propiedad en el JSON
       {
         "data": function(row) {
-            return row.firstName + " " + row.lastName + " " + row.name;
+            return row.name + " " + row.firstName + " " + row.lastName;
         }
     },            // Coincide con la propiedad en el JSON
       { "data": "date" },           // Coincide con la propiedad en el JSON

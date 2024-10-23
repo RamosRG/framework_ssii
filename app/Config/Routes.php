@@ -39,6 +39,9 @@ $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('showAudit', 'UserController::showAudit');
     $routes->get('takenActions/(:num)', 'UserController::takenActions/$1');
     $routes->post('uploadPhoto', 'UserController::uploadPhoto');
+    $routes->get('createQuestion', 'UserController::createQuestion');
+    $routes->get('getCategory', 'UserController::getCategory');
+    $routes->get('getFountain', 'UserController::getFountain');
 
 
 });

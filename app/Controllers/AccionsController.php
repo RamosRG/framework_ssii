@@ -110,27 +110,28 @@ class AccionsController extends BaseController
       // Ver el resultado en la consola para verificar el formato JSON
       echo json_encode($questions);
    }
-   public function insertQuestions()
-   {
+      public function insertQuestions()
+      {
 
-      $data = [
-         'fk_category' => $this->request->getPost('fk_category'), // Asegúrate de que coincida con el formulario
-         'question' => $this->request->getPost('question'),
-         'create_for' => $this->request->getPost('create_for'),
-         'fk_fountain' => $this->request->getPost('fk_fountain') // Asegúrate de que coincida con el formulario
-      ];
+         $data = [
+            'fk_category' => $this->request->getPost('category'), // Asegúrate de que coincida con el formulario
+            'question' => $this->request->getPost('question'),
+            'created_by' => $this->request->getPost('create_for'),
+            'status' => $this->request->getPost("status"),
+            'fk_source' => $this->request->getPost('source') // Asegúrate de que coincida con el formulario
+         ];
 
-      try {
-         $questionsModel = new QuestionsModel();
-         if ($questionsModel->insertQuestion($data)) {
-            return $this->response->setJSON(['status' => 'success', 'message' => 'Question created successfully']);
-         } else {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to create the new Question']);
+         try {
+            $questionsModel = new QuestionsModel();
+            if ($questionsModel->insert($data)) {
+               return $this->response->setJSON(['status' => 'success', 'message' => 'Question created successfully']);
+            } else {
+               return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to create the new Question']);
+            }
+         } catch (\Exception $e) {
+            return $this->response->setJSON(['status' => 'error', 'message' => $e->getMessage()]);
          }
-      } catch (\Exception $e) {
-         return $this->response->setJSON(['status' => 'error', 'message' => $e->getMessage()]);
       }
-   }
    public function getFountain()
    {
       $fountain = new FountainModel();

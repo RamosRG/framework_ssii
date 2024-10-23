@@ -33,6 +33,7 @@
 
         .w3-main {
             margin-left: 120px;
+            margin-right: 120px;
             padding: 2rem;
             transition: margin-left .4s;
         }

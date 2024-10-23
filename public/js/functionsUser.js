@@ -38,6 +38,7 @@ $(document).ready(function () {
         });
     });
 
+
     // Mostrar el nombre de usuario
     var username = sessionStorage.getItem('username');
     $('#welcome-message').text(username ? `WELCOME\n${username}` : 'WELCOME\nGuest');
