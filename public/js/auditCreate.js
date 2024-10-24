@@ -1,122 +1,103 @@
 $(document).on('click', '#createAudit .btnAudit', function (e) {
-    e.preventDefault(); // Evita el comportamiento predeterminado del botón
-    var form = $('#auditForm'); // Encuentra el formulario
-    var formData = form.serializeArray(); // Serializa los datos del formulario como un array
+    e.preventDefault();
+    const formData = $('#auditForm').serializeArray().filter(item => item.value.trim() !== ""); // Filter out empty values
 
-    // Mostrar todos los datos del formulario para ver si se capturan correctamente
-    console.log(formData);
+    // Validar que los campos obligatorios tengan valores
+    const machinery = formData.find(item => item.name === 'machinery');
+    const email = formData.find(item => item.name === 'email');
+    
+    if (!machinery || machinery.value === 'undefined') {
+        alert('Por favor, selecciona una maquinaria válida.');
+        return;
+    }
 
-    // Crear un nuevo array para filtrar valores vacíos
-    var filteredData = formData.filter(function (item) {
-        return item.value.trim() !== ""; // Mantiene solo aquellos inputs que no están vacíos
-    });
-
-    // Convertir el array filtrado de nuevo a un formato de cadena de consulta
-    var filteredDataString = $.param(filteredData);
-    console.log(filteredDataString); // Mostrar datos filtrados
+    if (!email || email.value === 'undefined') {
+        alert('Por favor, ingresa un correo electrónico válido.');
+        return;
+    }
 
     $.ajax({
-        url: '../accions/insertAudit', // URL de tu controlador que inserta los datos
+        url: '../accions/insertAudit',
         type: 'POST',
-        data: filteredDataString, // Envía los datos filtrados
+        data: $.param(formData),
         dataType: 'json',
         success: function (response) {
-            console.log(response);
             if (response.status === 'success') {
-                Swal.fire({
-                    title: 'Éxito!',
-                    text: '¡Auditoría Creada con éxito!',
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
-                }).then(function () {
-                    window.location.href = '../accions/showaudit'; // Cambia esta URL a la página deseada
+                Swal.fire('Éxito!', '¡Auditoría Creada con éxito!', 'success').then(() => {
+                    window.location.href = '../accions/showaudit';
                 });
             } else {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Error al crear la auditoría: ' + response.message,
-                    icon: 'error',
-                    confirmButtonText: 'Ok'
-                });
+                Swal.fire('Error!', 'Error al crear la auditoría: ' + response.message, 'error');
             }
         },
         error: function () {
-            Swal.fire({
-                title: 'Error!',
-                text: 'Ocurrió un error al intentar crear la auditoría.',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            });
+            Swal.fire('Error!', 'Ocurrió un error al intentar crear la auditoría.', 'error');
         }
     });
 });
 
-function fetchUsersData() {
-    fetch('/capas.com/accions/getUsers', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
+function fetchData(url, selectId, placeholder, valueField, textField) {
+    fetch(url, { method: 'GET', headers: { 'Content-Type': 'application/json' } })
         .then(response => response.json())
         .then(data => {
-            if (data.status === 'success') {
-                let userSelect = document.getElementById('user-list');
-                userSelect.innerHTML = ''; // Limpiar las opciones anteriores
+            console.log(data);
+            if (data && data[valueField] && Array.isArray(data[valueField])) {
+                const select = document.getElementById(selectId);
+                select.innerHTML = `<option selected>${placeholder}</option>`;
 
-                // Añadimos la opción inicial
-                let defaultOption = document.createElement('option');
-                defaultOption.text = "Open this select menu";
-                defaultOption.selected = true;
-                userSelect.appendChild(defaultOption);
-
-                // Llenar el select con los datos de áreas
-                data.users.forEach(item => {
-                    let option = document.createElement('option');
-                    option.value = item.id_user;  // Usamos id_area como valor
-                    option.textContent = item.area;  // Usamos area como el nombre a mostrar
-                    userSelect.appendChild(option);
+                data[valueField].forEach(item => {
+                    select.innerHTML += `<option value="${item.id_source}">${item[textField]}</option>`;
                 });
             } else {
-                console.error('Error al obtener las áreas');
+                console.error(`Error al obtener datos para ${selectId}: estructura de datos no válida o vacía`);
             }
         })
         .catch(error => console.error('Error en la solicitud:', error));
 }
-//Funcion para mandar a llamar los roles que se utilizan en la auditoria
-function fetchShiftData() {
-    // Hacemos la solicitud AJAX
-    fetch('/capas.com/accions/getShift', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                let shiftSelect = document.getElementById('shift-list');
-                shiftSelect.innerHTML = ''; // Limpiar las opciones anteriores
+let categories = [];
 
-                // Añadimos de nuevo la opción inicial
-                let defaultOption = document.createElement('option');
-                defaultOption.text = "Open this select menu";
-                defaultOption.selected = true;
-                shiftSelect.appendChild(defaultOption);
-
-                // Llenar el select con los datos de maquinaria
-                data.shift.forEach(item => {
-                    let option = document.createElement('option');
-                    option.value = item.id_shift;  // Usamos id_shift como valor
-                    option.textContent = item.shift;  // Usamos shift como el nombre a mostrar
-                    shiftSelect.appendChild(option);
-                });
-            } else {
-                console.error('Error al obtener los turnos');
+function fetchCategoryData() {
+    // Petición fetch para obtener las categorías
+    fetch('/capas.com/accions/getCategory')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la respuesta de la red');
             }
+            return response.json(); // Convertimos la respuesta a JSON
         })
-        .catch(error => console.error('Error en la solicitud:', error));
+        .then(data => {
+            // Guardamos las categorías en la variable global
+            categories = data.category;
+
+            // Accedemos al select donde queremos cargar las categorías
+            const select = document.getElementById('category-list');
+            // Limpiamos las opciones previas
+            select.innerHTML = '';
+
+            // Creamos una opción por defecto
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Selecciona una categoría';
+            select.appendChild(defaultOption);
+
+            // Iteramos sobre los datos de categorías y creamos opciones
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id_category; // ID de la categoría
+                option.textContent = category.category; // Nombre de la categoría
+                select.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Hubo un problema con la operación fetch:', error);
+        });
 }
+
+function fetchShiftData() { fetchData('/capas.com/accions/getShift', 'shift-list', 'Selecciona un turno', 'shift', 'shift'); }
+function fetchMachineryData() { fetchData('/capas.com/accions/getMachinery', 'machinery-list', 'Selecciona una maquinaria', 'machinery', 'machinery'); }
+function fetchUserData() { fetchData('/capas.com/admin/getUsers', 'user-list', 'Selecciona un usuario', 'user', 'email'); }
+function fetchSourceData() { fetchData('/capas.com/accions/getFountain', 'source-list', 'Selecciona una fuente', 'fountain', 'source'); }
+// Fetch departments based on selected area
 //Funcion para mandar a llamar los departamentos que se utilizan en la auditoria
 function fetchAreaData() {
     fetch('/capas.com/accions/getArea', {
@@ -187,230 +168,156 @@ document.getElementById('area-list').addEventListener('change', function () {
             .catch(error => console.error('Error en la solicitud:', error));
     }
 });
-//Funcion para mandar a llamar la maquinaria que se utilizara
-function fetchMachineryData() {
-    // Hacemos la solicitud AJAX
-    fetch('/capas.com/accions/getMachinery', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                let machinerySelect = document.getElementById('machinery-list');
-                machinerySelect.innerHTML = ''; // Limpiar las opciones anteriores
 
-                // Añadimos de nuevo la opción inicial
-                let defaultOption = document.createElement('option');
-                defaultOption.text = "Open this select menu";
-                defaultOption.selected = true;
-                machinerySelect.appendChild(defaultOption);
+const questionsData = []; // Array para almacenar las preguntas con sus categorías y fuentes
 
-                // Llenar el select con los datos de maquinaria
-                data.machinery.forEach(item => {
-                    let option = document.createElement('option');
-                    option.value = item.id_machinery;  // Usamos id_machinery como valor
-                    option.textContent = item.machinery;  // Usamos machinery como el nombre a mostrar
-                    machinerySelect.appendChild(option);
+document.getElementById('category-list').addEventListener('change', function () {
+    const categoryId = this.value;
+    const questionContainer = document.getElementById('dynamic-questions');
+    
+    // Limpiar solo el contenedor de las nuevas preguntas
+    questionContainer.innerHTML = '';
+
+    if (categoryId) {
+        // Encontrar el nombre de la categoría correspondiente al categoryId seleccionado
+        const selectedCategory = categories.find(cat => cat.id_category === categoryId)?.category;
+
+        // Crear un contenedor para la nueva pregunta y el select
+        const inputWrapper = document.createElement('div');
+        inputWrapper.className = 'question-wrapper w3-padding w3-margin-top';
+
+        // Estilo del input para la pregunta
+        const questionInput = document.createElement('input');
+        questionInput.className = 'w3-input w3-border w3-margin-bottom';
+        questionInput.type = 'text';
+        questionInput.placeholder = 'Ingresa la pregunta';
+        questionInput.required = true;
+        questionInput.id = 'new-question-input';
+
+        // Estilo del select para la fuente
+        const sourceSelect = document.createElement('select');
+        sourceSelect.className = 'w3-select w3-border w3-margin-bottom';
+        sourceSelect.id = 'source-list'; // ID para el select de la fuente
+        fetchSourceData(); // Llamar a la función para cargar las fuentes
+
+        // Botón para agregar la pregunta
+        const addButton = document.createElement('button');
+        addButton.className = 'w3-button w3-green w3-block';
+        addButton.textContent = 'Agregar Pregunta';
+
+        // Función del botón para agregar la pregunta a la tabla
+        addButton.onclick = function () {
+            const questionText = questionInput.value.trim();
+            const sourceText = sourceSelect.options[sourceSelect.selectedIndex].text; // Texto de la fuente seleccionada
+            
+            if (questionText) {
+                // Almacenar la pregunta, categoría y fuente
+                questionsData.push({
+                    category: selectedCategory,
+                    question: questionText,
+                    source: sourceText
                 });
+
+                // Crear una fila para la tabla
+                const tableRow = document.createElement('tr');
+
+                // Crear las celdas de la tabla para la categoría, pregunta y fuente
+                const categoryCell = document.createElement('td');
+                categoryCell.textContent = selectedCategory;
+
+                const questionCell = document.createElement('td');
+                questionCell.textContent = questionText;
+
+                const sourceCell = document.createElement('td');
+                sourceCell.textContent = sourceText;
+
+                // Crear el botón de eliminar
+                const deleteCell = document.createElement('td');
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'w3-button w3-red';
+                deleteButton.textContent = 'Eliminar';
+                deleteButton.onclick = function () {
+                    questionContainer.removeChild(tableRow);
+                    // También podemos eliminar la pregunta del array
+                    const index = questionsData.findIndex(q => q.question === questionText && q.source === sourceText);
+                    if (index > -1) {
+                        questionsData.splice(index, 1);
+                    }
+                };
+
+                deleteCell.appendChild(deleteButton);
+
+                // Añadir las celdas a la fila
+                tableRow.appendChild(categoryCell);
+                tableRow.appendChild(questionCell);
+                tableRow.appendChild(sourceCell);
+                tableRow.appendChild(deleteCell);
+
+                // Añadir la fila a la tabla
+                questionContainer.appendChild(tableRow);
+
+                // Limpiar el input y el select
+                questionInput.value = '';
+                sourceSelect.selectedIndex = 0;
             } else {
-                console.error('Error al obtener datos de maquinaria');
+                alert('Por favor, ingrese una pregunta válida.');
             }
-        })
-        .catch(error => console.error('Error en la solicitud:', error));
-}
-//Funcion para mandar a llamar la categoria que se utilizan en la auditoria
-function fetchCategoryData() {
-    // Hacemos la solicitud AJAX
-    fetch('/capas.com/accions/getCategory', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                let categorySelect = document.getElementById('category-list');
+        };
 
-                categorySelect.innerHTML = ''; // Limpiar las opciones anteriores
+        // Añadir los elementos al contenedor del formulario
+        inputWrapper.appendChild(questionInput);
+        inputWrapper.appendChild(sourceSelect);
+        inputWrapper.appendChild(addButton);
+        questionContainer.appendChild(inputWrapper);
 
-                // Añadimos de nuevo la opción inicial
-                let defaultOption = document.createElement('option');
-                defaultOption.text = "Open this select menu";
-                defaultOption.selected = true;
-                categorySelect.appendChild(defaultOption);
+        // Mostrar preguntas existentes de la categoría seleccionada
+        questionsData.forEach(q => {
+            if (q.category === selectedCategory) {
+                const tableRow = document.createElement('tr');
 
-                // Llenar el select con los datos de maquinaria
-                data.category.forEach(item => {
-                    let option = document.createElement('option');
-                    option.value = item.id_category;  // Usamos id_departament como valor
-                    option.textContent = item.category;  // Usamos departament como el nombre a mostrar
-                    categorySelect.appendChild(option);
-                });
-            } else {
-                console.error('Error al obtener las categorias');
+                const categoryCell = document.createElement('td');
+                categoryCell.textContent = q.category;
+
+                const questionCell = document.createElement('td');
+                questionCell.textContent = q.question;
+
+                const sourceCell = document.createElement('td');
+                sourceCell.textContent = q.source;
+
+                const deleteCell = document.createElement('td');
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'w3-button w3-red';
+                deleteButton.textContent = 'Eliminar';
+                deleteButton.onclick = function () {
+                    questionContainer.removeChild(tableRow);
+                    // También eliminar de questionsData
+                    const index = questionsData.findIndex(existingQuestion => existingQuestion.question === q.question && existingQuestion.source === q.source);
+                    if (index > -1) {
+                        questionsData.splice(index, 1);
+                    }
+                };
+
+                deleteCell.appendChild(deleteButton);
+
+                tableRow.appendChild(categoryCell);
+                tableRow.appendChild(questionCell);
+                tableRow.appendChild(sourceCell);
+                tableRow.appendChild(deleteCell);
+                questionContainer.appendChild(tableRow);
             }
-        })
-}
-//Funcion para mandar a llamar los privilegios que se utilizan en la auditoria
-function getPrivileges() {
-    return fetch('/capas.com/auth/getPrivileges', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                let privilegesInput = document.getElementById('privileges'); // El campo input hidden
-                privilegesInput.value = data.privileges; // Asignar el valor de los privilegios directamente
-            } else {
-                console.error('Error al obtener los datos de privilegios');
-            }
-        })
-        .catch(error => console.error('Error en la solicitud:', error));
-}
-// Función para llenar el select con datos de la fuente
-function fetchFountainData(selectElement) {
-    fetch('/capas.com/accions/getFountain', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success' && Array.isArray(data.fountain)) {
-                selectElement.innerHTML = ''; // Limpia opciones anteriores
-
-                // Opción por defecto
-                let defaultOption = document.createElement('option');
-                defaultOption.text = "Selecciona una fuente";
-                defaultOption.value = '';
-                selectElement.appendChild(defaultOption);
-
-                // Llenar select con fuentes
-                data.fountain.forEach(item => {
-                    let option = document.createElement('option');
-                    option.value = item.id_source;
-                    option.textContent = item.source;
-                    selectElement.appendChild(option);
-                });
-            } else {
-                console.error('Error al obtener datos de fuentes');
-            }
-        })
-        .catch(error => console.error('Error en la solicitud:', error));
-}
-//categorias utilizadas en la base de datos
-const categories = [
-    { name: "SEGURIDAD", value: "1", questions: ["Pregunta 1", "Pregunta 2", "Pregunta 3", "Pregunta 4", "Pregunta 5", "Pregunta 6", "Pregunta 7"] },
-    { name: "CALIDAD", value: "2", questions: ["Pregunta 1", "Pregunta 2", "Pregunta 3", "Pregunta 4", "Pregunta 5", "Pregunta 6", "Pregunta 7"] },
-    { name: "PRODUCCION", value: "3", questions: ["Pregunta 1", "Pregunta 2", "Pregunta 3", "Pregunta 4", "Pregunta 5", "Pregunta 6", "Pregunta 7"] },
-    { name: "PERSONAL O PROCESO", value: "4", questions: ["Pregunta 1", "Pregunta 2", "Pregunta 3", "Pregunta 4", "Pregunta 5", "Pregunta 6", "Pregunta 7"] },
-    { name: "COSTO", value: "5", questions: ["Pregunta 1", "Pregunta 2", "Pregunta 3", "Pregunta 4", "Pregunta 5", "Pregunta 6", "Pregunta 7"] }
-];
-
-function createDynamicSections() {
-    const container = document.getElementById('dynamic-sections');
-
-    categories.forEach((category) => {
-        const section = document.createElement('div');
-        section.className = 'question-section';
-
-        const label = document.createElement('h3');
-        label.innerHTML = `<b>${category.name}</b>`;
-        section.appendChild(label);
-
-        category.questions.forEach((question, questionIndex) => {
-            const questionContainer = document.createElement('div');
-            questionContainer.style.display = 'flex';
-            questionContainer.style.alignItems = 'center';
-            questionContainer.style.gap = '10px';
-            questionContainer.style.marginBottom = '15px';
-
-            // Input para la pregunta
-            const input = document.createElement('input');
-            input.className = 'w3-input w3-border w3-round';
-            input.type = 'text';
-            input.placeholder = question;
-            input.required = true;
-            input.name = `question_${category.value}_${questionIndex}`; // Asegúrate de que el name sea correcto
-
-            // Select para la fuente
-            const select = document.createElement('select');
-            select.className = 'w3-select w3-border w3-round';
-            select.style.display = 'none'; // Se mostrará después de que se escriba en el input
-            select.name = `source_${category.value}_${questionIndex}`; // Asegúrate de que el name sea correcto
-
-            // Llenar select cuando se escribe en el input
-            input.addEventListener('input', function () {
-                if (input.value.trim() !== "") {
-                    select.style.display = 'block';
-                    fetchFountainData(select); // Llamada para llenar el select
-                } else {
-                    select.style.display = 'none'; // Ocultar si el input está vacío
-                }
-            });
-
-            questionContainer.appendChild(input);
-            questionContainer.appendChild(select);
-            section.appendChild(questionContainer);
         });
+    }
+});
 
-        container.appendChild(section);
-    });
-}
 
-//funcion para obtener al usuario
-function fetchUserData() {
-    fetch('/capas.com/admin/getUsers', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                let userSelect = document.getElementById('user-list');
-                userSelect.innerHTML = ''; // Limpiar las opciones anteriores
 
-                // Añadir de nuevo la opción inicial
-                let defaultOption = document.createElement('option');
-                defaultOption.text = "Open this select menu";
-                defaultOption.selected = true;
-                userSelect.appendChild(defaultOption);
-
-                // Llenar el select con los datos de los usuarios
-                data.user.forEach(item => {  // Aquí cambiamos `machinery` por `users`
-                    let option = document.createElement('option');
-                    option.value = item.id_user;  // Usamos id_user como valor
-                    option.textContent = item.email;  // Usamos email como el nombre a mostrar
-                    userSelect.appendChild(option);
-                });
-            } else {
-                console.error('Error al obtener datos de los usuarios');
-            }
-        })
-        .catch(error => console.error('Error en la solicitud:', error));
-}
-
-//funcion para cargar todas los select que se encuentran en la vista de create audit
+// Fetch initial data on page load
 window.onload = function () {
     fetchShiftData();
     fetchAreaData();
     fetchMachineryData();
     fetchCategoryData();
-    getPrivileges();
-    fetchFountainData();
-    createDynamicSections();
     fetchUserData();
     const dateField = document.getElementById('date-field');
-    const today = new Date().toISOString().split('T')[0]; // Obtiene la fecha en formato YYYY-MM-DD
-    dateField.value = today;
+    dateField.value = new Date().toISOString().split('T')[0];
 };
