@@ -40,11 +40,11 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <br>
                 <h2 class="w3-container w3-center">Select her questions</h2>
                 <div id="dynamic-questions"></div> <!-- Contenedor para preguntas dinámicas -->
-                
+
                 <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
                     <div style="flex: 1;">
                         <label for="date"><b>Date</b></label>
@@ -66,6 +66,7 @@
                         <option selected>Open this select menu</option>
                         <!-- Aquí se llenarán las opciones con JavaScript -->
                     </select>
+                    
                 </div>
                 <br>
                 <div class="w3-center">

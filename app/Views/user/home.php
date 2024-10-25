@@ -11,6 +11,9 @@
 <body>
     <header>
         <h2 id="welcome-message">WELCOME </h2>
+        <a href="../auth/logout" class="button">
+            <i class="fas fa-sign-out-alt"></i> Log Out
+        </a>
     </header>
 
     <main>
@@ -22,11 +25,9 @@
                 <button class="button" id="auditForWeek">Audit Weekly</button>
                 <button class="button">Dashboard</button>
                 <a href="createQuestion" class="button">Add Question</a>
-
             </div>
         </div>
     </main>
-
 
     <footer>
         <p>&copy; 2024 DART CONTAINER. All rights reserved to Orlando Ramos.</p>

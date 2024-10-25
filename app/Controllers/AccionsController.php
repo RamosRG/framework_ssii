@@ -132,7 +132,7 @@ class AccionsController extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => $e->getMessage()]);
          }
       }
-   public function getFountain()
+   public function getSource()
    {
       $fountain = new FountainModel();
       $data = $fountain->findAll();
@@ -226,57 +226,52 @@ class AccionsController extends BaseController
    }
    public function insertAudit()
    {
-     
-
-      $auditData = [
-         'audit_title' => $this->request->getPost('name-of-audit'),
-         'fk_machinery' => $this->request->getPost('machinery'),
-         'fk_shift' => $this->request->getPost('shift'),
-         'fk_department' => $this->request->getPost('departament'),
-         'fk_auditor' => $this->request->getPost('email'),
-         'date' => $this->request->getPost('date'),
-      ];
-
-      try {
-         $auditModel = new AuditModel();
-         $auditId = $auditModel->insertAudit($auditData);
-
-         if ($auditId) {
-            $questionsData = [];
-
-            // Recorre las categorías y preguntas enviadas
-            for ($i = 1; $i <= 5; $i++) {
-               for ($j = 0; $j <= 6; $j++) {
-                  $question = $this->request->getPost("question_{$i}_{$j}");
-                  $source = $this->request->getPost("source_{$i}_{$j}");
-
-                  if ($question) {
-                     $questionsData[] = [
-                        'fk_audit' => $auditId,
-                        'fk_category' => $i,
-                        'question' => $question,
-                        'status' => 1,
-                        'create_at' => $this->request->getPost('date'),
-                        'fk_source' => $source ?? null,
-                     ];
-                  }
-
+      
+       $auditData = [
+           'audit_title' => $this->request->getPost('name-of-audit'),
+           'fk_machinery' => $this->request->getPost('machinery'),
+           'fk_shift' => $this->request->getPost('shift'),
+           'fk_department' => $this->request->getPost('departament'),
+           'fk_auditor' => $this->request->getPost('email'),
+           'date' => $this->request->getPost('date'),
+       ];
+   
+       try {
+           $auditModel = new AuditModel();
+           $auditId = $auditModel->insertAudit($auditData);
+   
+           if ($auditId) {
+               // Obtener las preguntas enviadas en formato JSON
+               $questionsData = json_decode($this->request->getPost('questions'), true); // Decodificar el JSON
+   
+               // Preparar el array de preguntas para insertar
+               $preparedQuestions = [];
+   
+               foreach ($questionsData as $questionData) {
+                   $preparedQuestions[] = [
+                       'fk_audit' => $auditId,
+                       'fk_category' => $questionData['id_category'], // Usar el ID de categoría de la pregunta
+                       'question' => $questionData['question'],
+                       'status' => 1,
+                       'create_at' => $this->request->getPost('date'),
+                       'fk_source' => $questionData['source'] ?? null,
+                   ];
                }
-            }
-            
-            $questionsModel = new QuestionsModel();
-            if (!empty($questionsData)) {
-               if (!$questionsModel->insertBatch($questionsData)) {
-                  throw new \Exception('Error al insertar las preguntas');
+   
+               $questionsModel = new QuestionsModel();
+               if (!empty($preparedQuestions)) {
+                   if (!$questionsModel->insertBatch($preparedQuestions)) {
+                       throw new \Exception('Error al insertar las preguntas');
+                   }
                }
-            }
-
-            return $this->response->setJSON(['status' => 'success', 'message' => 'Audit and questions created successfully']);
-         } else {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to create the new audit']);
-         }
-      } catch (\Exception $e) {
-         return $this->response->setJSON(['status' => 'error', 'message' => $e->getMessage()]);
-      }
+   
+               return $this->response->setJSON(['status' => 'success', 'message' => 'Audit and questions created successfully']);
+           } else {
+               return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to create the new audit']);
+           }
+       } catch (\Exception $e) {
+           return $this->response->setJSON(['status' => 'error', 'message' => $e->getMessage()]);
+       }
    }
+   
 }

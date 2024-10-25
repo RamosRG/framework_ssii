@@ -34,51 +34,49 @@ class AuthController extends BaseController
     {
         $session = session();
         $model = new AuthModel();
-
+    
         // Obtener el email y la contraseña del formulario
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
-
+    
         // Autenticar al usuario
         $user = $model->authenticate($email, $password);
         if ($user) {
-            // Guardar el email, nombre y los privilegios en la sesión
+            // Guardar datos del usuario en la sesión
             $session->set([
                 'email' => $user['email'],
                 'privileges' => $user['privileges'],
-                'username' => $user['name'], // Aquí puedes cambiarlo por un campo 'nombre' si tienes
-                'id_user' => $user['id_user'], // Aquí puedes cambiarlo por un campo 'id_user' si tienes
+                'username' => $user['name'],
+                'id_user' => $user['id_user'],
                 'logged_in' => true
             ]);
-
-            // Redirigir según los privilegios
-            if ($user['privileges'] === '1') {
+    
+            // Obtener la URL de redirección o usar una por defecto
+            $redirectUrl = $session->get('redirect_url') ?? ($user['privileges'] === '1' ? './admin/home' : './user/home');
+            $session->remove('redirect_url'); // Limpiar la URL de redirección de la sesión
+    
+            // Si la solicitud es AJAX, responde con JSON
+            if ($this->request->isAJAX()) {
                 return $this->response->setJSON([
                     'status' => 'success',
-                    'username' => $user['email'], // Asegúrate de que 'username' esté en la respuesta
-                    'username' => $user['name'], // Aquí puedes cambiarlo por un campo 'nombre' si tienes
-                    'id_user' => $user['id_user'], // Aquí puedes cambiarlo por un campo 'id_user' si tienes
-                    'message' => 'Bienvenido Admin',
-                    'redirect' => './admin/home'
-                ]);
-            } else {
-                return $this->response->setJSON([
-                    'status' => 'success',
-                    'username' => $user['email'], // Asegúrate de que 'username' esté en la respuesta
-                    'username' => $user['name'], // Aquí puedes cambiarlo por un campo 'nombre' si tienes
-                    'id_user' => $user['id_user'], // Aquí puedes cambiarlo por un campo 'id_user' si tienes
-                    'message' => 'Bienvenido Usuario',
-                    'redirect' => './user/home'
+                    'username' => $user['name'],
+                    'id_user' => $user['id_user'],
+                    'message' => 'Bienvenido ' . ($user['privileges'] === '1' ? 'Admin' : 'Usuario'),
+                    'redirect' => $redirectUrl
                 ]);
             }
+    
+            // Redirigir para solicitudes normales (no AJAX)
+            return redirect()->to($redirectUrl);
         } else {
-            // Credenciales incorrectas
+            // Responder con error si las credenciales son incorrectas
             return $this->response->setJSON([
                 'status' => 'error',
                 'message' => 'CREDENCIALES INCORRECTAS'
             ]);
         }
     }
+    
 
     public function logout()
     {
