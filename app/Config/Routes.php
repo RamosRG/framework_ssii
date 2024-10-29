@@ -41,6 +41,8 @@ $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'auth'], f
     $routes->get('createQuestion', 'UserController::createQuestion');
     $routes->get('getCategory', 'UserController::getCategory');
     $routes->get('getFountain', 'UserController::getFountain');
+    $routes->post('submitAnswer', 'UserController::submitAnswer');
+
 });
 
 

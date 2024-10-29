@@ -27,9 +27,10 @@ class AnswersModel extends Model
     public function getAcciones($idAudit)
     {
         return $this->select('audit.id_audit, questions.id_question, questions.question, questions.`status`, answers.id_answer, answers.is_complete, answers.answer,
-answers.evidence, answers.create_at')
+answers.evidence, answers.create_at,  users.`name`, users.firstName, users.lastName')
             ->join('questions', 'questions.id_question = answers.fk_question')
             ->join('audit', 'audit.id_audit = questions.fk_audit')
+            ->join('users', 'users.id_user = audit.fk_auditor')
             ->where('audit.id_audit', $idAudit)
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array

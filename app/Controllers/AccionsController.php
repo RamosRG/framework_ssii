@@ -14,6 +14,7 @@ use App\Models\AreasModel;
 
 class AccionsController extends BaseController
 {
+
    public function dashboard()
    {
       return view("accions/dashboard");

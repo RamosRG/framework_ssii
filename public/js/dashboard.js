@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 function cargarDashboard() {
     $.ajax({
-        url: 'http://localhost/capas.com/accions/getDashboardData',  // Asegúrate de que esta URL sea correcta
+        url: '/capas.com/accions/getDashboardData',  // Asegúrate de que esta URL sea correcta
         method: 'GET',
         dataType: 'json',
         success: function(response) {

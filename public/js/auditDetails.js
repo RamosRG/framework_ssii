@@ -1,3 +1,5 @@
+let currentStream;
+
 $(document).ready(function () {
     function getCurrentWeek() {
         const today = new Date();
@@ -72,7 +74,6 @@ $(document).ready(function () {
             $("#audit-questions-list").append(row);
         });
 
-        // Event listeners
         setupEventListeners();
     }
 
@@ -83,7 +84,6 @@ $(document).ready(function () {
             cameraButton.toggle(!isChecked);
         });
 
-        // Abrir cámara
         $("#audit-questions-list").on("click", ".camera-button", function (e) {
             e.preventDefault();
             const questionId = $(this).data("question-id");
@@ -91,23 +91,43 @@ $(document).ready(function () {
             startCamera();
         });
 
-        // Seleccionar foto desde sistema
         $("#audit-questions-list").on("click", ".select-photo-button", function () {
             $(this).siblings('.file-input').trigger('click');
         });
 
-        // Cargar archivo seleccionado
         $("#audit-questions-list").on("change", ".file-input", handleFileChange);
 
-        $("#takePhoto").on("click", function () {
+        $("#takePhoto").off("click").on("click", function (e) {
+            e.preventDefault();
             const questionId = $("#photoModal").data("question-id");
             takePhotoAndUpload(questionId);
         });
 
-        $("#photoModal").on("hide", function () {
-            stopCamera();
-            $("#photoPreview").hide();
-        });
+    }
+
+    function startCamera() {
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+            .then(stream => {
+                currentStream = stream; // Asigna el stream a la variable
+                const video = document.getElementById("video");
+                video.srcObject = stream;
+                video.style.display = "block";
+                $("#photoModal").css("display", "flex");
+            })
+            .catch(error => {
+                console.error("Error al acceder a la cámara:", error);
+                alert("No se puede acceder a la cámara.");
+            });
+    }
+
+    function stopCamera() {
+        const video = document.getElementById("video");
+        if (currentStream) {
+            currentStream.getTracks().forEach(track => track.stop());
+            video.srcObject = null;
+            video.style.display = "none";
+            $("#photoModal").hide();
+        }
     }
 
     function handleFileChange(event) {
@@ -115,73 +135,6 @@ $(document).ready(function () {
         const questionId = $(this).data("question-id");
         if (file) {
             previewAndUploadPhoto(file, questionId);
-        }
-    }
-
-    function fetchTakenActions(idAudit) {
-        $.ajax({
-            url: "../user/takenActions/" + idAudit,
-            type: "GET",
-            dataType: "json",
-            success: function (response) {
-                if (response.status === "success") {
-                    populateTakenActions(response.data);
-                } else {
-                    console.error("Error al obtener las acciones tomadas");
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error("Error en la solicitud AJAX:", error);
-            },
-        });
-    }
-
-    function populateTakenActions(actions) {
-        $("#taken-actions-list").empty();
-        takenQuestions = [];
-
-        actions.forEach(action => {
-            takenQuestions.push(action.id_question);
-            const row = `
-                <tr>
-                    <td>${action.id_question}</td>
-                    <td>${action.question}</td>
-                    <td>${action.answer}</td>
-                    <td>${action.responsable}</td>
-                    <td>${action.create_at}</td>
-                    <td>
-                        ${action.evidence ? `<img src="${action.evidence}" alt="Evidencia" style="width: 100px; height: auto;">` : 'Sin evidencia'}
-                    </td>
-                    <td>${action.is_complete ? 'Sí' : 'No'}</td>
-                </tr>
-            `;
-            $("#taken-actions-list").append(row);
-        });
-
-        fetchAuditDetails(id_audit);
-    }
-
-    function startCamera() {
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(stream => {
-                const video = document.getElementById("video");
-                video.srcObject = stream;
-                video.style.display = "block";
-                video.stream = stream; // Guardar el stream para detenerlo después
-            })
-            .catch(error => {
-                console.error("Error al acceder a la cámara: ", error);
-                alert("No se puede acceder a la cámara.");
-            });
-    }
-
-    function stopCamera() {
-        const video = document.getElementById("video");
-        const stream = video.stream;
-        if (stream) {
-            stream.getTracks().forEach(track => track.stop());
-            video.srcObject = null;
-            video.style.display = "none";
         }
     }
 
@@ -198,14 +151,102 @@ $(document).ready(function () {
         }, 'image/png');
     }
 
-    function previewAndUploadPhoto(file, questionId) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            $("#photoPreview").attr("src", e.target.result).show();
-            uploadPhoto(questionId, file);
-        };
-        reader.readAsDataURL(file);
+    function fetchTakenActions(idAudit) {
+        $.ajax({
+            url: "../user/takenActions/" + idAudit, // Asegúrate de que esta URL sea correcta
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                if (response.status === "success") {
+                    populateTakenActions(response.data); // Asume que tienes una función para manejar los datos
+                } else {
+                    console.error("No se encontraron acciones tomadas.");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error en la solicitud AJAX:", error);
+            },
+        });
     }
+
+    function populateTakenActions(actions, id_audit) {
+        $("#taken-actions-list").empty(); // Limpia la lista existente
+    
+        actions.forEach(action => {
+            takenQuestions.push(action.id_question); // Agrega el id de la pregunta al array
+    
+            const row = `
+                <tr>
+                    <td>${action.id_question}</td>
+                    <td>${action.question}</td>
+                    <td>${action.answer}</td>
+                    <td>
+                        ${action.evidence ? `<img src="${action.evidence}" alt="Evidencia" style="width: 100px; height: auto;">` : 'Sin evidencia'}
+                    </td>
+                    <td><input type="text" name="action${action.id_question}" placeholder="Escribe aquí..."></td>
+                    <td><input type="text" name="responsable_${action.id_question}" value="${action.name} ${action.firstName} ${action.lastName}"></td>
+                    <td><input type="date" name="date_${action.id_question}"></td>
+                    <td>
+                        <button style="font-size:12px"> 
+                         <i class="fa fa-camera w3-button w3-roud-long"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="radio" name="is_complete_${action.id_question}" value="1" ${action.is_complete ? 'checked' : ''}> Sí
+                        </label>
+                        <label>
+                            <input type="radio" name="is_complete_${action.id_question}" value="0" ${!action.is_complete ? 'checked' : ''}> No
+                        </label>
+                    </td>
+                    <td>
+                        <button class="send-button w3-button w3-blue w3-round"" data-question-id="${action.id_question}" style="font-size:12px">
+                            Enviar
+                        </button>
+                    </td>
+                </tr>
+            `;
+    
+            $("#taken-actions-list").append(row); // Agrega la nueva fila a la tabla
+        });
+    
+        // Asigna el evento de clic al botón "Enviar" de cada fila
+        $(".send-button").on("click", function () {
+            const questionId = $(this).data("question-id");
+            const data = {
+                fk_question: questionId,
+                action: $(`input[name="action${questionId}"]`).val(),
+                responsable: $(`input[name="responsable_${questionId}"]`).val(),
+                date: $(`input[name="date_${questionId}"]`).val(),
+                customInput3: $(`input[name="evidence_${questionId}"]`).val(),
+                is_complete: $(`input[name="is_complete_${questionId}"]:checked`).val()
+            };
+    
+            // Realizar la solicitud AJAX para enviar los datos al servidor
+            $.ajax({
+                url: "../user/submitAnswer", // Cambia la URL al endpoint correcto
+                type: "POST",
+                data: data,
+                success: function (response) {
+                    console.log(response);
+                    return false;
+                    if (response.status === "success") {
+                        alert("Datos enviados con éxito.");
+                    } else {
+                        alert("Error al enviar los datos.");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error en la solicitud AJAX:", error);
+                }
+            });
+        });
+    
+        fetchAuditDetails(id_audit); // Asegúrate de que `id_audit` esté definido
+    }
+    
+    
+
 
     function uploadPhoto(questionId, photoBlob) {
         const formData = new FormData();
@@ -219,7 +260,7 @@ $(document).ready(function () {
         formData.append('photo', photoBlob, 'photo.png');
 
         $.ajax({
-            url: "../user/uploadPhoto",
+            url: "../user/uploadPhoto", // Cambia esto si tu URL es diferente
             type: "POST",
             data: formData,
             contentType: false,
@@ -250,7 +291,7 @@ $(document).ready(function () {
                 $("#photoModal").hide();
                 $("#photoPreview").hide();
                 stopCamera();
-                fetchTakenActions(id_audit);
+                fetchTakenActions(id_audit); // Asegúrate de que `id_audit` esté definido
             });
         } else {
             console.error("Error al guardar la foto:", response.message);
