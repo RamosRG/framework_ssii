@@ -92,7 +92,6 @@ $(document).ready(function () {
     $("#machinery").val(audit.machinery);
     $("#shift").val(audit.shift);
   } else {
-    alert("dont data");
   }
 });
 

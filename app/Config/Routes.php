@@ -46,6 +46,7 @@ $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'auth'], f
 
 $routes->group('accions', ['namespace' => 'App\Controllers', 'filter' => 'auth'], function($routes) {
     $routes->get('addquestions', 'AccionsController::addquestions');
+    $routes->get('getDashboardData', 'AccionsController::getDashboardData');
     $routes->get('dashboard', 'AccionsController::dashboard');
     $routes->get('addaudit', 'AccionsController::addaudit');
     $routes->get('getMachinery', 'AccionsController::getMachinery');

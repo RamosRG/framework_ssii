@@ -42,7 +42,7 @@
                 </div>
 
                 <br>
-                <h2 class="w3-container w3-center">Select her questions</h2>
+                <h2 class="w3-container w3-center">Insert your questions</h2>
                 <div id="dynamic-questions"></div> <!-- Contenedor para preguntas dinámicas -->
 
                 <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">

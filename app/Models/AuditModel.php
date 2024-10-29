@@ -73,4 +73,55 @@ class AuditModel extends Model
 
         return $this->response->setJSON($lastAudit);
     }
+
+    public function getAuditsByDepartment()
+    {
+        return $this->select('department.department, COUNT(audit.id_audit) as audit_count')
+            ->join('department', 'department.id_department = audit.fk_department')
+            ->where('audit.status', 1)
+            ->groupBy('department.department')
+            ->findAll();
+    }
+
+    public function getAuditsByStatus()
+    {
+        return $this->select('audit.status, COUNT(audit.id_audit) as audit_count')
+            ->groupBy('audit.status')
+            ->findAll();
+    }
+
+    public function getAuditsByShift()
+    {
+        return $this->select('shift.shift, COUNT(audit.id_audit) as audit_count')
+            ->join('shift', 'shift.id_shift = audit.fk_shift')
+            ->where('audit.status', 1)
+            ->groupBy('shift.shift')
+            ->findAll();
+    }
+
+    // Method to get the count of pending audits
+    public function getPendingAuditsCount()
+    {
+        return $this->where('status', 'Pendiente')->countAllResults();
+    }
+
+    // Method to get the count of audits in progress
+    public function getInProgressAuditsCount()
+    {
+        return $this->where('status', 'En Progreso')->countAllResults();
+    }
+
+    // Method to get audits by layer, assuming a 'layer' or equivalent column exists
+    public function getAuditsByLayer()
+    {
+        return $this->select('layer, COUNT(id_audit) as total, AVG(compliance) as cumplimiento')
+            ->groupBy('layer')
+            ->findAll();
+    }
+
+    // Method to retrieve audit history
+    public function getAuditHistory()
+    {
+        return $this->orderBy('date', 'DESC')->findAll(10); // Example limit to 10 most recent records
+    }
 }

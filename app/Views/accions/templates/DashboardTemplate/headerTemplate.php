@@ -7,7 +7,6 @@
     <title>DASHBOARD</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body,
         h1,
@@ -51,27 +50,30 @@
             background-color: #303f9f !important;
         }
 
-        .dashboard-card {
-            background-color: white;
+        #dashboard {
             padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .dashboard-card h3 {
-            margin-top: 0;
-            color: #3f51b5;
+        canvas {
+            margin: 15px 0;
+            /* Reducido el margen superior e inferior */
+            border: 1px solid #ddd;
+            border-radius: 4px;
         }
 
-        .dashboard-card .value {
-            font-size: 24px;
-            font-weight: bold;
+        #historial-auditorias {
+            list-style-type: none;
+            padding: 0;
         }
 
-        .chart-container {
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        #historial-auditorias li {
+            padding: 8px;
+            background-color: #e9ecef;
+            margin-bottom: 5px;
+            border-radius: 4px;
         }
     </style>
 </head>
