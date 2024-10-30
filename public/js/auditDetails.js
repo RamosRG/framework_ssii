@@ -66,8 +66,11 @@ $(document).ready(function () {
                         <button class="camera-button" style="display:${isTaken ? "none" : "block"};" data-question-id="${detail.id_question}">
                             <i class="fa fa-camera"></i>
                         </button>
-                        <input type="file" class="file-input" accept="image/*" data-question-id="${detail.id_question}" style="display:none;">
-                        <button class="select-photo-button" data-question-id="${detail.id_question}">Seleccionar Foto</button>
+                    </td>
+                     <td>
+                        <button class="send-button w3-button w3-blue w3-round"" data-question-id="buton add" style="font-size:12px">
+                            Enviar
+                        </button>
                     </td>
                 </tr>
             `;
@@ -101,6 +104,7 @@ $(document).ready(function () {
             e.preventDefault();
             const questionId = $("#photoModal").data("question-id");
             takePhotoAndUpload(questionId);
+            takePhotoAndReplaceIcon(questionId);
         });
 
     }
@@ -171,10 +175,10 @@ $(document).ready(function () {
 
     function populateTakenActions(actions, id_audit) {
         $("#taken-actions-list").empty(); // Limpia la lista existente
-    
+
         actions.forEach(action => {
             takenQuestions.push(action.id_question); // Agrega el id de la pregunta al array
-    
+
             const row = `
                 <tr>
                     <td>${action.id_question}</td>
@@ -187,9 +191,10 @@ $(document).ready(function () {
                     <td><input type="text" name="responsable_${action.id_question}" value="${action.name} ${action.firstName} ${action.lastName}"></td>
                     <td><input type="date" name="date_${action.id_question}"></td>
                     <td>
-                        <button style="font-size:12px"> 
-                         <i class="fa fa-camera w3-button w3-roud-long"></i>
+                        <button style="font-size:12px" class="camera-button" data-question-id="1"> 
+                            <i class="fa fa-camera w3-button w3-round-long"></i>
                         </button>
+                            <img src="" alt="Thumbnail" class="thumbnail" style="display:none; width: 40px; height: auto; border-radius: 5px;">
                     </td>
                     <td>
                         <label>
@@ -206,10 +211,14 @@ $(document).ready(function () {
                     </td>
                 </tr>
             `;
-    
+
             $("#taken-actions-list").append(row); // Agrega la nueva fila a la tabla
         });
-    
+
+        $("#closeCamera").on("click", function () {
+            stopCamera();
+            $("#photoModal").hide();
+        });
         // Asigna el evento de clic al botón "Enviar" de cada fila
         $(".send-button").on("click", function () {
             const questionId = $(this).data("question-id");
@@ -221,7 +230,7 @@ $(document).ready(function () {
                 customInput3: $(`input[name="evidence_${questionId}"]`).val(),
                 is_complete: $(`input[name="is_complete_${questionId}"]:checked`).val()
             };
-    
+
             // Realizar la solicitud AJAX para enviar los datos al servidor
             $.ajax({
                 url: "../user/submitAnswer", // Cambia la URL al endpoint correcto
@@ -241,11 +250,34 @@ $(document).ready(function () {
                 }
             });
         });
-    
+
         fetchAuditDetails(id_audit); // Asegúrate de que `id_audit` esté definido
     }
+
+    function takePhotoAndReplaceIcon(questionId) {
+        const canvas = document.getElementById("canvas");
+        const video = document.getElementById("video");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
     
+        const context = canvas.getContext("2d");
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
     
+        // Convertir el canvas a una imagen
+        canvas.toBlob(blob => {
+            const url = URL.createObjectURL(blob);
+    
+            // Encontrar el botón de la cámara y reemplazar el ícono con la miniatura
+            const button = $(`button[data-question-id="${questionId}"]`);
+            button.hide(); // Ocultar el botón original
+    
+            const thumbnail = button.siblings(".thumbnail");
+            thumbnail.attr("src", url).show(); // Mostrar la miniatura
+    
+            stopCamera(); // Detener la cámara
+            $("#photoModal").hide(); // Cerrar el modal
+        }, 'image/png');
+    }    
 
 
     function uploadPhoto(questionId, photoBlob) {
@@ -279,6 +311,30 @@ $(document).ready(function () {
             }
         });
     }
+    function takePhotoAndReplaceIcon(questionId) {
+        const canvas = document.getElementById("canvas");
+        const video = document.getElementById("video");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        const context = canvas.getContext("2d");
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Convertir el canvas a una imagen
+        canvas.toBlob(blob => {
+            const url = URL.createObjectURL(blob);
+
+            // Encontrar el botón de la cámara y reemplazar el ícono con la miniatura
+            const button = $(`button[data-question-id="${questionId}"]`);
+            button.hide(); // Ocultar el botón original
+
+            const thumbnail = button.siblings(".thumbnail");
+            thumbnail.attr("src", url).show(); // Mostrar la miniatura
+
+            stopCamera(); // Detener la cámara
+            $("#photoModal").hide(); // Cerrar el modal
+        }, 'image/png');
+    }
 
     function handleUploadResponse(response) {
         if (response.status === "success") {
@@ -303,4 +359,5 @@ $(document).ready(function () {
             });
         }
     }
+
 });

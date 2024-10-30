@@ -11,7 +11,7 @@ use App\Models\CategoryModel;
 class UserController extends BaseController
 {
     public function submitAnswer(){
-        var_dump($_POST);
+        print_r($_POST);
         exit;
      }
     public function getFountain()

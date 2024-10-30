@@ -50,6 +50,7 @@
                             <th>¿Se cumplió?</th>
                             <th>¿Qué se encontró?</th>
                             <th>Evidencia</th>
+                            <th>Accion</th>
                         </tr>
                     </thead>
                     <tbody id="audit-questions-list">
@@ -73,9 +74,10 @@
                                 <th>Accion</th>
                                 <th>Responsable</th>
                                 <th>Fecha</th>
+                                <th>Tomar evidencia</th>
                                 <th>Evidencia de la accion</th>
                                 <th>Verificado</th>
-                                <th>Echo</th>
+                                <th>Accion</th>
                             </tr>
                         </thead>
                         <tbody id="taken-actions-list">
