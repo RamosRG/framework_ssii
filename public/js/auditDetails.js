@@ -1,6 +1,8 @@
 let currentStream;
+let currentButton; // Almacena el botón de cámara activado
 
 $(document).ready(function () {
+    // Función para obtener la semana actual
     function getCurrentWeek() {
         const today = new Date();
         const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -18,7 +20,6 @@ $(document).ready(function () {
 
     if (id_audit) {
         fetchAuditDetails(id_audit);
-        fetchTakenActions(id_audit);
     } else {
         console.error("No se encontró el ID de auditoría en la URL.");
     }
@@ -39,6 +40,7 @@ $(document).ready(function () {
                 console.error("Error en la solicitud AJAX:", error);
             },
         });
+        fetchTakenActions(idAudit)
     }
 
     function populateAuditDetails(auditDetails) {
@@ -67,8 +69,8 @@ $(document).ready(function () {
                             <i class="fa fa-camera"></i>
                         </button>
                     </td>
-                     <td>
-                        <button class="send-button w3-button w3-blue w3-round"" data-question-id="buton add" style="font-size:12px">
+                    <td>
+                        <button class="send-button w3-button w3-blue w3-round" data-question-id="${detail.id_question}" style="font-size:12px">
                             Enviar
                         </button>
                     </td>
@@ -76,93 +78,158 @@ $(document).ready(function () {
             `;
             $("#audit-questions-list").append(row);
         });
-
-        setupEventListeners();
     }
 
-    function setupEventListeners() {
-        $("#audit-questions-list").on("change", ".w3-check", function () {
-            const isChecked = $(this).is(":checked");
-            const cameraButton = $(this).closest('tr').find('.camera-button');
-            cameraButton.toggle(!isChecked);
-        });
+    // Abre la cámara al hacer clic en el botón de cámara
+    $(document).on("click", ".camera-button", function () {
+        $("#photoModal").show(); // Muestra el modal de la cámara
+        currentButton = $(this); // Almacena el botón que activó la cámara
+        openCamera();
+    });
 
-        $("#audit-questions-list").on("click", ".camera-button", function (e) {
-            e.preventDefault();
-            const questionId = $(this).data("question-id");
-            $("#photoModal").data("question-id", questionId).show();
-            startCamera();
-        });
+    $("#takePhoto").on("click", function () {
+        takePhoto();
+    });
 
-        $("#audit-questions-list").on("click", ".select-photo-button", function () {
-            $(this).siblings('.file-input').trigger('click');
-        });
+    // Cierra el modal y detiene el stream de la cámara
+    $("#closeCamera").on("click", function () {
+        $("#photoModal").hide();
+        closeCamera();
+    });
 
-        $("#audit-questions-list").on("change", ".file-input", handleFileChange);
-
-        $("#takePhoto").off("click").on("click", function (e) {
-            e.preventDefault();
-            const questionId = $("#photoModal").data("question-id");
-            takePhotoAndUpload(questionId);
-            takePhotoAndReplaceIcon(questionId);
-        });
-
-    }
-
-    function startCamera() {
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+    // Función para abrir la cámara y mostrar el video en tiempo real
+    function openCamera() {
+        const video = document.getElementById("video");
+        navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => {
-                currentStream = stream; // Asigna el stream a la variable
-                const video = document.getElementById("video");
-                video.srcObject = stream;
-                video.style.display = "block";
-                $("#photoModal").css("display", "flex");
+                currentStream = stream;
+                video.srcObject = stream; // Muestra el stream en el elemento <video>
+                video.play();
             })
             .catch(error => {
                 console.error("Error al acceder a la cámara:", error);
-                alert("No se puede acceder a la cámara.");
+                alert("No se puede acceder a la cámara. Verifique los permisos del navegador.");
             });
     }
 
-    function stopCamera() {
-        const video = document.getElementById("video");
+    // Función para cerrar la cámara y detener el stream
+    function closeCamera() {
         if (currentStream) {
-            currentStream.getTracks().forEach(track => track.stop());
-            video.srcObject = null;
-            video.style.display = "none";
-            $("#photoModal").hide();
+            currentStream.getTracks().forEach(track => track.stop()); // Detiene todos los tracks
+            currentStream = null;
         }
     }
 
-    function handleFileChange(event) {
-        const file = event.target.files[0];
-        const questionId = $(this).data("question-id");
-        if (file) {
-            previewAndUploadPhoto(file, questionId);
-        }
-    }
-
-    function takePhotoAndUpload(questionId) {
-        const canvas = document.getElementById("canvas");
+    // Función para capturar la foto
+    function takePhoto() {
         const video = document.getElementById("video");
-        canvas.width = 640;
-        canvas.height = 480;
+        const canvas = document.getElementById("canvas");
+
+        if (!canvas || !video) {
+            console.error("Canvas o video no encontrado");
+            return;
+        }
+
         const context = canvas.getContext("2d");
+        if (!context) {
+            console.error("No se pudo obtener el contexto del canvas");
+            return;
+        }
+
+        // Ajusta el tamaño del canvas al del video
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        // Dibuja el fotograma actual del video en el canvas
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-        canvas.toBlob(blob => {
-            uploadPhoto(questionId, blob);
-        }, 'image/png');
+        // Obtiene la imagen como una URL de datos
+        const imageDataURL = canvas.toDataURL("image/png");
+
+        // Reemplaza el ícono de la cámara en el botón con la imagen capturada
+        currentButton.html(`<img src="${imageDataURL}" alt="Captured Photo" style="width: 100%; height: 100%;">`);
+
+        // Oculta el modal y detiene la cámara
+        $("#photoModal").hide();
+        closeCamera();
+        
+        // Guarda la imagen en un lugar accesible (por ejemplo, en una variable)
+        currentButton.data('imageData', imageDataURL); // Almacena la imagen en el botón
     }
 
+    // Enviar datos al servidor cuando se presiona el botón "Enviar"
+    $(document).on("click", ".send-button", function () {
+        const questionId = $(this).data("question-id");
+        const isComplete = true; // Ajusta según tu lógica
+        const answerInput = $(this).closest("tr").find(".answer-input").val(); // Obtiene la respuesta del input
+        const imageData = currentButton.data('imageData'); // Obtiene la imagen almacenada
+
+        if (imageData) {
+            sendPhotoData(questionId, imageData, isComplete, answerInput);
+        } else {
+            alert("Por favor, toma una foto antes de enviar.");
+        }
+    });
+
+    function sendPhotoData(questionId, imageData, isComplete, answerInput) {
+        const formData = new FormData();
+        
+        // Agregar datos al FormData
+        formData.append('fk_question', questionId);
+        formData.append('is_complete', isComplete);
+        formData.append('answer', answerInput);
+        
+        // Convierte la imagen base64 a un Blob
+        const byteString = atob(imageData.split(',')[1]); // Decodifica base64
+        const mimeString = imageData.split(',')[0].split(':')[1].split(';')[0]; // Extrae el tipo MIME
+        const ab = new Uint8Array(byteString.length);
+        
+        // Rellena el Uint8Array con los bytes de la imagen
+        for (let i = 0; i < byteString.length; i++) {
+            ab[i] = byteString.charCodeAt(i);
+        }
+        
+        const blob = new Blob([ab], { type: mimeString }); // Crea el Blob a partir de los bytes
+        formData.append('photo', blob, 'photo.png'); // Agrega el Blob a FormData
+        
+        // Verifica el tamaño y tipo del Blob
+        console.log("Tamaño del Blob:", blob.size); // Debe ser mayor que 0 si la imagen se capturó correctamente
+        console.log("Tipo de Blob:", blob.type); // Debe coincidir con el tipo MIME de la imagen
+    
+        // Muestra los datos en FormData
+        for (let pair of formData.entries()) {
+            console.log(`${pair[0]}: ${pair[1]}`);
+        }
+    
+        $.ajax({
+            url: '../user/uploadPhoto', // Asegúrate de que esta URL sea correcta
+            type: 'POST',
+            data: formData,
+            processData: false, // Evita que jQuery procese los datos
+            contentType: false, // Evita que jQuery configure el tipo de contenido
+            success: function (response) {
+                console.log("Respuesta del servidor:", response);
+                if (response.status === 'success') {
+                    console.log("Datos enviados correctamente:", response.message);
+                    // Aquí puedes hacer lo que necesites después de enviar los datos
+                } else {
+                    console.error("Error al enviar los datos:", response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error en la solicitud AJAX:", error);
+            }
+        });
+    }
+    
     function fetchTakenActions(idAudit) {
         $.ajax({
-            url: "../user/takenActions/" + idAudit, // Asegúrate de que esta URL sea correcta
+            url: "../user/takenActions/" + idAudit,
             type: "GET",
             dataType: "json",
             success: function (response) {
                 if (response.status === "success") {
-                    populateTakenActions(response.data); // Asume que tienes una función para manejar los datos
+                    populateTakenActions(response.data);
                 } else {
                     console.error("No se encontraron acciones tomadas.");
                 }
@@ -172,13 +239,12 @@ $(document).ready(function () {
             },
         });
     }
-
     function populateTakenActions(actions, id_audit) {
         $("#taken-actions-list").empty(); // Limpia la lista existente
-
+ 
         actions.forEach(action => {
             takenQuestions.push(action.id_question); // Agrega el id de la pregunta al array
-
+ 
             const row = `
                 <tr>
                     <td>${action.id_question}</td>
@@ -191,7 +257,7 @@ $(document).ready(function () {
                     <td><input type="text" name="responsable_${action.id_question}" value="${action.name} ${action.firstName} ${action.lastName}"></td>
                     <td><input type="date" name="date_${action.id_question}"></td>
                     <td>
-                        <button style="font-size:12px" class="camera-button" data-question-id="1"> 
+                        <button style="font-size:12px" class="camera-button" data-question-id="1">
                             <i class="fa fa-camera w3-button w3-round-long"></i>
                         </button>
                             <img src="" alt="Thumbnail" class="thumbnail" style="display:none; width: 40px; height: auto; border-radius: 5px;">
@@ -211,10 +277,10 @@ $(document).ready(function () {
                     </td>
                 </tr>
             `;
-
+ 
             $("#taken-actions-list").append(row); // Agrega la nueva fila a la tabla
         });
-
+ 
         $("#closeCamera").on("click", function () {
             stopCamera();
             $("#photoModal").hide();
@@ -230,7 +296,7 @@ $(document).ready(function () {
                 customInput3: $(`input[name="evidence_${questionId}"]`).val(),
                 is_complete: $(`input[name="is_complete_${questionId}"]:checked`).val()
             };
-
+ 
             // Realizar la solicitud AJAX para enviar los datos al servidor
             $.ajax({
                 url: "../user/submitAnswer", // Cambia la URL al endpoint correcto
@@ -250,114 +316,7 @@ $(document).ready(function () {
                 }
             });
         });
-
-        fetchAuditDetails(id_audit); // Asegúrate de que `id_audit` esté definido
+ 
     }
-
-    function takePhotoAndReplaceIcon(questionId) {
-        const canvas = document.getElementById("canvas");
-        const video = document.getElementById("video");
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-    
-        const context = canvas.getContext("2d");
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    
-        // Convertir el canvas a una imagen
-        canvas.toBlob(blob => {
-            const url = URL.createObjectURL(blob);
-    
-            // Encontrar el botón de la cámara y reemplazar el ícono con la miniatura
-            const button = $(`button[data-question-id="${questionId}"]`);
-            button.hide(); // Ocultar el botón original
-    
-            const thumbnail = button.siblings(".thumbnail");
-            thumbnail.attr("src", url).show(); // Mostrar la miniatura
-    
-            stopCamera(); // Detener la cámara
-            $("#photoModal").hide(); // Cerrar el modal
-        }, 'image/png');
-    }    
-
-
-    function uploadPhoto(questionId, photoBlob) {
-        const formData = new FormData();
-        const checkbox = $(`input[data-question-id="${questionId}"]`);
-        const isComplete = checkbox.is(":checked") ? 1 : 0;
-        const answerText = checkbox.closest('tr').find('.answer-input').val();
-
-        formData.append('fk_question', questionId);
-        formData.append('is_complete', isComplete);
-        formData.append('answer', answerText);
-        formData.append('photo', photoBlob, 'photo.png');
-
-        $.ajax({
-            url: "../user/uploadPhoto", // Cambia esto si tu URL es diferente
-            type: "POST",
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                handleUploadResponse(response);
-            },
-            error: function (error) {
-                console.error("Error al guardar la foto:", error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'No se pudo guardar la foto. Intenta nuevamente.',
-                    confirmButtonText: 'Aceptar'
-                });
-            }
-        });
-    }
-    function takePhotoAndReplaceIcon(questionId) {
-        const canvas = document.getElementById("canvas");
-        const video = document.getElementById("video");
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-
-        const context = canvas.getContext("2d");
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        // Convertir el canvas a una imagen
-        canvas.toBlob(blob => {
-            const url = URL.createObjectURL(blob);
-
-            // Encontrar el botón de la cámara y reemplazar el ícono con la miniatura
-            const button = $(`button[data-question-id="${questionId}"]`);
-            button.hide(); // Ocultar el botón original
-
-            const thumbnail = button.siblings(".thumbnail");
-            thumbnail.attr("src", url).show(); // Mostrar la miniatura
-
-            stopCamera(); // Detener la cámara
-            $("#photoModal").hide(); // Cerrar el modal
-        }, 'image/png');
-    }
-
-    function handleUploadResponse(response) {
-        if (response.status === "success") {
-            Swal.fire({
-                icon: 'success',
-                title: '¡Éxito!',
-                text: 'Foto guardada exitosamente.',
-                confirmButtonText: 'Aceptar'
-            }).then(() => {
-                $("#photoModal").hide();
-                $("#photoPreview").hide();
-                stopCamera();
-                fetchTakenActions(id_audit); // Asegúrate de que `id_audit` esté definido
-            });
-        } else {
-            console.error("Error al guardar la foto:", response.message);
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'No se pudo guardar la foto. Intenta nuevamente.',
-                confirmButtonText: 'Aceptar'
-            });
-        }
-    }
-
 });
+    

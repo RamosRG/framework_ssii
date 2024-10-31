@@ -79,10 +79,11 @@ class UserController extends BaseController
     
             // Guardar los datos en la base de datos (ajusta según tu estructura de base de datos)
             $answersModel = new AnswersModel();
-            
+    
             // Verificar si ya existe un registro para esta pregunta
             $existingAnswer = $answersModel->where('fk_question', $fkQuestion)->first();
     
+            // Datos a guardar
             $data = [
                 'fk_question' => $fkQuestion,
                 'is_complete' => $isComplete,
@@ -90,22 +91,26 @@ class UserController extends BaseController
                 'evidence' => $imagePath // Guardar la ruta de la imagen en la base de datos
             ];
     
+            // Verificar si ya existe una respuesta
             if ($existingAnswer) {
                 // Si ya existe, actualizar el registro en lugar de insertar uno nuevo
-                $answersModel->update($existingAnswer['id'], $data);
+                if (isset($existingAnswer['id_answer'])) {
+                    $answersModel->update($existingAnswer['id_answer'], $data);
+                    return $this->response->setJSON(['status' => 'success', 'message' => 'Foto actualizada exitosamente.']);
+                } else {
+                    return $this->response->setJSON(['status' => 'error', 'message' => 'Error: ID de respuesta no encontrado.']);
+                }
             } else {
                 // Si no existe, insertar un nuevo registro
                 $answersModel->insert($data);
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Foto guardada exitosamente.']);
             }
-    
-            return $this->response->setJSON(['status' => 'success', 'message' => 'Foto guardada exitosamente.']);
         }
     
         // Manejo de errores si el archivo no es válido
         return $this->response->setJSON(['status' => 'error', 'message' => 'Error al subir la foto.']);
     }
     
-
     public function showAudit()
     {
 

@@ -50,6 +50,7 @@
                             <th>¿Se cumplió?</th>
                             <th>¿Qué se encontró?</th>
                             <th>Evidencia</th>
+                            <th>Foto</th>
                             <th>Accion</th>
                         </tr>
                     </thead>
@@ -124,14 +125,17 @@
             </div>
 
             <button class="w3-button w3-indigo w3-right w3-margin-top" type="submit">Submit Audit</button>
-
-            <!-- Modal -->
-            <div id="photoModal" style="display:none;">
-                <video id="video" autoplay playsinline></video>
-                <canvas id="canvas" style="display:none;"></canvas> <!-- Elemento canvas oculto -->
-                <button id="takePhoto" style="display:block; margin-top:10px;">Tomar Foto</button>
-                <button id="closeCamera" style="display:block; margin-top:10px;">Cerrar Cámara</button>
+            <div id="photoModal" style="display: none;">
+                <video id="video" autoplay style="width: 100%; height: auto; border: 1px solid black;"></video>
+                <canvas id="canvas" style="display: none;"></canvas>
+                <button id="takePhoto">Tomar Foto</button>
+                <button id="closeCamera">Cerrar Cámara</button>
             </div>
+
+
+
+
+
 
         </div>
 

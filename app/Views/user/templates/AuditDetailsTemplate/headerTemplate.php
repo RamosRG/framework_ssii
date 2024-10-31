@@ -38,7 +38,7 @@
             padding: 2rem;
             transition: margin-left .4s;
         }
-        
+
 
         @media (max-width: 600px) {
             .w3-main {
@@ -92,29 +92,16 @@
 
         /* Estilo del modal */
         #photoModal {
-            display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            background-color: white;
+            padding: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-        }
-
-        #video {
-            width: 100%;
-            height: auto;
-            max-width: 100%;
-            display: none;
-        }
-
-        #photoPreview {
-            display: none;
-            width: 100%;
-            height: auto;
-            max-width: 100%;
         }
     </style>
 </head>
