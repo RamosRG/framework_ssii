@@ -72,10 +72,10 @@ class UserController extends BaseController
         if ($file && $file->isValid()) {
             // Generar un nombre de archivo único basado en el ID de la pregunta para evitar duplicados
             $newName = "photo_" . $fkQuestion . ".png";
-            $file->move('uploads', $newName, true); // Mueve y sobrescribe si existe
+            $file->move('questions', $newName, true); // Mueve y sobrescribe si existe
     
             // Obtener la ruta completa de la imagen
-            $imagePath = '../uploads/' . $newName;
+            $imagePath = '../questions/' . $newName;
     
             // Guardar los datos en la base de datos (ajusta según tu estructura de base de datos)
             $answersModel = new AnswersModel();

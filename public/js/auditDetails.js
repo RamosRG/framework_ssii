@@ -70,8 +70,7 @@ $(document).ready(function () {
                         </button>
                     </td>
                     <td>
-                        <button class="send-button w3-button w3-blue w3-round" data-question-id="${detail.id_question}" style="font-size:12px">
-                            Enviar
+                        <button class="send-button w3-button w3-blue w3-round fa fa-send" data-question-id="${detail.id_question}" style="font-size:12px">
                         </button>
                     </td>
                 </tr>
@@ -152,7 +151,7 @@ $(document).ready(function () {
         // Oculta el modal y detiene la cámara
         $("#photoModal").hide();
         closeCamera();
-        
+
         // Guarda la imagen en un lugar accesible (por ejemplo, en una variable)
         currentButton.data('imageData', imageDataURL); // Almacena la imagen en el botón
     }
@@ -173,55 +172,65 @@ $(document).ready(function () {
 
     function sendPhotoData(questionId, imageData, isComplete, answerInput) {
         const formData = new FormData();
-        
-        // Agregar datos al FormData
+
         formData.append('fk_question', questionId);
         formData.append('is_complete', isComplete);
         formData.append('answer', answerInput);
-        
-        // Convierte la imagen base64 a un Blob
-        const byteString = atob(imageData.split(',')[1]); // Decodifica base64
-        const mimeString = imageData.split(',')[0].split(':')[1].split(';')[0]; // Extrae el tipo MIME
+
+        const byteString = atob(imageData.split(',')[1]);
+        const mimeString = imageData.split(',')[0].split(':')[1].split(';')[0];
         const ab = new Uint8Array(byteString.length);
-        
-        // Rellena el Uint8Array con los bytes de la imagen
+
         for (let i = 0; i < byteString.length; i++) {
             ab[i] = byteString.charCodeAt(i);
         }
-        
-        const blob = new Blob([ab], { type: mimeString }); // Crea el Blob a partir de los bytes
-        formData.append('photo', blob, 'photo.png'); // Agrega el Blob a FormData
-        
-        // Verifica el tamaño y tipo del Blob
-        console.log("Tamaño del Blob:", blob.size); // Debe ser mayor que 0 si la imagen se capturó correctamente
-        console.log("Tipo de Blob:", blob.type); // Debe coincidir con el tipo MIME de la imagen
-    
-        // Muestra los datos en FormData
-        for (let pair of formData.entries()) {
-            console.log(`${pair[0]}: ${pair[1]}`);
-        }
-    
+
+        const blob = new Blob([ab], { type: mimeString });
+        formData.append('photo', blob, 'photo.png');
+
         $.ajax({
-            url: '../user/uploadPhoto', // Asegúrate de que esta URL sea correcta
+            url: '../user/uploadPhoto',
             type: 'POST',
             data: formData,
-            processData: false, // Evita que jQuery procese los datos
-            contentType: false, // Evita que jQuery configure el tipo de contenido
+            processData: false,
+            contentType: false,
             success: function (response) {
-                console.log("Respuesta del servidor:", response);
                 if (response.status === 'success') {
-                    console.log("Datos enviados correctamente:", response.message);
-                    // Aquí puedes hacer lo que necesites después de enviar los datos
+                    // Alerta de éxito con SweetAlert
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Datos enviados correctamente',
+                        text: response.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    // Recargar la tabla después de enviar los datos
+                    fetchTakenActions(id_audit);
                 } else {
-                    console.error("Error al enviar los datos:", response.message);
+                    // Alerta de error con SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al enviar los datos',
+                        text: response.message,
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
             },
             error: function (xhr, status, error) {
                 console.error("Error en la solicitud AJAX:", error);
+
+                // Alerta de error en caso de fallo de la solicitud AJAX
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error en la conexión',
+                    text: 'Hubo un problema al enviar los datos. Inténtalo nuevamente.',
+                    confirmButtonText: 'Aceptar'
+                });
             }
         });
     }
-    
+
     function fetchTakenActions(idAudit) {
         $.ajax({
             url: "../user/takenActions/" + idAudit,
@@ -229,7 +238,8 @@ $(document).ready(function () {
             dataType: "json",
             success: function (response) {
                 if (response.status === "success") {
-                    populateTakenActions(response.data);
+
+                    populateTakenActions(response.data, idAudit);
                 } else {
                     console.error("No se encontraron acciones tomadas.");
                 }
@@ -239,84 +249,133 @@ $(document).ready(function () {
             },
         });
     }
+
     function populateTakenActions(actions, id_audit) {
         $("#taken-actions-list").empty(); // Limpia la lista existente
- 
+
         actions.forEach(action => {
-            takenQuestions.push(action.id_question); // Agrega el id de la pregunta al array
- 
             const row = `
-                <tr>
-                    <td>${action.id_question}</td>
-                    <td>${action.question}</td>
-                    <td>${action.answer}</td>
-                    <td>
-                        ${action.evidence ? `<img src="${action.evidence}" alt="Evidencia" style="width: 100px; height: auto;">` : 'Sin evidencia'}
-                    </td>
-                    <td><input type="text" name="action${action.id_question}" placeholder="Escribe aquí..."></td>
-                    <td><input type="text" name="responsable_${action.id_question}" value="${action.name} ${action.firstName} ${action.lastName}"></td>
-                    <td><input type="date" name="date_${action.id_question}"></td>
-                    <td>
-                        <button style="font-size:12px" class="camera-button" data-question-id="1">
-                            <i class="fa fa-camera w3-button w3-round-long"></i>
-                        </button>
-                            <img src="" alt="Thumbnail" class="thumbnail" style="display:none; width: 40px; height: auto; border-radius: 5px;">
-                    </td>
-                    <td>
-                        <label>
-                            <input type="radio" name="is_complete_${action.id_question}" value="1" ${action.is_complete ? 'checked' : ''}> Sí
-                        </label>
-                        <label>
-                            <input type="radio" name="is_complete_${action.id_question}" value="0" ${!action.is_complete ? 'checked' : ''}> No
-                        </label>
-                    </td>
-                    <td>
-                        <button class="send-button w3-button w3-blue w3-round"" data-question-id="${action.id_question}" style="font-size:12px">
-                            Enviar
-                        </button>
-                    </td>
-                </tr>
-            `;
- 
+    <tr data-question-id="${action.id_question}">
+        <td>${action.id_question}</td>
+        <td>${action.question}</td>
+        <td>${action.answer}</td>
+        <td>
+            ${action.evidence ? `<img src="${action.evidence}" alt="Evidencia" style="width: 100px; height: auto;">` : 'Sin evidencia'}
+        </td>
+        <td><input type="text" name="action${action.id_question}" placeholder="Escribe aquí..."></td>
+        <td><input type="text" name="responsable_${action.id_question}" value="${action.name} ${action.firstName} ${action.lastName}"></td>
+        <td><input type="date" name="date_${action.id_question}"></td>
+        <td>
+            <input type="file" name="evidence_${action.id_question}" accept="image/*" style="display: none;">
+            <button style="font-size:12px" class="camera-button" data-question-id="${action.id_question}">
+                <i class="fa fa-camera w3-button w3-round-long"></i>
+            </button>
+            <img src="" alt="Thumbnail" class="thumbnail" style="display:none; width: 40px; height: auto; border-radius: 5px;">
+        </td>
+        <td>
+            <label>
+                <input type="radio" name="is_complete_${action.id_question}" value="1" ${action.is_complete ? 'checked' : ''}> Sí
+            </label>
+            <label>
+                <input type="radio" name="is_complete_${action.id_question}" value="0" ${!action.is_complete ? 'checked' : ''}> No
+            </label>
+        </td>
+        <td>
+            <input type="hidden" name="id_answer${action.id_question}" value="${action.id_answer}">
+            <button class="btn-accions w3-button w3-blue w3-round" data-question-id="${action.id_question}" style="font-size:12px">
+                Enviar
+            </button>
+        </td>
+    </tr>
+    `;
             $("#taken-actions-list").append(row); // Agrega la nueva fila a la tabla
         });
- 
+
+
+
         $("#closeCamera").on("click", function () {
             stopCamera();
             $("#photoModal").hide();
         });
-        // Asigna el evento de clic al botón "Enviar" de cada fila
-        $(".send-button").on("click", function () {
+
+
+        $(document).on("click", ".btn-accions", function () {
             const questionId = $(this).data("question-id");
-            const data = {
-                fk_question: questionId,
-                action: $(`input[name="action${questionId}"]`).val(),
-                responsable: $(`input[name="responsable_${questionId}"]`).val(),
-                date: $(`input[name="date_${questionId}"]`).val(),
-                customInput3: $(`input[name="evidence_${questionId}"]`).val(),
-                is_complete: $(`input[name="is_complete_${questionId}"]:checked`).val()
-            };
- 
+    
+            // Crear un nuevo objeto FormData
+            const formData = new FormData();
+            formData.append('fk_question', questionId);
+            formData.append('action', $(`input[name="action${questionId}"]`).val());
+            formData.append('id_answer', $(`input[name="id_answer${questionId}"]`).val());
+            formData.append('responsable', $(`input[name="responsable_${questionId}"]`).val());
+            formData.append('date', $(`input[name="date_${questionId}"]`).val());
+        
+            // Agregar el archivo de evidencia con un nombre personalizado
+            const evidenceInputFile = $(`input[name="evidence_${questionId}"]`).val();
+            if (evidenceInputFile) {
+                // Crear un nuevo archivo con el nombre personalizado
+                const customFileName = `evidence_${questionId}_${new Date().toISOString().replace(/[-:.]/g, '')}.jpg`;
+                const customFile = dataURLtoFile(evidenceInputFile, customFileName);
+                formData.append('evidence', customFile);
+            }
+        
+            formData.append('is_complete', $(`input[name="is_complete_${questionId}"]:checked`).val());
+            console.log(formData);
+        return false;
             // Realizar la solicitud AJAX para enviar los datos al servidor
             $.ajax({
                 url: "../user/submitAnswer", // Cambia la URL al endpoint correcto
                 type: "POST",
-                data: data,
+                data: formData,
+                processData: false, // Impide que jQuery procese los datos
+                contentType: false, // Impide que jQuery establezca el content type
                 success: function (response) {
-                    console.log(response);
-                    return false;
                     if (response.status === "success") {
-                        alert("Datos enviados con éxito.");
+                        Swal.fire({
+                            icon: "success",
+                            title: "Éxito",
+                            text: "Datos enviados con éxito.",
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+        
+                        // Vuelve a llamar a fetchTakenActions para obtener datos actualizados
+                        fetchTakenActions(id_audit);
                     } else {
-                        alert("Error al enviar los datos.");
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "Error al enviar los datos."
+                        });
                     }
                 },
                 error: function (xhr, status, error) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Error en la solicitud AJAX."
+                    });
                     console.error("Error en la solicitud AJAX:", error);
                 }
             });
+        
+
+            return false;
         });
- 
+
     }
+    document.getElementById('openCamera').addEventListener('click', function () {
+        document.getElementById('photoModal').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    });
+
+    document.getElementById('closeCamera').addEventListener('click', function () {
+        document.getElementById('photoModal').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+        let video = document.getElementById('video');
+        video.pause(); // Pausar la cámara al cerrar el modal
+        video.srcObject = null; // Detener el video
+    });
+
 });
-    
+

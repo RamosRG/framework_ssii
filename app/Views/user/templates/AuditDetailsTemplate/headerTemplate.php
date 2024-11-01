@@ -92,16 +92,40 @@
 
         /* Estilo del modal */
         #photoModal {
+            display: none;
+            /* Oculto por defecto */
             position: fixed;
-            top: 10%;
-            left: 10%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 80%;
+            /* Puedes ajustar el ancho */
+            max-width: 500px;
             background-color: white;
-            padding: 20px;
+            border: 1px solid black;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            /* Asegúrate de que esté por encima de otros elementos */
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        #photoModal button {
+            margin-top: 10px;
+        }
+
+        #overlay {
+            display: none;
+            /* Oculto por defecto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Fondo semi-transparente */
+            z-index: 999;
+            /* Debajo del modal */
         }
     </style>
 </head>

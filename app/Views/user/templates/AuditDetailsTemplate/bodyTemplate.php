@@ -50,7 +50,6 @@
                             <th>¿Se cumplió?</th>
                             <th>¿Qué se encontró?</th>
                             <th>Evidencia</th>
-                            <th>Foto</th>
                             <th>Accion</th>
                         </tr>
                     </thead>
@@ -76,7 +75,6 @@
                                 <th>Responsable</th>
                                 <th>Fecha</th>
                                 <th>Tomar evidencia</th>
-                                <th>Evidencia de la accion</th>
                                 <th>Verificado</th>
                                 <th>Accion</th>
                             </tr>
@@ -125,19 +123,13 @@
             </div>
 
             <button class="w3-button w3-indigo w3-right w3-margin-top" type="submit">Submit Audit</button>
-            <div id="photoModal" style="display: none;">
+            <div id="overlay"></div>
+            <div id="photoModal">
                 <video id="video" autoplay style="width: 100%; height: auto; border: 1px solid black;"></video>
                 <canvas id="canvas" style="display: none;"></canvas>
                 <button id="takePhoto">Tomar Foto</button>
                 <button id="closeCamera">Cerrar Cámara</button>
             </div>
 
-
-
-
-
-
         </div>
-
     </div>
-</div>
