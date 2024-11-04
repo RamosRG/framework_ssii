@@ -252,41 +252,40 @@ $(document).ready(function () {
 
     function populateTakenActions(actions, id_audit) {
         $("#taken-actions-list").empty(); // Limpia la lista existente
-
+        const isTaken = takenQuestions.includes(actions.id_question);
         actions.forEach(action => {
             const row = `
     <tr data-question-id="${action.id_question}">
-        <td>${action.id_question}</td>
-        <td>${action.question}</td>
-        <td>${action.answer}</td>
-        <td>
-            ${action.evidence ? `<img src="${action.evidence}" alt="Evidencia" style="width: 100px; height: auto;">` : 'Sin evidencia'}
-        </td>
-        <td><input type="text" name="action${action.id_question}" placeholder="Escribe aquí..."></td>
-        <td><input type="text" name="responsable_${action.id_question}" value="${action.name} ${action.firstName} ${action.lastName}"></td>
-        <td><input type="date" name="date_${action.id_question}"></td>
-        <td>
-            <input type="file" name="evidence_${action.id_question}" accept="image/*" style="display: none;">
-            <button style="font-size:12px" class="camera-button" data-question-id="${action.id_question}">
-                <i class="fa fa-camera w3-button w3-round-long"></i>
-            </button>
-            <img src="" alt="Thumbnail" class="thumbnail" style="display:none; width: 40px; height: auto; border-radius: 5px;">
-        </td>
-        <td>
-            <label>
-                <input type="radio" name="is_complete_${action.id_question}" value="1" ${action.is_complete ? 'checked' : ''}> Sí
-            </label>
-            <label>
-                <input type="radio" name="is_complete_${action.id_question}" value="0" ${!action.is_complete ? 'checked' : ''}> No
-            </label>
-        </td>
-        <td>
-            <input type="hidden" name="id_answer${action.id_question}" value="${action.id_answer}">
-            <button class="btn-accions w3-button w3-blue w3-round" data-question-id="${action.id_question}" style="font-size:12px">
-                Enviar
-            </button>
-        </td>
-    </tr>
+    <td>${action.id_question}</td>
+    <td>${action.question}</td>
+    <td>${action.answer}</td>
+    <td>
+        ${action.evidence ? `<img src="${action.evidence}" alt="Evidencia" style="width: 100px; height: auto;">` : 'Sin evidencia'}
+    </td>
+    <td><input type="text" name="action${action.id_question}" placeholder="Escribe aquí..."></td>
+    <td><input type="text" name="responsable_${action.id_question}" value="${action.name} ${action.firstName} ${action.lastName}"></td>
+    <td><input type="date" name="date_${action.id_question}"></td>
+    <td>
+        <button class="camera-button" style="display:${isTaken ? "none" : "block"};" data-question-id="${action.id_question}">
+            <i class="fa fa-camera"></i>
+        </button>
+    </td>
+    <td>
+        <label>
+            <input type="radio" name="is_complete_${action.id_question}" value="1" ${action.is_complete ? 'checked' : ''}> Sí
+        </label>
+        <label>
+            <input type="radio" name="is_complete_${action.id_question}" value="0" ${!action.is_complete ? 'checked' : ''}> No
+        </label>
+    </td>
+    <td>
+        <input type="hidden" name="id_answer${action.id_question}" value="${action.id_answer}">
+        <button class="btn-accions w3-button w3-blue w3-round" data-question-id="${action.id_question}" style="font-size:12px">
+            Enviar
+        </button>
+    </td>
+</tr>
+
     `;
             $("#taken-actions-list").append(row); // Agrega la nueva fila a la tabla
         });
@@ -300,74 +299,82 @@ $(document).ready(function () {
 
 
         $(document).on("click", ".btn-accions", function () {
-            const questionId = $(this).data("question-id");
-    
-            // Crear un nuevo objeto FormData
-            const formData = new FormData();
-            formData.append('fk_question', questionId);
-            formData.append('action', $(`input[name="action${questionId}"]`).val());
-            formData.append('id_answer', $(`input[name="id_answer${questionId}"]`).val());
-            formData.append('responsable', $(`input[name="responsable_${questionId}"]`).val());
-            formData.append('date', $(`input[name="date_${questionId}"]`).val());
-        
-            // Agregar el archivo de evidencia con un nombre personalizado
-            const evidenceInputFile = $(`input[name="evidence_${questionId}"]`).val();
-            if (evidenceInputFile) {
-                // Crear un nuevo archivo con el nombre personalizado
-                const customFileName = `evidence_${questionId}_${new Date().toISOString().replace(/[-:.]/g, '')}.jpg`;
-                const customFile = dataURLtoFile(evidenceInputFile, customFileName);
-                formData.append('evidence', customFile);
+
+            const questionId = $(this).data("question-id"); // Obtén el ID de la pregunta
+            const action = $(`input[name="action${questionId}"]`).val(); // Obtén el valor del campo de acción
+            const responsable = $(`input[name="responsable_${questionId}"]`).val(); // Obtén el responsable
+            const date = $(`input[name="date_${questionId}"]`).val(); // Obtén la fecha
+            const isComplete = $(`input[name="is_complete_${questionId}"]:checked`).val(); // Verifica si está completo
+            const idAnswer = $(`input[name="id_answer${questionId}"]`).val(); // Obtén el ID de respuesta
+            const imageData = currentButton.data('imageData');
+            
+
+            if (imageData) {
+                sendAccionsData(questionId, action, responsable, date, isComplete, idAnswer, imageData);
+            } else {
+                alert("por favor, toma una foto");
             }
-        
-            formData.append('is_complete', $(`input[name="is_complete_${questionId}"]:checked`).val());
-            console.log(formData);
-        return false;
-            // Realizar la solicitud AJAX para enviar los datos al servidor
-            $.ajax({
-                url: "../user/submitAnswer", // Cambia la URL al endpoint correcto
-                type: "POST",
-                data: formData,
-                processData: false, // Impide que jQuery procese los datos
-                contentType: false, // Impide que jQuery establezca el content type
-                success: function (response) {
-                    if (response.status === "success") {
+
+            function sendAccionsData(questionId, action, responsable, date, isComplete, idAnswer, imageData) {
+                const formData = new FormData();
+
+                formData.append('fk_answer', idAnswer);
+                formData.append('responsable', responsable);
+                formData.append('is_complete', isComplete);
+                formData.append('create_at', date);
+
+                const byteString = atob(imageData.split(',')[1]);
+                const mimeString = imageData.split(',')[0].split(':')[1].split(';')[0];
+                const ab = new Uint8Array(byteString.length);
+
+                for (let i = 0; i < byteString.length; i++) {
+                    ab[i] = byteString.charCodeAt(i);
+                }
+
+                const blob = new Blob([ab], { type: mimeString });
+                formData.append('photo', blob, 'photo.png');
+               
+                $.ajax({
+                    url: '../user/submitAnswer', // Cambia la URL según sea necesario
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+
+                        if (response.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Datos enviados correctamente',
+                                text: response.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            // Recargar la tabla después de enviar los datos
+                            fetchTakenActions(id_audit);
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error al enviar los datos',
+                                text: response.message,
+                                confirmButtonText: 'Aceptar'
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error en la solicitud AJAX:", error);
                         Swal.fire({
-                            icon: "success",
-                            title: "Éxito",
-                            text: "Datos enviados con éxito.",
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
-        
-                        // Vuelve a llamar a fetchTakenActions para obtener datos actualizados
-                        fetchTakenActions(id_audit);
-                    } else {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error",
-                            text: "Error al enviar los datos."
+                            icon: 'error',
+                            title: 'Error en la conexión',
+                            text: 'Hubo un problema al enviar los datos. Inténtalo nuevamente.',
+                            confirmButtonText: 'Aceptar'
                         });
                     }
-                },
-                error: function (xhr, status, error) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "Error en la solicitud AJAX."
-                    });
-                    console.error("Error en la solicitud AJAX:", error);
-                }
-            });
-        
-
-            return false;
+                });
+            }
         });
-
     }
-    document.getElementById('openCamera').addEventListener('click', function () {
-        document.getElementById('photoModal').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-    });
+
 
     document.getElementById('closeCamera').addEventListener('click', function () {
         document.getElementById('photoModal').style.display = 'none';

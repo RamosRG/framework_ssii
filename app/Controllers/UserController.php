@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ActionsModel;
 use App\Models\AnswersModel;
 use App\Models\QuestionsModel;
 use App\Models\FountainModel;
@@ -10,10 +11,68 @@ use App\Models\CategoryModel;
 
 class UserController extends BaseController
 {
-    public function submitAnswer(){
-        print_r($_POST);
-        exit;
-     }
+    public function submitAnswer()
+    {
+        // Obtener los datos del POST
+        $questionId = $this->request->getPost('questionId');
+        $action = $this->request->getPost('action');
+        $responsable = $this->request->getPost('responsable');
+        $date = $this->request->getPost('date');
+        $isComplete = $this->request->getPost('isComplete');
+        $idAnswer = $this->request->getPost('idAnswer');
+        $imageData = $this->request->getPost('imageData');
+    
+        // Verificar si se recibió imageData
+        if (!$imageData) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'No se encontró imagen']);
+        }
+    
+        // Decodificar la imagen base64
+        $image_parts = explode(";base64,", $imageData);
+        if (count($image_parts) == 2) {
+            $image_type_aux = explode("image/", $image_parts[0]);
+            if (count($image_type_aux) == 2) {
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
+    
+                // Generar un nombre único para la imagen
+                $fileName = uniqid() . '.' . $image_type;
+    
+                // Definir la ruta donde se guardará la imagen
+                $filePath = WRITEPATH . 'accions/' . $fileName;
+    
+                // Guardar la imagen en el servidor
+                if (file_put_contents($filePath, $image_base64)) {
+                    // Preparar datos para guardar en la base de datos
+                    $data = [
+                        'id_answer' => $idAnswer,
+                        'action' => $action,
+                        'responsable' => $responsable,
+                        'is_complete' => $isComplete,
+                        'date' => $date,
+                        'photo_path' => $fileName,
+                    ];
+    
+                    $modelaccion = new ActionsModel();
+    
+                    // Guardar en la base de datos
+                    if ($modelaccion->insert($data)) {
+                        return $this->response->setJSON(['status' => 'success', 'message' => 'Imagen y datos guardados correctamente']);
+                    } else {
+                        return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar los datos en la base de datos']);
+                    }
+                } else {
+                    return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar la imagen en el servidor']);
+                }
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Tipo de imagen inválido']);
+            }
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Formato de imagen inválido']);
+        }
+    }
+    
+    
     public function getFountain()
     {
         $fountain = new FountainModel();
@@ -64,25 +123,25 @@ class UserController extends BaseController
         $fkQuestion = $this->request->getPost('fk_question');
         $isComplete = $this->request->getPost('is_complete');
         $answer = $this->request->getPost('answer');
-    
+
         // Manejar el archivo subido
         $file = $this->request->getFile('photo');
-    
+
         // Verificar si el archivo fue subido
         if ($file && $file->isValid()) {
             // Generar un nombre de archivo único basado en el ID de la pregunta para evitar duplicados
             $newName = "photo_" . $fkQuestion . ".png";
             $file->move('questions', $newName, true); // Mueve y sobrescribe si existe
-    
+
             // Obtener la ruta completa de la imagen
             $imagePath = '../questions/' . $newName;
-    
+
             // Guardar los datos en la base de datos (ajusta según tu estructura de base de datos)
             $answersModel = new AnswersModel();
-    
+
             // Verificar si ya existe un registro para esta pregunta
             $existingAnswer = $answersModel->where('fk_question', $fkQuestion)->first();
-    
+
             // Datos a guardar
             $data = [
                 'fk_question' => $fkQuestion,
@@ -90,7 +149,7 @@ class UserController extends BaseController
                 'answer' => $answer,
                 'evidence' => $imagePath // Guardar la ruta de la imagen en la base de datos
             ];
-    
+
             // Verificar si ya existe una respuesta
             if ($existingAnswer) {
                 // Si ya existe, actualizar el registro en lugar de insertar uno nuevo
@@ -106,11 +165,11 @@ class UserController extends BaseController
                 return $this->response->setJSON(['status' => 'success', 'message' => 'Foto guardada exitosamente.']);
             }
         }
-    
+
         // Manejo de errores si el archivo no es válido
         return $this->response->setJSON(['status' => 'error', 'message' => 'Error al subir la foto.']);
     }
-    
+
     public function showAudit()
     {
 

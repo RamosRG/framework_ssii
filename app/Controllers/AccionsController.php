@@ -14,10 +14,7 @@ use App\Models\AreasModel;
 
 class AccionsController extends BaseController
 {
-   public function saveAudit(){
-      var_dump($_POST);
-      exit(0);
-   }
+   
    public function dashboard()
    {
       return view("accions/dashboard");
