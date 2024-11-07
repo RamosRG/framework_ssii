@@ -13,65 +13,51 @@ class UserController extends BaseController
 {
     public function submitAnswer()
     {
+
+    
         // Obtener los datos del POST
         $questionId = $this->request->getPost('questionId');
         $action = $this->request->getPost('action');
         $responsable = $this->request->getPost('responsable');
         $date = $this->request->getPost('date');
-        $isComplete = $this->request->getPost('isComplete');
-        $idAnswer = $this->request->getPost('idAnswer');
-        $imageData = $this->request->getPost('imageData');
-    
-        // Verificar si se recibió imageData
-        if (!$imageData) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'No se encontró imagen']);
+        $isComplete = $this->request->getPost('is_complete');
+        $idAnswer = $this->request->getPost('fk_answer');
+        
+        
+        // Verificar si el archivo de imagen ha sido recibido
+        $image = $this->request->getFile('photo');
+        if (!$image->isValid()) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'No se recibió una imagen válida']);
         }
     
-        // Decodificar la imagen base64
-        $image_parts = explode(";base64,", $imageData);
-        if (count($image_parts) == 2) {
-            $image_type_aux = explode("image/", $image_parts[0]);
-            if (count($image_type_aux) == 2) {
-                $image_type = $image_type_aux[1];
-                $image_base64 = base64_decode($image_parts[1]);
-    
-                // Generar un nombre único para la imagen
-                $fileName = uniqid() . '.' . $image_type;
-    
-                // Definir la ruta donde se guardará la imagen
-                $filePath = WRITEPATH . 'accions/' . $fileName;
-    
-                // Guardar la imagen en el servidor
-                if (file_put_contents($filePath, $image_base64)) {
-                    // Preparar datos para guardar en la base de datos
-                    $data = [
-                        'id_answer' => $idAnswer,
-                        'action' => $action,
-                        'responsable' => $responsable,
-                        'is_complete' => $isComplete,
-                        'date' => $date,
-                        'photo_path' => $fileName,
-                    ];
-    
-                    $modelaccion = new ActionsModel();
-    
-                    // Guardar en la base de datos
-                    if ($modelaccion->insert($data)) {
-                        return $this->response->setJSON(['status' => 'success', 'message' => 'Imagen y datos guardados correctamente']);
-                    } else {
-                        return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar los datos en la base de datos']);
-                    }
-                } else {
-                    return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar la imagen en el servidor']);
-                }
+        // Generar un nombre único para la imagen
+        $fileName = $image->getRandomName();
+        
+        // Mover el archivo a la ubicación deseada
+        $filePath = WRITEPATH . 'accions/' . $fileName;
+        if ($image->move(WRITEPATH . 'accions', $fileName)) {
+            // Preparar datos para guardar en la base de datos
+            $data = [
+                'fk_answer' => $idAnswer,
+                'action_description' => $action,
+                'responsable' => $responsable,
+                'is_complete' => $isComplete,
+                'date' => $date,
+                'evidence_accion' => $fileName,
+            ];
+            
+            $modelaccion = new ActionsModel();
+            
+            // Guardar en la base de datos
+            if ($modelaccion->insert($data)) {
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Imagen y datos guardados correctamente']);
             } else {
-                return $this->response->setJSON(['status' => 'error', 'message' => 'Tipo de imagen inválido']);
+                return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar los datos en la base de datos']);
             }
         } else {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Formato de imagen inválido']);
+            return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar la imagen en el servidor']);
         }
     }
-    
     
     public function getFountain()
     {

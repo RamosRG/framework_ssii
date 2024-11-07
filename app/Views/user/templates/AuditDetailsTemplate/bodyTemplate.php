@@ -2,7 +2,7 @@
 
 
     <div class="w3-container" id="contact" style="margin-top: 75px">
-        <h2 class="w3-border-bottom w3-border-light-grey w3-padding-16">Mantenimiento Preventivo / Casa de Fuerza - Auditoría por Capas</h2>
+        <h1 class="w3-border-bottom w3-border-light-grey w3-padding-16 tittle" id="tittle"></h1>
 
         <div class="w3-row-padding">
             <div class="w3-third form-group">
