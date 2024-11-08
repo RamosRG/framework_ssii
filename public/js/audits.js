@@ -23,6 +23,7 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (response) {
+                console.log(response);
                 if (response.status === 'success') {
                     var auditDetails = response.data;
 
@@ -32,28 +33,35 @@ $(document).ready(function () {
 
                     // Rellenar la tabla de preguntas de la auditoría
                     auditDetails.forEach(function (detail) {
+                        var complianceIcon = detail.compliance === "Yes"
+                            ? '<i class="fas fa-check-circle" style="color: green;"></i>'
+                            : '<i class="fas fa-times-circle" style="color: red;"></i>';
+
+                        var findings = detail.Que_se_encontro ? detail.Que_se_encontro : "Sin problema";
                         var questionsRow = `
                             <tr>
                                 <td>${detail.category}</td>
                                 <td>${detail.question}</td>
                                 <td>${detail.create_at}</td>
                                 <td>${detail.source}</td>
-                                <td>${detail.compliance}</td>
-                                <td>${detail.Que_se_encontro}</td>
+                                <td>${complianceIcon}</td>
+                                <td>${findings}</td>
                             </tr>
                         `;
                         $("#audit-questions-list").append(questionsRow);
 
                         // Rellenar la tabla de acciones tomadas si existen
-                        if (detail.action_description) {
+                        if (detail.action_description && detail.evidence_accion && detail.responsable && detail.compliance && detail.action_created_at && detail.action_updated_at) {
                             var actionsRow = `
                                 <tr>
-                                    <td>${detail.action_description}</td>
-                                    <td>${detail.responsable}</td>
+                                    <td>${detail.category}</td>
+                                    <td>${detail.question}</td>
+                                    <td>${detail.Que_se_encontro}</td>
                                     <td>${detail.evidence_accion}</td>
-                                    <td>${detail.action_complete ? "Yes" : "No"}</td>
-                                    <td>${detail.action_created_at}</td>
-                                    <td>${detail.action_updated_at}</td>
+                                    <td>${detail.responsable}</td>
+                                    <td>${detail.compliance}</td>
+                                    <td>${detail.created_at}</td>
+                                    <td>${detail.updated_at}</td>
                                 </tr>
                             `;
                             $("#taken-actions-list").append(actionsRow);

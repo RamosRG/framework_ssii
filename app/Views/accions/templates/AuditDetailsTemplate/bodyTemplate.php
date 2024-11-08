@@ -6,9 +6,8 @@
 
     <div class="w3-container" id="contact" style="margin-top: 75px">
         <h2 class="w3-border-bottom w3-border-light-grey w3-padding-16" id="audit_title"></h2>
-        
+
         <!-- Datos Generales de la Auditoría -->
-        <form action="../accions/saveAudit" method="POST" class="w3-container">
             <div class="w3-row-padding">
                 <div class="w3-third form-group">
                     <label for="no_audit"><b>Audit Number</b></label>
@@ -62,29 +61,34 @@
             </div>
 
             <!-- Acciones Tomadas -->
-            <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <div class="accions w3-container w3-card w3-white w3-margin-bottom">
                 <h3 class="w3-text-indigo">Acciones Tomadas</h3>
                 <div class="responsive-table">
                     <table>
                         <thead>
                             <tr>
-                                <th>Acción</th>
+                                <th>Categoria</th>
+                                <th>Pregunta</th>
+                                <th>¿Qué se encontró?</th>
+                                <th>Evidencia</th>
                                 <th>Responsable</th>
-                                <th>Evidence</th>
-                                <th>Complete</th>
-                                <th>Fecha de Creación</th>
-                                <th>Última Actualización</th>
+                                <th>Revisado</th>
+                                <th>Fecha</th>
+                                <th>Tomar Evidencia</th>
+                                <th>Creado</th>
+                                <th>Actualizado</th>
                             </tr>
                         </thead>
                         <tbody id="taken-actions-list">
                             <!-- Aquí se inyectarán dinámicamente las filas de la tabla -->
                         </tbody>
                     </table>
+
                 </div>
             </div>
 
             <!-- Verificación y Seguimiento -->
-            <div class="w3-container w3-card w3-white">
+            <div class="verification w3-container w3-card w3-white">
                 <h3 class="w3-text-indigo">Verificación y Seguimiento</h3>
                 <div class="responsive-table">
                     <table>
@@ -119,8 +123,5 @@
                     </table>
                 </div>
             </div>
-
-            <button class="w3-button w3-indigo w3-right w3-margin-top" type="submit">Submit Audit</button>
-        </form>
     </div>
 </div>

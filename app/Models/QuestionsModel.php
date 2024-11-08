@@ -29,35 +29,36 @@ class QuestionsModel extends Model
 
     public function getAudit($auditId)
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('questions');
-    
-        $builder->select([
-            'category.category',
-            'questions.question',
-            'questions.create_at',
-            'source.source',
-            'answers.answer AS Que_se_encontro',
-            // Agregamos el CASE WHEN como un string
-            '(CASE WHEN answers.is_complete = 1 THEN "No" ELSE "Yes" END) AS compliance',
-            'actions.action_description',
-            'actions.responsable',
-            'actions.evidence_accion',
-            'actions.is_complete AS action_complete',
-            'actions.created_at AS action_created_at',
-            'actions.updated_at AS action_updated_at'
-        ]);
-    
-        $builder->join('source', 'source.id_source = questions.fk_source', 'inner');
-        $builder->join('category', 'category.id_category = questions.fk_category', 'inner');
-        $builder->join('answers', 'answers.fk_question = questions.id_question', 'left');
-        $builder->join('actions', 'actions.fk_answer = answers.id_answer', 'left');
-    
-        $builder->where('questions.fk_audit', $auditId);
-    
-        $query = $builder->get();  // Ejecuta la consulta
-        return $query->getResultArray();  // Devuelve el resultado como un array
-    }
+            $builder = $this->db->table('questions');
+        
+            $builder->select([
+                'category.category',
+                'questions.question',
+                'questions.create_at',
+                'source.source',
+                'answers.answer AS Que_se_encontro',
+                // Agregamos el CASE WHEN como un string
+                '(CASE WHEN answers.is_complete = 1 THEN "No" ELSE "Yes" END) AS compliance',
+                'actions.action_description',
+                'actions.responsable',
+                'actions.evidence_accion',
+                'actions.is_complete AS action_complete',
+                'actions.created_at AS action_created_at',
+                'actions.updated_at AS action_updated_at'
+            ]);
+        
+            // Join de las tablas necesarias
+            $builder->join('source', 'source.id_source = questions.fk_source', 'inner');
+            $builder->join('category', 'category.id_category = questions.fk_category', 'inner');
+            $builder->join('answers', 'answers.fk_question = questions.id_question', 'left');
+            $builder->join('actions', 'actions.fk_answer = answers.id_answer', 'left');
+        
+            $builder->where('questions.fk_audit', $auditId);
+        
+            $query = $builder->get();  // Ejecuta la consulta
+            return $query->getResultArray();  // Devuelve el resultado como un array
+        }
+
     
     public function getQuestionsByCategory($categoryId)
     {

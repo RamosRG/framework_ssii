@@ -55,3 +55,17 @@
         .responsive-table {
             overflow-x: auto;
         }
+        .accions th {
+            background-color: #4caf50 !important;
+            /* Fondo verde */
+            color: white !important;
+            /* Texto blanco */
+        }
+
+        /* Estilo específico para Verificación y Seguimiento */
+        .verification th {
+            background-color: #ff9800 !important;
+            /* Fondo naranja */
+            color: white !important;
+            /* Texto blanco */
+        }
