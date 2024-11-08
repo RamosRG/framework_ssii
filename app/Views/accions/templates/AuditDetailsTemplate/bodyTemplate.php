@@ -7,6 +7,7 @@
     <div class="w3-container" id="contact" style="margin-top: 75px">
         <h2 class="w3-border-bottom w3-border-light-grey w3-padding-16" id="audit_title"></h2>
         
+        <!-- Datos Generales de la Auditoría -->
         <form action="../accions/saveAudit" method="POST" class="w3-container">
             <div class="w3-row-padding">
                 <div class="w3-third form-group">
@@ -38,6 +39,7 @@
                 </div>
             </div>
 
+            <!-- Preguntas de la Auditoría -->
             <div class="w3-container w3-card w3-white w3-margin-bottom">
                 <h3 class="w3-text-indigo">Audit Questions</h3>
                 <div class="responsive-table">
@@ -59,32 +61,29 @@
                 </div>
             </div>
 
+            <!-- Acciones Tomadas -->
             <div class="w3-container w3-card w3-white w3-margin-bottom">
                 <h3 class="w3-text-indigo">Acciones Tomadas</h3>
                 <div class="responsive-table">
                     <table>
                         <thead>
                             <tr>
-                                <th>Número</th>
                                 <th>Acción</th>
                                 <th>Responsable</th>
-                                <th>Fecha</th>
-                                <th>Verificado</th>
+                                <th>Evidence</th>
+                                <th>Complete</th>
+                                <th>Fecha de Creación</th>
+                                <th>Última Actualización</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><input type="text" class="w3-input w3-border w3-round" value="Se continua retroalimentando a personal"></td>
-                                <td><input type="text" class="w3-input w3-border w3-round" value="Rosendo Miranda"></td>
-                                <td><input type="date" class="w3-input w3-border w3-round"></td>
-                                <td><input type="checkbox" class="w3-check"></td>
-                            </tr>
+                        <tbody id="taken-actions-list">
+                            <!-- Aquí se inyectarán dinámicamente las filas de la tabla -->
                         </tbody>
                     </table>
                 </div>
             </div>
 
+            <!-- Verificación y Seguimiento -->
             <div class="w3-container w3-card w3-white">
                 <h3 class="w3-text-indigo">Verificación y Seguimiento</h3>
                 <div class="responsive-table">
@@ -124,3 +123,4 @@
             <button class="w3-button w3-indigo w3-right w3-margin-top" type="submit">Submit Audit</button>
         </form>
     </div>
+</div>

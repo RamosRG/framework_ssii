@@ -13,8 +13,6 @@ class UserController extends BaseController
 {
     public function submitAnswer()
     {
-
-    
         // Obtener los datos del POST
         $questionId = $this->request->getPost('questionId');
         $action = $this->request->getPost('action');
@@ -22,17 +20,16 @@ class UserController extends BaseController
         $date = $this->request->getPost('date');
         $isComplete = $this->request->getPost('is_complete');
         $idAnswer = $this->request->getPost('fk_answer');
-        
-        
+
         // Verificar si el archivo de imagen ha sido recibido
         $image = $this->request->getFile('photo');
         if (!$image->isValid()) {
             return $this->response->setJSON(['status' => 'error', 'message' => 'No se recibió una imagen válida']);
         }
-    
+
         // Generar un nombre único para la imagen
         $fileName = $image->getRandomName();
-        
+
         // Mover el archivo a la ubicación deseada
         $filePath = WRITEPATH . 'accions/' . $fileName;
         if ($image->move(WRITEPATH . 'accions', $fileName)) {
@@ -45,20 +42,31 @@ class UserController extends BaseController
                 'date' => $date,
                 'evidence_accion' => $fileName,
             ];
-            
+
             $modelaccion = new ActionsModel();
-            
-            // Guardar en la base de datos
-            if ($modelaccion->insert($data)) {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Imagen y datos guardados correctamente']);
+
+            // Verificar si el registro ya existe
+            $existingRecord = $modelaccion->where('fk_answer', $idAnswer)->first();
+
+            if ($existingRecord) {
+                // Si el registro existe, actualizarlo
+                if ($modelaccion->update($existingRecord['id_action'], $data)) {
+                    return $this->response->setJSON(['status' => 'success', 'message' => 'Datos actualizados correctamente']);
+                } else {
+                    return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo actualizar los datos en la base de datos']);
+                }
             } else {
-                return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar los datos en la base de datos']);
+                // Si el registro no existe, insertarlo
+                if ($modelaccion->insert($data)) {
+                    return $this->response->setJSON(['status' => 'success', 'message' => 'Imagen y datos guardados correctamente']);
+                } else {
+                    return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar los datos en la base de datos']);
+                }
             }
         } else {
             return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar la imagen en el servidor']);
         }
     }
-    
     public function getFountain()
     {
         $fountain = new FountainModel();
@@ -105,9 +113,10 @@ class UserController extends BaseController
 
     public function uploadPhoto()
     {
+        
         // Obtener los datos del formulario
         $fkQuestion = $this->request->getPost('fk_question');
-        $isComplete = $this->request->getPost('is_complete');
+        $isComplete = $this->request->getPost('compliaceCheckBox');
         $answer = $this->request->getPost('answer');
 
         // Manejar el archivo subido

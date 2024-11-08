@@ -89,41 +89,51 @@
         }
 
         /* Estilo del modal */
-        #photoModal {
+        .photo-modal {
             display: none;
-            /* Oculto por defecto */
+            /* Hide initially */
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80%;
-            /* Puedes ajustar el ancho */
-            max-width: 500px;
-            background-color: white;
-            border: 1px solid black;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            /* Asegúrate de que esté por encima de otros elementos */
+            z-index: 20;
+            background: #fff;
             padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
             border-radius: 8px;
         }
 
-        #photoModal button {
-            margin-top: 10px;
+        .modal-video {
+            width: 100%;
+            height: auto;
+            border: 1px solid black;
         }
 
-        #overlay {
-            display: none;
-            /* Oculto por defecto */
+        .overlay {
             position: fixed;
+            display: none;
+            /* Hide initially */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            /* Fondo semi-transparente */
-            z-index: 999;
-            /* Debajo del modal */
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .accions th {
+            background-color: #4caf50 !important;
+            /* Fondo verde */
+            color: white !important;
+            /* Texto blanco */
+        }
+
+        /* Estilo específico para Verificación y Seguimiento */
+        .verification th {
+            background-color: #ff9800 !important;
+            /* Fondo naranja */
+            color: white !important;
+            /* Texto blanco */
         }
     </style>
 </head>

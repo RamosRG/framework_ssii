@@ -179,19 +179,21 @@ console.log(audit.audit_title);
         const questionId = $(this).data("question-id");
         const answerInput = $(this).closest("tr").find(".answer-input").val();
         const imageData = $(this).closest("tr").find(".camera-button").data('imageData');
+        const complianceCheckbox = $(this).closest("tr").find('input[type="checkbox"]').prop('checked') ? 1 : 0; // Cambié esta línea
 
         if (imageData) {
-            sendPhotoData(questionId, imageData, answerInput);
+            sendPhotoData(questionId, imageData, answerInput, complianceCheckbox);
         } else {
             alert("Por favor, toma una foto antes de enviar.");
         }
     });
 
-    function sendPhotoData(questionId, imageData, answerInput) {
+    function sendPhotoData(questionId, imageData, answerInput, complianceCheckbox) {
         const formData = new FormData();
 
         formData.append('fk_question', questionId);
         formData.append('answer', answerInput);
+        formData.append('compliaceCheckBox', complianceCheckbox);
 
         const byteString = atob(imageData.split(',')[1]);
         const mimeString = imageData.split(',')[0].split(':')[1].split(';')[0];
@@ -211,6 +213,7 @@ console.log(audit.audit_title);
             processData: false,
             contentType: false,
             success: function (response) {
+             
                 if (response.status === 'success') {
                     Swal.fire({
                         icon: 'success',

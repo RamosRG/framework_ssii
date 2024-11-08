@@ -1,9 +1,8 @@
 <div class="w3-main">
-
-
     <div class="w3-container" id="contact" style="margin-top: 75px">
-        <h1 class="w3-border-bottom w3-border-light-grey w3-padding-16 tittle" id="tittle"></h1>
+        <h1 class="w3-border-bottom w3-border-light-grey w3-padding-16 tittle" id="tittle">Audit Details</h1>
 
+        <!-- Audit Information -->
         <div class="w3-row-padding">
             <div class="w3-third form-group">
                 <label for="no_audit"><b>Audit Number</b></label>
@@ -19,6 +18,7 @@
             </div>
         </div>
 
+        <!-- Additional Information -->
         <div class="w3-row-padding">
             <div class="w3-third form-group">
                 <label for="departament"><b>Department</b></label>
@@ -34,8 +34,9 @@
             </div>
         </div>
 
+        <!-- Audit Questions Table -->
         <div class="w3-container w3-card w3-white w3-margin-bottom">
-            <h3 class="w3-text-indigo">Audit Questions</h3>
+            <h3 class="w3-text-black">PREGUNTAS DE LA AUDITORIA</h3>
             <div class="responsive-table">
                 <table>
                     <thead>
@@ -47,86 +48,95 @@
                             <th>¿Se cumplió?</th>
                             <th>¿Qué se encontró?</th>
                             <th>Evidencia</th>
-                            <th>Accion</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody id="audit-questions-list">
-                        <!-- Aquí se inyectarán dinámicamente las filas de la tabla -->
+                        <!-- Dynamic rows inserted here -->
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <div class=" accions w3-container w3-card w3-white w3-margin-bottom">
-            <div class="w3-container w3-card w3-white w3-margin-bottom">
-                <h3 class="w3-text-indigo">Acciones Tomadas</h3>
-                <div class="responsive-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Número</th>
-                                <th>Pregunta</th>
-                                <th>¿Que se encontro?</th>
-                                <th>Evidencia</th>
-                                <th>Accion</th>
-                                <th>Responsable</th>
-                                <th>Fecha</th>
-                                <th>Tomar evidencia</th>
-                                <th>Verificado</th>
-                                <th>Accion</th>
-                            </tr>
-                        </thead>
-                        <tbody id="taken-actions-list">
-                            <!-- Aquí se inyectarán dinámicamente las acciones tomadas -->
-                        </tbody>
-                    </table>
-                </div>
+        <!-- Actions Taken Section -->
+        <div class="accions w3-container w3-card w3-white w3-margin-bottom">
+            <h3 class="w3-text-black">ACCIONES TOMADAS</h3>
+            <div class="responsive-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Pregunta</th>
+                            <th>¿Qué se encontró?</th>
+                            <th>Evidencia</th>
+                            <th>Acción</th>
+                            <th>Responsable</th>
+                            <th>Fecha</th>
+                            <th>Tomar Evidencia</th>
+                            <th>Verificado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taken-actions-list">
+                        <!-- Dynamic rows inserted here -->
+                    </tbody>
+                </table>
             </div>
-
-            <div class="w3-container w3-card w3-white">
-                <h3 class="w3-text-indigo">Verificación y Seguimiento</h3>
-                <div class="responsive-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Número de línea</th>
-                                <th>Verificación de acciones</th>
-                                <th>Descripción</th>
-                                <th>Implementado</th>
-                                <th>Mejorado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><input type="text" class="w3-input w3-border w3-round"></td>
-                                <td><input type="text" class="w3-input w3-border w3-round"></td>
-                                <td>
-                                    <select class="w3-select w3-border">
-                                        <option value="Sí">Sí</option>
-                                        <option value="No">No</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="w3-select w3-border">
-                                        <option value="Sí">Sí</option>
-                                        <option value="No">No</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div>
+                <select id="user-list" name="user" class="w3-input w3-border w3-round">
+                    <option selected>Select a user</option>
+                    <!-- Dynamic options populated here -->
+                </select>
             </div>
+        </div>
 
-            <button class="w3-button w3-indigo w3-right w3-margin-top" type="submit">Submit Audit</button>
-            <div id="overlay"></div>
-            <div id="photoModal">
-                <video id="video" autoplay style="width: 100%; height: auto; border: 1px solid black;"></video>
-                <canvas id="canvas" style="display: none;"></canvas>
-                <button id="takePhoto">Tomar Foto</button>
-                <button id="closeCamera">Cerrar Cámara</button>
+        <!-- Verification Section -->
+        <div class="verification w3-container w3-card w3-white">
+            <h3 class="w3-text-black">VERIFICACION Y SEGUIMIENTO</h3>
+            <div class="responsive-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Número de línea</th>
+                            <th>Verificación de acciones</th>
+                            <th>Descripción</th>
+                            <th>Implementado</th>
+                            <th>Mejorado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><input type="text" class="w3-input w3-border w3-round"></td>
+                            <td><input type="text" class="w3-input w3-border w3-round"></td>
+                            <td>
+                                <select class="w3-select w3-border">
+                                    <option value="Sí">Sí</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="w3-select w3-border">
+                                    <option value="Sí">Sí</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+        </div>
 
+        <!-- Submit Button -->
+        <button class="w3-button w3-indigo w3-right w3-margin-top" type="submit">Submit Audit</button>
+        
+        <!-- Modal for Camera and Photo Capture -->
+        <div id="overlay" class="overlay"></div>
+        <div id="photoModal" class="photo-modal">
+            <video id="video" autoplay class="modal-video"></video>
+            <canvas id="canvas" style="display: none;"></canvas>
+            <button id="takePhoto" class="w3-button w3-blue w3-round">Tomar Foto</button>
+            <button id="closeCamera" class="w3-button w3-red w3-round">Cerrar Cámara</button>
         </div>
     </div>
+</div>

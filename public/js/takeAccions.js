@@ -7,6 +7,7 @@ function fetchTakenActions(idAudit) {
         success: function (response) {
             if (response.status === "success") {
                 populateTakenActions(response.data, idAudit);
+                fetchUserData();
             } else {
                 console.error("No se encontraron acciones tomadas.");
             }
@@ -181,6 +182,7 @@ function sendAccionsData(questionId, action, responsable, date, isComplete, idAn
         processData: false,
         contentType: false,
         success: function (response) {
+            
             if (response.status === 'success') {
                 Swal.fire({
                     icon: 'success',
@@ -209,5 +211,40 @@ function sendAccionsData(questionId, action, responsable, date, isComplete, idAn
             });
         }
     });
+   
+}
+function fetchUserData() {
+    fetch('/capas.com/admin/getUsers', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            
+            if (data.status === 'success') {
+                
+                let userSelect = document.getElementById('user-list');
+                userSelect.innerHTML = ''; // Limpiar las opciones anteriores
+
+                // Añadir de nuevo la opción inicial
+                let defaultOption = document.createElement('option');
+                defaultOption.text = "Open this select menu";
+                defaultOption.selected = true;
+                userSelect.appendChild(defaultOption);
+
+                // Llenar el select con los datos de los usuarios
+                data.user.forEach(item => {  // Aquí cambiamos `machinery` por `users`
+                    let option = document.createElement('option');
+                    option.value = item.id_user;  // Usamos id_user como valor
+                    option.textContent = item.email;  // Usamos email como el nombre a mostrar
+                    userSelect.appendChild(option);
+                });
+            } else {
+                console.error('Error al obtener datos de los usuarios');
+            }
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
 }
 
