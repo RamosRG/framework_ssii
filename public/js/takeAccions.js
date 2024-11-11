@@ -220,31 +220,37 @@ function fetchUserData() {
             'Content-Type': 'application/json'
         }
     })
-        .then(response => response.json())
-        .then(data => {
-            
-            if (data.status === 'success') {
-                
-                let userSelect = document.getElementById('user-list');
-                userSelect.innerHTML = ''; // Limpiar las opciones anteriores
+    .then(response => response.json())
+    .then(data => {
+        
+        if (data.status === 'success') {
+            let userSelect = document.getElementById('user-list');
+            userSelect.innerHTML = ''; // Limpiar las opciones anteriores
 
-                // Añadir de nuevo la opción inicial
-                let defaultOption = document.createElement('option');
-                defaultOption.text = "Open this select menu";
-                defaultOption.selected = true;
-                userSelect.appendChild(defaultOption);
+            // Añadir de nuevo la opción inicial
+            let defaultOption = document.createElement('option');
+            defaultOption.text = "Open this select menu";
+            defaultOption.selected = true;
+            defaultOption.disabled = true;
+            userSelect.appendChild(defaultOption);
 
-                // Llenar el select con los datos de los usuarios
-                data.user.forEach(item => {  // Aquí cambiamos `machinery` por `users`
-                    let option = document.createElement('option');
-                    option.value = item.id_user;  // Usamos id_user como valor
-                    option.textContent = item.email;  // Usamos email como el nombre a mostrar
-                    userSelect.appendChild(option);
-                });
-            } else {
-                console.error('Error al obtener datos de los usuarios');
-            }
-        })
-        .catch(error => console.error('Error en la solicitud:', error));
+            // Llenar el select con los datos de los usuarios
+            data.user.forEach(item => {
+                let option = document.createElement('option');
+                option.value = item.id_user;
+                option.textContent = item.email;
+                userSelect.appendChild(option);
+            });
+
+            // Inicializamos Select2 en el elemento
+            $(userSelect).select2({
+                placeholder: "Select a user",
+                width: '100%'  // Ajustar al ancho del contenedor
+            });
+        } else {
+            console.error('Error al obtener datos de los usuarios');
+        }
+    })
+    .catch(error => console.error('Error en la solicitud:', error));
 }
 

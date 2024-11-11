@@ -31,8 +31,8 @@ class UserController extends BaseController
         $fileName = $image->getRandomName();
 
         // Mover el archivo a la ubicación deseada
-        $filePath = WRITEPATH . 'accions/' . $fileName;
-        if ($image->move(WRITEPATH . 'accions', $fileName)) {
+        $filePath = WRITEPATH . '../accions/' . $fileName;
+        if ($image->move(WRITEPATH . '../accions', $fileName)) {
             // Preparar datos para guardar en la base de datos
             $data = [
                 'fk_answer' => $idAnswer,

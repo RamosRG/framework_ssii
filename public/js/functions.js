@@ -82,6 +82,7 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (response) {
+                console.log(response);
                 if (response.error) {
                     alert(response.error);
                 } else {
@@ -93,8 +94,7 @@ $(document).ready(function () {
                     $('#id01').find('input[name="status"]').val(response.status);
                     $('#id01').find('input[name="area"]').val(response.area);
                     $('#id01').find('input[name="id_user"]').val(response.id_user);
-                    $('#id01').find('input[name="fk_area"]').val(response.fk_area);
-                    $('#id01').find('input[name="id_area"]').val(response.id_area);
+                    $('#id01').find('input[name="area"]').val(response.fk_area);
                     $('#id01').find('input[name="created_at"]').val(response.created_at);
                     $('#id01').find('input[name="updated_at"]').val(response.updated_at);
 

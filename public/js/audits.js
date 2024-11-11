@@ -33,9 +33,15 @@ $(document).ready(function () {
 
                     // Rellenar la tabla de preguntas de la auditoría
                     auditDetails.forEach(function (detail) {
-                        var complianceIcon = detail.compliance === "Yes"
+                        
+
+                            var complianceIcon = detail.compliance === "Yes"
                             ? '<i class="fas fa-check-circle" style="color: green;"></i>'
                             : '<i class="fas fa-times-circle" style="color: red;"></i>';
+                            var question_complete = detail.question_complete === "1"
+                            ? '<i class="fas fa-check-circle" style="color: green;"></i>'
+                            : '<i class="fas fa-times-circle" style="color: red;"></i>';
+                            
 
                         var findings = detail.Que_se_encontro ? detail.Que_se_encontro : "Sin problema";
                         var questionsRow = `
@@ -44,7 +50,7 @@ $(document).ready(function () {
                                 <td>${detail.question}</td>
                                 <td>${detail.create_at}</td>
                                 <td>${detail.source}</td>
-                                <td>${complianceIcon}</td>
+                                <td>${question_complete}</td>
                                 <td>${findings}</td>
                             </tr>
                         `;
@@ -52,16 +58,30 @@ $(document).ready(function () {
 
                         // Rellenar la tabla de acciones tomadas si existen
                         if (detail.action_description && detail.evidence_accion && detail.responsable && detail.compliance && detail.action_created_at && detail.action_updated_at) {
+                            var evidenceActionImage = detail.evidence_accion 
+                            ? `<img src="${detail.evidence_accion}" alt="Evidence Action" style="width: 100px; height: auto;">` 
+                            : "No hay evidencia";
+
+                            var evidenceQuestion = detail.evidence_answer 
+                            ? `<img src="${detail.evidence_answer}" alt="Evidence Question" style="width: 100px; height: auto;">` 
+                            : "No hay evidencia";
+
+                            var iscomplete = detail.action_compliance === "Yes"
+                            ? '<i class="fas fa-check-circle" style="color: green;"></i>'
+                            : '<i class="fas fa-times-circle" style="color: red;"></i>';
+
                             var actionsRow = `
                                 <tr>
                                     <td>${detail.category}</td>
                                     <td>${detail.question}</td>
                                     <td>${detail.Que_se_encontro}</td>
-                                    <td>${detail.evidence_accion}</td>
+                                    <td>${evidenceQuestion}</td>
+                                    <td>${detail.fecha_respuesta_pregunta}</td>
+                                    <td>${detail.action_description}</td>
                                     <td>${detail.responsable}</td>
-                                    <td>${detail.compliance}</td>
-                                    <td>${detail.created_at}</td>
-                                    <td>${detail.updated_at}</td>
+                                    <td>${iscomplete}</td>
+                                    <td>${evidenceActionImage}</td>
+                                    <td>${detail.action_created_at}</td>
                                 </tr>
                             `;
                             $("#taken-actions-list").append(actionsRow);

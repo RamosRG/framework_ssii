@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHOW AUDIT</title>
+    <title>Show AUDIT</title>
     <link rel="stylesheet" href="../public/css/framework/w3.css">
+    <link href="../public/assets/select2/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body,

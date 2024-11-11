@@ -70,13 +70,13 @@
                                 <th>Categoria</th>
                                 <th>Pregunta</th>
                                 <th>¿Qué se encontró?</th>
-                                <th>Evidencia</th>
+                                <th>Evidencia Pregunta</th>
+                                <th>Fecha Respuesta</th>
+                                <th>Accion tomada</th>
                                 <th>Responsable</th>
                                 <th>Revisado</th>
-                                <th>Fecha</th>
-                                <th>Tomar Evidencia</th>
-                                <th>Creado</th>
-                                <th>Actualizado</th>
+                                <th>Evidencia Accion</th>
+                                <th>Fecha respuesta Accion</th>
                             </tr>
                         </thead>
                         <tbody id="taken-actions-list">

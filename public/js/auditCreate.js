@@ -30,30 +30,36 @@ function fetchShiftData() {
             'Content-Type': 'application/json'
         }
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                let shiftSelect = document.getElementById('shift-list');
-                shiftSelect.innerHTML = ''; // Limpiar las opciones anteriores
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            let shiftSelect = $('#shift-list');
+            shiftSelect.empty(); // Limpiar las opciones anteriores
 
-                // Añadimos de nuevo la opción inicial
-                let defaultOption = document.createElement('option');
-                defaultOption.text = "Open this select menu";
-                defaultOption.selected = true;
-                shiftSelect.appendChild(defaultOption);
+            // Añadir opción predeterminada
+            shiftSelect.append(new Option("Open this select menu", "", true));
 
-                // Llenar el select con los datos de maquinaria
-                data.shift.forEach(item => {
-                    let option = document.createElement('option');
-                    option.value = item.id_shift;  // Usamos id_shift como valor
-                    option.textContent = item.shift;  // Usamos shift como el nombre a mostrar
-                    shiftSelect.appendChild(option);
-                });
-            } else {
-                console.error('Error al obtener los turnos');
-            }
-        })
-        .catch(error => console.error('Error en la solicitud:', error));
+            // Llenar el select con los datos de turnos
+            data.shift.forEach(item => {
+                let option = new Option(item.shift, item.id_shift);
+                shiftSelect.append(option);
+            });
+
+            // Inicializar Select2 en shift-list con estilos personalizados
+            shiftSelect.select2({
+                placeholder: "Seleccione un turno",
+                allowClear: true,
+                width: '100%',
+                dropdownCssClass: "custom-select2-dropdown",
+                selectionCssClass: "custom-select2-selection"
+            });
+
+            shiftSelect.trigger('change'); // Actualizar Select2
+        } else {
+            console.error('Error al obtener los turnos');
+        }
+    })
+    .catch(error => console.error('Error en la solicitud:', error));
 }
 
 function fetchMachineryData() {
@@ -64,31 +70,38 @@ function fetchMachineryData() {
             'Content-Type': 'application/json'
         }
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                let machinerySelect = document.getElementById('machinery-list');
-                machinerySelect.innerHTML = ''; // Limpiar las opciones anteriores
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            let machinerySelect = $('#machinery-list');
+            machinerySelect.empty(); // Limpiar las opciones anteriores
 
-                // Añadimos de nuevo la opción inicial
-                let defaultOption = document.createElement('option');
-                defaultOption.text = "Open this select menu";
-                defaultOption.selected = true;
-                machinerySelect.appendChild(defaultOption);
+            // Añadir opción predeterminada
+            machinerySelect.append(new Option("Open this select menu", "", true));
 
-                // Llenar el select con los datos de maquinaria
-                data.machinery.forEach(item => {
-                    let option = document.createElement('option');
-                    option.value = item.id_machinery;  // Usamos id_machinery como valor
-                    option.textContent = item.machinery;  // Usamos machinery como el nombre a mostrar
-                    machinerySelect.appendChild(option);
-                });
-            } else {
-                console.error('Error al obtener datos de maquinaria');
-            }
-        })
-        .catch(error => console.error('Error en la solicitud:', error));
+            // Llenar el select con los datos de maquinaria
+            data.machinery.forEach(item => {
+                let option = new Option(item.machinery, item.id_machinery);
+                machinerySelect.append(option);
+            });
+
+            // Inicializar Select2 en machinery-list con estilos personalizados
+            machinerySelect.select2({
+                placeholder: "Seleccione maquinaria",
+                allowClear: true,
+                width: '100%',
+                dropdownCssClass: "custom-select2-dropdown",
+                selectionCssClass: "custom-select2-selection"
+            });
+
+            machinerySelect.trigger('change'); // Actualizar Select2
+        } else {
+            console.error('Error al obtener datos de maquinaria');
+        }
+    })
+    .catch(error => console.error('Error en la solicitud:', error));
 }
+
 
 function fetchUserData() {
     fetch('/capas.com/admin/getUsers', {
@@ -238,7 +251,6 @@ document.getElementById('category-list').addEventListener('change', function () 
                     source: sourceId
                 });
                 console.log('ID de la fuente:', sourceId);
-                console.log('Preguntas a enviar:', questionsData);
                 renderQuestions(); // Actualizar la visualización de preguntas
                 questionInput.value = ''; // Limpiar el campo
             } else {
@@ -340,8 +352,6 @@ $(document).on('click', '#createAudit .btnAudit', function (e) {
         }
     });
 });
-
-
 
 function fetchAreaData() {
     fetch('/capas.com/accions/getArea', {
