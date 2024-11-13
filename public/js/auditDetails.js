@@ -45,37 +45,36 @@ $(document).ready(function () {
 
 
     function populateAuditDetails(auditDetails) {
-    const audit = auditDetails[0];
-    $("#tittle").text(audit.audit_title);
-    $("#date").val(audit.date);
-    $("#auditor").val(`${audit.name} ${audit.firstName} ${audit.lastName}`);
-    $("#status").val(audit.status);
-    $("#departament").val(audit.department);
-    $("#machinery").val(audit.machinery);
-    $("#shift").val(audit.shift);
-    $("#audit-questions-list").empty();
-console.log(audit.audit_title);
-    auditDetails.forEach(detail => {
-        const isTaken = takenQuestions.includes(detail.id_question);
-        const isAnswered = detail.is_answered || false;  // Asegúrate de tener esta propiedad de alguna manera
-        
-        // Marca la respuesta si está tomada
-        const complianceCheckbox = `
+        const audit = auditDetails[0];
+        $("#tittle").text(audit.audit_title);
+        $("#auditor").val(`${audit.name} ${audit.firstName} ${audit.lastName}`);
+        $("#status").val(audit.status);
+        $("#departament").val(audit.department);
+        $("#machinery").val(audit.machinery);
+        $("#shift").val(audit.shift);
+        $("#audit-questions-list").empty();
+        console.log(audit.audit_title);
+        auditDetails.forEach(detail => {
+            const isTaken = takenQuestions.includes(detail.id_question);
+            const isAnswered = detail.is_answered || false;  // Asegúrate de tener esta propiedad de alguna manera
+
+            // Marca la respuesta si está tomada
+            const complianceCheckbox = `
             <input type="checkbox" class="w3-check" 
                 ${isAnswered ? "disabled checked" : (isTaken ? "disabled" : "checked")} 
                 data-question-id="${detail.id_question}"
             >
         `;
-        
-        // Si la pregunta está respondida, no permitir la cámara ni el envío
-        const cameraButtonDisplay = isAnswered ? "none" : (isTaken ? "none" : "block");
-        const sendButtonDisabled = isAnswered ? "disabled" : "";
-        
-        // Deshabilita la entrada de texto y cambia el estilo si la pregunta ya fue respondida
-        const answerInputDisabled = isAnswered ? "disabled" : "";
-        const rowClass = isAnswered ? "answered" : "";
 
-        const row = `
+            // Si la pregunta está respondida, no permitir la cámara ni el envío
+            const cameraButtonDisplay = isAnswered ? "none" : (isTaken ? "none" : "block");
+            const sendButtonDisabled = isAnswered ? "disabled" : "";
+
+            // Deshabilita la entrada de texto y cambia el estilo si la pregunta ya fue respondida
+            const answerInputDisabled = isAnswered ? "disabled" : "";
+            const rowClass = isAnswered ? "answered" : "";
+
+            const row = `
             <tr data-question-id="${detail.id_question}" class="${rowClass}">
                 <td>${detail.category}</td>
                 <td>${detail.question}</td>
@@ -98,11 +97,51 @@ console.log(audit.audit_title);
                 </td>
             </tr>
         `;
-        
-        $("#audit-questions-list").append(row);
-    });
-}
 
+            $("#audit-questions-list").append(row);
+        });
+    }
+
+    // Manejar la creación de preguntas
+    $(document).on('click', '#createQuestion .AuditCreate', function (e) {
+        e.preventDefault();
+
+        var form = $('#questionForm');
+        var formData = form.serialize();
+        console.log(formData);
+
+        $.ajax({
+            url: '../accions/insertQuestions', // URL del controlador que inserta los datos
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 'success') {
+                    Swal.fire({
+                        title: 'Éxito!',
+                        text: 'Pregunta Creada con éxito!',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Error al crear la pregunta: ' + response.message,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Ocurrió un error al intentar crear la pregunta.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+            }
+        });
+    });
 
     // Abre la cámara al hacer clic en el botón de cámara
     $(document).on("click", ".camera-button", function () {
@@ -124,14 +163,14 @@ console.log(audit.audit_title);
     // Función para abrir la cámara y mostrar el video en tiempo real
     function openCamera() {
         const video = document.getElementById("video");
-    
+
         // Configuración para usar la cámara trasera o la cámara frontal según el dispositivo
         const constraints = {
             video: {
                 facingMode: "environment", // Usa "environment" para la cámara trasera o "user" para la cámara frontal
             },
         };
-    
+
         navigator.mediaDevices.getUserMedia(constraints)
             .then(stream => {
                 currentStream = stream;
@@ -143,7 +182,7 @@ console.log(audit.audit_title);
                 alert("No se puede acceder a la cámara. Verifique los permisos del navegador.");
             });
     }
-    
+
 
     // Función para cerrar la cámara y detener el stream
     function closeCamera() {
@@ -213,7 +252,7 @@ console.log(audit.audit_title);
             processData: false,
             contentType: false,
             success: function (response) {
-             
+
                 if (response.status === 'success') {
                     Swal.fire({
                         icon: 'success',

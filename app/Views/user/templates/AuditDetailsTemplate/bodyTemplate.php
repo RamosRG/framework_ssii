@@ -9,15 +9,20 @@
                 <input id="no_audit" class="w3-input w3-border w3-round" type="text" name="no_audit" required>
             </div>
             <div class="w3-third form-group">
-                <label for="date"><b>Date</b></label>
+                <label for="date"><b>Date Start</b></label>
                 <input id="date" class="w3-input w3-border w3-round" type="date" name="date" required>
             </div>
             <div class="w3-third form-group">
+                <label for="date"><b>Date Finish</b></label>
+                <input id="date" class="w3-input w3-border w3-round" type="date" name="date" required>
+            </div>
+        </div>
+        <div class="w3-row-padding">
+            <div class="form-group">
                 <label for="auditor"><b>Auditor</b></label>
                 <input id="auditor" class="w3-input w3-border w3-round" type="text" name="auditor" required>
             </div>
         </div>
-
         <!-- Additional Information -->
         <div class="w3-row-padding">
             <div class="w3-third form-group">
@@ -129,7 +134,7 @@
 
         <!-- Submit Button -->
         <button class="w3-button w3-indigo w3-right w3-margin-top" type="submit">Submit Audit</button>
-        
+
         <!-- Modal for Camera and Photo Capture -->
         <div id="overlay" class="overlay"></div>
         <div id="photoModal" class="photo-modal">

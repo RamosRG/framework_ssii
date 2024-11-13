@@ -8,6 +8,7 @@ function fetchTakenActions(idAudit) {
             if (response.status === "success") {
                 populateTakenActions(response.data, idAudit);
                 fetchUserData();
+                fetchUserData1();
             } else {
                 console.error("No se encontraron acciones tomadas.");
             }
@@ -28,7 +29,12 @@ function populateTakenActions(actions, id_audit) {
                 <td>${action.answer}</td>
                 <td>${action.evidence ? `<img src="${action.evidence}" alt="Evidencia" style="width: 100px; height: auto;">` : 'Sin evidencia'}</td>
                 <td><input type="text" name="action${action.id_question}" placeholder="Escribe aquí..."></td>
-                <td><input type="text" name="responsable_${action.id_question}" value="${action.name} ${action.firstName} ${action.lastName}"></td>
+                <td>
+    <select name="responsable_${action.id_question}" class="responsable-select" data-question-id="${action.id_question}">
+        <option value="" selected disabled>Selecciona un usuario</option>
+        <!-- Opciones de usuarios se llenarán dinámicamente -->
+    </select>
+</td>
                 <td><input type="date" name="date_${action.id_question}"></td>
                 <td>
                     <button class="w3-btn w3-round-large camera-button" style="display:${takenQuestions.includes(action.id_question) ? "none" : "block"};" data-question-id="${action.id_question}">
@@ -128,17 +134,18 @@ function populateTakenActions(actions, id_audit) {
         stopCamera();
     });
 
-    // Enviar datos de la acción
     // Evento para enviar datos de la acción
     $(document).off("click", ".btn-accions").on("click", ".btn-accions", function () {
         const questionId = $(this).data("question-id");
         const action = $(`input[name="action${questionId}"]`).val();
-        const responsable = $(`input[name="responsable_${questionId}"]`).val();
+        
+        // Cambiado de input a select para obtener el valor del responsable
+        const responsable = $(`select[name="responsable_${questionId}"]`).val();  // Ahora es un select
         const date = $(`input[name="date_${questionId}"]`).val();
         const isComplete = $(`input[name="is_complete_${questionId}"]:checked`).val();
         const idAnswer = $(`input[name="id_answer${questionId}"]`).val();
         const imageData = $(this).closest("tr").find(".camera-button").data("imageData");  // Obtén el imageData específico del botón de la cámara para esta fila
-        
+    
         if (action && responsable && date && isComplete !== undefined) {
             if (imageData) {
                 // Llama a sendAccionsData solo si imageData está presente
@@ -151,6 +158,7 @@ function populateTakenActions(actions, id_audit) {
         }
         return false;
     });
+    
 }
 
 function sendAccionsData(questionId, action, responsable, date, isComplete, idAnswer, imageData, id_audit) {
@@ -161,7 +169,7 @@ function sendAccionsData(questionId, action, responsable, date, isComplete, idAn
     formData.append('is_complete', isComplete);
     formData.append('create_at', date);
     formData.append('id_audit', id_audit);  // Agregar id_audit
-    
+
     // Convertir imagen a Blob y agregarla como archivo
     const byteString = atob(imageData.split(',')[1]);
     const mimeString = imageData.split(',')[0].split(':')[1].split(';')[0];
@@ -182,7 +190,7 @@ function sendAccionsData(questionId, action, responsable, date, isComplete, idAn
         processData: false,
         contentType: false,
         success: function (response) {
-            
+
             if (response.status === 'success') {
                 Swal.fire({
                     icon: 'success',
@@ -211,7 +219,7 @@ function sendAccionsData(questionId, action, responsable, date, isComplete, idAn
             });
         }
     });
-   
+
 }
 function fetchUserData() {
     fetch('/capas.com/admin/getUsers', {
@@ -220,32 +228,68 @@ function fetchUserData() {
             'Content-Type': 'application/json'
         }
     })
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.status === 'success') {
+                let userSelect = document.getElementById('user-list');
+                userSelect.innerHTML = ''; // Limpiar las opciones anteriores
+
+                // Añadir de nuevo la opción inicial
+                let defaultOption = document.createElement('option');
+                defaultOption.text = "Open this select menu";
+                defaultOption.selected = true;
+                defaultOption.disabled = true;
+                userSelect.appendChild(defaultOption);
+
+                // Llenar el select con los datos de los usuarios
+                data.user.forEach(item => {
+                    let option = document.createElement('option');
+                    option.value = item.id_user;
+                    option.textContent = item.email;
+                    userSelect.appendChild(option);
+                });
+
+                // Inicializamos Select2 en el elemento
+                $(userSelect).select2({
+                    placeholder: "Select a user",
+                    width: '100%'  // Ajustar al ancho del contenedor
+                });
+            } else {
+                console.error('Error al obtener datos de los usuarios');
+            }
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
+}
+function fetchUserData1() {
+    fetch('/capas.com/admin/getUsers', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
     .then(response => response.json())
     .then(data => {
-        
         if (data.status === 'success') {
-            let userSelect = document.getElementById('user-list');
-            userSelect.innerHTML = ''; // Limpiar las opciones anteriores
+            // Llenar todos los selects de la página con los usuarios
+            document.querySelectorAll('.responsable-select').forEach(select => {
+                select.innerHTML = ''; // Limpiar opciones anteriores
 
-            // Añadir de nuevo la opción inicial
-            let defaultOption = document.createElement('option');
-            defaultOption.text = "Open this select menu";
-            defaultOption.selected = true;
-            defaultOption.disabled = true;
-            userSelect.appendChild(defaultOption);
+                // Añadir la opción predeterminada
+                let defaultOption = document.createElement('option');
+                defaultOption.text = "Selecciona un usuario";
+                defaultOption.value = "";
+                defaultOption.selected = true;
+                defaultOption.disabled = true;
+                select.appendChild(defaultOption);
 
-            // Llenar el select con los datos de los usuarios
-            data.user.forEach(item => {
-                let option = document.createElement('option');
-                option.value = item.id_user;
-                option.textContent = item.email;
-                userSelect.appendChild(option);
-            });
-
-            // Inicializamos Select2 en el elemento
-            $(userSelect).select2({
-                placeholder: "Select a user",
-                width: '100%'  // Ajustar al ancho del contenedor
+                // Llenar el select con los datos de los usuarios
+                data.user.forEach(item => {
+                    let option = document.createElement('option');
+                    option.value = item.id_user;
+                    option.textContent = `${item.email}`; // Mostrar nombre completo
+                    select.appendChild(option);
+                });
             });
         } else {
             console.error('Error al obtener datos de los usuarios');

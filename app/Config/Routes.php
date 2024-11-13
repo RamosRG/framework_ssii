@@ -15,6 +15,8 @@ $routes->group('auth', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('forgotPassword', 'AuthController::forgotPassword');
     $routes->get('getData', 'AuthController::getData');
     $routes->get('getUserById/(:num)', 'AuthController::getUserById/$1');
+    $routes->get('getDepartmentsByArea/(:num)', 'AuthController::getDepartmentsByArea/$1');
+    $routes->get('getAreaByDepartment/(:num)', 'AuthController::getAreaByDepartment/$1');
 });
 
 

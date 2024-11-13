@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\AuthModel;
+use App\Models\DepartamentModel;
 use CodeIgniter\Email\Email;
 
 class AuthController extends BaseController
@@ -104,4 +105,19 @@ class AuthController extends BaseController
             return $this->response->setJSON(['error' => 'Usuario no encontrado']);
         }
     }
+    public function getDepartmentsByArea($areaId)
+{
+    $model = new DepartamentModel();
+    $departments = $model->where('fk_area', $areaId)->findAll();
+
+    return $this->response->setJSON($departments);
+}
+public function getAreaByDepartment($areaId)
+{
+    $model = new DepartamentModel();
+    $departments = $model->where('fk_area', $areaId)->findAll();
+
+    return $this->response->setJSON($departments);
+}
+
 }

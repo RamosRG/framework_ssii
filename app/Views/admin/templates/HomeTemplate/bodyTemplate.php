@@ -95,7 +95,7 @@
         <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
           <div style="flex: 1;">
             <label><b>CREATED</b></label>
-            <input class="w3-input w3-border" type="text" name="created_at" id="created_at" required>
+            <input class="w3-input w3-border" type="date" name="created_at" id="created_at" required>
           </div>
           <div style="flex: 1;">
             <label><b>UPDATED</b></label>

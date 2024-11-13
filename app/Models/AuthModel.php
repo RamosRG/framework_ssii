@@ -51,7 +51,7 @@ class AuthModel extends Model
 
     public function getUsersByNumbre($id)
     {
-        return $this->select('users.id_user, users.email, users.name, users.firstName, users.lastName, area.area, department.department, users.`status`,
+        return $this->select('users.id_user, users.email, users.name, users.firstName, users.lastName, area.area, area.id_area, department.department, users.fk_department, users.`status`,
          users.created_at, users.updated_at')
             ->join('department', 'department.id_department = users.fk_department') // Realiza el INNER JOIN
             ->join('area', 'area.id_area = department.fk_area') // Realiza el INNER JOIN

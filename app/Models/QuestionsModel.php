@@ -82,10 +82,10 @@ class QuestionsModel extends Model
 
     public function showAllQuestions()
     {
-        return $this->select('questions.id_question, questions.question, questions.create_for, questions.status, source.source, category.category')
+        return $this->select('questions.id_question, questions.question, questions.created_by, questions.status, source.source, category.category')
             ->join('category', 'questions.fk_category = category.id_category')
             ->join('source', 'questions.fk_source = source.id_source')
-            ->where('questions.status', 1)
+            ->where('questions.status', 0)
             ->orderBy('category.category', 'ASC')
             ->findAll();
     }

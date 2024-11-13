@@ -108,7 +108,6 @@ class AccionsController extends BaseController
 
       // Llamamos al método del modelo para obtener las preguntas activas
       $questions = $model->showAllQuestions();
-
       // Ver el resultado en la consola para verificar el formato JSON
       echo json_encode($questions);
    }

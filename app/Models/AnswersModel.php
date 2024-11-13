@@ -32,6 +32,7 @@ answers.evidence, answers.create_at,  users.`name`, users.firstName, users.lastN
             ->join('audit', 'audit.id_audit = questions.fk_audit')
             ->join('users', 'users.id_user = audit.fk_auditor')
             ->where('audit.id_audit', $idAudit)
+            ->where('audit.status', 1)
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
     }

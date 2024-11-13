@@ -4,15 +4,15 @@
 </div>
 
 <!-- Scripts -->
-<script src="../public/js/script.js"></script>
-<script src="../public/js/jquery.dataTables.min.js"></script>
+<script src="../public/js/framework/script.js"></script>
 <script src="../public/assets/sweetalert2/sweetalert2.all.min.js"></script>
-<script src="../public/js/functionsCreate.js"></script>
+<script src="../public/js/framework/jquery.dataTables.min.js"></script>
+<script src="../public/js/showQuestions.js"></script>
 <script>
- 
     $(document).ready(function() {
         $('#example').DataTable();
     });
+
     function w3_open() {
         if (window.innerWidth <= 600) {
             document.getElementById("mySidebar").style.width = "100%";
@@ -30,4 +30,5 @@
 </script>
 
 </body>
+
 </html>
