@@ -13,7 +13,7 @@ class AuditoriaCapas extends Migration
             'id_accions'          => ['type' => 'INT', 'auto_increment' => true],
             'fk_answer'           => ['type' => 'INT', 'null' => true],
             'accions'             => ['type' => 'VARCHAR', 'constraint' => '255', 'null' => true],
-            'create_at'           => ['type' => 'TIMESTAMP', 'null' => true],
+            'created_at'           => ['type' => 'TIMESTAMP', 'null' => true],
             'update_at'           => ['type' => 'TIMESTAMP', 'null' => true],
         ]);
         $this->forge->addKey('id_accions', true);
@@ -27,8 +27,8 @@ class AuditoriaCapas extends Migration
             'answer'              => ['type' => 'VARCHAR', 'constraint' => '200', 'default' => ''],
             'observation'         => ['type' => 'VARCHAR', 'constraint' => '200', 'default' => ''],
             'evidence'            => ['type' => 'VARCHAR', 'constraint' => '200', 'default' => ''],
-            'create_at'           => ['type' => 'TIMESTAMP', 'null' => true],
-            'update_at'           => ['type' => 'TIMESTAMP', 'null' => true],
+            'created_at'           => ['type' => 'TIMESTAMP', 'null' => true],
+            'updated_at'           => ['type' => 'TIMESTAMP', 'null' => true],
         ]);
         $this->forge->addKey('id_answer', true);
         $this->forge->addForeignKey('fk_question', 'questions', 'id_question', 'CASCADE', 'SET NULL');
@@ -39,8 +39,8 @@ class AuditoriaCapas extends Migration
             'id_area'             => ['type' => 'INT', 'auto_increment' => true],
             'area'                => ['type' => 'VARCHAR', 'constraint' => '50', 'default' => ''],
             'status'              => ['type' => 'INT', 'default' => 1],
-            'create_at'           => ['type' => 'TIMESTAMP', 'null' => true],
-            'update_at'           => ['type' => 'TIMESTAMP', 'null' => true],
+            'created_at'           => ['type' => 'TIMESTAMP', 'null' => true],
+            'updated_at'           => ['type' => 'TIMESTAMP', 'null' => true],
         ]);
         $this->forge->addKey('id_area', true);
         $this->forge->createTable('area');
@@ -57,7 +57,7 @@ class AuditoriaCapas extends Migration
             'reviewed_by'         => ['type' => 'VARCHAR', 'constraint' => '50', 'null' => false],
             'date_reviewed'       => ['type' => 'DATETIME', 'null' => false],
             'fk_user'             => ['type' => 'INT', 'null' => false],
-            'create_at'           => ['type' => 'TIMESTAMP', 'null' => true],
+            'created_at'           => ['type' => 'TIMESTAMP', 'null' => true],
             'update_at'           => ['type' => 'TIMESTAMP', 'null' => true],
         ]);
         $this->forge->addKey('id_audit', true);
@@ -72,7 +72,7 @@ class AuditoriaCapas extends Migration
             'id_category'         => ['type' => 'INT', 'auto_increment' => true],
             'category'            => ['type' => 'VARCHAR', 'constraint' => '50', 'default' => ''],
             'status'              => ['type' => 'TINYINT', 'default' => 1],
-            'create_at'           => ['type' => 'TIMESTAMP', 'null' => true],
+            'created_at'           => ['type' => 'TIMESTAMP', 'null' => true],
             'update_at'           => ['type' => 'TIMESTAMP', 'null' => true],
         ]);
         $this->forge->addKey('id_category', true);
@@ -83,7 +83,7 @@ class AuditoriaCapas extends Migration
             'id_departament'      => ['type' => 'INT', 'auto_increment' => true],
             'departament'         => ['type' => 'VARCHAR', 'constraint' => '50', 'default' => ''],
             'status'              => ['type' => 'TINYINT', 'null' => true],
-            'create_at'           => ['type' => 'TIMESTAMP', 'null' => true],
+            'created_at'           => ['type' => 'TIMESTAMP', 'null' => true],
             'update_at'           => ['type' => 'TIMESTAMP', 'null' => true],
         ]);
         $this->forge->addKey('id_departament', true);
@@ -98,7 +98,7 @@ class AuditoriaCapas extends Migration
             'implementation'      => ['type' => 'VARCHAR', 'constraint' => '200', 'default' => ''],
             'improved'            => ['type' => 'VARCHAR', 'constraint' => '200', 'default' => ''],
             'evidence'            => ['type' => 'VARCHAR', 'constraint' => '150', 'null' => true],
-            'create_at'           => ['type' => 'TIMESTAMP', 'null' => true],
+            'created_at'           => ['type' => 'TIMESTAMP', 'null' => true],
             'update_at'           => ['type' => 'TIMESTAMP', 'null' => true],
         ]);
         $this->forge->addKey('id_follow-up', true);
@@ -109,7 +109,7 @@ class AuditoriaCapas extends Migration
         $this->forge->addField([
             'id_machinery'        => ['type' => 'INT', 'auto_increment' => true],
             'imachinery'          => ['type' => 'VARCHAR', 'constraint' => '150', 'default' => ''],
-            'create_at'           => ['type' => 'TIMESTAMP', 'null' => false],
+            'created_at'           => ['type' => 'TIMESTAMP', 'null' => false],
             'update_ad'           => ['type' => 'TIMESTAMP', 'null' => false],
         ]);
         $this->forge->addKey('id_machinery', true);
@@ -122,7 +122,7 @@ class AuditoriaCapas extends Migration
             'fk_auditoria'        => ['type' => 'INT', 'null' => true],
             'question'            => ['type' => 'VARCHAR', 'constraint' => '200', 'null' => true],
             'status'              => ['type' => 'TINYINT', 'null' => true],
-            'create_at'           => ['type' => 'TIMESTAMP', 'null' => true],
+            'created_at'           => ['type' => 'TIMESTAMP', 'null' => true],
             'update_at'           => ['type' => 'TIMESTAMP', 'null' => true],
             'create_for'          => ['type' => 'TIMESTAMP', 'null' => true],
             'fk_fountain'         => ['type' => 'INT', 'null' => true],
@@ -136,7 +136,7 @@ class AuditoriaCapas extends Migration
         $this->forge->addField([
             'id_shift'            => ['type' => 'INT', 'auto_increment' => true],
             'shift'               => ['type' => 'VARCHAR', 'constraint' => '50', 'default' => ''],
-            'create_at'           => ['type' => 'TIMESTAMP', 'null' => false],
+            'created_at'           => ['type' => 'TIMESTAMP', 'null' => false],
             'update_ad'           => ['type' => 'TIMESTAMP', 'null' => false],
         ]);
         $this->forge->addKey('id_shift', true);

@@ -12,33 +12,33 @@ class QuestionsModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $allowedFields = [
-        'fk_audit', 
-        'fk_category', 
-        'question', 
-        'status', 
-        'create_at', 
-        'update_at', 
-        'created_by', 
-        'fk_source', 
+        'fk_audit',
+        'fk_category',
+        'question',
+        'status',
+        'created_at',
+        'updated_at',
+        'created_by',
+        'fk_source',
         'evidence'
     ];
 
     protected $useTimestamps = true;
-    protected $createdField = 'create_at';
-    protected $updatedField = 'update_at';
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
 
     public function getAudit($auditId)
     {
         $builder = $this->db->table('questions');
-    
+
         $builder->select([
             'category.category',
             'questions.question',
-            'questions.create_at',
+            'questions.created_at',
             'source.source',
             'answers.answer AS Que_se_encontro',
             'answers.evidence AS evidence_answer',
-            'answers.create_at AS fecha_respuesta_pregunta',
+            'answers.created_at AS fecha_respuesta_pregunta',
             // Utilizamos COALESCE para reemplazar NULL con 1
             'COALESCE(answers.is_complete, 1) AS question_complete',
             // Ajuste en el CASE para mostrar "Yes" cuando es NULL o distinto de 0
@@ -53,26 +53,23 @@ class QuestionsModel extends Model
             'actions.created_at AS action_created_at',
             'actions.updated_at AS action_updated_at'
         ]);
-    
+
         // Join de las tablas necesarias
         $builder->join('source', 'source.id_source = questions.fk_source', 'inner');
         $builder->join('category', 'category.id_category = questions.fk_category', 'inner');
         $builder->join('answers', 'answers.fk_question = questions.id_question', 'left');
         $builder->join('actions', 'actions.fk_answer = answers.id_answer', 'left');
-    
+
         $builder->where('questions.fk_audit', $auditId);
-    
+
         $query = $builder->get();  // Ejecuta la consulta
         return $query->getResultArray();  // Devuelve el resultado como un array
     }
-    
-    
 
-    
     public function getQuestionsByCategory($categoryId)
     {
         return $this->where(['fk_category' => $categoryId, 'status' => 1])
-                    ->findAll();
+            ->findAll();
     }
 
     public function updateQuestionById($id, $data)
@@ -112,5 +109,4 @@ class QuestionsModel extends Model
             ->findAll();
     }
 
-    
 }

@@ -50,6 +50,8 @@ $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'auth'], f
 
 $routes->group('accions', ['namespace' => 'App\Controllers', 'filter' => 'auth'], function($routes) {
     $routes->get('addquestions', 'AccionsController::addquestions');
+    $routes->get('getAuditToEdit', 'AccionsController::getAuditToEdit');
+    $routes->get('showAuditsToEdit', 'AccionsController::showAuditsToEdit');
     $routes->get('getDashboardData', 'AccionsController::getDashboardData');
     $routes->get('dashboard', 'AccionsController::dashboard');
     $routes->get('addaudit', 'AccionsController::addaudit');

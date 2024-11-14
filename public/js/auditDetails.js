@@ -78,7 +78,7 @@ $(document).ready(function () {
             <tr data-question-id="${detail.id_question}" class="${rowClass}">
                 <td>${detail.category}</td>
                 <td>${detail.question}</td>
-                <td>${detail.create_at}</td>
+                <td>${detail.created_at}</td>
                 <td>${detail.source}</td>
                 <td>${complianceCheckbox}</td>
                 <td><input type="text" class="w3-text answer-input" ${answerInputDisabled}></td>

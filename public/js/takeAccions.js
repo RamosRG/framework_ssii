@@ -167,7 +167,7 @@ function sendAccionsData(questionId, action, responsable, date, isComplete, idAn
     formData.append('action', action);  // Agregar acción
     formData.append('responsable', responsable);
     formData.append('is_complete', isComplete);
-    formData.append('create_at', date);
+    formData.append('created_at', date);
     formData.append('id_audit', id_audit);  // Agregar id_audit
 
     // Convertir imagen a Blob y agregarla como archivo

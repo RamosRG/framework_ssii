@@ -14,7 +14,63 @@ use App\Models\AreasModel;
 
 class AccionsController extends BaseController
 {
-   
+   public function getAuditToEdit()
+   {
+      $model = new AuditModel();
+
+      // Obtener los datos de la auditoría
+      $audit = $model->getAuditForId();
+
+      if ($audit && count($audit) > 0) {
+         return $this->response->setJSON([
+            'status' => 'success',
+            'data' => $audit
+         ]); // Devolver los datos completos de la auditoría
+      } else {
+         return $this->response->setJSON(['status' => 'error', 'message' => 'Auditoría no encontrada']);
+      }
+   }
+   public function showAuditsToEdit()
+   {
+      return view('accions/edit_audit');
+   }
+   public function generateWeeklyAudit()
+   {
+      $auditModel = new AuditModel();
+      $questionsModel = new QuestionsModel();
+
+      // Verificar si ya existe una auditoría creada esta semana
+      $currentWeek = date('W');
+      $currentYear = date('Y');
+      $existingAudit = $auditModel->where('year', $currentYear)
+         ->where('week', $currentWeek)
+         ->first();
+
+      if ($existingAudit) {
+         // Si la auditoría ya existe esta semana, no se crea una nueva
+         return "La auditoría ya existe para esta semana.";
+      }
+
+      // Crear una nueva auditoría para la semana actual
+      $newAuditId = $auditModel->insert([
+         'week' => $currentWeek,
+         'year' => $currentYear,
+         'status' => 'active',
+         'created_at' => date('Y-m-d H:i:s')
+      ]);
+
+      // Copiar preguntas activas a la nueva auditoría
+      $questions = $questionsModel->where('active', 1)->findAll();
+      foreach ($questions as $question) {
+         $questionsModel->insert([
+            'audit_id' => $newAuditId,
+            'question_text' => $question['question_text'],
+            'active' => $question['active']
+         ]);
+      }
+
+      return "Auditoría semanal creada exitosamente.";
+   }
    public function dashboard()
    {
       return view("accions/dashboard");
@@ -254,7 +310,7 @@ class AccionsController extends BaseController
                   'fk_category' => $questionData['id_category'], // Usar el ID de categoría de la pregunta
                   'question' => $questionData['question'],
                   'status' => 1,
-                  'create_at' => $this->request->getPost('date'),
+                  'created_at' => $this->request->getPost('date'),
                   'fk_source' => $questionData['source'] ?? null,
                ];
             }
@@ -299,24 +355,24 @@ class AccionsController extends BaseController
       ];
    }
    public function getDashboardData()
-{
-    $auditModel = new AuditModel();
-    
-    // Obtener todos los datos para el dashboard
-    $auditsByDepartment = $this->getAuditsByDepartment($auditModel);
-    $auditsByStatus = $this->getAuditsByStatus($auditModel);
-    $auditsByShift = $this->getAuditsByShift($auditModel);
-    $auditoriasData = $this->getAuditoriasData($auditModel);
-    
-    // Enviar los datos en formato JSON
-    return $this->response->setJSON([
-        'status' => 'success',
-        'data' => [
+   {
+      $auditModel = new AuditModel();
+
+      // Obtener todos los datos para el dashboard
+      $auditsByDepartment = $this->getAuditsByDepartment($auditModel);
+      $auditsByStatus = $this->getAuditsByStatus($auditModel);
+      $auditsByShift = $this->getAuditsByShift($auditModel);
+      $auditoriasData = $this->getAuditoriasData($auditModel);
+
+      // Enviar los datos en formato JSON
+      return $this->response->setJSON([
+         'status' => 'success',
+         'data' => [
             'auditsByDepartment' => $auditsByDepartment,
             'auditsByStatus' => $auditsByStatus,
             'auditsByShift' => $auditsByShift,
             'auditoriasData' => $auditoriasData
-        ]
-    ]);
-}
+         ]
+      ]);
+   }
 }

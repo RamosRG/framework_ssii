@@ -15,8 +15,30 @@ class AuditModel extends Model
 
     // Dates
     protected $useTimestamps = true; // Correcto
-    protected $createdField = 'create_at';
-    protected $updatedField = 'update_at';
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
+
+    public function getAuditForId()
+    {
+        return $this->select('audit.id_audit, audit.audit_title, audit.created_at, audit.created_at, audit.updated_at, department.department')
+            ->join('department', 'department.id_department = audit.fk_department')
+            ->findAll();
+    }
+    public function editAudit($id_audit)
+    {
+        return $this->select('audit.id_audit, audit.audit_title, audit.created_at, department.department, category.category, questions.question, department.department,
+`source`.`source`, machinery.machinery, audit.created_at, audit.updated_at')
+            ->join('source', 'source.id_source = questions.fk_source')
+            ->join('category', 'category.id_category = questions.fk_category')
+            ->join('shift', 'audit.fk_shift = shift.id_shift')
+            ->join('machinery', 'machinery.id_machinery = audit.fk_machinery')
+            ->join('questions', 'category.id_category = questions.fk_category')
+            ->join('department', 'department.id_department = audit.fk_department')
+            ->where('audit.id_audit', $id_audit)
+            ->where('audit.status', 1)
+            ->orderBy('audit.created_at', 'DESC') // Order by created_at in descending order
+            ->findAll();
+    }
 
     public function getAuditByStatus($idUser)
     {

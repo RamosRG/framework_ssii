@@ -15,8 +15,8 @@ class ShiftModel extends Model
 
     // Dates
     protected $useTimestamps = true; // Correcto
-    protected $createdField = 'create_at';
-    protected $updatedField = 'update_at';
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
 
 }
 
