@@ -11,6 +11,17 @@ use App\Models\CategoryModel;
 
 class UserController extends BaseController
 {
+    public function getAllActions()
+    {
+        // Instanciar el modelo
+        $actionsModel = new ActionsModel();
+
+        // Obtener todos los registros de la tabla 'actions'
+        $data['actions'] = $actionsModel->findAll();
+
+        // Retornar los datos como JSON o pasarlos a una vista
+        return $this->response->setJSON($data);
+    }
     public function submitAnswer()
     {
         // Obtener los datos del POST

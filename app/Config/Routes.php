@@ -44,6 +44,8 @@ $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'auth'], f
     $routes->get('getCategory', 'UserController::getCategory');
     $routes->get('getFountain', 'UserController::getFountain');
     $routes->post('submitAnswer', 'UserController::submitAnswer');
+    $routes->get('/actions/getAll', 'ActionsController::getAllActions');
+
 
 });
 
@@ -72,9 +74,11 @@ $routes->group('accions', ['namespace' => 'App\Controllers', 'filter' => 'auth']
     $routes->get('showQuestion', 'AccionsController::showQuestion');
     $routes->get('getArea', 'AccionsController::getArea');
     $routes->post('getQuestionsByCategory', 'AccionsController::getQuestionsByCategory');
-    $routes->post('updateStatus/(:num)', 'AccionsController::updateStatus/$1');
+    $routes->post('updateStatus', 'AccionsController::updateStatus');
     $routes->get('getAudit/(:num)', 'AccionsController::getAudit/$1');
     $routes->get('getAuditOfEdit/(:num)', 'AccionsController::getAuditOfEdit/$1');
     $routes->get('auditForUsers/(:num)', 'AccionsController::auditForUsers/$1');
     $routes->get('getDepartamentById/(:num)', 'AccionsController::getDepartamentById/$1');
+    $routes->post('editAudit', 'AccionsController::editAudit');
+
 });

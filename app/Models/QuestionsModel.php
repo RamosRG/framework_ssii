@@ -95,7 +95,7 @@ class QuestionsModel extends Model
     public function auditForUser($id_audit)
     {
         return $this->select('audit.audit_title, audit.fk_auditor, users.name, users.firstName, users.lastName, shift.shift, machinery.machinery, department.department,
-                             category.category, questions.question, questions.id_question, questions.create_at, source.source, audit.no_audit,
+                             category.category, questions.question, questions.id_question, questions.created_at, source.source, audit.no_audit,
                              audit.id_audit, audit.fk_auditor, audit.status, audit.date, audit.id_audit')
             ->join('source', 'source.id_source = questions.fk_source')
             ->join('category', 'category.id_category = questions.fk_category')

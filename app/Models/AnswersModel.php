@@ -15,22 +15,24 @@ class AnswersModel extends Model
         'answer',
         'observation',
         'evidence',
-        'create_at',
-        'update_at'
+        'created_at',
+        'updated_at'
     ];
 
     // Permitir que los timestamps se actualicen automáticamente
     protected $useTimestamps = true;
-    protected $createdField = 'create_at';
-    protected $updatedField = 'update_at';
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
 
     public function getAcciones($idAudit)
     {
         return $this->select('audit.id_audit, questions.id_question, questions.question, questions.`status`, answers.id_answer, answers.is_complete, answers.answer,
-answers.evidence, answers.create_at,  users.`name`, users.firstName, users.lastName')
+answers.evidence, answers.created_at,  users.`name`, users.firstName, users.lastName, actions.action_description, actions.created_at,
+actions.evidence_accion, actions.is_complete')
             ->join('questions', 'questions.id_question = answers.fk_question')
             ->join('audit', 'audit.id_audit = questions.fk_audit')
             ->join('users', 'users.id_user = audit.fk_auditor')
+            ->join('actions', 'answers.id_answer = actions.fk_answer')
             ->where('audit.id_audit', $idAudit)
             ->where('audit.status', 1)
             ->get()

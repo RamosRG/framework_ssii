@@ -11,9 +11,69 @@ use App\Models\CategoryModel;
 use App\Models\FountainModel;
 use App\Models\QuestionsModel;
 use App\Models\AreasModel;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class AccionsController extends BaseController
 {
+   public function editAudit()
+   {
+       $request = service('request');
+
+       try {
+           // Leer los datos enviados
+           $requestData = json_decode($request->getBody(), true);
+
+           // Validar campos requeridos
+           if (
+               empty($requestData['audit_title']) ||
+               empty($requestData['fk_auditor']) ||
+               empty($requestData['fk_department']) ||
+               empty($requestData['fk_shift']) ||
+               empty($requestData['fk_machinery'])
+           ) {
+               return $this->response->setJSON([
+                   'status' => 'error',
+                   'message' => 'Faltan datos principales de la auditoría.',
+               ])->setStatusCode(ResponseInterface::HTTP_BAD_REQUEST);
+           }
+
+           // Preparar los datos para la actualización
+           $dataToUpdate = [
+               'audit_title'   => $requestData['audit_title'],
+               'fk_auditor'    => $requestData['fk_auditor'],
+               'fk_department' => $requestData['fk_department'],
+               'fk_shift'      => $requestData['fk_shift'],
+               'fk_machinery'  => $requestData['fk_machinery'],
+               'date_start'    => $requestData['date_start'] ?? null,
+               'date_end'      => $requestData['date_end'] ?? null,
+               'reviewed_by'   => $requestData['reviewed_by'] ?? null,
+               'review_date'   => $requestData['review_date'] ?? null,
+               'status'        => $requestData['status'] ?? 1, // Activo por defecto
+           ];
+
+           // Actualizar en la base de datos
+           $auditModel = new AuditModel();
+           $updated = $auditModel->update($requestData['id_audit'], $dataToUpdate);
+
+           if (!$updated) {
+               return $this->response->setJSON([
+                   'status' => 'error',
+                   'message' => 'No se pudo actualizar la auditoría.',
+               ])->setStatusCode(ResponseInterface::HTTP_INTERNAL_SERVER_ERROR);
+           }
+
+           // Respuesta exitosa
+           return $this->response->setJSON([
+               'status' => 'success',
+               'message' => 'Auditoría actualizada correctamente.',
+           ]);
+       } catch (\Exception $e) {
+           return $this->response->setJSON([
+               'status' => 'error',
+               'message' => 'Error al procesar la solicitud: ' . $e->getMessage(),
+           ])->setStatusCode(ResponseInterface::HTTP_INTERNAL_SERVER_ERROR);
+       }
+   }
    public function AuditToEdit()
    {
       return view('accions/audit_to_edit');
@@ -159,25 +219,32 @@ class AccionsController extends BaseController
       }
    }
    //Actualizar el estatus de las preguntas
-   public function updateStatus($id)
+   public function updateStatus()
    {
-      $model = new QuestionsModel();
-
-      // Obtener el nuevo estado desde el formulario o AJAX
-      $status = $this->request->getPost('status');
-
-      // Validamos el status, debe ser 0 o 1
-      if ($status != 0 && $status != 1) {
-         return $this->response->setJSON(['error' => 'Status inválido']);
-      }
-
-      // Actualizar el estado de la pregunta por ID
-      if ($model->update($id, ['status' => $status])) {
-         return $this->response->setJSON(['success' => 'El estado ha sido actualizado correctamente']);
-      } else {
-         return $this->response->setJSON(['error' => 'No se pudo actualizar el estado']);
-      }
+       $model = new QuestionsModel();
+   
+       // Obtener los datos desde el cuerpo de la solicitud POST
+       $id = $this->request->getPost('questionId');
+       $status = $this->request->getPost('status');
+   
+       // Validamos el status, debe ser 0 o 1
+       if ($status != 0 && $status != 1) {
+           return $this->response->setJSON(['error' => 'Status inválido']);
+       }
+   
+       // Validamos que el ID de la pregunta exista
+       if (!$id) {
+           return $this->response->setJSON(['error' => 'ID de pregunta no proporcionado']);
+       }
+   
+       // Actualizar el estado de la pregunta por ID
+       if ($model->update($id, ['status' => $status])) {
+           return $this->response->setJSON(['success' => 'El estado ha sido actualizado correctamente']);
+       } else {
+           return $this->response->setJSON(['error' => 'No se pudo actualizar el estado']);
+       }
    }
+   
    public function showQuestion()
    {
       $model = new QuestionsModel();

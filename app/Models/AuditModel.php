@@ -18,6 +18,8 @@ class AuditModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
+
+
     public function getAuditForId()
     {
         return $this->select('audit.id_audit, audit.audit_title, audit.created_at, audit.created_at, audit.updated_at, department.department')
@@ -26,8 +28,9 @@ class AuditModel extends Model
     }
     public function editAudit($id_audit)
     {
-        return $this->select('audit.id_audit, audit.audit_title, audit.created_at, department.department, category.category, questions.question, department.department,
-`source`.`source`, machinery.machinery, audit.created_at, audit.updated_at')
+        return $this->select('audit.id_audit, audit.audit_title, audit.fk_auditor, audit.fk_department, audit.fk_shift, audit.fk_machinery,
+         audit.created_at, department.department, category.category, questions.id_question, questions.question,
+         department.department, questions.status, `source`.`source`, machinery.machinery, audit.created_at, audit.updated_at')
             ->join('machinery', 'machinery.id_machinery = audit.fk_machinery')
             ->join('questions', 'audit.id_audit = questions.fk_audit')
             ->join('department', 'department.id_department = audit.fk_department')
@@ -36,6 +39,7 @@ class AuditModel extends Model
             ->join('category', 'category.id_category = questions.fk_category')
             ->where('audit.id_audit', $id_audit)
             ->where('audit.status', 1)
+            ->where('questions.status', 1)
             ->orderBy('audit.created_at', 'DESC') // Order by created_at in descending order
             ->findAll();
     }
