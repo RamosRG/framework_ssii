@@ -14,6 +14,26 @@ use App\Models\AreasModel;
 
 class AccionsController extends BaseController
 {
+   public function AuditToEdit()
+   {
+      return view('accions/audit_to_edit');
+   }
+   public function getAuditOfEdit($data)
+   {
+      $model = new AuditModel();
+
+      // Obtener los datos de la auditoría
+      $audit = $model->editAudit($data);
+
+      if ($audit && count($audit) > 0) {
+         return $this->response->setJSON([
+            'status' => 'success',
+            'data' => $audit
+         ]); // Devolver los datos completos de la auditoría
+      } else {
+         return $this->response->setJSON(['status' => 'error', 'message' => 'Auditoría no encontrada']);
+      }
+   }
    public function getAuditToEdit()
    {
       $model = new AuditModel();

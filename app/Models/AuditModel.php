@@ -28,12 +28,12 @@ class AuditModel extends Model
     {
         return $this->select('audit.id_audit, audit.audit_title, audit.created_at, department.department, category.category, questions.question, department.department,
 `source`.`source`, machinery.machinery, audit.created_at, audit.updated_at')
-            ->join('source', 'source.id_source = questions.fk_source')
-            ->join('category', 'category.id_category = questions.fk_category')
-            ->join('shift', 'audit.fk_shift = shift.id_shift')
             ->join('machinery', 'machinery.id_machinery = audit.fk_machinery')
-            ->join('questions', 'category.id_category = questions.fk_category')
+            ->join('questions', 'audit.id_audit = questions.fk_audit')
             ->join('department', 'department.id_department = audit.fk_department')
+            ->join('source', 'source.id_source = questions.fk_source')
+            ->join('shift', 'audit.fk_shift = shift.id_shift')
+            ->join('category', 'category.id_category = questions.fk_category')
             ->where('audit.id_audit', $id_audit)
             ->where('audit.status', 1)
             ->orderBy('audit.created_at', 'DESC') // Order by created_at in descending order

@@ -14,49 +14,46 @@ $(document).ready(function () {
     ]
   });
 
-  var audit_id = data.id_audit; // Obtener el ID de la auditoría de la fila
-  if (!audit_id) {
-    alert("No se pudo obtener el ID de la auditoría.");
-    return;
-  }
-  
-  // Realizar la solicitud AJAX para obtener los datos de la auditoría
-  $.ajax({
-    url: "/capas.com/accions/getAuditToEdit/" + audit_id, // Cambié userId por audit_id
-    type: "GET",
-    dataType: "json",
-    success: function (response) {
-      if (response.status === "error") {
-        alert(response.message);
-      } else {
-        console.log(response);
-        // Guardar los datos de la auditoría en localStorage
-        localStorage.setItem("auditData", JSON.stringify(response.data));
-  
-        // Confirmar si los datos fueron almacenados en localStorage
-        if (localStorage.getItem("auditData")) {
-          // Redirigir a la vista de detalles
-          window.location.href = "/capas.com/accions/auditdetails";
-        } else {
-          alert("No se pudieron guardar los datos en localStorage.");
-        }
-      }
-    },
-    error: function () {
-      alert("Error al obtener los datos de la auditoría.");
-    },  
-  });
-});
+ $(document).ready(function () {
+   // Inicializar DataTable y asignarla a la variable 'table'
+   var table = $("#auditTable").DataTable();
 
-$(document).ready(function () {
-  // Obtener los datos de la auditoría desde localStorage
-  var auditData = localStorage.getItem("auditData");
-  if (auditData) {
-    var audit = JSON.parse(auditData);
+   // Evento para manejar el click en el botón '.btn-getAudit'
+   $("#auditTable").on("click", ".btn-getAudit", function () {
+     var data = table.row($(this).parents("tr")).data();
+     var userId = data.id_audit; // Obtener el ID de la auditoría de la fila
 
-    // Rellenar las cajas de texto con los datos de la auditoría
-    $("#id_audit").val(audit.id_audit);
-    $("#date").val(audit.date);
-  } else {
-  }
+     if (!userId) {
+       alert("No se pudo obtener el ID de la auditoría.");
+       return;
+     }
+
+     // Realizar la solicitud AJAX para obtener los datos de la auditoría
+     $.ajax({
+       url: "/capas.com/accions/getAuditOfEdit/" + userId,
+       type: "GET",
+       dataType: "json",
+       success: function (response) {
+         if (response.error) {
+           alert(response.error);
+         } else {
+           console.log(response);
+           // Guardar los datos de la auditoría en localStorage
+           localStorage.setItem("auditData", JSON.stringify(response));
+
+           // Confirmar si los datos fueron almacenados en localStorage
+           if (localStorage.getItem("auditData")) {
+             // Redirigir a la vista de detalles
+             window.location.href = "/capas.com/accions/AuditToEdit";
+           } else {
+           }
+         }
+       },
+       error: function () {
+         alert("Error al obtener los datos de la auditoría.");
+       },
+     });
+   });
+ });
+
 });

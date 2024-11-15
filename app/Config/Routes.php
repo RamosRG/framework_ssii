@@ -49,6 +49,7 @@ $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'auth'], f
 
 
 $routes->group('accions', ['namespace' => 'App\Controllers', 'filter' => 'auth'], function($routes) {
+    $routes->get('AuditToEdit', 'AccionsController::AuditToEdit');
     $routes->get('addquestions', 'AccionsController::addquestions');
     $routes->get('getAuditToEdit', 'AccionsController::getAuditToEdit');
     $routes->get('showAuditsToEdit', 'AccionsController::showAuditsToEdit');
@@ -73,7 +74,7 @@ $routes->group('accions', ['namespace' => 'App\Controllers', 'filter' => 'auth']
     $routes->post('getQuestionsByCategory', 'AccionsController::getQuestionsByCategory');
     $routes->post('updateStatus/(:num)', 'AccionsController::updateStatus/$1');
     $routes->get('getAudit/(:num)', 'AccionsController::getAudit/$1');
+    $routes->get('getAuditOfEdit/(:num)', 'AccionsController::getAuditOfEdit/$1');
     $routes->get('auditForUsers/(:num)', 'AccionsController::auditForUsers/$1');
     $routes->get('getDepartamentById/(:num)', 'AccionsController::getDepartamentById/$1');
 });
-
