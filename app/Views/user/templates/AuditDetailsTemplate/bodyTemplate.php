@@ -77,21 +77,27 @@
                             <th>Acción</th>
                             <th>Responsable</th>
                             <th>Fecha</th>
-                            <th>Tomar Evidencia</th>
                             <th>Verificado</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody id="taken-actions-list">
-                        <!-- Dynamic rows inserted here -->
+                        <!-- Las filas de acciones se llenan dinámicamente -->
                     </tbody>
                 </table>
             </div>
+
+            <!-- Select principal para escoger al responsable -->
+            <select id="user-list" name="user" class="w3-input w3-border w3-round">
+                <option selected>Selecciona un usuario</option>
+                <!-- Opciones dinámicas se llenarán aquí -->
+            </select>
+
             <div>
-                <select id="user-list" name="user" class="w3-input w3-border w3-round">
-                    <option selected>Select a user</option>
-                    <!-- Dynamic options populated here -->
-                </select>
+                <br>
+                <button id="send-data" class="w3-button w3-green w3-block w3-round w3-animate-input">
+                    Enviar al Supervisor
+                </button>
             </div>
         </div>
 

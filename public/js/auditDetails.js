@@ -53,7 +53,6 @@ $(document).ready(function () {
         $("#machinery").val(audit.machinery);
         $("#shift").val(audit.shift);
         $("#audit-questions-list").empty();
-        console.log(audit.audit_title);
         auditDetails.forEach(detail => {
             const isTaken = takenQuestions.includes(detail.id_question);
             const isAnswered = detail.is_answered || false;  // Asegúrate de tener esta propiedad de alguna manera

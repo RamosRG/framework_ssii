@@ -26,16 +26,32 @@ class AnswersModel extends Model
 
     public function getAcciones($idAudit)
     {
-        return $this->select('audit.id_audit, questions.id_question, questions.question, questions.`status`, answers.id_answer, answers.is_complete, answers.answer,
-answers.evidence, answers.created_at,  users.`name`, users.firstName, users.lastName, actions.action_description, actions.created_at,
-actions.evidence_accion, actions.is_complete')
-            ->join('questions', 'questions.id_question = answers.fk_question')
-            ->join('audit', 'audit.id_audit = questions.fk_audit')
-            ->join('users', 'users.id_user = audit.fk_auditor')
-            ->join('actions', 'answers.id_answer = actions.fk_answer')
-            ->where('audit.id_audit', $idAudit)
+        return $this->select('
+        audit.id_audit, 
+        questions.id_question, 
+        questions.question, 
+        questions.`status`, 
+        answers.id_answer, 
+        answers.is_complete, 
+        answers.answer,
+        answers.evidence, 
+        answers.created_at,  
+        users.`name`, 
+        users.firstName, 
+        users.lastName, 
+        actions.action_description, 
+        actions.created_at,
+        actions.evidence_accion, 
+        actions.is_complete
+    ')
+        ->join('questions', 'questions.id_question = answers.fk_question', 'LEFT')
+        ->join('audit', 'audit.id_audit = questions.fk_audit', 'LEFT')
+        ->join('users', 'users.id_user = audit.fk_auditor', 'LEFT')
+        ->join('actions', 'answers.id_answer = actions.fk_answer', 'LEFT')
+        ->where('audit.id_audit', $idAudit)
             ->where('audit.status', 1)
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
     }
+
 }

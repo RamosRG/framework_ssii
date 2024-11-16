@@ -11,6 +11,29 @@ use App\Models\CategoryModel;
 
 class UserController extends BaseController
 {
+    public function savedAudit()
+    {
+        $data = $this->request->getJSON(); // Recibe los datos JSON como objeto stdClass
+
+        // Verificar si se ha recibido tableData
+        if (!isset($data->tableData)) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'No se recibieron los datos de las acciones']);
+        }
+
+        $auditModel = new ActionsModel();
+
+        // Llamar al método para actualizar los supervisores
+        $result = $auditModel->updateActionSupervisors($data->tableData); // $data->tableData es el objeto
+
+
+        if ($result) {
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Datos enviados correctamente al supervisor']);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo enviar los datos']);
+        }
+    }
+
+
     public function getAllActions()
     {
         // Instanciar el modelo

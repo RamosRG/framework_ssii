@@ -44,13 +44,14 @@ $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'auth'], f
     $routes->get('getCategory', 'UserController::getCategory');
     $routes->get('getFountain', 'UserController::getFountain');
     $routes->post('submitAnswer', 'UserController::submitAnswer');
-    $routes->get('/actions/getAll', 'ActionsController::getAllActions');
-
-
+    $routes->post('savedAudit', 'UserController::savedAudit');
+    
+    
 });
 
 
 $routes->group('accions', ['namespace' => 'App\Controllers', 'filter' => 'auth'], function($routes) {
+    $routes->get('/getAll', 'ActionsController::getAllActions');
     $routes->get('AuditToEdit', 'AccionsController::AuditToEdit');
     $routes->get('addquestions', 'AccionsController::addquestions');
     $routes->get('getAuditToEdit', 'AccionsController::getAuditToEdit');
