@@ -1,3 +1,5 @@
+
+
 function fetchTakenActions(idAudit) {
   $.ajax({
     url: "../user/takenActions/" + idAudit,
@@ -9,6 +11,7 @@ function fetchTakenActions(idAudit) {
         fetchUserData();
         fetchUserData1();
         collectTableData();
+        getAuditIdFromURL();
       } else {
         console.error("No se encontraron acciones tomadas.");
       }
@@ -18,7 +21,11 @@ function fetchTakenActions(idAudit) {
     },
   });
 }
-
+function getAuditIdFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  idAudit = urlParams.get("id_audit"); // Obtener el id_audit de la URL
+  console.log("ID de la auditoría desde la URL:", idAudit);
+}
 function populateTakenActions(actions, id_audit) {
   $("#taken-actions-list").empty();
   actions.forEach((action) => {
@@ -346,7 +353,6 @@ function collectTableData() {
     });
   });
 
-
   return { tableData }; // Aseguramos que enviamos un objeto con el campo tableData
 }
 
@@ -394,8 +400,6 @@ function sendDataToSupervisor(data) {
   });
 }
 
-
-
 document.getElementById("user-list").addEventListener("change", function () {
   const selectedUserId = this.value; // ID del usuario seleccionado
   const selectedUserName = this.options[this.selectedIndex].text; // Nombre del usuario seleccionado
@@ -418,3 +422,63 @@ document.getElementById("user-list").addEventListener("change", function () {
     select.value = selectedUserId;
   });
 });
+function submitAuditComment(auditElement) {
+  // Extraemos el id_audit del atributo data-audit-id del botón o elemento
+  const idAudit = auditElement.dataset.auditId; // Usamos dataset para acceder al atributo data-audit-id
+  const comment = document.getElementById("audit-comment").value; // Obtenemos el comentario
+  console.log(idAudit); // Verificamos que el idAudit se obtuvo correctamente
+
+  // Validación para asegurarse de que el comentario no esté vacío
+  if (comment.trim() === "") {
+    Swal.fire({
+      icon: "warning",
+      title: "Comentario requerido",
+      text: "Por favor, añade un comentario antes de finalizar la auditoría.",
+      confirmButtonText: "Aceptar",
+    });
+    return;
+  }
+
+  // Enviar los datos al servidor mediante AJAX
+  $.ajax({
+    url: "../user/submitAuditComment", // Asegúrate de que esta URL sea correcta
+    type: "POST", // Usamos POST para enviar datos
+    data: JSON.stringify({ id_audit: idAudit, comment }), // Enviamos el id_audit y el comentario en JSON
+    contentType: "application/json", // Especificamos que el contenido es JSON
+    success: function (response) {
+      if (response.status === "success") {
+        Swal.fire({
+          icon: "success",
+          title: "Comentario guardado",
+          text: "El comentario se ha guardado correctamente.",
+          timer: 1500,
+        });
+
+        // Actualizamos dinámicamente la fila en la tabla
+        const row = document.querySelector(`tr[data-audit-id="${idAudit}"]`);
+        if (row) {
+          const commentCell = row.querySelector(".comment-cell"); // Encontramos la celda del comentario
+          if (commentCell) {
+            commentCell.textContent = comment; // Actualizamos el contenido de la celda
+          }
+        }
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error al guardar",
+          text: response.message || "No se pudo guardar el comentario.",
+          confirmButtonText: "Aceptar",
+        });
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error("Error en la solicitud AJAX:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error en la conexión",
+        text: "Hubo un problema al enviar los datos. Inténtalo nuevamente.",
+        confirmButtonText: "Aceptar",
+      });
+    },
+  });
+}

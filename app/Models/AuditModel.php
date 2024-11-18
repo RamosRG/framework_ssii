@@ -11,7 +11,7 @@ class AuditModel extends Model
 
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['no_audit', 'audit_title', 'fk_auditor', 'fk_machinery', 'fk_shift', 'date', 'fk_department', 'status', 'reviewed_by', 'review_date', 'fk_user'];
+    protected $allowedFields = ['no_audit', 'audit_title', 'fk_auditor', 'fk_machinery', 'fk_shift', 'date', 'fk_department', 'status', 'date_start', 'date_end', 'reviewed_by', 'review_date', 'fk_user', 'comment'];
 
     // Dates
     protected $useTimestamps = true; // Correcto

@@ -73,7 +73,7 @@
                             <th>Número</th>
                             <th>Pregunta</th>
                             <th>¿Qué se encontró?</th>
-                            <th>Evidencia</th>
+                            <th>Foto evidencia</th>
                             <th>Acción</th>
                             <th>Responsable</th>
                             <th>Fecha</th>
@@ -137,9 +137,33 @@
                 </table>
             </div>
         </div>
+        <br>
+        <div class="descripcion w3-container w3-card w3-white">
+            <h3 class="w3-text-black">Comentarios de la auditoría</h3>
+            <div class="responsive-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Añadir comentarios</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" id="audit-comment" class="w3-input w3-border w3-round"
+                                    placeholder="Escribe tu comentario aquí">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-        <!-- Submit Button -->
-        <button class="w3-button w3-indigo w3-right w3-margin-top" type="submit">Submit Audit</button>
+        <!-- Ejemplo de un botón con el id_audit en un data-* -->
+        <button data-audit-id="6" class="w3-button w3-block w3-red" onclick="submitAuditComment(this)">Enviar
+            Comentario</button>
+
+
 
         <!-- Modal for Camera and Photo Capture -->
         <div id="overlay" class="overlay"></div>

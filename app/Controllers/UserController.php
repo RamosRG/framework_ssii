@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ActionsModel;
 use App\Models\AnswersModel;
+use App\Models\AuditModel;
 use App\Models\QuestionsModel;
 use App\Models\FountainModel;
 use App\Models\CategoryModel;
@@ -11,6 +12,74 @@ use App\Models\CategoryModel;
 
 class UserController extends BaseController
 {
+    public function submitAuditComment()
+    {
+        // Obtener los datos enviados como JSON
+        $request = $this->request->getJSON();
+        $idAudit = $request->id_audit ?? null; // ID de la auditoría
+        $comment = $request->comment ?? null; // Comentario proporcionado
+        $fechaFinalizacion = $request->date_start ?? date('Y-m-d H:i:s'); // Fecha actual o enviada
+       
+        // Validar datos requeridos
+        if (!$idAudit || !$comment) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'ID de auditoría y comentario son requeridos.',
+            ]);
+        }
+
+        // Cargar el modelo y actualizar el comentario
+        $auditModel = new AuditModel();
+        try {
+            $updated = $auditModel->update($idAudit, [
+                'comment' => $comment,
+                'date_end' => $fechaFinalizacion, // Si es necesario
+                'status' => 0, // Si es necesario
+            ]);
+
+            if ($updated) {
+                return $this->response->setJSON([
+                    'status' => 'success',
+                    'message' => 'Comentario actualizado.',
+                    'data' => [
+                        'id_audit' => $idAudit,
+                        'comment' => $comment,
+                        'date_start' => $fechaFinalizacion,
+                    ],
+                ]);
+            }
+
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'No se pudo actualizar el comentario. Verifica el ID de auditoría.',
+            ]);
+        } catch (\Exception $e) {
+            // Manejar errores de base de datos u otros errores
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Ocurrió un error al actualizar la auditoría: ' . $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function getAuditDetails($idAudit, $supervisorId)
+    {
+        $actionsModel = new QuestionsModel();
+
+        $auditDetails = $actionsModel->getDataOfAccions($idAudit, $supervisorId);
+
+        if (!empty($auditDetails)) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'data' => $auditDetails
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'No se encontraron detalles para esta auditoría.'
+            ]);
+        }
+    }
     public function savedAudit()
     {
         $data = $this->request->getJSON(); // Recibe los datos JSON como objeto stdClass
@@ -144,7 +213,6 @@ class UserController extends BaseController
         // Devuelve los datos como JSON
         return $this->response->setJSON(['status' => 'success', 'data' => $data]);
     }
-
     public function uploadPhoto()
     {
         
@@ -198,7 +266,6 @@ class UserController extends BaseController
         // Manejo de errores si el archivo no es válido
         return $this->response->setJSON(['status' => 'error', 'message' => 'Error al subir la foto.']);
     }
-
     public function showAudit()
     {
 
@@ -221,7 +288,6 @@ class UserController extends BaseController
             ]);
         }
     }
-
     public function Assignedaudit()
     {
         return view('user/audit_user');

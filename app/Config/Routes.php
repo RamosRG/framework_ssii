@@ -45,6 +45,7 @@ $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'auth'], f
     $routes->get('getFountain', 'UserController::getFountain');
     $routes->post('submitAnswer', 'UserController::submitAnswer');
     $routes->post('savedAudit', 'UserController::savedAudit');
+    $routes->post('submitAuditComment', 'UserController::submitAuditComment');
     
     
 });

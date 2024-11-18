@@ -188,9 +188,10 @@ class AccionsController extends BaseController
    public function auditForUsers($data)
    {
       $model = new AuditModel();
-
+      
       // Obtener los datos de la auditoría
       $audit = $model->getAuditByStatus($data);
+
 
       if ($audit && count($audit) > 0) {
          return $this->response->setJSON([

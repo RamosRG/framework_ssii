@@ -27,6 +27,45 @@ class QuestionsModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
+    public function getDataOfAccions($idAudit, $supervisorId)
+    {
+        $builder = $this->db->table('questions');
+        $builder->select('
+            audit.audit_title, audit.created_at, audit.id_audit, actions.supervisor_id
+        ');
+        $builder->join('audit', 'audit.id_audit = questions.fk_audit');
+        $builder->join('answers', 'answers.fk_question = questions.id_question');
+        $builder->join('audit', 'audit.id_audit = answers.fk_audit');
+        $builder->join('actions', 'actions.fk_answer = answers.id_answer');
+        $builder->where('audit.id_audit', $idAudit);
+        $builder->where('audit.status', 1);
+        $builder->where('actions.supervisor_id', $supervisorId);
+
+        return $builder->get()->getResultArray();
+    }
+    public function getAuditActions($idAudit, $supervisorId)
+    {
+        $builder = $this->db->table('questions');
+        $builder->select('
+            questions.question,
+            audit.audit_title,
+            audit.id_audit,
+            answers.answer,
+            answers.evidence,
+            actions.action_description,
+            actions.evidence_accion,
+            actions.is_complete,
+            actions.supervisor_id
+        ');
+        $builder->join('answers', 'answers.fk_question = questions.id_question');
+        $builder->join('audit', 'audit.id_audit = answers.fk_audit');
+        $builder->join('actions', 'actions.fk_answer = answers.id_answer');
+        $builder->where('audit.id_audit', $idAudit);
+        $builder->where('audit.status', 1);
+        $builder->where('actions.supervisor_id', $supervisorId);
+
+        return $builder->get()->getResultArray();
+    }
     public function getAudit($auditId)
     {
         $builder = $this->db->table('questions');
