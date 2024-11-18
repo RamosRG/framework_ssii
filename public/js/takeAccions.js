@@ -387,6 +387,7 @@ function sendDataToSupervisor(data) {
           confirmButtonText: "Aceptar",
         });
       }
+      window.location.href = "/capas.com/user/home";
     },
     error: function (xhr, status, error) {
       console.error("Error en la solicitud AJAX:", error);

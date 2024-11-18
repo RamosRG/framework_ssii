@@ -146,6 +146,13 @@
                         <tr>
                             <th>Añadir comentarios</th>
                         </tr>
+                        <tr>
+                             <!-- Select principal para escoger al responsable -->
+            <select id="user-list" name="user" class="w3-input w3-border w3-round">
+                <option selected>Selecciona un usuario</option>
+                <!-- Opciones dinámicas se llenarán aquí -->
+            </select>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
@@ -160,7 +167,7 @@
         </div>
 
         <!-- Ejemplo de un botón con el id_audit en un data-* -->
-        <button data-audit-id="6" class="w3-button w3-block w3-red" onclick="submitAuditComment(this)">Enviar
+        <button data-audit-id="id_audit" class="w3-button w3-block w3-red" onclick="submitAuditComment(this)">Enviar
             Comentario</button>
 
 
