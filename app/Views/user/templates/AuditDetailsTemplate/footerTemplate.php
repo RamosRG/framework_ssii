@@ -7,8 +7,8 @@
 <script src="../public/js/framework/jquery.dataTables.min.js"></script>
 <script src="../public/assets/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="../public/assets/select2/select2.min.js"></script>
-<script src="../public/js/auditDetails.js"></script>
-<script src="../public/js/TakeAccions.js"></script>
+<script src="../public/js/audit/auditDetails.js"></script>
+<script src="../public/js/accions/TakeAccions.js"></script>
 
 <script>
     function w3_open() {
