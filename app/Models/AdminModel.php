@@ -12,7 +12,7 @@ class AdminModel extends Model
 
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['email', 'name', 'firstName', 'lastName', 'password', 'fk_department', 'email_verified', 'verification_token', 'privileges', 'status', 'created_at', 'updated_at'];
+    protected $allowedFields = ['email', 'name', 'firstName', 'lastName', 'password', 'fk_department', 'fk_role',  'email_verified', 'verification_token', 'privileges', 'status', 'created_at', 'updated_at'];
 
 
     protected bool $status = true;

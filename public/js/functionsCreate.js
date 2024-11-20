@@ -1,11 +1,11 @@
 $(document).ready(function () {
-  
+
     // Inicializar Select2 en los selectores de área y departamento
     $('#area-list, #department-list').select2({
         placeholder: "Seleccione una opción",
         allowClear: true // Permite limpiar la selección
     });
-
+   
     // Función para cargar los datos del área
     function fetchAreaData() {
         fetch('/capas.com/accions/getArea', {
@@ -14,25 +14,25 @@ $(document).ready(function () {
                 'Content-Type': 'application/json'
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                let areaSelect = $('#area-list');
-                areaSelect.empty(); // Limpiar opciones anteriores
-                areaSelect.append(new Option("Seleccione una opción", "")); // Añadir opción predeterminada
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    let areaSelect = $('#area-list');
+                    areaSelect.empty(); // Limpiar opciones anteriores
+                    areaSelect.append(new Option("Seleccione una opción", "")); // Añadir opción predeterminada
 
-                // Llenar el select con los datos de áreas
-                data.areas.forEach(item => {
-                    let option = new Option(item.area, item.id_area);
-                    areaSelect.append(option);
-                });
+                    // Llenar el select con los datos de áreas
+                    data.areas.forEach(item => {
+                        let option = new Option(item.area, item.id_area);
+                        areaSelect.append(option);
+                    });
 
-                areaSelect.trigger('change'); // Actualizar Select2
-            } else {
-                console.error('Error al obtener las áreas');
-            }
-        })
-        .catch(error => console.error('Error en la solicitud:', error));
+                    areaSelect.trigger('change'); // Actualizar Select2
+                } else {
+                    console.error('Error al obtener las áreas');
+                }
+            })
+            .catch(error => console.error('Error en la solicitud:', error));
     }
 
     // Manejar el cambio en el área y cargar departamentos correspondientes
@@ -46,31 +46,31 @@ $(document).ready(function () {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    let departmentSelect = $('#department-list');
-                    departmentSelect.empty(); // Limpiar opciones anteriores
-                    departmentSelect.append(new Option("Seleccione un departamento", "")); // Añadir opción inicial
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        let departmentSelect = $('#department-list');
+                        departmentSelect.empty(); // Limpiar opciones anteriores
+                        departmentSelect.append(new Option("Seleccione un departamento", "")); // Añadir opción inicial
 
-                    // Llenar el select con datos de departamentos
-                    data.departments.forEach(item => {
-                        let option = new Option(item.department, item.id_department);
-                        departmentSelect.append(option);
-                    });
+                        // Llenar el select con datos de departamentos
+                        data.departments.forEach(item => {
+                            let option = new Option(item.department, item.id_department);
+                            departmentSelect.append(option);
+                        });
 
-                    departmentSelect.trigger('change'); // Actualizar Select2
-                } else {
-                    console.error('Error al obtener los departamentos');
-                }
-            })
-            .catch(error => console.error('Error en la solicitud:', error));
+                        departmentSelect.trigger('change'); // Actualizar Select2
+                    } else {
+                        console.error('Error al obtener los departamentos');
+                    }
+                })
+                .catch(error => console.error('Error en la solicitud:', error));
         }
     });
 
     // Llamar a la función de carga de áreas al cargar la página
     fetchAreaData();
-
+    fetchRoleData();
     // Manejar el evento de clic para actualizar el estado de la pregunta
     $('#questionTable').on('click', '.btn-update-status', function () {
         var questionId = $(this).data('id');
@@ -90,7 +90,7 @@ $(document).ready(function () {
             }
         });
     });
-    
+
     // Manejar la creación de preguntas
     $(document).on('click', '#createQuestion .btnQuestion', function (e) {
         e.preventDefault();
@@ -98,7 +98,7 @@ $(document).ready(function () {
         var form = $('#questionForm');
         var formData = form.serialize();
         console.log(formData);
-        
+
         $.ajax({
             url: '../accions/insertQuestions', // URL del controlador que inserta los datos
             type: 'POST',
@@ -139,7 +139,7 @@ $(document).ready(function () {
         var form = $('#userForm');
         var formData = form.serialize();
         console.log(formData);
-        
+
         $.ajax({
             url: '../admin/insertData', // URL del controlador que inserta los datos
             type: 'POST',
@@ -174,9 +174,38 @@ $(document).ready(function () {
             }
         });
     });
+    function fetchRoleData() {
+        fetch('../accions/getRole', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                let roleSelect = $('#role-list');
+                roleSelect.empty(); // Limpiar opciones anteriores
+                roleSelect.append(new Option("Seleccione una opción", "")); // Añadir opción predeterminada
     
+                // Llenar el select con los datos de roles
+                data.role.forEach(item => {
+                    let option = new Option(item.role, item.id_role);
+                    roleSelect.append(option);
+                });
+    
+                roleSelect.trigger('change'); // Actualizar Select2
+            } else {
+                console.error('Error al obtener los roles:', data.message || 'Sin mensaje de error');
+            }
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
+    }
+    
+
+
     // Cargar todas las áreas al cargar la página
     window.onload = function () {
-        fetchAreaData();
+       
     };
 });

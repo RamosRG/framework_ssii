@@ -48,7 +48,7 @@ class AdminController extends Controller
     //Funcion para insertar un usuario dentro del controlador
     public function insertData()
     {
-        
+     
         helper('text'); // Para generar una cadena aleatoria
         $token = bin2hex(random_bytes(32)); // Genera un token único para la verificación
     
@@ -61,6 +61,7 @@ class AdminController extends Controller
             'lastName' => $this->request->getPost('lastName'),
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
             'fk_department' => $this->request->getPost('department'),
+            'fk_role' => $this->request->getPost('role'),
         ];
         $adminModel = new AdminModel();
         

@@ -16,7 +16,7 @@
           <th>EMAIL</th>
           <th>NAME</th>
           <th>FIRSTNAME</th>
-          <th>LASTNAME</th>
+          <th>ROLE</th>
           <th>AREA</th>
           <th>DEPARTMENT</th>
           <th>STATUS</th>
@@ -32,7 +32,7 @@
           <th>EMAIL</th>
           <th>NAME</th>
           <th>FIRSTNAME</th>
-          <th>LASTNAME</th>
+          <th>ROLE</th>
           <th>AREA</th>
           <th>DEPARTMENT</th>
           <th>STATUS</th>

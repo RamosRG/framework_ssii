@@ -31,6 +31,12 @@
                         <label for="password"><b>Password</b></label>
                         <input id="password" class="w3-input w3-border w3-round" type="password" name="password" style="width:100%;" required>
                     </div>
+                    <div style="flex: 1;">
+                        <label for="role"><b>Role</b></label>
+                        <select id="role-list" name="role" class="w3-input w3-border w3-round" required>
+                            <option selected>Seleccione un departamento</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">

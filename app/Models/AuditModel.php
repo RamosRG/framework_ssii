@@ -11,7 +11,7 @@ class AuditModel extends Model
 
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['no_audit', 'audit_title', 'fk_auditor', 'fk_machinery', 'fk_shift', 'date', 'fk_department', 'status', 'date_start', 'date_end', 'reviewed_by', 'review_date', 'fk_user', 'comment'];
+    protected $allowedFields = ['no_audit', 'audit_title', 'fk_auditor', 'fk_machinery', 'fk_shift', 'date', 'fk_department', 'status', 'date_start', 'date_end', 'reviewed_by', 'review_date', 'fk_user', 'comment', 'id_supervisor'];
 
     // Dates
     protected $useTimestamps = true; // Correcto
@@ -19,6 +19,35 @@ class AuditModel extends Model
     protected $updatedField = 'updated_at';
 
 
+    public function updateActionSupervisors($auditData)
+    {
+        $builder = $this->db->table('audit'); // Especificar la tabla 'audit'
+    
+        // Verificar si los datos existen
+        if (isset($auditData['userId']) && isset($auditData['id_audit'])) {
+            $userId = $auditData['userId'];
+            $idAudit = $auditData['id_audit'];
+    
+            // Verificar si el id_audit existe en la base de datos
+            $auditExists = $this->db->table('audit')->where('id_audit', $idAudit)->countAllResults();
+    
+            if ($auditExists > 0) {
+                // Realizar la actualización si el audit existe
+                $builder->set('id_supervisor', $userId)
+                    ->where('id_audit', $idAudit)
+                    ->update(); // Ejecutar la actualización
+    
+                return true; // Retornar verdadero si se actualiza correctamente
+            } else {
+                // Si no se encuentra el audit, retornar un error
+                return false;
+            }
+        }
+    
+        return false; // Retornar falso si los datos no son correctos
+    }
+    
+    
 
     public function getAuditForId()
     {

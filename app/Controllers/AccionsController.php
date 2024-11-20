@@ -11,10 +11,20 @@ use App\Models\CategoryModel;
 use App\Models\FountainModel;
 use App\Models\QuestionsModel;
 use App\Models\AreasModel;
+use App\Models\RoleModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class AccionsController extends BaseController
 {
+   public function getRole()
+   {
+      $role = new RoleModel();
+      $data = $role->findAll();
+      return $this->response->setJSON([
+         'status' => 'success',
+         'role' => $data
+      ]);
+   }
    public function editAudit()
    {
        $request = service('request');
@@ -297,6 +307,7 @@ class AccionsController extends BaseController
          'category' => $data
       ]);
    }
+
    public function auditdetails()
    {
       // Cargar la vista de detalles

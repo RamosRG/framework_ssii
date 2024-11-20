@@ -5,7 +5,6 @@ function fetchTakenActions(idAudit) {
     type: "GET",
     dataType: "json",
     success: function (response) {
-      console.log(response);
       if (response.status === "success") {
         populateTakenActions(response.data, idAudit);
         fetchUserData(); // Llama a los datos de usuarios después de llenar las acciones
@@ -23,7 +22,6 @@ function fetchTakenActions(idAudit) {
 function populateTakenActions(actions, id_audit) {
   $("#taken-actions-list").empty(); // Limpia la tabla
   actions.forEach((action) => {
-    console.log("id_answer", action.id_answer)
     const row = `
       <tr data-question-id="${action.id_question}">
         <td>${action.id_question || ""}</td>
@@ -158,14 +156,14 @@ function takePhoto() {
 }
 
 $(document).off("click", ".btn-accions").on("click", ".btn-accions", function () {
+  const $row = $(this).closest("tr"); // Encuentra la fila (tr) más cercana al botón clicado
   const questionId = $(this).data("question-id");
-  const action = $(`input[name="action${questionId}"]`).val();
-  const responsable = $(`select[name="responsable_${questionId}"]`).val();
-  const date = $(`input[name="date_${questionId}"]`).val();
-  const isComplete = $(`input[name="is_complete_${questionId}"]:checked`).val() === "1" ? 1 : 0; // Convertir 'is_complete' a número entero
-  const idAnswer = $(`input[name="id_answer"]`).val();
-console.log(idAnswer);
-  // Recuperar el archivo de imagen desde el atributo del botón
+  const action = $row.find(`input[name="action${questionId}"]`).val();
+  const responsable = $row.find(`select[name="responsable_${questionId}"]`).val();
+  const date = $row.find(`input[name="date_${questionId}"]`).val();
+  const isComplete = $row.find(`input[name="is_complete_${questionId}"]:checked`).val() === "1" ? 1 : 0;
+  const idAnswer = $row.find(`input[name="id_answer"]`).val(); // Busca el id_answer solo dentro de la fila
+  
   const imageFile = currentButton.data('imageFile'); // Obtener el archivo
 
   // Verifica si la foto es válida antes de enviarla
@@ -193,8 +191,6 @@ console.log(idAnswer);
   formData.append("is_complete", isComplete);
   formData.append("created_at", date);
   formData.append("photo", imageFile); // Adjunta el archivo de imagen
-
-  console.log("FormData antes de enviar:", formData);
 
   $.ajax({
     url: "../user/submitAnswer",
@@ -227,7 +223,6 @@ console.log(idAnswer);
   });
 });
 
-
 // Obtener datos de usuarios
 function fetchUserData() {
   fetch("/capas.com/admin/getUsers", {
@@ -255,7 +250,6 @@ function fetchUserData() {
           userSelect.appendChild(option);
         });
 
-        console.log("Users", data.user);
       } else {
         console.error("No se pudieron obtener los datos de los usuarios.");
       }

@@ -9,7 +9,7 @@ $(document).ready(function () {
             { "data": "email" },
             { "data": "name" },
             { "data": "firstName" },
-            { "data": "lastName" },
+            { "data": "role" },
             { "data": "area" },
             { "data": "department" },
             {
@@ -81,7 +81,6 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-                console.log(response); // Para verificar los datos recibidos
 
                 if (response.error) {
                     alert(response.error);

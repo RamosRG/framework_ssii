@@ -7,7 +7,7 @@
 <script src="../public/js/framework/script.js"></script>
 <script src="../public/js/framework/jquery.dataTables.min.js"></script>
 <script src="../public/assets/sweetalert2/sweetalert2.all.min.js"></script>
-<script src="../public/js/accions.js"></script>
+<script src="../public/js/accions/accions.js"></script>
 <script>
  
     $(document).ready(function() {

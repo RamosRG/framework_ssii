@@ -27,6 +27,40 @@ class QuestionsModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
+
+    public function getDataOfActions($supervisorId)
+    {
+        $builder = $this->db->table('questions');
+        $builder->select('
+            audit.audit_title, 
+            audit.id_audit, 
+            audit.date_start, 
+            questions.question, 
+            questions.created_at, 
+            answers.answer, 
+            answers.evidence,
+            actions.action_description, 
+            actions.evidence_accion, 
+            actions.supervisor_id
+        ');
+        $builder->join('audit', 'audit.id_audit = questions.fk_audit');
+        $builder->join('answers', 'answers.fk_question = questions.id_question');
+        $builder->join('actions', 'actions.fk_answer = answers.id_answer');
+        $builder->where('actions.supervisor_id', $supervisorId);
+    
+        // Añadir lógica para obtener solo una auditoría (con MIN(id_audit))
+        $builder->where('audit.id_audit', function ($subQuery) use ($supervisorId) {
+            $subQuery->selectMin('audit.id_audit')
+                ->from('audit')
+                ->join('questions', 'questions.fk_audit = audit.id_audit')
+                ->join('answers', 'answers.fk_question = questions.id_question')
+                ->join('actions', 'actions.fk_answer = answers.id_answer')
+                ->where('actions.supervisor_id', $supervisorId);
+        });
+    
+        return $builder->get()->getResultArray();
+    }
+    
     public function getDataOfAccions($idAudit, $supervisorId)
     {
         $builder = $this->db->table('questions');
@@ -147,5 +181,4 @@ class QuestionsModel extends Model
             ->where('audit.status', 1)
             ->findAll();
     }
-
 }

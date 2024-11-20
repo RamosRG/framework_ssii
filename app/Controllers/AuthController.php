@@ -30,8 +30,7 @@ class AuthController extends BaseController
                 'message' => 'Usuario no encontrado'
             ]);
         }
-    }
-    public function login()
+    }public function login()
     {
         $session = session();
         $model = new AuthModel();
@@ -46,14 +45,19 @@ class AuthController extends BaseController
             // Guardar datos del usuario en la sesión
             $session->set([
                 'email' => $user['email'],
-                'privileges' => $user['privileges'],
+                'fk_role' => $user['fk_role'],
                 'username' => $user['name'],
                 'id_user' => $user['id_user'],
                 'logged_in' => true
             ]);
     
-            // Obtener la URL de redirección o usar una por defecto
-            $redirectUrl = $session->get('redirect_url') ?? ($user['privileges'] === '1' ? './admin/home' : './user/home');
+            // Determinar la URL de redirección según el rol
+            $redirectUrl = $session->get('redirect_url') 
+                ?? ($user['fk_role'] === '1' ? './manager/home' 
+                : ($user['fk_role'] === '2' ? './supervisor/home' 
+                : ($user['fk_role'] === '3' ? './user/home' 
+                : ($user['fk_role'] === '4' ? './admin/home' : './default/home'))));
+            
             $session->remove('redirect_url'); // Limpiar la URL de redirección de la sesión
     
             // Si la solicitud es AJAX, responde con JSON
@@ -62,7 +66,6 @@ class AuthController extends BaseController
                     'status' => 'success',
                     'username' => $user['name'],
                     'id_user' => $user['id_user'],
-                    'message' => 'Bienvenido ' . ($user['privileges'] === '1' ? 'Admin' : 'Usuario'),
                     'redirect' => $redirectUrl
                 ]);
             }
@@ -77,6 +80,7 @@ class AuthController extends BaseController
             ]);
         }
     }
+    
     
 
     public function logout()

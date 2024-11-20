@@ -11,7 +11,7 @@ class AuthModel extends Model
 
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['email', 'name', 'firstName', 'lastName', 'password', 'fk_area', 'status', 'email_verified', 'verification_token', 'privileges', 'created_at', 'updated_at']; // Correcto
+    protected $allowedFields = ['email', 'name', 'firstName', 'lastName', 'password', 'fk_area', 'status', 'fk_role', 'email_verified', 'verification_token', 'privileges', 'created_at', 'updated_at']; // Correcto
 
     protected bool $status = true;
 
@@ -24,7 +24,7 @@ class AuthModel extends Model
     {
         // Construyendo la consulta SQL para buscar el usuario por email y estado activo
         $builder = $this->builder();
-        $builder->select('id_user, email, name, firstName, lastName, status, password, privileges');
+        $builder->select('id_user, email, name, firstName, lastName, status, password, fk_role');
         $builder->where('email', $email);
         $builder->where('status', 1); // Solo usuarios activos
         $user = $builder->get()->getFirstRow(); // Obtiene el primer resultado de la consulta
@@ -42,9 +42,11 @@ class AuthModel extends Model
 
     public function getUsers()
     {
-        return $this->select('users.id_user, users.email, users.name, users.firstName, users.lastName, area.area, department.department, users.`status`, users.created_at, users.updated_at')  // Selecciona todos los campos de ambas tablas
+        return $this->select('users.id_user, users.email, users.name, users.firstName, users.lastName, area.area, department.department, users.`status`, 
+users.created_at, users.updated_at, role.id_role, role.`role`')  // Selecciona todos los campos de ambas tablas
             ->join('department', 'department.id_department = users.fk_department') // Realiza el INNER JOIN
             ->join('area', 'area.id_area = department.fk_area') // Realiza el INNER JOIN
+            ->join('role', 'role.id_role = users.fk_role') // Realiza el INNER JOIN
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
     }

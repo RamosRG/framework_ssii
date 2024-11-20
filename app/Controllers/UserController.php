@@ -19,7 +19,7 @@ class UserController extends BaseController
         $idAudit = $request->id_audit ?? null; // ID de la auditoría
         $comment = $request->comment ?? null; // Comentario proporcionado
         $fechaFinalizacion = $request->date_start ?? date('Y-m-d H:i:s'); // Fecha actual o enviada
-       
+
         // Validar datos requeridos
         if (!$idAudit || !$comment) {
             return $this->response->setJSON([
@@ -61,7 +61,6 @@ class UserController extends BaseController
             ]);
         }
     }
-
     public function getAuditDetails($idAudit, $supervisorId)
     {
         $actionsModel = new QuestionsModel();
@@ -82,27 +81,25 @@ class UserController extends BaseController
     }
     public function savedAudit()
     {
-        $data = $this->request->getJSON(); // Recibe los datos JSON como objeto stdClass
-
-        // Verificar si se ha recibido tableData
-        if (!isset($data->tableData)) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'No se recibieron los datos de las acciones']);
+        $data = json_decode($this->request->getBody(), true);
+    
+        if (isset($data['userId']) && isset($data['id_audit'])) {
+            $userId = $data['userId'];
+            $idAudit = $data['id_audit'];
+    
+            // Aquí creas una instancia del modelo AuditModel
+            $modelAudit = new AuditModel();
+            
+            // Actualizas la auditoría en la base de datos
+            $modelAudit->update($idAudit, ['id_supervisor' => $userId]);
+  
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Auditoría actualizada correctamente.']);
         }
-
-        $auditModel = new ActionsModel();
-
-        // Llamar al método para actualizar los supervisores
-        $result = $auditModel->updateActionSupervisors($data->tableData); // $data->tableData es el objeto
-
-
-        if ($result) {
-            return $this->response->setJSON(['status' => 'success', 'message' => 'Datos enviados correctamente al supervisor']);
-        } else {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo enviar los datos']);
-        }
+    
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Datos incompletos.']);
     }
-
-
+    
+    
     public function getAllActions()
     {
         // Instanciar el modelo
@@ -123,21 +120,21 @@ class UserController extends BaseController
         $date = $this->request->getPost('date');
         $isComplete = $this->request->getPost('is_complete');
         $idAnswer = $this->request->getPost('fk_answer');
-    
+
         // Verificar si el archivo de imagen ha sido recibido
         $image = $this->request->getFile('photo');
-    
+
         if ($image === null) {
             return $this->response->setJSON(['status' => 'error', 'message' => 'No se recibió ningún archivo']);
         }
-    
+
         if (!$image->isValid()) {
             return $this->response->setJSON(['status' => 'error', 'message' => $image->getErrorString()]);
         }
-    
+
         // Generar un nombre único para la imagen
         $fileName = $image->getRandomName();
-    
+
         // Mover el archivo a la ubicación deseada
         $filePath = WRITEPATH . '../accions/' . $fileName;
         if ($image->move(WRITEPATH . '../accions', $fileName)) {
@@ -150,15 +147,15 @@ class UserController extends BaseController
                 'date' => $date,
                 'evidence_accion' => $fileName,
             ];
-    
+
             $modelaccion = new ActionsModel();
-    
+
             // Verificar si el registro ya existe
             $existingRecord = $modelaccion->where('fk_answer', $idAnswer)->first();
-    
+
             if ($existingRecord) {
                 // Si el registro existe, actualizarlo
-                if ($modelaccion->update($existingRecord['id_action'], $data)) {
+                if ($modelaccion->update($existingRecord['id_actions'], $data)) {
                     return $this->response->setJSON(['status' => 'success', 'message' => 'Datos actualizados correctamente']);
                 } else {
                     return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo actualizar los datos en la base de datos']);
@@ -175,7 +172,7 @@ class UserController extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar la imagen en el servidor']);
         }
     }
-        public function getFountain()
+    public function getFountain()
     {
         $fountain = new FountainModel();
         $data = $fountain->findAll();
@@ -220,7 +217,7 @@ class UserController extends BaseController
     }
     public function uploadPhoto()
     {
-        
+
         // Obtener los datos del formulario
         $fkQuestion = $this->request->getPost('fk_question');
         $isComplete = $this->request->getPost('compliaceCheckBox');
