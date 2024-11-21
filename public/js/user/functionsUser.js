@@ -37,7 +37,7 @@ $(document).ready(function () {
     username ? `WELCOME\n${username}` : "WELCOME\nGuest"
   );
 
-  // Manejar clic en el botón para obtener auditorías
+  // Botón para obtener auditorías asignadas
   $("#auditForWeek").on("click", function () {
     var userId = sessionStorage.getItem("id_user");
 
@@ -69,7 +69,7 @@ $(document).ready(function () {
     });
   });
 
-  // Generar las tarjetas dinámicamente
+  // Generar tarjetas de auditorías asignadas
   function generateAuditCards(auditDetails) {
     var container = document.getElementById("auditCardsContainer");
 
@@ -103,11 +103,77 @@ $(document).ready(function () {
     });
   }
 
-  // Llamar a la función para generar las tarjetas
-  var auditDetails = JSON.parse(sessionStorage.getItem("auditDetails"));
-  if (auditDetails) {
-    generateAuditCards(auditDetails);
+  // Botón para auditorías por revisar
+  $("#auditForReview").on("click", function () {
+    var userId = sessionStorage.getItem("id_user");
+
+    if (!userId) {
+      showError("Error!", "Usuario no autenticado o sesión expirada.");
+      return;
+    }
+
+    $.ajax({
+      url: "../supervisor/auditToReview/" + userId,
+      type: "GET",
+      dataType: "json",
+      success: function (response) {
+        if (response.status === "success") {
+          var auditDetails = response.data;
+
+          // Almacenar los detalles en sessionStorage
+          sessionStorage.setItem("auditDetails", JSON.stringify(auditDetails));
+
+          // Redirigir a la página de auditorías
+          window.location.href = "../supervisor/AccionsOfAudit";
+        } else {
+          showError("Error!", response.message);
+        }
+      },
+      error: function () {
+        showError("Error!", "No se pudieron obtener las auditorías.");
+      },
+    });
+  });
+
+  function generateActionsCards(auditDetails) {
+    var container = document.getElementById("auditCardsContainer");
+  
+    if (!container) {
+      console.warn("Contenedor para las tarjetas no encontrado.");
+      return;
+    }
+  
+    container.innerHTML = ""; // Limpiar el contenedor antes de generar las tarjetas
+  
+    auditDetails.forEach(function (audit) {
+      var card = document.createElement("div");
+      card.classList.add("card");
+      card.setAttribute("data-id-audit", audit.id_audit);
+  
+      // Contenido de la tarjeta
+      card.innerHTML = `
+        <h2>${audit.audit_title}</h2>
+        <p><strong>Correo:</strong> ${audit.email}</p>
+        <p><strong>Fecha de inicio:</strong> ${audit.date_start}</p>
+      `;
+  
+      // Añadir funcionalidad de selección a la tarjeta
+      card.addEventListener("click", function () {
+        var id_audit = audit.id_audit;
+        // Redirigir a una página de detalles
+        window.location.href = "showAudit?id_audit=" + id_audit;
+      });
+  
+      container.appendChild(card);
+    });
   }
+  
+  // Llamar a la función para generar las tarjetas
+  var dataCards = JSON.parse(sessionStorage.getItem("dataCards"));
+  if (dataCards) {
+    generateActionsCards(dataCards);
+  }
+  
 
   // Función para mostrar errores
   function showError(title, message) {

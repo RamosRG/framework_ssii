@@ -16,6 +16,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class AccionsController extends BaseController
 {
+   
    public function getRole()
    {
       $role = new RoleModel();
