@@ -12,7 +12,7 @@ class AdminModel extends Model
 
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['email', 'name', 'firstName', 'lastName', 'password', 'fk_department', 'fk_role',  'email_verified', 'verification_token', 'privileges', 'status', 'created_at', 'updated_at'];
+    protected $allowedFields = ['email', 'name', 'firstName', 'lastName', 'password', 'fk_department', 'fk_role', 'privileges', 'status', 'created_at', 'updated_at', 'id_supervisor'];
 
 
     protected bool $status = true;
@@ -48,6 +48,20 @@ class AdminModel extends Model
 
     }
     
-
+    public function GetDataOfAccions($idSupervisor)
+    {
+        return $this->select([
+                'users.email', 
+                'audit.audit_title', 
+                'audit.date_start', 
+                'audit.id_supervisor',
+                'audit.id_audit'
+            ])
+            ->join('audit', 'users.id_user = audit.fk_auditor') // Realiza el INNER JOIN correctamente
+            ->where('audit.id_supervisor', $idSupervisor) // Filtra por el ID del supervisor
+            ->get()
+            ->getResultArray(); // Devuelve el resultado como un array
+    }
+    
 }
 

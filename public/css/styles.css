@@ -84,3 +84,27 @@ body, h1, h2, h3, h4, h5 {
   margin: 2rem auto;
   padding: 20px;
 }
+.cards-container {
+  position: relative;
+  z-index: 20; /* Mayor que el menú */
+  margin-left: 250px; /* Asegúrate de que coincida con el ancho del menú */
+  padding: 20px; /* Espaciado interno para que no toque los bordes */
+}
+
+
+.card {
+  flex: 0 1 calc(33.33% - 16px);
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+

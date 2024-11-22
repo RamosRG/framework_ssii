@@ -23,6 +23,7 @@
             <input type="hidden" id="userId"> <!-- Reemplaza "12345" con el valor real del ID -->
             <div class="button-container">
                 <button class="button" id="auditForWeek">Audit Weekly</button>
+                <button class="button" id="auditForReview">Audit to Review</button>
                 <button class="button">Dashboard</button>
                 <a href="createQuestion" class="button">Add Question</a>
             </div>
@@ -36,7 +37,7 @@
     <!-- Archivo de JavaScript -->
     <script src="../public/js/framework/jquery-3.6.0.min.js"></script>
     <script src="../public/assets/sweetalert2/sweetalert2.all.min.js"></script>
-    <script src="./../public/js/supervisor/functionsSupervisor.js"></script>
+    <script src="../public/js/user/functionsUser.js"></script>
 </body>
 
 </html>
