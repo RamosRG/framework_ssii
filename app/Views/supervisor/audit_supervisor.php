@@ -36,6 +36,8 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            background-color: #F08650;
+            
         }
         .card h2 {
             margin: 0;
@@ -65,7 +67,8 @@
     </header>
 
     <main>
-        <div id="auditCardsContainer"></div>
+    <div id="reviewAuditCardsContainer"></div>
+
     </main>
 
     <footer>

@@ -90,10 +90,12 @@ $routes->group('accions', ['namespace' => 'App\Controllers', 'filter' => 'auth']
 $routes->group('supervisor', ['namespace' => 'App\Controllers', 'filter' => 'auth'], function($routes) {
 
     $routes->get('auditToReview/(:num)', 'SupervisorController::auditToReview/$1');
-    $routes->get('AccionsOfAudit', 'SupervisorController::AccionsOfAudit');
+    $routes->get('accionsOfAudit', 'SupervisorController::accionsOfAudit');
     $routes->get('home', 'SupervisorController::home');
     $routes->get('showActiveAudit', 'SupervisorController::showActiveAudit');
-    $routes->get('auditForSupervisor/(:num)', 'SupervisorController::auditForSupervisor/$1');
+    $routes->get('auditForSupervisor', 'SupervisorController::auditForSupervisor');
+    $routes->get('showAudit', 'SupervisorController::showAudit');
+    $routes->post('finishData', 'SupervisorController::finishData');
     
     
 });

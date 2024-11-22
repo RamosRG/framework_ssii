@@ -18,36 +18,50 @@ class AuditModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
+    public function getDataOfActions($auditID)
+    {
+        $builder = $this->db->table('audit');  // Alias para la tabla audit principal
+        $builder->select('
+           audit.id_audit, audit.audit_title, audit.date, audit.id_supervisor, questions.question, answers.answer, answers.evidence, actions.id_actions,
+        actions.action_description, actions.evidence_accion
+        ');
+        $builder->join('questions', 'questions.fk_audit = audit.id_audit');  // Usar el alias 'a'
+        $builder->join('answers', 'answers.fk_question = questions.id_question');
+        $builder->join('actions', 'actions.fk_answer = answers.id_answer');
+        $builder->where('audit.id_audit', $auditID);
+
+        return $builder->get()->getResultArray();
+    }
 
     public function updateActionSupervisors($auditData)
     {
         $builder = $this->db->table('audit'); // Especificar la tabla 'audit'
-    
+
         // Verificar si los datos existen
         if (isset($auditData['userId']) && isset($auditData['id_audit'])) {
             $userId = $auditData['userId'];
             $idAudit = $auditData['id_audit'];
-    
+
             // Verificar si el id_audit existe en la base de datos
             $auditExists = $this->db->table('audit')->where('id_audit', $idAudit)->countAllResults();
-    
+
             if ($auditExists > 0) {
                 // Realizar la actualización si el audit existe
                 $builder->set('id_supervisor', $userId)
                     ->where('id_audit', $idAudit)
                     ->update(); // Ejecutar la actualización
-    
+
                 return true; // Retornar verdadero si se actualiza correctamente
             } else {
                 // Si no se encuentra el audit, retornar un error
                 return false;
             }
         }
-    
+
         return false; // Retornar falso si los datos no son correctos
     }
-    
-    
+
+
 
     public function getAuditForId()
     {

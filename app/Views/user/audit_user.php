@@ -36,6 +36,8 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            background-color: #56A3F0;
+
         }
         .card h2 {
             margin: 0;

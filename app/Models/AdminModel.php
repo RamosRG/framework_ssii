@@ -51,10 +51,11 @@ class AdminModel extends Model
     public function GetDataOfAccions($idSupervisor)
     {
         return $this->select([
-                'users.email', 
+                'users.name', 
+                'users.firstName', 
+                'users.lastName',
                 'audit.audit_title', 
-                'audit.date_start', 
-                'audit.id_supervisor',
+                'audit.date', 
                 'audit.id_audit'
             ])
             ->join('audit', 'users.id_user = audit.fk_auditor') // Realiza el INNER JOIN correctamente

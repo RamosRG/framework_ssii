@@ -82,24 +82,22 @@ class UserController extends BaseController
     public function savedAudit()
     {
         $data = json_decode($this->request->getBody(), true);
-    
+
         if (isset($data['userId']) && isset($data['id_audit'])) {
             $userId = $data['userId'];
             $idAudit = $data['id_audit'];
-    
+
             // Aquí creas una instancia del modelo AuditModel
             $modelAudit = new AuditModel();
-            
+
             // Actualizas la auditoría en la base de datos
             $modelAudit->update($idAudit, ['id_supervisor' => $userId]);
-  
+
             return $this->response->setJSON(['status' => 'success', 'message' => 'Auditoría actualizada correctamente.']);
         }
-    
+
         return $this->response->setJSON(['status' => 'error', 'message' => 'Datos incompletos.']);
     }
-    
-    
     public function getAllActions()
     {
         // Instanciar el modelo
@@ -120,24 +118,28 @@ class UserController extends BaseController
         $date = $this->request->getPost('date');
         $isComplete = $this->request->getPost('is_complete');
         $idAnswer = $this->request->getPost('fk_answer');
-
+    
         // Verificar si el archivo de imagen ha sido recibido
         $image = $this->request->getFile('photo');
-
+    
         if ($image === null) {
             return $this->response->setJSON(['status' => 'error', 'message' => 'No se recibió ningún archivo']);
         }
-
+    
         if (!$image->isValid()) {
             return $this->response->setJSON(['status' => 'error', 'message' => $image->getErrorString()]);
         }
-
+    
         // Generar un nombre único para la imagen
         $fileName = $image->getRandomName();
-
-        // Mover el archivo a la ubicación deseada
-        $filePath = WRITEPATH . '../accions/' . $fileName;
-        if ($image->move(WRITEPATH . '../accions', $fileName)) {
+    
+        // Ruta de destino para la imagen
+        $filePath = '../accions/' . $fileName;
+    
+        // Intentar mover el archivo
+        if ($image->move( 'accions', $fileName)) {
+            log_message('debug', 'Archivo movido a: ' . $filePath); // Agregar log de depuración
+    
             // Preparar datos para guardar en la base de datos
             $data = [
                 'fk_answer' => $idAnswer,
@@ -147,12 +149,12 @@ class UserController extends BaseController
                 'date' => $date,
                 'evidence_accion' => $fileName,
             ];
-
+ 
             $modelaccion = new ActionsModel();
-
+    
             // Verificar si el registro ya existe
             $existingRecord = $modelaccion->where('fk_answer', $idAnswer)->first();
-
+    
             if ($existingRecord) {
                 // Si el registro existe, actualizarlo
                 if ($modelaccion->update($existingRecord['id_actions'], $data)) {
@@ -172,6 +174,7 @@ class UserController extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar la imagen en el servidor']);
         }
     }
+    
     public function getFountain()
     {
         $fountain = new FountainModel();
