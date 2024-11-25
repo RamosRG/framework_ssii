@@ -60,6 +60,7 @@ class AdminModel extends Model
             ])
             ->join('audit', 'users.id_user = audit.fk_auditor') // Realiza el INNER JOIN correctamente
             ->where('audit.id_supervisor', $idSupervisor) // Filtra por el ID del supervisor
+            ->where('audit.status', 1) // Filtra por el ID del supervisor
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
     }

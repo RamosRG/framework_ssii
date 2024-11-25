@@ -16,7 +16,34 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class AccionsController extends BaseController
 {
+   public function getAuditsFinished()
+   {
+      $auditModel = new AuditModel();
+      $data = $auditModel->getDataOfAuditsInactives();
+      return $this->response->setJSON($data);
+   }
    
+   public function getVerificaciones($idAudit)
+   {
+    
+       if (!$idAudit) {
+
+           return $this->response->setJSON(['status' => 'error', 'message' => 'ID de auditoría no proporcionado.']);
+       }
+   
+       $auditModel = new AuditModel();
+    
+       // Obtener las acciones tomadas
+       $follow = $auditModel->getAuditVerification($idAudit);
+       
+       // Ver los datos en la consola para depurar
+   
+       if (empty($follow)) {
+           return $this->response->setJSON(['status' => 'error', 'message' => 'No se encontraron acciones tomadas.']);
+       }
+   
+       return $this->response->setJSON(['status' => 'success', 'data' => $follow]);
+   }
    public function getRole()
    {
       $role = new RoleModel();
@@ -342,6 +369,11 @@ class AccionsController extends BaseController
    {
 
       return view('accions/show_audit');
+   }
+   public function ShowFinishedAudit()
+   {
+
+      return view('accions/show_audit_finished');
    }
    public function addquestions()
    {

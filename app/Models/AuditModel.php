@@ -18,6 +18,45 @@ class AuditModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
+    public function getDataOfAuditsInactives()
+    {
+        return $this->select('audit.id_audit, audit.no_audit, audit.audit_title, users.name,users.firstName, users.lastName, 
+            audit.date, audit.fk_auditor, audit.status, department.department, machinery.machinery, shift.shift')
+            ->join('users', 'users.id_user = audit.fk_auditor')  // Asegura que el auditor esté relacionado
+            ->join('department', 'department.id_department = audit.fk_department') // Realiza el INNER JOIN
+            ->join('machinery', 'machinery.id_machinery = audit.fk_machinery') // Realiza el INNER JOIN
+            ->join('shift', 'shift.id_shift = audit.fk_shift') // Realiza el INNER JOIN
+            ->where('audit.status', 0) // Filtra por el estado de la auditoría
+            ->where('department.status', 0) // Filtra por el estado del department  
+            ->get()
+            ->getResultArray(); // Devuelve el resultado como un array
+    }
+    public function getAuditVerification($auditId) {
+        return $this->select('
+            audit.id_audit,
+            audit.id_supervisor,
+            reviewer.email AS reviewer_email,
+            answers.answer,
+            actions.action_description,
+            actions.evidence_accion,
+            follow_up.linea,
+            follow_up.follow_up,
+            follow_up.is_resolved
+        ')
+        ->join('users AS auditor', 'auditor.id_user = audit.fk_auditor')
+        ->join('users AS reviewer', 'reviewer.id_user = audit.reviewed_by')
+        ->join('questions', 'audit.id_audit = questions.fk_audit')
+        ->join('answers', 'answers.fk_question = questions.id_question')
+        ->join('actions', 'actions.fk_answer = answers.id_answer')
+        ->join('follow_up', 'follow_up.fk_accions = actions.id_actions')
+        ->where('audit.id_audit', $auditId)
+        ->where('audit.status', 1)
+        
+        ->get()
+        ->getResultArray(); // Retorna los resultados como un array
+            // Depura los datos
+
+    }
     public function getDataOfActions($auditID)
     {
         $builder = $this->db->table('audit');  // Alias para la tabla audit principal
@@ -32,7 +71,6 @@ class AuditModel extends Model
 
         return $builder->get()->getResultArray();
     }
-
     public function updateActionSupervisors($auditData)
     {
         $builder = $this->db->table('audit'); // Especificar la tabla 'audit'
@@ -60,9 +98,6 @@ class AuditModel extends Model
 
         return false; // Retornar falso si los datos no son correctos
     }
-
-
-
     public function getAuditForId()
     {
         return $this->select('audit.id_audit, audit.audit_title, audit.created_at, audit.created_at, audit.updated_at, department.department')

@@ -17,9 +17,12 @@ $(document).ready(function () {
 
     const urlParams = new URLSearchParams(window.location.search);
     const id_audit = urlParams.get("id_audit");
+    $("#id_audit").val(id_audit);
+
 
     if (id_audit) {
         fetchAuditDetails(id_audit);
+        getFollowUp(id_audit);
     } else {
         console.error("No se encontró el ID de auditoría en la URL.");
     }
@@ -262,6 +265,7 @@ $(document).ready(function () {
                     });
 
                     fetchTakenActions(id_audit);
+                    saveAuditComment(id_audit);
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -283,3 +287,136 @@ $(document).ready(function () {
         });
     }
 });
+function getFollowUp(idAudit) {
+    $.ajax({
+        url: '../accions/getVerificaciones/' + idAudit,
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            console.log(response); // Verificar la respuesta en la consola
+
+            if (response.status === 'success') {
+                var auditDetails = response.data;
+
+                // Limpiar la tabla antes de llenarla
+                $("#taken-followUp-list").empty();
+
+                // Iterar los detalles y rellenar la tabla
+                auditDetails.forEach(function (detail) {
+                    // Manejo de valores vacíos
+                    var actionDescription = detail.action_description || "Sin descripción";
+                    var evidenceAccion = detail.evidence_accion
+                        ? `<img src="../accions/${detail.evidence_accion}" alt="Evidencia" style="width: 100px; height: auto;">`
+                        : "No hay evidencia";
+                    var linea = detail.linea || "N/A";
+                    var followUp = detail.follow_up || "Sin seguimiento";
+                    var isResolved = detail.is_resolved === "1"
+                        ? '<i class="fas fa-check-circle" style="color: green;"></i>'
+                        : '<i class="fas fa-times-circle" style="color: red;"></i>';
+
+                    // Crear la fila de la tabla
+                    var questionsRow = `
+                        <tr>
+                            <td>${actionDescription}</td>
+                            <td>${evidenceAccion}</td>
+                            <td>${linea}</td>
+                            <td>${followUp}</td>
+                            <td>${isResolved}</td>
+                        </tr>
+                    `;
+
+                    // Agregar la fila a la tabla
+                    $("#taken-followUp-list").append(questionsRow);
+                });
+            } else {
+                console.error('Error al obtener los detalles de la auditoría');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error en la solicitud AJAX:', error);
+        }
+    });
+   
+}
+$(document).ready(function () {
+    // Asociar el evento de clic al botón
+    $("#save-audit").on("click", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id_audit = urlParams.get("id_audit");
+
+        if (!id_audit) {
+            alert("No se encontró el ID de auditoría.");
+            return;
+        }
+
+        saveAuditComment(id_audit); // Llamar a la función para guardar el comentario
+    });
+});
+
+// Función para guardar el comentario de auditoría
+function saveAuditComment(idAudit) {
+    // Obtener el comentario
+    const comment = $("#audit-comment").val();
+
+    // Verificar que el comentario no esté vacío
+    if (!comment.trim()) {
+        Swal.fire({
+            icon: "warning",
+            title: "Comentario vacío",
+            text: "Por favor, escribe un comentario antes de guardar.",
+            confirmButtonText: "Aceptar",
+        });
+        return;
+    }
+
+    // Preparar los datos para enviar al servidor
+    const data = {
+        id_audit: idAudit,
+        comment: comment,
+    };
+
+    // Enviar la solicitud AJAX con fetch
+    fetch("../user/submitAuditComment", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json(); // Convertir la respuesta a JSON
+        })
+        .then((result) => {
+            if (result.status === "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Datos enviados correctamente",
+                    text: result.message,
+                    showConfirmButton: false,
+                    timer: 1500,
+                }).then(() => {
+                    window.location.href = "/capas.com/accions/showaudit"; // Redirigir a la página de inicio
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error al enviar los datos",
+                    text: result.message,
+                    confirmButtonText: "Aceptar",
+                });
+            }
+        })
+        .catch((error) => {
+            console.error("Error en la solicitud:", error);
+            Swal.fire({
+                icon: "error",
+                title: "Error en la conexión",
+                text: "Hubo un problema al enviar los datos. Inténtalo nuevamente.",
+                confirmButtonText: "Aceptar",
+            });
+        });
+}
+

@@ -23,51 +23,49 @@ function fetchUserData(callback) {
         .catch((error) => console.error("Error al obtener usuarios:", error));
 }
 
-// Función para obtener los detalles de auditoría y poblar la tabla
 function fetchAuditDetails(auditID) {
     $.ajax({
         url: '../supervisor/auditForSupervisor', // Cambia la URL si es necesario
         method: 'GET',
-        data: { id_audit: auditID }, // Pasamos el id_audit como parámetro en la solicitud
+        data: { id_audit: auditID },
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
                 const auditData = response.data;
-                const tableBody = $('#audit-table tbody'); // Seleccionar el cuerpo de la tabla
+                const tableBody = $('#audit-table tbody');
 
                 tableBody.empty(); // Limpiar la tabla antes de llenarla
 
-                // Obtener usuarios y poblar la tabla
                 fetchUserData((users) => {
+                    if (!users || users.length === 0) {
+                        alert('No se encontraron usuarios para asignar como responsables.');
+                        return;
+                    }
+
                     auditData.forEach((item) => {
-                        let row = '<tr data-id-action="' + item.id_actions + '">';
-                        row += '<td><input type="text" name="numlinea" class="w3-input w3-border w3-round"></td>';
-                        row += '<td>' + item.question + '</td>';
-                        row += '<td><input type="text" class="w3-input w3-border w3-round" value="' + item.answer + '"></td>';
-                        row += item.evidence
-                            ? '<td><img src="' + item.evidence + '" alt="Evidencia" style="width: 100px; height: auto;"></td>'
-                            : '<td>No hay imagen</td>';
-                        row += '<td><input type="text" class="w3-input w3-border w3-round" value="' + item.action_description + '"></td>';
-                        row += item.evidence_accion
-                            ? '<td><img src="../accions/' + item.evidence_accion + '" alt="Evidencia" style="width: 100px; height: auto;"></td>'
-                            : '<td>No hay imagen</td>';
-                        row += '<td><input type="date" class="w3-input w3-border w3-round" value="' + item.date_start + '"></td>';
-                        row += '<td><input type="checkbox" class="w3-check" ' + (item.mejorado ? 'checked' : '') + '></td>';
-                        row += '<td><input type="text" name="comentario" class="w3-input w3-border w3-round"></td>';
-
-                        row += '<td><select class="w3-select w3-border w3-round">';
-                        row += '<option value="">Selecciona un responsable</option>';
-
-                        // Opciones dinámicas de usuarios
-                        users.forEach((user) => {
-                            row += '<option value="' + user.id_user + '"' + 
-                                (user.id_user == item.supervisor_id ? ' selected' : '') + '>' +
-                                user.email + '</option>';
-                        });
-
-                        row += '</select></td>';
-                        row += '</tr>';
-                        tableBody.append(row); // Añadir la fila a la tabla
+                        const row = `
+                            <tr data-id-action="${item.id_actions}">
+                                <td><input type="text" name="num-linea" class="w3-input w3-border w3-round"></td>
+                                <td>${item.question}</td>
+                                <td>${item.answer}</td>
+                                <td>${item.evidence ? `<img src="${item.evidence}" alt="Evidencia" style="width: 100px;">` : 'No hay imagen'}</td>
+                                <td>${item.action_description}</td>
+                                <td>${item.evidence_accion ? `<img src="../accions/${item.evidence_accion}" alt="Evidencia" style="width: 100px;">` : 'No hay imagen'}</td>
+                                <td><input type="date" name="date" class="w3-input w3-border w3-round" value="${item.date_start}"></td>
+                                <td><input type="checkbox" class="w3-check" ${item.mejorado ? 'checked' : ''}></td>
+                                <td><input type="text" name="comentario" class="w3-input w3-border w3-round"></td>
+                                <td>
+                                    <select class="w3-select w3-border w3-round">
+                                        <option value="">Selecciona un responsable</option>
+                                        ${users.map(user => `
+                                            <option value="${user.id_user}" ${user.id_user == item.supervisor_id ? 'selected' : ''}>
+                                                ${user.email}
+                                            </option>`).join('')}
+                                    </select>
+                                </td>
+                            </tr>
+                        `;
+                        tableBody.append(row);
                     });
                 });
             } else {
@@ -75,51 +73,56 @@ function fetchAuditDetails(auditID) {
             }
         },
         error: function (xhr, status, error) {
-            console.log('Error al obtener los datos de la auditoría:', error);
+            console.error('Error al obtener los datos de la auditoría:', error);
         }
     });
 }
 
-// Guardar datos al servidor
 $('#saveButton').on('click', function () {
     const auditData = [];
-
-    // Recorrer cada fila de la tabla
+    const responsablesData = []; // Para almacenar datos de responsables
+    
     $('#audit-table tbody tr').each(function () {
         const row = $(this);
-
-        // Recopilar los datos de cada fila
         const rowData = {
-            id_action: row.data('id-action'), // ID de acción desde atributo data
-            question: row.find('td:nth-child(1)').text(),
-            answer: row.find('td:nth-child(2) input').val(),
-            evidence: row.find('td:nth-child(3) img').attr('src') || null,
-            actionDescription: row.find('td:nth-child(4) input').val(),
-            evidenceAccion: row.find('td:nth-child(5) img').attr('src') || null,
-            date: row.find('td:nth-child(6) input').val(),
-            mejorado: row.find('td:nth-child(7) input[type="checkbox"]').is(':checked') ? 1 : 0,
-            responsable: row.find('td:nth-child(8) select').val(),
+            id_action: row.data('id-action'),
+            linea: row.find('input[name="num-linea"]').val(),
+            date: row.find('input[name="date"]').val(),
+            mejorado: row.find('td:nth-child(8) input[type="checkbox"]').is(':checked') ? 1 : 0,
+            comentario: row.find('input[name="comentario"]').val(),
+            responsable: row.find('td:nth-child(10) select').val(),
         };
 
         auditData.push(rowData);
-    });
-    
-    // Enviar los datos al servidor
-    $.ajax({
-        url: '../supervisor/finishData',
-        type: 'POST',
-        data: JSON.stringify({ audits: auditData }),
-        contentType: 'application/json',
-        success: function (response) {
-            console.log(response);
-return false;
-            alert('Datos guardados correctamente');
-        },
-        error: function (xhr, status, error) {
-            console.error('Error al guardar los datos:', error);
+        // Agregar responsable al arreglo para la tabla 'audit'
+        if (rowData.responsable) {
+            responsablesData.push({
+                id_audit: getUrlParameter('id_audit'), // Suponiendo que ID de auditoría está en la URL
+                id_action: rowData.id_action,
+                responsable: rowData.responsable
+                
+            });
+           
         }
     });
+
+    if (auditData.length > 0) {
+        $.ajax({
+            url: '../supervisor/finishData',
+            method: 'POST',
+            data: JSON.stringify({ audits: auditData, responsables: responsablesData }), // Enviamos ambos conjuntos de datos
+            contentType: 'application/json',
+            success: function (response) {
+                alert('Datos guardados correctamente.');
+                location.reload(); // Opcional
+            },
+            error: function (xhr, status, error) {
+                console.error('Error al guardar los datos:', error);
+            }
+        });
+    }
 });
+
 
 // Ejecutar funciones al cargar el documento
 $(document).ready(function () {

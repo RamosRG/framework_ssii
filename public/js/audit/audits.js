@@ -15,6 +15,7 @@ $(document).ready(function () {
         $("#shift").val(audit.shift);
 
         fetchAuditDetails(audit.id_audit);
+        getFollowUp(audit.id_audit);
     }
 
     function fetchAuditDetails(idAudit) {
@@ -23,7 +24,6 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-                console.log(response);
                 if (response.status === 'success') {
                     var auditDetails = response.data;
 
@@ -33,15 +33,15 @@ $(document).ready(function () {
 
                     // Rellenar la tabla de preguntas de la auditoría
                     auditDetails.forEach(function (detail) {
-                        
 
-                            var complianceIcon = detail.compliance === "Yes"
+
+                        var complianceIcon = detail.compliance === "Yes"
                             ? '<i class="fas fa-check-circle" style="color: green;"></i>'
                             : '<i class="fas fa-times-circle" style="color: red;"></i>';
-                            var question_complete = detail.question_complete === "1"
+                        var question_complete = detail.question_complete === "1"
                             ? '<i class="fas fa-check-circle" style="color: green;"></i>'
                             : '<i class="fas fa-times-circle" style="color: red;"></i>';
-                            
+
 
                         var findings = detail.Que_se_encontro ? detail.Que_se_encontro : "Sin problema";
                         var questionsRow = `
@@ -58,17 +58,17 @@ $(document).ready(function () {
 
                         // Rellenar la tabla de acciones tomadas si existen
                         if (detail.action_description && detail.evidence_accion && detail.responsable && detail.compliance && detail.action_created_at && detail.action_updated_at) {
-                            var evidenceActionImage = detail.evidence_accion 
-                            ? `<img src="${detail.evidence_accion}" alt="Evidence Action" style="width: 100px; height: auto;">` 
-                            : "No hay evidencia";
+                            var evidenceActionImage = detail.evidence_accion
+                                ? `<img src="${detail.evidence_accion}" alt="Evidence Action" style="width: 100px; height: auto;">`
+                                : "No hay evidencia";
 
-                            var evidenceQuestion = detail.evidence_answer 
-                            ? `<img src="${detail.evidence_answer}" alt="Evidence Question" style="width: 100px; height: auto;">` 
-                            : "No hay evidencia";
+                            var evidenceQuestion = detail.evidence_answer
+                                ? `<img src="${detail.evidence_answer}" alt="Evidence Question" style="width: 100px; height: auto;">`
+                                : "No hay evidencia";
 
                             var iscomplete = detail.action_compliance === "Yes"
-                            ? '<i class="fas fa-check-circle" style="color: green;"></i>'
-                            : '<i class="fas fa-times-circle" style="color: red;"></i>';
+                                ? '<i class="fas fa-check-circle" style="color: green;"></i>'
+                                : '<i class="fas fa-times-circle" style="color: red;"></i>';
 
                             var actionsRow = `
                                 <tr>
@@ -96,4 +96,55 @@ $(document).ready(function () {
             }
         });
     }
+    function getFollowUp(idAudit) {
+        $.ajax({
+            url: '../accions/getVerificaciones/' + idAudit,
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                console.log(response); // Verificar la respuesta en la consola
+    
+                if (response.status === 'success') {
+                    var auditDetails = response.data;
+    
+                    // Limpiar la tabla antes de llenarla
+                    $("#taken-followUp-list").empty();
+    
+                    // Iterar los detalles y rellenar la tabla
+                    auditDetails.forEach(function (detail) {
+                        // Manejo de valores vacíos
+                        var actionDescription = detail.action_description || "Sin descripción";
+                        var evidenceAccion = detail.evidence_accion 
+                            ? `<img src="../accions/${detail.evidence_accion}" alt="Evidencia" style="width: 100px; height: auto;">`
+                            : "No hay evidencia";
+                        var linea = detail.linea || "N/A";
+                        var followUp = detail.follow_up || "Sin seguimiento";
+                        var isResolved = detail.is_resolved === "1" 
+                            ? '<i class="fas fa-check-circle" style="color: green;"></i>'
+                            : '<i class="fas fa-times-circle" style="color: red;"></i>';
+    
+                        // Crear la fila de la tabla
+                        var questionsRow = `
+                            <tr>
+                                <td>${actionDescription}</td>
+                                <td>${evidenceAccion}</td>
+                                <td>${linea}</td>
+                                <td>${followUp}</td>
+                                <td>${isResolved}</td>
+                            </tr>
+                        `;
+    
+                        // Agregar la fila a la tabla
+                        $("#taken-followUp-list").append(questionsRow);
+                    });
+                } else {
+                    console.error('Error al obtener los detalles de la auditoría');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error en la solicitud AJAX:', error);
+            }
+        });
+    }
+    
 });

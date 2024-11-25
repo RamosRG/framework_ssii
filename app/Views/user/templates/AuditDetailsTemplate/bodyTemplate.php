@@ -102,9 +102,9 @@
             </div>
         </div>
 
-        <!-- Verification Section -->
-        <div class="verification w3-container w3-card w3-white">
-            <h3 class="w3-text-black">VERIFICACION Y SEGUIMIENTO</h3>
+       <!-- Verificación y Seguimiento -->
+       <div class="verification w3-container w3-card w3-white">
+            <h3 class="w3-text-indigo">Verificación y Seguimiento</h3>
             <div class="responsive-table">
                 <table>
                     <thead>
@@ -116,24 +116,10 @@
                             <th>Mejorado</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><input type="text" class="w3-input w3-border w3-round"></td>
-                            <td><input type="text" class="w3-input w3-border w3-round"></td>
-                            <td>
-                                <select class="w3-select w3-border">
-                                    <option value="Sí">Sí</option>
-                                    <option value="No">No</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select class="w3-select w3-border">
-                                    <option value="Sí">Sí</option>
-                                    <option value="No">No</option>
-                                </select>
-                            </td>
-                        </tr>
+                    <tbody id="taken-followUp-list">
+
+                        
+                        <!-- Aquí se insertarán las filas dinámicamente -->
                     </tbody>
                 </table>
             </div>
@@ -147,13 +133,7 @@
                         <tr>
                             <th>Añadir comentarios</th>
                         </tr>
-                        <tr>
-                             <!-- Select principal para escoger al responsable -->
-            <select id="user-list" name="user" class="w3-input w3-border w3-round">
-                <option selected>Selecciona un usuario</option>
-                <!-- Opciones dinámicas se llenarán aquí -->
-            </select>
-                        </tr>
+                  
                     </thead>
                     <tbody>
                         <tr>
@@ -166,10 +146,8 @@
                 </table>
             </div>
         </div>
+        <button id="save-audit" data-id="id_audit" class="w3-button w3-block w3-red">Guardar Auditoria</button>
 
-        <!-- Ejemplo de un botón con el id_audit en un data-* -->
-        <button data-audit-id="id_audit" class="w3-button w3-block w3-red" onclick="submitAuditComment(this)">Enviar
-            Comentario</button>
 
 
 

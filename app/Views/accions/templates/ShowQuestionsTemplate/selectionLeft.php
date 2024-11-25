@@ -6,6 +6,7 @@
     <a href="../admin/home" class="w3-bar-item w3-button"><i class="fas fa-home"></i> Home</a>
     <a href="../accions/addaudit" class="w3-bar-item w3-button"><i class="fas fa-plus-circle"></i> Add Audit</a>
     <a href="../accions/showaudit" class="w3-bar-item w3-button"><i class="fas fa-list-alt"></i> Show Audit</a>
+    <a href="../accions/ShowFinishedAudit" class="w3-bar-item w3-button"><i class="fas fa-list-alt"></i> show finished audit</a>
     <a href="../accions/showquestions" class="w3-bar-item w3-button"><i class="fas fa-clipboard-list"></i> Show Questions</a>
     <a href="../accions/dashboard" class="w3-bar-item w3-button"><i class="	fas fa-dharmachakra"></i> Dashboard</a>
     <a href="../accions/showAuditsToEdit" class="w3-bar-item w3-button"><i class="	fas fa-edit"></i> Edit Audit</a>

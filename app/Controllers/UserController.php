@@ -12,13 +12,13 @@ use App\Models\CategoryModel;
 
 class UserController extends BaseController
 {
+
     public function submitAuditComment()
     {
         // Obtener los datos enviados como JSON
         $request = $this->request->getJSON();
         $idAudit = $request->id_audit ?? null; // ID de la auditoría
         $comment = $request->comment ?? null; // Comentario proporcionado
-        $fechaFinalizacion = $request->date_start ?? date('Y-m-d H:i:s'); // Fecha actual o enviada
 
         // Validar datos requeridos
         if (!$idAudit || !$comment) {
@@ -33,7 +33,6 @@ class UserController extends BaseController
         try {
             $updated = $auditModel->update($idAudit, [
                 'comment' => $comment,
-                'date_end' => $fechaFinalizacion, // Si es necesario
                 'status' => 0, // Si es necesario
             ]);
 
@@ -44,7 +43,6 @@ class UserController extends BaseController
                     'data' => [
                         'id_audit' => $idAudit,
                         'comment' => $comment,
-                        'date_start' => $fechaFinalizacion,
                     ],
                 ]);
             }

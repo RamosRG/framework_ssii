@@ -52,8 +52,11 @@ $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'auth'], f
 
 
 $routes->group('accions', ['namespace' => 'App\Controllers', 'filter' => 'auth'], function($routes) {
+    $routes->get('getVerificaciones/(:num)', 'AccionsController::getVerificaciones/$1');
     $routes->get('getRole', 'AccionsController::getRole');
     $routes->get('getAll', 'AccionsController::getAllActions');
+    $routes->get('ShowFinishedAudit', 'AccionsController::ShowFinishedAudit');
+    $routes->get('getAuditsFinished', 'AccionsController::getAuditsFinished');
     $routes->get('AuditToEdit', 'AccionsController::AuditToEdit');
     $routes->get('addquestions', 'AccionsController::addquestions');
     $routes->get('getAuditToEdit', 'AccionsController::getAuditToEdit');

@@ -12,7 +12,7 @@ class FollowUpModel extends Model
 
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['fk_accions','followup', 'evidencia', 'is_resolved', 'created_at','updated_at'];
+    protected $allowedFields = ['fk_accions','linea', 'follow_up', 'evidencia', 'date_response', 'is_resolved', 'created_at','updated_at'];
 
 
     protected bool $status = true;

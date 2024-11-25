@@ -13,62 +13,81 @@ use CodeIgniter\Email\Email;
 class SupervisorController extends BaseController
 {
     public function finishData()
-{
-    $request = $this->request->getJSON();
-print_r($request);
-    if (isset($request->audits) && is_array($request->audits)) {
+    {
+        $request = $this->request->getJSON();
+        if (!$request) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Datos inválidos.']);
+        }
+
         $followUpModel = new FollowUpModel();
+        $auditModel = new AuditModel();
 
-        foreach ($request->audits as $audit) {
-            // Verifica si se incluye el ID de la acción
-            if (isset($audit->id_action)) {
-                // Construye el arreglo de datos excluyendo valores nulos
-                $data = array_filter([
-                    'answer' => $audit->answer ?? null,
-                    'evidence' => $audit->evidence ?? null,
-                    'action_description' => $audit->actionDescription ?? null,
-                    'evidence_accion' => $audit->evidenceAccion ?? null,
-                    'date' => $audit->date ?? null,
-                    'mejorado' => $audit->mejorado ?? null,
-                    'responsable' => $audit->responsable ?? null
-                ], fn($value) => $value !== null);
-
-                // Si hay datos para actualizar
-                if (!empty($data)) {
-                    // Actualiza el registro existente
-                    if (!$followUpModel->update($audit->id_action, $data)) {
-                        return $this->response->setJSON([
-                            'status' => 'error',
-                            'message' => 'Error al actualizar los datos',
-                            'details' => $followUpModel->errors()
-                        ]);
-                    }
+        // Manejar datos de `follow_up`
+        if (isset($request->audits) && is_array($request->audits)) {
+            foreach ($request->audits as $audit) {
+                // Validar datos requeridos
+                if (!isset($audit->id_action, $audit->linea)) {
+                    continue; // Saltar registros incompletos
                 }
-            } else {
-                return $this->response->setJSON([
-                    'status' => 'error',
-                    'message' => 'Falta el ID de la acción en una de las auditorías'
-                ]);
+
+                // Datos para `follow_up`
+                $data = [
+                    'fk_accions' => $audit->id_action,
+                    'linea' => $audit->linea,
+                    'follow_up' => $audit->comentario ?? null,
+                    'is_resolved' => $audit->mejorado ?? null,
+                    'date_response' => $audit->date ?? null,
+                    'responsable' => $audit->responsable ?? null,
+                ];
+
+                // Insertar registro
+                if (!$followUpModel->insert($data)) {
+                    return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Error al insertar en follow_up',
+                        'details' => $followUpModel->errors()
+                    ]);
+                }
             }
         }
 
-        return $this->response->setJSON(['status' => 'success', 'message' => 'Datos guardados correctamente']);
+        // Manejar datos de responsables para `audit`
+        if (isset($request->responsables) && is_array($request->responsables)) {
+            foreach ($request->responsables as $responsable) {
+                // Validar datos obligatorios
+                if (!isset($responsable->id_audit, $responsable->responsable)) {
+                    continue; // Saltar registros incompletos
+                }
+
+                // Datos para actualizar en `audit`
+                $auditData = [
+                    'reviewed_by' => $responsable->responsable,
+                    'review_date' => date('Y-m-d H:i:s'), // Marcar actualización
+                ];
+
+                // Actualizar registro existente
+                if (!$auditModel->update($responsable->id_audit, $auditData)) {
+                    return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Error al actualizar audit',
+                        'details' => $auditModel->errors()
+                    ]);
+                }
+            }
+        }
+
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Datos procesados correctamente.']);
     }
-
-    return $this->response->setJSON(['status' => 'error', 'message' => 'No se recibieron datos válidos']);
-}
-
-
-
     public function showAudit()
     {
         return view("supervisor/show_audit");
     }
-    public function auditToReview($idSupervisor) {
-        
+    public function auditToReview($idSupervisor)
+    {
+
         $card = new AdminModel();
         $data = $card->GetDataOfAccions($idSupervisor);
-    
+
         return $this->response->setJSON([
             'status' => 'success',
             'data' => $data
@@ -83,28 +102,26 @@ print_r($request);
         return view("supervisor/home");
     }
     public function auditForSupervisor()
-{
-    // Obtener el parámetro id_audit desde la URL
-    $idAudit = $this->request->getGet('id_audit');
+    {
+        // Obtener el parámetro id_audit desde la URL
+        $idAudit = $this->request->getGet('id_audit');
 
-    if ($idAudit) {
-        $model = new AuditModel();
+        if ($idAudit) {
+            $model = new AuditModel();
 
-        // Obtener los datos de la auditoría
-        $audit = $model->getDataOfActions($idAudit);
+            // Obtener los datos de la auditoría
+            $audit = $model->getDataOfActions($idAudit);
 
-        if ($audit && count($audit) > 0) {
-            return $this->response->setJSON([
-                'status' => 'success',
-                'data' => $audit
-            ]);
+            if ($audit && count($audit) > 0) {
+                return $this->response->setJSON([
+                    'status' => 'success',
+                    'data' => $audit
+                ]);
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Auditoría no encontrada']);
+            }
         } else {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Auditoría no encontrada']);
+            return $this->response->setJSON(['status' => 'error', 'message' => 'ID de auditoría no proporcionado']);
         }
-    } else {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'ID de auditoría no proporcionado']);
     }
-}
-
-    
 }
