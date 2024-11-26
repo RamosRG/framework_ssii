@@ -18,6 +18,46 @@ class AuditModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
+    public function getAuditCompleteVerification($auditId) {
+        return $this->select('
+            audit.id_audit,
+            audit.id_supervisor,
+            reviewer.email AS reviewer_email,
+            answers.answer,
+            actions.action_description,
+            actions.evidence_accion,
+            follow_up.linea,
+            follow_up.follow_up,
+            follow_up.is_resolved
+        ')
+        ->join('users AS auditor', 'auditor.id_user = audit.fk_auditor')
+        ->join('users AS reviewer', 'reviewer.id_user = audit.reviewed_by')
+        ->join('questions', 'audit.id_audit = questions.fk_audit')
+        ->join('answers', 'answers.fk_question = questions.id_question')
+        ->join('actions', 'actions.fk_answer = answers.id_answer')
+        ->join('follow_up', 'follow_up.fk_accions = actions.id_actions')
+        ->where('audit.id_audit', $auditId)
+        ->where('audit.status', 0)
+        
+        ->get()
+        ->getResultArray(); // Retorna los resultados como un array
+            // Depura los datos
+
+    }
+    public function getAuditFinished($id): mixed
+    {
+        return $this->select('audit.id_audit, audit.no_audit, audit.date, audit.audit_title, audit.`status`, users.`name`,id_audit, users.firstName, users.lastName,
+ department.department, machinery.machinery, shift.shift')
+            ->join('users', 'users.id_user = audit.fk_auditor')  // Asegura que el auditor esté relacionado
+            ->join('department', 'department.id_department = audit.fk_department') // INNER JOIN con department
+            ->join('machinery', 'machinery.id_machinery = audit.fk_machinery') // INNER JOIN con Machinery
+            ->join('shift', 'shift.id_shift = audit.fk_shift') // INNER JOIN con Shift
+            ->where('audit.id_audit', $id) // Filtra por el ID de la auditoría
+            ->where('audit.status', 0) // Filtra por el estado de la auditoría
+            ->where('department.status', 1) // Filtra por el estado del departmento
+            ->get()
+            ->getResultArray(); // Devuelve el resultado como un array
+    }
     public function getDataOfAuditsInactives()
     {
         return $this->select('audit.id_audit, audit.no_audit, audit.audit_title, users.name,users.firstName, users.lastName, 
@@ -27,7 +67,7 @@ class AuditModel extends Model
             ->join('machinery', 'machinery.id_machinery = audit.fk_machinery') // Realiza el INNER JOIN
             ->join('shift', 'shift.id_shift = audit.fk_shift') // Realiza el INNER JOIN
             ->where('audit.status', 0) // Filtra por el estado de la auditoría
-            ->where('department.status', 0) // Filtra por el estado del department  
+            ->where('department.status', 1) // Filtra por el estado del department  
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
     }
@@ -178,7 +218,7 @@ class AuditModel extends Model
         return $this->response->setJSON($lastAudit);
     }
 
-    public function getAuditsByDepartment()
+    public function getAuditsByDepartment(): array
     {
         return $this->select('department.department, COUNT(audit.id_audit) as audit_count')
             ->join('department', 'department.id_department = audit.fk_department')

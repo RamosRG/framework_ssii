@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AuditModel;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use Tests\Support\Database\Seeds\ExampleSeeder;
@@ -16,7 +17,7 @@ final class ExampleDatabaseTest extends CIUnitTestCase
 
     public function testModelFindAll(): void
     {
-        $model = new ExampleModel();
+        $model = new AuditModel();
 
         // Get every row created by ExampleSeeder
         $objects = $model->findAll();

@@ -53,7 +53,10 @@ $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'auth'], f
 
 $routes->group('accions', ['namespace' => 'App\Controllers', 'filter' => 'auth'], function($routes) {
     $routes->get('getVerificaciones/(:num)', 'AccionsController::getVerificaciones/$1');
+    $routes->get('getCompletedVerificaciones/(:num)', 'AccionsController::getCompletedVerificaciones/$1');
     $routes->get('getRole', 'AccionsController::getRole');
+    $routes->get('createWeeklyAudit', 'AccionsController::createWeeklyAudit');
+    $routes->get('AuditCompleteDetails', 'AccionsController::AuditCompleteDetails');
     $routes->get('getAll', 'AccionsController::getAllActions');
     $routes->get('ShowFinishedAudit', 'AccionsController::ShowFinishedAudit');
     $routes->get('getAuditsFinished', 'AccionsController::getAuditsFinished');
@@ -84,6 +87,7 @@ $routes->group('accions', ['namespace' => 'App\Controllers', 'filter' => 'auth']
     $routes->get('getAudit/(:num)', 'AccionsController::getAudit/$1');
     $routes->get('getAuditOfEdit/(:num)', 'AccionsController::getAuditOfEdit/$1');
     $routes->get('auditForUsers/(:num)', 'AccionsController::auditForUsers/$1');
+    $routes->get('getAuditByIdFinished/(:num)', 'AccionsController::getAuditByIdFinished/$1');
     $routes->get('getDepartamentById/(:num)', 'AccionsController::getDepartamentById/$1');
     $routes->post('editAudit', 'AccionsController::editAudit');
 

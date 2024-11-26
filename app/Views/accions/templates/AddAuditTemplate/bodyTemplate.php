@@ -1,6 +1,6 @@
 <div class="w3-main" id="createAudit">
     <div class="w3-container" id="contact" style="margin-top:70px">
-        <h1 class="w3-xxxlarge w3-text-indigo"><b>Add Audit</b></h1>
+        <h1 class="w3-xxxlarge w3-text-indigo"><b>Add AUDIT</b></h1>
         <hr style="width:50px;border:5px solid indigo" class="w3-round">
         <div>
             <form id="auditForm" action="../accions/insertAudit" method="post">

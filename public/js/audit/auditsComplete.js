@@ -148,7 +148,7 @@ $(document).ready(function () {
     }
     function getFollowUp(idAudit) {
         $.ajax({
-            url: '../accions/getVerificaciones/' + idAudit,
+            url: '../accions/getCompletedVerificaciones/' + idAudit,
             type: 'GET',
             dataType: 'json',
             success: function (response) {

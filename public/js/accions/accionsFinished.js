@@ -19,7 +19,7 @@ $(document).ready(function () {
       {
         "data": "status",   // Cambiar "status" por "audit_status" para que coincida
         "render": function (data) {
-          return data == 1 ? `<i class="fa fa-plus" style="font-size:24px;color:blue">` : '<i class="fa fa-remove w3-red" style="font-size:24px"></i>'
+          return data == 0 ? `<i class="fa fa-remove" style="font-size:24px;color:red">` : '<i class="fa fa-remove w3-red" style="font-size:24px"></i>'
         }
       },
       {
@@ -45,7 +45,7 @@ $(document).ready(function () {
 
     // Realizar la solicitud AJAX para obtener los datos de la auditoría
     $.ajax({
-      url: "/capas.com/accions/getAuditById/" + userId,
+      url: "/capas.com/accions/getAuditByIdFinished/" + userId,
       type: "GET",
       dataType: "json",
       success: function (response) {
@@ -59,7 +59,7 @@ $(document).ready(function () {
           // Confirmar si los datos fueron almacenados en localStorage
           if (localStorage.getItem("auditData")) {
             // Redirigir a la vista de detalles
-            window.location.href = "/capas.com/accions/auditdetails";
+            window.location.href = "/capas.com/accions/AuditCompleteDetails";
           } else {
           }
         }
