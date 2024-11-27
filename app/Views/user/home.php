@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../public/css/user/home.css">
     <title>Home</title>
 </head>
 
 <body>
     <header>
-        <h2 id="welcome-message">WELCOME </h2>
-        <a href="../auth/logout" class="button">
-            <i class="fas fa-sign-out-alt"></i> Log Out
-        </a>
+        <h2 color="olive">AUDITORIA POR CAPAS</h2>
+        <h2 id="welcome-message">WELCOME</h2>
+       
     </header>
 
     <main>
@@ -22,9 +22,10 @@
             <!-- Input oculto para almacenar el ID del usuario -->
             <input type="hidden" id="userId"> <!-- Reemplaza "12345" con el valor real del ID -->
             <div class="button-container">
-                <button class="button" id="auditForWeek">Audit Weekly</button>
-                <button class="button">Dashboard</button>
-                <a href="createQuestion" class="button">Add Question</a>
+                <button class="button" id="auditForWeek">AUDIT WEEKLY</button>
+                <button class="button">DASHBOARD</button>
+                <a class="button">CONCLUDED AUDITS</a>
+                <a class="button fa fa-sign-out">LOG OUT</a>
             </div>
         </div>
     </main>

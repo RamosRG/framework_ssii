@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>CAPAS AUDITORY</title>
     <title>Audit System</title>
     <style>
         body {
@@ -14,7 +16,7 @@
             min-height: 100vh;
         }
         header {
-            background-color: #333;
+            background-color: #2848b3;
             color: white;
             text-align: center;
             padding: 1em;
@@ -54,7 +56,7 @@
             transform: scale(1.05);
         }
         footer {
-            background-color: #333;
+            background-color: #2848b3;
             color: white;
             text-align: center;
             padding: 1em;
