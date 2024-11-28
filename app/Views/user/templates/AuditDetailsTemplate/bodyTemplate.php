@@ -109,10 +109,10 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Número de línea</th>
-                            <th>Verificación de acciones</th>
-                            <th>Descripción</th>
-                            <th>Implementado</th>
+                            <th>Question</th>
+                            <th>Acciones</th>
+                            <th>Imagen de la Descripcion</th>
+                            <th>Comentario</th>
                             <th>Mejorado</th>
                         </tr>
                     </thead>
@@ -138,7 +138,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <input type="text" id="audit-comment" class="w3-input w3-border w3-round"
+                                <input type="text" id="audit-commentario" class="w3-input w3-border w3-round"
                                     placeholder="Escribe tu comentario aquí">
                             </td>
                         </tr>

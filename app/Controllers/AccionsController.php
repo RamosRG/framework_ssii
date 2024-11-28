@@ -113,8 +113,6 @@ class AccionsController extends BaseController
          'newAuditId' => $newAuditId
       ])->setStatusCode(ResponseInterface::HTTP_CREATED);
    }
-
-
    public function getCompletedVerificaciones($idAudit)
    {
 
@@ -549,7 +547,7 @@ class AccionsController extends BaseController
          'departament' => $data
       ]);
    }
-   public function insertAudit()
+   public function insertAudit(): ResponseInterface
    {
 
       $auditData = [

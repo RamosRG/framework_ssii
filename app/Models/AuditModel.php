@@ -77,9 +77,9 @@ class AuditModel extends Model
             audit.id_supervisor,
             reviewer.email AS reviewer_email,
             answers.answer,
+            questions.question,
             actions.action_description,
             actions.evidence_accion,
-            follow_up.linea,
             follow_up.follow_up,
             follow_up.is_resolved
         ')

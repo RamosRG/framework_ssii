@@ -221,8 +221,8 @@ class UserController extends BaseController
 
         // Obtener los datos del formulario
         $fkQuestion = $this->request->getPost('fk_question');
-        $isComplete = $this->request->getPost('compliaceCheckBox');
         $answer = $this->request->getPost('answer');
+        $isComplete = $this->request->getPost('compliaceCheckBox');
 
         // Manejar el archivo subido
         $file = $this->request->getFile('photo');

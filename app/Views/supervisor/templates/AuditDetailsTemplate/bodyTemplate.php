@@ -9,9 +9,8 @@
                 <table id="audit-table">
                     <thead>
                         <tr>
-                            <th>Numero de Línea</th>
                             <th>Pregunta</th>
-                            <th>Respuesta</th>
+                            <th>Accion</th>
                             <th>Evidencia Pregunta</th>
                             <th>Descripción de la acción</th>
                             <th>Evidencia de lo implementado</th>

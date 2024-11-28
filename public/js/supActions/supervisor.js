@@ -45,7 +45,6 @@ function fetchAuditDetails(auditID) {
                     auditData.forEach((item) => {
                         const row = `
                             <tr data-id-action="${item.id_actions}">
-                                <td><input type="text" name="num-linea" class="w3-input w3-border w3-round"></td>
                                 <td>${item.question}</td>
                                 <td>${item.answer}</td>
                                 <td>${item.evidence ? `<img src="${item.evidence}" alt="Evidencia" style="width: 100px;">` : 'No hay imagen'}</td>
@@ -55,13 +54,13 @@ function fetchAuditDetails(auditID) {
                                 <td><input type="checkbox" class="w3-check" ${item.mejorado ? 'checked' : ''}></td>
                                 <td><input type="text" name="comentario" class="w3-input w3-border w3-round"></td>
                                 <td>
-                                    <select class="w3-select w3-border w3-round">
-                                        <option value="">Selecciona un responsable</option>
-                                        ${users.map(user => `
-                                            <option value="${user.id_user}" ${user.id_user == item.supervisor_id ? 'selected' : ''}>
-                                                ${user.email}
-                                            </option>`).join('')}
-                                    </select>
+                                    <select class="w3-select w3-border w3-round" onchange="console.log('Responsable seleccionado:', this.value)">
+                <option value="">Selecciona un responsable</option>
+                ${users.map(user => `
+                    <option value="${user.id_user}" ${user.id_user == item.supervisor_id ? 'selected' : ''}>
+                        ${user.name} ${user.firstName}
+                    </option>`).join('')}
+            </select>
                                 </td>
                             </tr>
                         `;
@@ -81,30 +80,28 @@ function fetchAuditDetails(auditID) {
 $('#saveButton').on('click', function () {
     const auditData = [];
     const responsablesData = []; // Para almacenar datos de responsables
-    
+
     $('#audit-table tbody tr').each(function () {
         const row = $(this);
+        const responsable = row.find('select').val();
+        console.log('Responsable seleccionado:', responsable); // Aquí es más útil
         const rowData = {
             id_action: row.data('id-action'),
-            linea: row.find('input[name="num-linea"]').val(),
             date: row.find('input[name="date"]').val(),
             mejorado: row.find('td:nth-child(8) input[type="checkbox"]').is(':checked') ? 1 : 0,
             comentario: row.find('input[name="comentario"]').val(),
-            responsable: row.find('td:nth-child(10) select').val(),
+            responsable: responsable,
         };
-
         auditData.push(rowData);
-        // Agregar responsable al arreglo para la tabla 'audit'
-        if (rowData.responsable) {
+        if (responsable) {
             responsablesData.push({
-                id_audit: getUrlParameter('id_audit'), // Suponiendo que ID de auditoría está en la URL
+                id_audit: getUrlParameter('id_audit'),
                 id_action: rowData.id_action,
-                responsable: rowData.responsable
-                
+                responsable: responsable,
             });
-           
         }
     });
+
 
     if (auditData.length > 0) {
         $.ajax({
@@ -112,7 +109,9 @@ $('#saveButton').on('click', function () {
             method: 'POST',
             data: JSON.stringify({ audits: auditData, responsables: responsablesData }), // Enviamos ambos conjuntos de datos
             contentType: 'application/json',
+
             success: function (response) {
+                console.log({ audits: auditData, responsables: responsablesData });
                 alert('Datos guardados correctamente.');
                 location.reload(); // Opcional
             },
