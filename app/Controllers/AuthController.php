@@ -56,7 +56,7 @@ class AuthController extends BaseController
                 ?? ($user['fk_role'] === '1' ? './manager/home' 
                 : ($user['fk_role'] === '2' ? './supervisor/home' 
                 : ($user['fk_role'] === '3' ? './user/home' 
-                : ($user['fk_role'] === '4' ? './admin/home' : './default/home'))));
+                : ($user['fk_role'] === '4' ? './accions/dashboard' : './default/home'))));
             
             $session->remove('redirect_url'); // Limpiar la URL de redirección de la sesión
     

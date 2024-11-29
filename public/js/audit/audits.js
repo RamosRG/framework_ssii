@@ -163,27 +163,27 @@ $(document).ready(function () {
                     // Iterar los detalles y rellenar la tabla
                     auditDetails.forEach(function (detail) {
                         // Manejo de valores vacíos
+                        var question = detail.question || "Sin descripción";
                         var actionDescription = detail.action_description || "Sin descripción";
                         var evidenceAccion = detail.evidence_accion
                             ? `<img src="../accions/${detail.evidence_accion}" alt="Evidencia" style="width: 100px; height: auto;">`
                             : "No hay evidencia";
-                        var linea = detail.linea || "N/A";
                         var followUp = detail.follow_up || "Sin seguimiento";
                         var isResolved = detail.is_resolved === "1"
                             ? '<i class="fas fa-check-circle" style="color: green;"></i>'
                             : '<i class="fas fa-times-circle" style="color: red;"></i>';
-
+    
                         // Crear la fila de la tabla
                         var questionsRow = `
                             <tr>
+                                <td>${question}</td>
                                 <td>${actionDescription}</td>
                                 <td>${evidenceAccion}</td>
-                                <td>${linea}</td>
                                 <td>${followUp}</td>
                                 <td>${isResolved}</td>
                             </tr>
                         `;
-
+    
                         // Agregar la fila a la tabla
                         $("#taken-followUp-list").append(questionsRow);
                     });
@@ -195,7 +195,7 @@ $(document).ready(function () {
                 console.error('Error en la solicitud AJAX:', error);
             }
         });
-
+       
     }
     $(document).ready(function () {
         // Asociar el evento de clic al botón

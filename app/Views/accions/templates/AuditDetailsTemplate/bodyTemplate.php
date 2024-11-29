@@ -94,16 +94,16 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Número de línea</th>
-                            <th>Verificación de acciones</th>
-                            <th>Descripción</th>
-                            <th>Implementado</th>
+                            <th>Question</th>
+                            <th>Acciones</th>
+                            <th>Imagen de la Descripcion</th>
+                            <th>Comentario</th>
                             <th>Mejorado</th>
                         </tr>
                     </thead>
                     <tbody id="taken-followUp-list">
 
-                        
+
                         <!-- Aquí se insertarán las filas dinámicamente -->
                     </tbody>
                 </table>

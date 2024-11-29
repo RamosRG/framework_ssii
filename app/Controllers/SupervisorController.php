@@ -18,66 +18,73 @@ class SupervisorController extends BaseController
         if (!$request) {
             return $this->response->setJSON(['status' => 'error', 'message' => 'Datos inválidos.']);
         }
-
+    
         $followUpModel = new FollowUpModel();
         $auditModel = new AuditModel();
-
+    
         // Manejar datos de `follow_up`
         if (isset($request->audits) && is_array($request->audits)) {
             foreach ($request->audits as $audit) {
-                // Validar datos requeridos
-                if (!isset($audit->id_action, $audit->linea)) {
-                    continue; // Saltar registros incompletos
+                if (empty($audit->id_action)) {
+                    continue; // Saltar registros sin id_action
                 }
-
-                // Datos para `follow_up`
+    
+                // Preparar datos para `follow_up`
                 $data = [
                     'fk_accions' => $audit->id_action,
-                    'linea' => $audit->linea,
                     'follow_up' => $audit->comentario ?? null,
-                    'is_resolved' => $audit->mejorado ?? null,
                     'date_response' => $audit->date ?? null,
+                    'is_resolved' => isset($audit->mejorado) ? (int)$audit->mejorado : null,
                     'responsable' => $audit->responsable ?? null,
                 ];
-
-                // Insertar registro
+    
+                // Insertar en `follow_up`
                 if (!$followUpModel->insert($data)) {
                     return $this->response->setJSON([
                         'status' => 'error',
-                        'message' => 'Error al insertar en follow_up',
-                        'details' => $followUpModel->errors()
+                        'message' => 'Error al insertar en follow_up.',
+                        'details' => $followUpModel->errors(),
                     ]);
                 }
             }
         }
-
+    
         // Manejar datos de responsables para `audit`
         if (isset($request->responsables) && is_array($request->responsables)) {
             foreach ($request->responsables as $responsable) {
-                // Validar datos obligatorios
-                if (!isset($responsable->id_audit, $responsable->responsable)) {
+                if (empty($responsable->id_audit) || empty($responsable->responsable)) {
                     continue; // Saltar registros incompletos
                 }
-
-                // Datos para actualizar en `audit`
+    
+                // Preparar datos para actualizar en `audit`
                 $auditData = [
                     'reviewed_by' => $responsable->responsable,
-                    'review_date' => date('Y-m-d H:i:s'), // Marcar actualización
+                    'review_date' => date('Y-m-d H:i:s'),
                 ];
-
-                // Actualizar registro existente
+    
+                // Verificar si el registro existe antes de actualizar
+                if (!$auditModel->find($responsable->id_audit)) {
+                    return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'El registro de auditoría no existe.',
+                        'id_audit' => $responsable->id_audit,
+                    ]);
+                }
+    
+                // Actualizar `audit`
                 if (!$auditModel->update($responsable->id_audit, $auditData)) {
                     return $this->response->setJSON([
                         'status' => 'error',
-                        'message' => 'Error al actualizar audit',
-                        'details' => $auditModel->errors()
+                        'message' => 'Error al actualizar audit.',
+                        'details' => $auditModel->errors(),
                     ]);
                 }
             }
         }
-
+    
         return $this->response->setJSON(['status' => 'success', 'message' => 'Datos procesados correctamente.']);
     }
+    
     public function showAudit()
     {
         return view("supervisor/show_audit");
