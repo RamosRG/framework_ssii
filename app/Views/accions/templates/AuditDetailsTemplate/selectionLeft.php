@@ -3,14 +3,14 @@
     <div class="w3-container w3-center">
         <h3 class="w3-padding-64"><b>Auditoria<br>Por<br>Capas</b></h3>
     </div>
-    <a href="../admin/home" class="w3-bar-item w3-button"><i class="fas fa-home"></i> Home</a>
-    <a href="../accions/addaudit" class="w3-bar-item w3-button"><i class="fas fa-plus-circle"></i> Add Audit</a>
-    <a href="../accions/showaudit" class="w3-bar-item w3-button"><i class="fas fa-list-alt"></i> Show Audit</a>
-    <a href="../accions/ShowFinishedAudit" class="w3-bar-item w3-button"><i class="fas fa-list-alt"></i> show finished audit</a>
-    <a href="../accions/showquestions" class="w3-bar-item w3-button"><i class="fas fa-clipboard-list"></i> Show Questions</a>
-    <a href="../accions/dashboard" class="w3-bar-item w3-button"><i class="	fas fa-dharmachakra"></i> Dashboard</a>
-    <a href="../accions/showAuditsToEdit" class="w3-bar-item w3-button"><i class="	fas fa-edit"></i> Edit Audit</a>
-    <a href="../auth/logout" class="w3-bar-item w3-button"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+    <a href="../admin/home" class="w3-bar-item w3-button"><i class="fa fa-home"></i> Home</a>
+    <a href="../accions/addaudit" class="w3-bar-item w3-button"><i class="fa fa-plus"></i> Add Audit</a>
+    <a href="../accions/showaudit" class="w3-bar-item w3-button"><i class="fa fa-bars"></i> Show Audit</a>
+    <a href="../accions/ShowFinishedAudit" class="w3-bar-item w3-button"><i class="	fa fa-external-link-square"></i> Show Finished Audit</a>
+    <a href="../accions/showquestions" class="w3-bar-item w3-button"><i class="	fa fa-folder-open-o"></i> Show Questions</a>
+    <a href="../accions/dashboard" class="w3-bar-item w3-button"><i class="	fa fa-dashboard"></i> Dashboard</a>
+    <a href="../accions/showAuditsToEdit" class="w3-bar-item w3-button"><i class="fa fa-edit"></i> Edit Audit</a>
+    <a href="../auth/logout" class="w3-bar-item w3-button"><i class="fa fa-external-link"></i> Log Out</a>
 </nav>
 
 <div class="w3-main">

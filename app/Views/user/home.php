@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="../public/css/framework/w3.css">
+    <link rel="stylesheet" href="../public/css/font-awesome.min.css">
     <link rel="stylesheet" href="../public/css/user/home.css">
     <title>Home</title>
 </head>
@@ -13,7 +14,7 @@
     <header>
         <h2 color="olive">AUDITORIA POR CAPAS</h2>
         <h2 id="welcome-message">WELCOME</h2>
-       
+
     </header>
 
     <main>
@@ -22,10 +23,10 @@
             <!-- Input oculto para almacenar el ID del usuario -->
             <input type="hidden" id="userId"> <!-- Reemplaza "12345" con el valor real del ID -->
             <div class="button-container">
-                <button class="button" id="auditForWeek">AUDIT WEEKLY</button>
-                <button class="button">DASHBOARD</button>
-                <a class="button">CONCLUDED AUDITS</a>
-                <a class="button fa fa-sign-out">LOG OUT</a>
+                <button id="auditForWeek" class="w3-button w3-light-blue w3-round-large fa fa-calendar"  style="font-size:24px" > AUDIT WEEKLY</button>
+                <button class="w3-button w3-light-blue w3-round-large fa fa-dashboard" style="font-size:24px" > DASHBOARD</button>
+                <button class="w3-button w3-light-blue w3-round-large fa fa-thumbs-o-up" style="font-size:24px"> CONCLUDED AUDITS</button>
+                <button class="w3-button w3-light-blue w3-round-large fa fa-external-link-square" style="font-size:24px"> LOG OUT</button>
             </div>
         </div>
     </main>

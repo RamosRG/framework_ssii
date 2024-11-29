@@ -12,5 +12,7 @@
             "email": "orp2131100708@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "daycry/cronjob": "^2.2"
+    }
 }
