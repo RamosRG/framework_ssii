@@ -30,36 +30,36 @@ function fetchShiftData() {
             'Content-Type': 'application/json'
         }
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            let shiftSelect = $('#shift-list');
-            shiftSelect.empty(); // Limpiar las opciones anteriores
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                let shiftSelect = $('#shift-list');
+                shiftSelect.empty(); // Limpiar las opciones anteriores
 
-            // Añadir opción predeterminada
-            shiftSelect.append(new Option("Open this select menu", "", true));
+                // Añadir opción predeterminada
+                shiftSelect.append(new Option("Open this select menu", "", true));
 
-            // Llenar el select con los datos de turnos
-            data.shift.forEach(item => {
-                let option = new Option(item.shift, item.id_shift);
-                shiftSelect.append(option);
-            });
+                // Llenar el select con los datos de turnos
+                data.shift.forEach(item => {
+                    let option = new Option(item.shift, item.id_shift);
+                    shiftSelect.append(option);
+                });
 
-            // Inicializar Select2 en shift-list con estilos personalizados
-            shiftSelect.select2({
-                placeholder: "Seleccione un turno",
-                allowClear: true,
-                width: '100%',
-                dropdownCssClass: "custom-select2-dropdown",
-                selectionCssClass: "custom-select2-selection"
-            });
+                // Inicializar Select2 en shift-list con estilos personalizados
+                shiftSelect.select2({
+                    placeholder: "Seleccione un turno",
+                    allowClear: true,
+                    width: '100%',
+                    dropdownCssClass: "custom-select2-dropdown",
+                    selectionCssClass: "custom-select2-selection"
+                });
 
-            shiftSelect.trigger('change'); // Actualizar Select2
-        } else {
-            console.error('Error al obtener los turnos');
-        }
-    })
-    .catch(error => console.error('Error en la solicitud:', error));
+                shiftSelect.trigger('change'); // Actualizar Select2
+            } else {
+                console.error('Error al obtener los turnos');
+            }
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
 }
 
 function fetchMachineryData() {
@@ -70,36 +70,36 @@ function fetchMachineryData() {
             'Content-Type': 'application/json'
         }
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            let machinerySelect = $('#machinery-list');
-            machinerySelect.empty(); // Limpiar las opciones anteriores
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                let machinerySelect = $('#machinery-list');
+                machinerySelect.empty(); // Limpiar las opciones anteriores
 
-            // Añadir opción predeterminada
-            machinerySelect.append(new Option("Open this select menu", "", true));
+                // Añadir opción predeterminada
+                machinerySelect.append(new Option("Open this select menu", "", true));
 
-            // Llenar el select con los datos de maquinaria
-            data.machinery.forEach(item => {
-                let option = new Option(item.machinery, item.id_machinery);
-                machinerySelect.append(option);
-            });
+                // Llenar el select con los datos de maquinaria
+                data.machinery.forEach(item => {
+                    let option = new Option(item.machinery, item.id_machinery);
+                    machinerySelect.append(option);
+                });
 
-            // Inicializar Select2 en machinery-list con estilos personalizados
-            machinerySelect.select2({
-                placeholder: "Seleccione maquinaria",
-                allowClear: true,
-                width: '100%',
-                dropdownCssClass: "custom-select2-dropdown",
-                selectionCssClass: "custom-select2-selection"
-            });
+                // Inicializar Select2 en machinery-list con estilos personalizados
+                machinerySelect.select2({
+                    placeholder: "Seleccione maquinaria",
+                    allowClear: true,
+                    width: '100%',
+                    dropdownCssClass: "custom-select2-dropdown",
+                    selectionCssClass: "custom-select2-selection"
+                });
 
-            machinerySelect.trigger('change'); // Actualizar Select2
-        } else {
-            console.error('Error al obtener datos de maquinaria');
-        }
-    })
-    .catch(error => console.error('Error en la solicitud:', error));
+                machinerySelect.trigger('change'); // Actualizar Select2
+            } else {
+                console.error('Error al obtener datos de maquinaria');
+            }
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
 }
 
 
@@ -339,7 +339,7 @@ $(document).on('click', '#createAudit .btnAudit', function (e) {
         data: $.param(formData),
         dataType: 'json',
         success: function (response) {
-            
+
             if (response.status === 'success') {
                 Swal.fire('Éxito!', '¡Auditoría Creada con éxito!', 'success').then(() => {
                     window.location.href = '../accions/showaudit';

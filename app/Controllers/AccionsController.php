@@ -13,6 +13,7 @@ use App\Models\QuestionsModel;
 use App\Models\AreasModel;
 use App\Models\RoleModel;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Email\Email;
 
 class AccionsController extends BaseController
 {
@@ -75,7 +76,6 @@ class AccionsController extends BaseController
          ->getResult();
 
       foreach ($questions as $question) {
-         print_r($question);  // Esto mostrará todos los valores de la pregunta, incluyendo fk_source.
          $newQuestionData = [
             'fk_audit'  => $newAuditId,
             'question'  => $question->question,
@@ -89,7 +89,6 @@ class AccionsController extends BaseController
 
          if (!$db->table('questions')->insert($newQuestionData)) {
             $error = $db->error();  // Obtiene el error de la base de datos
-            print_r($error);  // Verifica el error específico
             throw new \Exception('Error al insertar una pregunta: ' . json_encode($error));
          }
       }
@@ -549,52 +548,82 @@ class AccionsController extends BaseController
    }
    public function insertAudit(): ResponseInterface
    {
-
-      $auditData = [
-         'audit_title' => $this->request->getPost('name-of-audit'),
-         'fk_machinery' => $this->request->getPost('machinery'),
-         'fk_shift' => $this->request->getPost('shift'),
-         'fk_department' => $this->request->getPost('departament'),
-         'fk_auditor' => $this->request->getPost('email'),
-         'date' => $this->request->getPost('date'),
-      ];
-
-      try {
-         $auditModel = new AuditModel();
-         $auditId = $auditModel->insertAudit($auditData);
-
-         if ($auditId) {
-            // Obtener las preguntas enviadas en formato JSON
-            $questionsData = json_decode($this->request->getPost('questions'), true); // Decodificar el JSON
-
-            // Preparar el array de preguntas para insertar
-            $preparedQuestions = [];
-
-            foreach ($questionsData as $questionData) {
-               $preparedQuestions[] = [
-                  'fk_audit' => $auditId,
-                  'fk_category' => $questionData['id_category'], // Usar el ID de categoría de la pregunta
-                  'question' => $questionData['question'],
-                  'status' => 1,
-                  'created_at' => $this->request->getPost('date'),
-                  'fk_source' => $questionData['source'] ?? null,
-               ];
-            }
-
-            $questionsModel = new QuestionsModel();
-            if (!empty($preparedQuestions)) {
-               if (!$questionsModel->insertBatch($preparedQuestions)) {
-                  throw new \Exception('Error al insertar las preguntas');
+       $auditData = [
+           'audit_title' => $this->request->getPost('name-of-audit'),
+           'fk_machinery' => $this->request->getPost('machinery'),
+           'fk_shift' => $this->request->getPost('shift'),
+           'fk_department' => $this->request->getPost('departament'),
+           'fk_auditor' => $this->request->getPost('email'),
+           'date' => $this->request->getPost('date'),
+       ];
+   
+       try {
+           $auditModel = new AuditModel();
+           $auditId = $auditModel->insertAudit($auditData);
+   
+           if ($auditId) {
+               // Obtener las preguntas enviadas en formato JSON
+               $questionsData = json_decode($this->request->getPost('questions'), true); // Decodificar el JSON
+   
+               // Preparar el array de preguntas para insertar
+               $preparedQuestions = [];
+   
+               foreach ($questionsData as $questionData) {
+                   $preparedQuestions[] = [
+                       'fk_audit' => $auditId,
+                       'fk_category' => $questionData['id_category'], // Usar el ID de categoría de la pregunta
+                       'question' => $questionData['question'],
+                       'status' => 1,
+                       'created_at' => $this->request->getPost('date'),
+                       'fk_source' => $questionData['source'] ?? null,
+                   ];
                }
-            }
-
-            return $this->response->setJSON(['status' => 'success', 'message' => 'Audit and questions created successfully']);
-         } else {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to create the new audit']);
-         }
-      } catch (\Exception $e) {
-         return $this->response->setJSON(['status' => 'error', 'message' => $e->getMessage()]);
-      }
+   
+               $questionsModel = new QuestionsModel();
+               if (!empty($preparedQuestions)) {
+                   if (!$questionsModel->insertBatch($preparedQuestions)) {
+                       throw new \Exception('Error al insertar las preguntas');
+                   }
+               }
+   
+               // Enviar correo de notificación
+               $this->sendAuditNotificationEmail($auditData);
+   
+               return $this->response->setJSON(['status' => 'success', 'message' => 'Audit and questions created successfully']);
+           } else {
+               return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to create the new audit']);
+           }
+       } catch (\Exception $e) {
+           return $this->response->setJSON(['status' => 'error', 'message' => $e->getMessage()]);
+       }
+   }
+   private function sendAuditNotificationEmail(array $auditData): void
+   {
+       $emailService = \Config\Services::email();
+   
+       $to = $auditData['fk_auditor']; // Dirección del auditor (correo)
+       $subject = 'Nueva Auditoría Asignada';
+       $message = "
+           <p>Hola,</p>
+           <p>Se ha creado una nueva auditoría con los siguientes detalles:</p>
+           <ul>
+               <li><strong>Título:</strong> {$auditData['audit_title']}</li>
+               <li><strong>Máquina:</strong> {$auditData['fk_machinery']}</li>
+               <li><strong>Turno:</strong> {$auditData['fk_shift']}</li>
+               <li><strong>Departamento:</strong> {$auditData['fk_department']}</li>
+               <li><strong>Fecha:</strong> {$auditData['date']}</li>
+           </ul>
+           <p>Por favor, inicia sesión para más detalles.</p>
+       ";
+   
+       $emailService->setTo($to);
+       $emailService->setFrom('orlando.ramos@dart.biz', 'Sistema de Auditorías');
+       $emailService->setSubject($subject);
+       $emailService->setMessage($message);
+   
+       if (!$emailService->send()) {
+           log_message('error', 'No se pudo enviar el correo: ' . $emailService->printDebugger(['headers']));
+       }
    }
    private function getAuditsByDepartment($auditModel)
    {

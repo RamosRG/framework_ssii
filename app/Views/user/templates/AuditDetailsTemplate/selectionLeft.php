@@ -3,7 +3,10 @@
     <div class="w3-container w3-center">
         <h3 class="w3-padding-64"><b>Auditoria<br>Por<br>Capas</b></h3>
     </div>
-    <a href="../user/home" class="w3-bar-item w3-button"><i class="	fa fa-home"></i> Home</a>
+    <a href="../user/home" class="w3-bar-item w3-button fa fa-home" > Home</a>
+    <a href="../user/dashboard" class="w3-bar-item w3-button fa fa-dashboard" > Dashboard</a>
+    <a href="../user/showAuditFinisheds" class="w3-bar-item w3-button fa fa-list" > Concluded Audits</a>
+    <a href="../auth/logout" class="w3-bar-item w3-button fa fa-external-link-square"> Log Out</a>
 </nav>
 
 <div class="w3-main">

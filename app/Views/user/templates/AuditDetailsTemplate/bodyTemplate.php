@@ -6,36 +6,36 @@
         <div class="w3-row-padding">
             <div class="w3-third form-group">
                 <label for="no_audit"><b>Audit Number</b></label>
-                <input id="no_audit" class="w3-input w3-border w3-round" type="text" name="no_audit" required>
+                <input id="no_audit" class="w3-input w3-border w3-round" type="text" name="no_audit" >
             </div>
             <div class="w3-third form-group">
-                <label for="date"><b>Date Start</b></label>
-                <input id="date" class="w3-input w3-border w3-round" type="date" name="date" required>
+                <label for="date_start"><b>Date Start</b></label>
+                <input id="date_start" class="w3-input w3-border w3-round" type="text" name="date_start" >
             </div>
             <div class="w3-third form-group">
-                <label for="date"><b>Date Finish</b></label>
-                <input id="date" class="w3-input w3-border w3-round" type="date" name="date" required>
+                <label for="date_end"><b>Date Finish</b></label>
+                <input id="date_end" class="w3-input w3-border w3-round" type="text" name="date_end" >
             </div>
         </div>
         <div class="w3-row-padding">
             <div class="form-group">
                 <label for="auditor"><b>Auditor</b></label>
-                <input id="auditor" class="w3-input w3-border w3-round" type="text" name="auditor" required>
+                <input id="auditor" class="w3-input w3-border w3-round" type="text" name="auditor" >
             </div>
         </div>
         <!-- Additional Information -->
         <div class="w3-row-padding">
             <div class="w3-third form-group">
                 <label for="departament"><b>Department</b></label>
-                <input id="departament" class="w3-input w3-border w3-round" type="text" name="departament" required>
+                <input id="departament" class="w3-input w3-border w3-round" type="text" name="departament" >
             </div>
             <div class="w3-third form-group">
                 <label for="machinery"><b>Machinery</b></label>
-                <input id="machinery" class="w3-input w3-border w3-round" type="text" name="machinery" required>
+                <input id="machinery" class="w3-input w3-border w3-round" type="text" name="machinery" >
             </div>
             <div class="w3-third form-group">
                 <label for="shift"><b>Shift</b></label>
-                <input id="shift" class="w3-input w3-border w3-round" type="text" name="shift" required>
+                <input id="shift" class="w3-input w3-border w3-round" type="text" name="shift" >
             </div>
         </div>
 
@@ -154,6 +154,7 @@
         <!-- Modal for Camera and Photo Capture -->
         <div id="overlay" class="overlay"></div>
         <div id="photoModal" class="photo-modal">
+        <div id="loading" style="display: none;">Cargando...</div>
             <video id="video" autoplay class="modal-video"></video>
             <canvas id="canvas" style="display: none;"></canvas>
             <button id="takePhoto" class="w3-button w3-blue w3-round">Tomar Foto</button>

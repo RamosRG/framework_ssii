@@ -138,7 +138,7 @@ class QuestionsModel extends Model
     {
         return $this->select('audit.audit_title, audit.fk_auditor, users.name, users.firstName, users.lastName, shift.shift, machinery.machinery, department.department,
                              category.category, questions.question, questions.id_question, questions.created_at, source.source, audit.no_audit,
-                             audit.id_audit, audit.fk_auditor, audit.status, audit.date, audit.id_audit')
+                             audit.id_audit, audit.fk_auditor, audit.status, audit.date, audit.id_audit, audit.date_start, audit.date_end')
             ->join('source', 'source.id_source = questions.fk_source')
             ->join('category', 'category.id_category = questions.fk_category')
             ->join('audit', 'questions.fk_audit = audit.id_audit')
