@@ -603,33 +603,89 @@ class AccionsController extends BaseController
    {
        $emailService = \Config\Services::email();
    
-       $to = $auditData['email']; // Dirección del auditor (correo)
+       $to = $auditData['email'];
        $subject = 'Nueva Auditoría Asignada';
+   
+       // Mensaje con estilos en línea
        $message = "
-           <p>Hola,</p>
-           <p>Se ha creado una nueva auditoría con los siguientes detalles:</p>
-           <ul>
-               <li><strong>Título:</strong> {$auditData['audit_title']}</li>
-               <li><strong>Máquina:</strong> {$auditData['fk_machinery']}</li>
-               <li><strong>Turno:</strong> {$auditData['fk_shift']}</li>
-               <li><strong>Departamento:</strong> {$auditData['fk_department']}</li>
-               <li><strong>Fecha:</strong> {$auditData['date']}</li>
-           </ul>
-           <p>Por favor, inicia sesión para más detalles.</p>
+           <html>
+           <head>
+               <style>
+                   body {
+                       font-family: Arial, sans-serif;
+                       background-color: #f9f9f9;
+                       color: #333;
+                       margin: 0;
+                       padding: 0;
+                   }
+                   .container {
+                       max-width: 600px;
+                       margin: 20px auto;
+                       background: #fff;
+                       padding: 20px;
+                       border-radius: 8px;
+                       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                   }
+                   .header {
+                       background-color: #007bff;
+                       color: white;
+                       padding: 10px 20px;
+                       border-radius: 8px 8px 0 0;
+                       text-align: center;
+                   }
+                   .content {
+                       padding: 20px;
+                   }
+                   ul {
+                       padding-left: 20px;
+                   }
+                   li {
+                       margin-bottom: 10px;
+                   }
+                   .footer {
+                       margin-top: 20px;
+                       font-size: 0.9em;
+                       color: #777;
+                       text-align: center;
+                   }
+               </style>
+           </head>
+           <body>
+               <div class='container'>
+                   <div class='header'>
+                       <h2>Sistema de Auditorías</h2>
+                   </div>
+                   <div class='content'>
+                       <p>Hola,</p>
+                       <p>Se ha creado una nueva auditoría con los siguientes detalles:</p>
+                       <ul>
+                           <li><strong>Título:</strong> {$auditData['audit_title']}</li>
+                           <li><strong>Fecha:</strong> {$auditData['date']}</li>
+                       </ul>
+                       <p>Por favor, inicia sesión para más detalles.</p>
+                   </div>
+                   <div class='footer'>
+                       &copy; " . date('Y') . " Sistema de Auditorías. Todos los derechos reservados.
+                   </div>
+               </div>
+           </body>
+           </html>
        ";
    
        $emailService->setTo($to);
        $emailService->setFrom('orlandoramosperez26@gmail.com', 'Sistema de Auditorías');
        $emailService->setSubject($subject);
        $emailService->setMessage($message);
+       $emailService->setMailType('html'); // Importante para usar HTML
    
-       if (!$emailService->send()) {
-         echo 'Correo enviado correctamente.';
-      } else {
-          echo 'Error al enviar correo:';
-          print_r($emailService->printDebugger(['headers']));
-      }
+       if ($emailService->send()) {
+           echo 'Correo enviado correctamente.';
+       } else {
+           echo 'Error al enviar correo:';
+           print_r($emailService->printDebugger(['headers']));
+       }
    }
+   
    private function getAuditsByDepartment($auditModel)
    {
       return $auditModel->getAuditsByDepartment();
