@@ -6,14 +6,14 @@ use CodeIgniter\Config\BaseConfig;
 
 class Email extends BaseConfig
 {
-    public string $fromEmail  = 'orlando.ramos@dart.biz';
+    public string $fromEmail  = 'orlandoramosperez26@gmail.com';
     public string $fromName   = 'Auditoria Por Capas';
     public string $recipients = '';
 
     /**
      * The "user agent"
      */
-    public string $userAgent = 'CodeIgniter';
+    public string $userAgent = 'DART';
 
     /**
      * The mail sending protocol: mail, sendmail, smtp
@@ -28,22 +28,22 @@ class Email extends BaseConfig
     /**
      * SMTP Server Hostname
      */
-    public string $SMTPHost = 'smtp.dart.biz';
+    public string $SMTPHost = 'smtp.gmail.com';
 
     /**
      * SMTP Username
      */
-    public string $SMTPUser = 'orlando.ramos@dart.biz';
+    public string $SMTPUser = 'orlandoramosperez26@gmail.com';
 
     /**
      * SMTP Password
      */
-    public string $SMTPPass = '';
+    public string $SMTPPass = 'fnpz dhzr sxzs serv';
 
     /**
      * SMTP Port
      */
-    public int $SMTPPort = 465;
+    public int $SMTPPort = 587;
 
     /**
      * SMTP Timeout (in seconds)

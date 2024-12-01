@@ -1,0 +1,231 @@
+INFO - 2024-12-01 19:09:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:09:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-12-01 19:09:58 --> mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`auditoria_capas`.`audit`, CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`fk_auditor`) REFERENCES `users` (`id_user`)) in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `au...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `au...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `au...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `au...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 D:\laragon\www\capas.com\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 D:\laragon\www\capas.com\app\Models\AuditModel.php(178): CodeIgniter\Model->insert(Array)
+#8 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(563): App\Models\AuditModel->insertAudit(Array)
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#11 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#13 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+CRITICAL - 2024-12-01 19:09:58 --> CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`auditoria_capas`.`audit`, CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`fk_auditor`) REFERENCES `users` (`id_user`))
+[Method: POST, Route: accions/insertAudit]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (:audit_title:, :fk_machinery:, :fk_shift:, :fk_department:, :fk_auditor:, :date:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Models\AuditModel.php(178): CodeIgniter\Model->insert([...])
+ 6 APPPATH\Controllers\AccionsController.php(563): App\Models\AuditModel->insertAudit([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-01 19:09:58 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`auditoria_capas`.`audit`, CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`fk_auditor`) REFERENCES `users` (`id_user`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'panm\', \'1\', \'2\', \'28\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:09:58\', \'2024-12-01 19:09:58\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'panm\', \'1\', \'2\', \'28\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:09:58\', \'2024-12-01 19:09:58\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (:audit_title:, :fk_machinery:, :fk_shift:, :fk_department:, :fk_auditor:, :date:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Models\AuditModel.php(178): CodeIgniter\Model->insert([...])
+ 8 APPPATH\Controllers\AccionsController.php(563): App\Models\AuditModel->insertAudit([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-01 19:09:58 --> [Caused by] mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`auditoria_capas`.`audit`, CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`fk_auditor`) REFERENCES `users` (`id_user`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'panm\', \'1\', \'2\', \'28\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:09:58\', \'2024-12-01 19:09:58\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'panm\', \'1\', \'2\', \'28\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:09:58\', \'2024-12-01 19:09:58\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'panm\', \'1\', \'2\', \'28\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:09:58\', \'2024-12-01 19:09:58\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (:audit_title:, :fk_machinery:, :fk_shift:, :fk_department:, :fk_auditor:, :date:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Models\AuditModel.php(178): CodeIgniter\Model->insert([...])
+ 9 APPPATH\Controllers\AccionsController.php(563): App\Models\AuditModel->insertAudit([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+11 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+12 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-12-01 19:10:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-12-01 19:10:58 --> mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`auditoria_capas`.`audit`, CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`fk_auditor`) REFERENCES `users` (`id_user`)) in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `au...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `au...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `au...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `au...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 D:\laragon\www\capas.com\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 D:\laragon\www\capas.com\app\Models\AuditModel.php(178): CodeIgniter\Model->insert(Array)
+#8 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(563): App\Models\AuditModel->insertAudit(Array)
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#11 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#13 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+CRITICAL - 2024-12-01 19:10:58 --> CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`auditoria_capas`.`audit`, CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`fk_auditor`) REFERENCES `users` (`id_user`))
+[Method: POST, Route: accions/insertAudit]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (:audit_title:, :fk_machinery:, :fk_shift:, :fk_department:, :fk_auditor:, :date:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Models\AuditModel.php(178): CodeIgniter\Model->insert([...])
+ 6 APPPATH\Controllers\AccionsController.php(563): App\Models\AuditModel->insertAudit([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-01 19:10:58 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`auditoria_capas`.`audit`, CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`fk_auditor`) REFERENCES `users` (`id_user`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'panm\', \'1\', \'2\', \'28\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:10:58\', \'2024-12-01 19:10:58\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'panm\', \'1\', \'2\', \'28\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:10:58\', \'2024-12-01 19:10:58\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (:audit_title:, :fk_machinery:, :fk_shift:, :fk_department:, :fk_auditor:, :date:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Models\AuditModel.php(178): CodeIgniter\Model->insert([...])
+ 8 APPPATH\Controllers\AccionsController.php(563): App\Models\AuditModel->insertAudit([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-01 19:10:58 --> [Caused by] mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`auditoria_capas`.`audit`, CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`fk_auditor`) REFERENCES `users` (`id_user`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'panm\', \'1\', \'2\', \'28\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:10:58\', \'2024-12-01 19:10:58\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'panm\', \'1\', \'2\', \'28\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:10:58\', \'2024-12-01 19:10:58\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'panm\', \'1\', \'2\', \'28\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:10:58\', \'2024-12-01 19:10:58\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (:audit_title:, :fk_machinery:, :fk_shift:, :fk_department:, :fk_auditor:, :date:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Models\AuditModel.php(178): CodeIgniter\Model->insert([...])
+ 9 APPPATH\Controllers\AccionsController.php(563): App\Models\AuditModel->insertAudit([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+11 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+12 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-12-01 19:11:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:11:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:11:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:11:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:11:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:11:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:11:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:11:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:11:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-12-01 19:11:19 --> mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`auditoria_capas`.`audit`, CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`fk_auditor`) REFERENCES `users` (`id_user`)) in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `au...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `au...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `au...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `au...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 D:\laragon\www\capas.com\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 D:\laragon\www\capas.com\app\Models\AuditModel.php(178): CodeIgniter\Model->insert(Array)
+#8 D:\laragon\www\capas.com\app\Controllers\AccionsController.php(563): App\Models\AuditModel->insertAudit(Array)
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#11 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#13 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+CRITICAL - 2024-12-01 19:11:19 --> CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`auditoria_capas`.`audit`, CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`fk_auditor`) REFERENCES `users` (`id_user`))
+[Method: POST, Route: accions/insertAudit]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (:audit_title:, :fk_machinery:, :fk_shift:, :fk_department:, :fk_auditor:, :date:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Models\AuditModel.php(178): CodeIgniter\Model->insert([...])
+ 6 APPPATH\Controllers\AccionsController.php(563): App\Models\AuditModel->insertAudit([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-01 19:11:19 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`auditoria_capas`.`audit`, CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`fk_auditor`) REFERENCES `users` (`id_user`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'dsdsa\', \'2\', \'2\', \'22\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:11:19\', \'2024-12-01 19:11:19\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'dsdsa\', \'2\', \'2\', \'22\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:11:19\', \'2024-12-01 19:11:19\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (:audit_title:, :fk_machinery:, :fk_shift:, :fk_department:, :fk_auditor:, :date:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Models\AuditModel.php(178): CodeIgniter\Model->insert([...])
+ 8 APPPATH\Controllers\AccionsController.php(563): App\Models\AuditModel->insertAudit([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-01 19:11:19 --> [Caused by] mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`auditoria_capas`.`audit`, CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`fk_auditor`) REFERENCES `users` (`id_user`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'dsdsa\', \'2\', \'2\', \'22\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:11:19\', \'2024-12-01 19:11:19\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'dsdsa\', \'2\', \'2\', \'22\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:11:19\', \'2024-12-01 19:11:19\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (\'dsdsa\', \'2\', \'2\', \'22\', \'orp2131100708@gmail.com\', \'2024-12-01\', \'2024-12-01 19:11:19\', \'2024-12-01 19:11:19\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `audit` (`audit_title`, `fk_machinery`, `fk_shift`, `fk_department`, `fk_auditor`, `date`, `created_at`, `updated_at`) VALUES (:audit_title:, :fk_machinery:, :fk_shift:, :fk_department:, :fk_auditor:, :date:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Models\AuditModel.php(178): CodeIgniter\Model->insert([...])
+ 9 APPPATH\Controllers\AccionsController.php(563): App\Models\AuditModel->insertAudit([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->insertAudit()
+11 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+12 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-12-01 19:11:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:11:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:14:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:14:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:14:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:14:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:14:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:14:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:14:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:14:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:15:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:15:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:15:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:15:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:15:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:15:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:15:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:15:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:16:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:16:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-01 19:16:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

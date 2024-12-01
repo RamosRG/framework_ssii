@@ -20,13 +20,6 @@ class UserController extends BaseController
         $idAudit = $request->id_audit ?? null; // ID de la auditoría
         $comment = $request->comment ?? null; // Comentario proporcionado
 
-        // Validar datos requeridos
-        if (!$idAudit || !$comment) {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'message' => 'ID de auditoría y comentario son requeridos.',
-            ]);
-        }
 
         // Cargar el modelo y actualizar el comentario
         $auditModel = new AuditModel();
@@ -109,6 +102,7 @@ class UserController extends BaseController
     }
     public function submitAnswer()
     {
+        
         // Obtener los datos del POST
         $questionId = $this->request->getPost('questionId');
         $action = $this->request->getPost('action');
@@ -132,7 +126,7 @@ class UserController extends BaseController
         $fileName = $image->getRandomName();
     
         // Ruta de destino para la imagen
-        $filePath = '../accions/' . $fileName;
+        $filePath = 'accions/' . $fileName;
     
         // Intentar mover el archivo
         if ($image->move( 'accions', $fileName)) {

@@ -548,15 +548,17 @@ class AccionsController extends BaseController
    }
    public function insertAudit(): ResponseInterface
    {
+    
        $auditData = [
            'audit_title' => $this->request->getPost('name-of-audit'),
            'fk_machinery' => $this->request->getPost('machinery'),
            'fk_shift' => $this->request->getPost('shift'),
            'fk_department' => $this->request->getPost('departament'),
-           'fk_auditor' => $this->request->getPost('email'),
+           'fk_auditor' => $this->request->getPost('user_id'),
+           'email' => $this->request->getPost('email'),
            'date' => $this->request->getPost('date'),
        ];
-   
+
        try {
            $auditModel = new AuditModel();
            $auditId = $auditModel->insertAudit($auditData);
@@ -601,7 +603,7 @@ class AccionsController extends BaseController
    {
        $emailService = \Config\Services::email();
    
-       $to = $auditData['fk_auditor']; // Dirección del auditor (correo)
+       $to = $auditData['email']; // Dirección del auditor (correo)
        $subject = 'Nueva Auditoría Asignada';
        $message = "
            <p>Hola,</p>
@@ -617,13 +619,16 @@ class AccionsController extends BaseController
        ";
    
        $emailService->setTo($to);
-       $emailService->setFrom('orlando.ramos@dart.biz', 'Sistema de Auditorías');
+       $emailService->setFrom('orlandoramosperez26@gmail.com', 'Sistema de Auditorías');
        $emailService->setSubject($subject);
        $emailService->setMessage($message);
    
        if (!$emailService->send()) {
-           log_message('error', 'No se pudo enviar el correo: ' . $emailService->printDebugger(['headers']));
-       }
+         echo 'Correo enviado correctamente.';
+      } else {
+          echo 'Error al enviar correo:';
+          print_r($emailService->printDebugger(['headers']));
+      }
    }
    private function getAuditsByDepartment($auditModel)
    {

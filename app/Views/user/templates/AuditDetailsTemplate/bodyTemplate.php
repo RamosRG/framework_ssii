@@ -150,15 +150,5 @@
 
 
 
-
-        <!-- Modal for Camera and Photo Capture -->
-        <div id="overlay" class="overlay"></div>
-        <div id="photoModal" class="photo-modal">
-        <div id="loading" style="display: none;">Cargando...</div>
-            <video id="video" autoplay class="modal-video"></video>
-            <canvas id="canvas" style="display: none;"></canvas>
-            <button id="takePhoto" class="w3-button w3-blue w3-round">Tomar Foto</button>
-            <button id="closeCamera" class="w3-button w3-red w3-round">Cerrar Cámara</button>
-        </div>
     </div>
 </div>

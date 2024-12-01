@@ -70,7 +70,7 @@
                 </div>
                 <br>
                 <div class="w3-center">
-                    <button class="w3-button w3-blue btnAudit" type="submit">Submit</button>
+                    <button class="w3-button w3-blue btnAudit" type="submit">Crear Auditoria</button>
                 </div>
             </form>
         </div>

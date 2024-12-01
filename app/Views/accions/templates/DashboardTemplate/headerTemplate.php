@@ -32,7 +32,6 @@
 
         .w3-main {
             margin-left: 150px;
-            padding: 2rem;
             transition: margin-left .4s;
         }
 

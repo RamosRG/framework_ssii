@@ -9,32 +9,24 @@
 <script src="../public/js/audit/auditsComplete.js"></script>
 
 <script>
+// Script to open and close sidebar
 function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
 }
-
+ 
 function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
 }
 
-$(document).ready(function() {
-    $('#example').DataTable();
-
-    // Add more rows to tables
-    $('.add-row').click(function() {
-        var table = $(this).closest('table');
-        var newRow = table.find('tbody tr:last').clone();
-        newRow.find('input').val('');
-        table.find('tbody').append(newRow);
-    });
-
-    // Remove row from tables
-    $('table').on('click', '.remove-row', function() {
-        $(this).closest('tr').remove();
-    });
-});
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
 </script>
 </body>
 </html>

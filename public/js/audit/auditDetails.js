@@ -147,168 +147,115 @@ $(document).ready(function () {
         });
     });
 
-    // Abre la cámara al hacer clic en el botón de cámara
     $(document).on("click", ".camera-button", function () {
-        $("#photoModal").show(); // Muestra el modal de la cámara
-        currentButton = $(this); // Almacena el botón que activó la cámara
-        openCamera();
-    });
+        currentButton = $(this);
+        const fileInput = $("<input type='file' accept='image/*' style='display:none;'>");
+        $("body").append(fileInput);
 
-    $("#takePhoto").on("click", function () {
-        takePhoto();
-    });
-
-    // Cierra el modal y detiene el stream de la cámara
-    $("#closeCamera").on("click", function () {
-        $("#photoModal").hide();
-        closeCamera();
-    });
-
-    function openCamera() {
-        const video = document.getElementById("video");
-
-        // Configuración de cámara con orientación adaptativa
-        const constraints = {
-            video: {
-                facingMode: "environment", // Usar cámara trasera
-                width: { ideal: 1280 }, // Opcional: ancho ideal
-                height: { ideal: 720 }  // Opcional: alto ideal
-            },
-        };
-
-        navigator.mediaDevices.getUserMedia(constraints)
-            .then(stream => {
-                currentStream = stream;
-                video.srcObject = stream;
-                video.play();
-                document.getElementById("loading").style.display = "block";
-
-                navigator.mediaDevices.getUserMedia(constraints)
-                    .then(stream => {
-                        document.getElementById("loading").style.display = "none";
-                        // Resto del código...
-                    });
-                // Ajusta el tamaño dinámicamente
-                video.onloadedmetadata = () => {
-                    video.style.width = "100%";
-                    video.style.height = "auto";
+        fileInput.on("change", function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imageDataURL = e.target.result;
+                    if (imageDataURL) {
+                        currentButton.html(`<img src="${imageDataURL}" alt="Selected Photo" style="width: 100%; height: 100%;">`);
+                        currentButton.data('imageData', imageDataURL);
+                    } else {
+                        console.error("Error: La imagen no se cargó correctamente.");
+                    }
                 };
-            })
-            .catch(error => {
-                console.error("Error al acceder a la cámara:", error);
-                alert("No se puede acceder a la cámara. Verifique los permisos del navegador.");
-            });
-       
+                reader.readAsDataURL(file);
+            }
+            fileInput.remove();
+        });
 
-    }
-
-
-    // Función para cerrar la cámara y detener el stream
-    function closeCamera() {
-        if (currentStream) {
-            currentStream.getTracks().forEach(track => {
-                if (track.readyState === "live") {
-                    track.stop(); // Detiene solo tracks activos
-                }
-            });
-            currentStream = null;
-        }
-    }
-
-    // Función para capturar la foto
-    function takePhoto() {
-        const video = document.getElementById("video");
-        const canvas = document.getElementById("canvas");
-
-        const context = canvas.getContext("2d");
-
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        const imageDataURL = canvas.toDataURL("image/png");
-
-        currentButton.html(`<img src="${imageDataURL}" alt="Captured Photo" style="width: 100%; height: 100%;">`);
-
-        $("#photoModal").hide();
-        closeCamera();
-
-        currentButton.data('imageData', imageDataURL); // Almacena la imagen en el botón
-    }
+        fileInput.click();
+    });
 
     $(document).on("click", ".send-button", function () {
         const questionId = $(this).data("question-id");
         const answerInput = $(this).closest("tr").find(".answer-input").val();
         const imageData = $(this).closest("tr").find(".camera-button").data('imageData');
-        const complianceCheckbox = $(this).closest("tr").find('input[type="checkbox"]').prop('checked') ? 1 : 0; // Cambié esta línea
+        const complianceCheckbox = $(this).closest("tr").find('input[type="checkbox"]').prop('checked') ? 1 : 0;
 
         if (imageData) {
             sendPhotoData(questionId, imageData, answerInput, complianceCheckbox);
         } else {
-            alert("Por favor, toma una foto antes de enviar.");
+            Swal.fire({
+                icon: "warning",
+                title: "Faltan datos",
+                text: "Por favor, completa todos los campos antes de enviar.",
+            });
+            return;
         }
     });
-    $(document).ready(function () {
-        $("#photoModal").hide();
-    });
-    
+
     function sendPhotoData(questionId, imageData, answerInput, complianceCheckbox) {
         const formData = new FormData();
-
         formData.append('fk_question', questionId);
         formData.append('answer', answerInput);
-        formData.append('compliaceCheckBox', complianceCheckbox);
+        formData.append('complianceCheckBox', complianceCheckbox);
 
-        const byteString = atob(imageData.split(',')[1]);
-        const mimeString = imageData.split(',')[0].split(':')[1].split(';')[0];
-        const ab = new Uint8Array(byteString.length);
+        // Verifica y convierte la imagen base64 a un Blob
+        const base64Data = imageData.split(',')[1];
+        const mimeType = imageData.split(',')[0].split(':')[1].split(';')[0];
+        try {
+            const byteString = atob(base64Data);
+            const ab = new Uint8Array(byteString.length);
 
-        for (let i = 0; i < byteString.length; i++) {
-            ab[i] = byteString.charCodeAt(i);
-        }
+            for (let i = 0; i < byteString.length; i++) {
+                ab[i] = byteString.charCodeAt(i);
+            }
 
-        const blob = new Blob([ab], { type: mimeString });
-        formData.append('photo', blob, 'photo.png');
+            const blob = new Blob([ab], { type: mimeType });
+            formData.append('photo', blob, 'photo.png');
 
-        $.ajax({
-            url: '../user/uploadPhoto',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-
-                if (response.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Datos enviados correctamente',
-                        text: response.message,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-
-                    fetchTakenActions(id_audit);
-                    saveAuditComment(id_audit);
-                } else {
+            $.ajax({
+                url: '../user/uploadPhoto',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.status === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Datos enviados correctamente',
+                            text: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        // Llamada a funciones adicionales si es necesario
+                        fetchTakenActions(id_audit);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error al enviar los datos',
+                            text: response.message,
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error en la solicitud AJAX:", error);
                     Swal.fire({
                         icon: 'error',
-                        title: 'Error al enviar los datos',
-                        text: response.message,
+                        title: 'Error en la conexión',
+                        text: 'Hubo un problema al enviar los datos. Inténtalo nuevamente.',
                         confirmButtonText: 'Aceptar'
                     });
                 }
-            },
-            error: function (xhr, status, error) {
-                console.error("Error en la solicitud AJAX:", error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error en la conexión',
-                    text: 'Hubo un problema al enviar los datos. Inténtalo nuevamente.',
-                    confirmButtonText: 'Aceptar'
-                });
-            }
-        });
+            });
+        } catch (e) {
+            console.error("Error al convertir la imagen a Blob:", e);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de procesamiento',
+                text: 'Hubo un problema al procesar la imagen. Inténtalo nuevamente.',
+                confirmButtonText: 'Aceptar'
+            });
+        }
     }
 });
 function getFollowUp(idAudit) {
@@ -334,8 +281,8 @@ function getFollowUp(idAudit) {
                         : "No hay evidencia";
                     var followUp = detail.follow_up || "Sin seguimiento";
                     var isResolved = detail.is_resolved === "1"
-                        ? '<i class="fas fa-check-circle" style="color: green;"></i>'
-                        : '<i class="fas fa-times-circle" style="color: red;"></i>';
+                        ? '<i class="fa fa-check-circle" style="color: green;"></i>'
+                        : '<i class="fa fa-remove" style="color: red;"></i>';
 
                     // Crear la fila de la tabla
                     var questionsRow = `
@@ -361,99 +308,5 @@ function getFollowUp(idAudit) {
     });
 
 }
-$(document).ready(function () {
-    // Asociar el evento de clic al botón
-    $("#save-audit").on("click", function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const id_audit = urlParams.get("id_audit");
 
-        if (!id_audit) {
-            alert("No se encontró el ID de auditoría.");
-            return;
-        }
-
-    });
-});
-
-$(document).ready(function () {
-    // Asociar el evento de clic al botón
-    $("#save-audit").on("click", function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const id_audit = urlParams.get("id_audit");
-
-        if (!id_audit) {
-            alert("No se encontró el ID de auditoría.");
-            return;
-        }
-
-        saveAuditComment(id_audit); // Llamar a la función para guardar el comentario
-    });
-});
-
-// Función para guardar el comentario de auditoría
-function saveAuditComment(idAudit) {
-    // Obtener el comentario
-    const comment = $("#audit-commentario").val();
-
-    // Verificar que el comentario no esté vacío
-    if (!comment.trim()) {
-        Swal.fire({
-            icon: "warning",
-            title: "Comentario vacío",
-            text: "Por favor, escribe un comentario antes de guardar.",
-            confirmButtonText: "Aceptar",
-        });
-        return;
-    }
-
-    // Preparar los datos para enviar al servidor
-    const data = {
-        id_audit: idAudit,
-        comment: comment,
-    };
-
-    // Enviar la solicitud AJAX con fetch
-    fetch("../user/submitAuditComment", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json(); // Convertir la respuesta a JSON
-        })
-        .then((result) => {
-            if (result.status === "success") {
-                Swal.fire({
-                    icon: "success",
-                    title: "Datos enviados correctamente",
-                    text: result.message,
-                    showConfirmButton: false,
-                    timer: 1500,
-                }).then(() => {
-                    window.location.href = "/capas.com/accions/showaudit"; // Redirigir a la página de inicio
-                });
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error al enviar los datos",
-                    text: result.message,
-                    confirmButtonText: "Aceptar",
-                });
-            }
-        })
-        .catch((error) => {
-            console.error("Error en la solicitud:", error);
-            Swal.fire({
-                icon: "error",
-                title: "Error en la conexión",
-                text: "Hubo un problema al enviar los datos. Inténtalo nuevamente.",
-                confirmButtonText: "Aceptar",
-            });
-        });
-}
 

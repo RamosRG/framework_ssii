@@ -36,11 +36,11 @@ $(document).ready(function () {
 
 
                         var complianceIcon = detail.compliance === "Yes"
-                            ? '<i class="fas fa-check-circle" style="color: green;"></i>'
-                            : '<i class="fas fa-times-circle" style="color: red;"></i>';
+                            ? '<i class="fa fa-check-circle" style="color: green;"></i>'
+                            : '<i class="fa fa-remove" style="color: red;"></i>';
                         var question_complete = detail.question_complete === "1"
-                            ? '<i class="fas fa-check-circle" style="color: green;"></i>'
-                            : '<i class="fas fa-times-circle" style="color: red;"></i>';
+                            ? '<i class="fa fa-check-circle" style="color: green;"></i>'
+                            : '<i class="fa fa-remove" style="color: red;"></i>';
 
 
                         var findings = detail.Que_se_encontro ? detail.Que_se_encontro : "Sin problema";
@@ -67,8 +67,8 @@ $(document).ready(function () {
                                 : "No hay evidencia";
 
                             var iscomplete = detail.action_compliance === "Yes"
-                                ? '<i class="fas fa-check-circle" style="color: green;"></i>'
-                                : '<i class="fas fa-times-circle" style="color: red;"></i>';
+                                ? '<i class="fa fa-check-circle" style="color: green;"></i>'
+                                : '<i class="fa fa-remove" style="color: red;"></i>';
 
                             var actionsRow = `
                                 <tr>
@@ -120,8 +120,8 @@ $(document).ready(function () {
                         var linea = detail.linea || "N/A";
                         var followUp = detail.follow_up || "Sin seguimiento";
                         var isResolved = detail.is_resolved === "1"
-                            ? '<i class="fas fa-check-circle" style="color: green;"></i>'
-                            : '<i class="fas fa-times-circle" style="color: red;"></i>';
+                            ? '<i class="fa fa-check-circle" style="color: green;"></i>'
+                            : '<i class="fa fa-remove" style="color: red;"></i>';
 
                         // Crear la fila de la tabla
                         var questionsRow = `
@@ -170,8 +170,8 @@ $(document).ready(function () {
                             : "No hay evidencia";
                         var followUp = detail.follow_up || "Sin seguimiento";
                         var isResolved = detail.is_resolved === "1"
-                            ? '<i class="fas fa-check-circle" style="color: green;"></i>'
-                            : '<i class="fas fa-times-circle" style="color: red;"></i>';
+                            ? '<i class="fa fa-check-circle" style="color: green;"></i>'
+                            : '<i class="fa fa-remove" style="color: red;"></i>';
     
                         // Crear la fila de la tabla
                         var questionsRow = `

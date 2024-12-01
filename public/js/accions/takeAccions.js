@@ -33,7 +33,6 @@ function populateTakenActions(actions, id_audit) {
         : "Sin evidencia"}
         </td>
         <td>
-         
           <input type="text" name="action${action.id_question}" value="${action.action_description || ""}">
         </td>
         <td>
@@ -46,9 +45,8 @@ function populateTakenActions(actions, id_audit) {
           <input type="date" name="date_${action.id_question}" value="${action.created_at ? new Date(action.created_at).toISOString().split("T")[0] : ""}">
         </td>
         <td>
-          <button class="w3-btn w3-round-large camera-button" style="display:${action.is_complete == "1" ? "none" : "block"};" data-question-id="${action.id_question}">
-            <i class="fa fa-camera"></i>
-          </button>
+          <!-- Botón para seleccionar una foto -->
+          <input type="file" class="file-input" accept="image/*" data-question-id="${action.id_question}">
         </td>
         <td>
           <label>
@@ -61,7 +59,7 @@ function populateTakenActions(actions, id_audit) {
           </label>
         </td>
         <td>
-        <input type="hidden" name="id_answer" value="${action.id_answer|| ""}">
+          <input type="hidden" name="id_answer" value="${action.id_answer || ""}">
           <button class="btn-accions w3-button w3-blue w3-round" data-question-id="${action.id_question}" style="font-size:12px">Enviar</button>
         </td>
       </tr>
@@ -69,90 +67,21 @@ function populateTakenActions(actions, id_audit) {
     $("#taken-actions-list").append(row);
   });
 
-  // Abre la cámara al hacer clic en el botón de cámara
-  $(document).on("click", ".camera-button", function () {
-    $("#photoModal").show(); // Muestra el modal de la cámara
-    currentButton = $(this); // Almacena el botón que activó la cámara
-    openCamera();
+  // Manejo de la selección de un archivo de imagen
+  $(document).on("change", ".file-input", function () {
+    const fileInput = $(this);
+    const questionId = fileInput.data("question-id");
+    const file = fileInput[0].files[0]; // Obtiene el archivo seleccionado
+
+    if (file) {
+      // Muestra una vista previa de la imagen
+      const imageUrl = URL.createObjectURL(file);
+      fileInput.after(`<img src="${imageUrl}" alt="Vista previa de la imagen" style="width: 100px; height: auto; margin-top: 10px;">`);
+      
+      // Guarda el archivo para enviarlo más tarde
+      fileInput.data('imageFile', file);
+    }
   });
-
-  $("#takePhoto").on("click", function () {
-    takePhoto();
-  });
-
-  // Cierra el modal y detiene el stream de la cámara
-  $("#closeCamera").on("click", function () {
-    $("#photoModal").hide();
-    closeCamera();
-  });
-}
-
-function openCamera() {
-  const video = document.getElementById("video");
-
-  // Configuración para usar la cámara trasera o la cámara frontal según el dispositivo
-  const constraints = {
-    video: {
-      facingMode: "environment", // Usar "environment" para la cámara trasera, o "user" para la cámara frontal
-    },
-  };
-
-  navigator.mediaDevices.getUserMedia(constraints)
-    .then((stream) => {
-      currentStream = stream;
-      video.srcObject = stream;
-      video.play();
-    })
-    .catch((error) => {
-      console.error("Error al acceder a la cámara:", error);
-
-      // Verificación del tipo de error
-      if (error.name === "NotAllowedError") {
-        alert("Permiso de cámara denegado. Por favor, habilítelo en la configuración del navegador.");
-      } else if (error.name === "NotFoundError") {
-        alert("No se encontró una cámara disponible.");
-      } else if (error.name === "AbortError") {
-        alert("El proceso de acceso a la cámara fue abortado. Por favor, intente de nuevo.");
-      } else {
-        alert("Error desconocido al acceder a la cámara: " + error.message);
-      }
-    });
-}
-
-// Función para cerrar la cámara y detener el stream
-function closeCamera() {
-  if (currentStream) {
-    currentStream.getTracks().forEach(track => track.stop());
-    currentStream = null;
-  }
-}
-
-// Función para capturar la foto
-function takePhoto() {
-  const video = document.getElementById("video");
-  const canvas = document.getElementById("canvas");
-
-  const context = canvas.getContext("2d");
-
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-
-  context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-  // Convertir la imagen capturada a un Blob (formato de archivo)
-  canvas.toBlob(function (blob) {
-    const file = new File([blob], "captured_photo.png", { type: "image/png" });
-
-    // Almacenar el archivo en FormData
-    currentButton.data('imageFile', file); // Guardamos el archivo para enviarlo más tarde
-
-    // Mostrar la imagen capturada en el botón
-    const imageUrl = URL.createObjectURL(file);
-    currentButton.html(`<img src="${imageUrl}" alt="Captured Photo" style="width: 100%; height: 100%;">`);
-
-    $("#photoModal").hide();
-    closeCamera(); // Cierra la cámara después de tomar la foto
-  }, "image/png");
 }
 
 $(document).off("click", ".btn-accions").on("click", ".btn-accions", function () {
@@ -164,12 +93,12 @@ $(document).off("click", ".btn-accions").on("click", ".btn-accions", function ()
   const isComplete = $row.find(`input[name="is_complete_${questionId}"]:checked`).val() === "1" ? 1 : 0;
   const idAnswer = $row.find(`input[name="id_answer"]`).val(); // Busca el id_answer solo dentro de la fila
   
-  const imageFile = currentButton.data('imageFile'); // Obtener el archivo
+  const imageFile = $row.find(".file-input").data('imageFile'); // Obtener el archivo
 
   // Verifica si la foto es válida antes de enviarla
   if (!imageFile) {
-    console.log("No se ha capturado ninguna foto.");
-    alert("Por favor, capture una foto antes de enviar.");
+    console.log("No se ha seleccionado ninguna foto.");
+    alert("Por favor, selecciona una foto antes de enviar.");
     return;
   }
 
@@ -222,6 +151,7 @@ $(document).off("click", ".btn-accions").on("click", ".btn-accions", function ()
     },
   });
 });
+
 
 // Obtener datos de usuarios
 function fetchUserData() {

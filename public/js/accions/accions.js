@@ -29,7 +29,7 @@ $(document).ready(function () {
         }
       },
       {
-        "defaultContent": '<button class=" fa fa-arrow-right btn-getAudit w3-button w3-yellow w3-round fa fa-address-book-o"></button>'
+        "defaultContent": '<button class=" btn-getAudit w3-button w3-yellow w3-round fa fa-bars"></button>'
       }
     ]
   });
