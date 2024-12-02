@@ -16,6 +16,7 @@ $(document).ready(function () {
 
         fetchAuditDetails(audit.id_audit);
         getFollowUp(audit.id_audit);
+        getPDF(audit.id_audit);
     }
 
     function fetchAuditDetails(idAudit) {
@@ -98,56 +99,6 @@ $(document).ready(function () {
     }
     function getFollowUp(idAudit) {
         $.ajax({
-            url: '../accions/getVerificaciones/' + idAudit,
-            type: 'GET',
-            dataType: 'json',
-            success: function (response) {
-                console.log(response); // Verificar la respuesta en la consola
-
-                if (response.status === 'success') {
-                    var auditDetails = response.data;
-
-                    // Limpiar la tabla antes de llenarla
-                    $("#taken-followUp-list").empty();
-
-                    // Iterar los detalles y rellenar la tabla
-                    auditDetails.forEach(function (detail) {
-                        // Manejo de valores vacíos
-                        var actionDescription = detail.action_description || "Sin descripción";
-                        var evidenceAccion = detail.evidence_accion
-                            ? `<img src="../accions/${detail.evidence_accion}" alt="Evidencia" style="width: 100px; height: auto;">`
-                            : "No hay evidencia";
-                        var linea = detail.linea || "N/A";
-                        var followUp = detail.follow_up || "Sin seguimiento";
-                        var isResolved = detail.is_resolved === "1"
-                            ? '<i class="fa fa-check-circle" style="color: green;"></i>'
-                            : '<i class="fa fa-remove" style="color: red;"></i>';
-
-                        // Crear la fila de la tabla
-                        var questionsRow = `
-                            <tr>
-                                <td>${actionDescription}</td>
-                                <td>${evidenceAccion}</td>
-                                <td>${linea}</td>
-                                <td>${followUp}</td>
-                                <td>${isResolved}</td>
-                            </tr>
-                        `;
-
-                        // Agregar la fila a la tabla
-                        $("#taken-followUp-list").append(questionsRow);
-                    });
-                } else {
-                    console.error('Error al obtener los detalles de la auditoría');
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error('Error en la solicitud AJAX:', error);
-            }
-        });
-    }
-    function getFollowUp(idAudit) {
-        $.ajax({
             url: '../accions/getCompletedVerificaciones/' + idAudit,
             type: 'GET',
             dataType: 'json',
@@ -195,7 +146,57 @@ $(document).ready(function () {
                 console.error('Error en la solicitud AJAX:', error);
             }
         });
+    }
+    function getPDF(idAudit) {
+        $.ajax({
+            url: '../accions/generarPDF/' + idAudit,
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                console.log(response); // Verificar la respuesta en la consola
 
+                if (response.status === 'success') {
+                    var auditDetails = response.data;
+
+                    // Limpiar la tabla antes de llenarla
+                    $("#taken-followUp-list").empty();
+
+                    // Iterar los detalles y rellenar la tabla
+                    auditDetails.forEach(function (detail) {
+                        // Manejo de valores vacíos
+                        var question = detail.question || "Sin descripción";
+                        var actionDescription = detail.action_description || "Sin descripción";
+                        var evidenceAccion = detail.evidence_accion
+                            ? `<img src="../accions/${detail.evidence_accion}" alt="Evidencia" style="width: 100px; height: auto;">`
+                            : "No hay evidencia";
+                        var followUp = detail.follow_up || "Sin seguimiento";
+                        var isResolved = detail.is_resolved === "1"
+                            ? '<i class="fa fa-check-circle" style="color: green;"></i>'
+                            : '<i class="fa fa-remove" style="color: red;"></i>';
+    
+                        // Crear la fila de la tabla
+                        var questionsRow = `
+                            <tr>
+                                <td>${question}</td>
+                                <td>${actionDescription}</td>
+                                <td>${evidenceAccion}</td>
+                                <td>${followUp}</td>
+                                <td>${isResolved}</td>
+                            </tr>
+                        `;
+    
+                        // Agregar la fila a la tabla
+                        $("#taken-followUp-list").append(questionsRow);
+                    });
+                } else {
+                    console.error('Error al obtener los detalles de la auditoría');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error en la solicitud AJAX:', error);
+            }
+        });
+       
     }
     $(document).ready(function () {
         // Asociar el evento de clic al botón

@@ -13,6 +13,7 @@
         }
     ],
     "require": {
-        "daycry/cronjob": "^2.2"
+        "daycry/cronjob": "^2.2",
+        "dompdf/dompdf": "^3.0"
     }
 }

@@ -23,9 +23,31 @@ $(document).ready(function () {
         }
       },
       {
-        "defaultContent": '<button class=" fa fa-arrow-right btn-getAudit w3-button w3-yellow w3-round fa fa-address-book-o"></button>'
-      }
+        "defaultContent": `
+            <button class="fa fa-arrow-right btn-getAudit w3-button w3-yellow w3-round"></button>
+            <button class="fa fa-file-pdf-o btn-generatePDF w3-button w3-red w3-round"></button>
+        `
+    }
+    
     ]
+  });
+});
+
+$(document).ready(function () {
+  var table = $("#auditTable").DataTable();
+
+  // Evento para manejar el click en el botón '.btn-generatePDF'
+  $("#auditTable").on("click", ".btn-generatePDF", function () {
+    var data = table.row($(this).parents("tr")).data();
+    var userId = data.id_audit; // Obtener el ID de la auditoría de la fila
+
+    if (!userId) {
+      alert("No se pudo obtener el ID de la auditoría.");
+      return;
+    }
+
+    // Redirigir a la función de generación de PDF
+    window.open("/capas.com/accions/generarPDF/" + userId, "_blank");
   });
 });
 
@@ -69,7 +91,9 @@ $(document).ready(function () {
       },
     });
   });
+  
 });
+
 
 $(document).ready(function () {
   // Obtener los datos de la auditoría desde localStorage

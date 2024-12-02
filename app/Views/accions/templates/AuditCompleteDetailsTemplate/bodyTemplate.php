@@ -94,10 +94,10 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Número de línea</th>
-                            <th>Verificación de acciones</th>
-                            <th>Descripción</th>
-                            <th>Implementado</th>
+                        <th>Pregunta</th>
+                            <th>Acciones</th>
+                            <th>Imagen de la Descripcion</th>
+                            <th>Comentario</th>
                             <th>Mejorado</th>
                         </tr>
                     </thead>

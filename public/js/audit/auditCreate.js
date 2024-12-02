@@ -363,6 +363,7 @@ $(document).on("click", "#createAudit .btnAudit", function (e) {
     data: $.param(formData),
     dataType: "json",
     success: function (response) {
+      console.log(response);
       if (response.status === "success") {
         Swal.fire("Éxito!", "¡Auditoría Creada con éxito!", "success").then(
           () => {

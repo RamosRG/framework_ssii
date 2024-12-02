@@ -110,3 +110,72 @@ function sendDataToSupervisor(data) {
   });
 }
 
+$(document).ready(function () {
+    // Asociar el evento de clic al botón
+    $("#save-audit").on("click", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id_audit = urlParams.get("id_audit");
+
+        if (!id_audit) {
+            alert("No se encontró el ID de auditoría.");
+            return;
+        }
+
+        saveAuditComment(id_audit); // Llamar a la función para guardar el comentario
+    });
+});
+
+// Función para guardar el comentario de auditoría
+function saveAuditComment(idAudit) {
+    // Obtener el comentario
+    const comment = $("#audit-commentario").val();
+
+    // Preparar los datos para enviar al servidor
+    const data = {
+        id_audit: idAudit,
+        comment: comment,
+    };
+
+    // Enviar la solicitud AJAX con fetch
+    fetch("../user/submitAuditComment", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => {
+            if (!response.ok) {
+            }
+            return response.json(); // Convertir la respuesta a JSON
+        })
+        .then((result) => {
+            if (result.status === "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Datos enviados correctamente",
+                    text: result.message,
+                    showConfirmButton: false,
+                    timer: 1500,
+                }).then(() => {
+                    window.location.href = "/capas.com/accions/showaudit"; // Redirigir a la página de inicio
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error al enviar los datos",
+                    text: result.message,
+                    confirmButtonText: "Aceptar",
+                });
+            }
+        })
+        .catch((error) => {
+            console.error("Error en la solicitud:", error);
+            Swal.fire({
+                icon: "error",
+                title: "Error en la conexión",
+                text: "Hubo un problema al enviar los datos. Inténtalo nuevamente.",
+                confirmButtonText: "Aceptar",
+            });
+        });
+}

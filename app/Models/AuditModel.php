@@ -18,30 +18,61 @@ class AuditModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
-    public function getAuditCompleteVerification($auditId) {
+    public function GenerarPDF($auditId)
+    {
+        return $this->select('
+            audit.no_audit, audit.audit_title, audit.date_start, 
+            users.name AS auditor_name, users.firstName, 
+            machinery.machinery, shift.shift, department.department,
+            questions.question, questions.created_at, 
+            category.category, source.source,  
+            answers.answer, answers.evidence, answers.is_complete,
+            actions.action_description, actions.evidence_accion, 
+            actions.responsable, follow_up.follow_up, 
+            follow_up.date_response, audit.reviewed_by
+        ')
+        ->join('users', 'users.id_user = audit.fk_auditor', 'left')
+        ->join('shift', 'shift.id_shift = audit.fk_shift', 'left')
+        ->join('machinery', 'machinery.id_machinery = audit.fk_machinery', 'left')
+        ->join('department', 'department.id_department = audit.fk_department', 'left')
+        ->join('questions', 'questions.fk_audit = audit.id_audit')
+        ->join('category', 'category.id_category = questions.fk_category', 'left')
+        ->join('source', 'source.id_source = questions.fk_source', 'left')
+        ->join('answers', 'answers.fk_question = questions.id_question', 'left')
+        ->join('actions', 'actions.fk_answer = answers.id_answer', 'left')
+        ->join('follow_up', 'follow_up.fk_accions = actions.id_actions', 'left')
+        ->where('audit.id_audit', $auditId)
+        ->where('audit.status', 0)
+        ->get()
+        ->getResultArray();
+    }
+
+    
+    public function getAuditCompleteVerification($auditId)
+    {
         return $this->select('
             audit.id_audit,
             audit.id_supervisor,
             reviewer.email AS reviewer_email,
             answers.answer,
+            questions.question,
             actions.action_description,
             actions.evidence_accion,
-            follow_up.linea,
             follow_up.follow_up,
             follow_up.is_resolved
         ')
-        ->join('users AS auditor', 'auditor.id_user = audit.fk_auditor')
-        ->join('users AS reviewer', 'reviewer.id_user = audit.reviewed_by')
-        ->join('questions', 'audit.id_audit = questions.fk_audit')
-        ->join('answers', 'answers.fk_question = questions.id_question')
-        ->join('actions', 'actions.fk_answer = answers.id_answer')
-        ->join('follow_up', 'follow_up.fk_accions = actions.id_actions')
-        ->where('audit.id_audit', $auditId)
-        ->where('audit.status', 0)
-        
-        ->get()
-        ->getResultArray(); // Retorna los resultados como un array
-            // Depura los datos
+            ->join('users AS auditor', 'auditor.id_user = audit.fk_auditor')
+            ->join('users AS reviewer', 'reviewer.id_user = audit.reviewed_by')
+            ->join('questions', 'audit.id_audit = questions.fk_audit')
+            ->join('answers', 'answers.fk_question = questions.id_question')
+            ->join('actions', 'actions.fk_answer = answers.id_answer')
+            ->join('follow_up', 'follow_up.fk_accions = actions.id_actions')
+            ->where('audit.id_audit', $auditId)
+            ->where('audit.status', 0)
+
+            ->get()
+            ->getResultArray(); // Retorna los resultados como un array
+        // Depura los datos
 
     }
     public function getAuditFinished($id): mixed
@@ -71,7 +102,8 @@ class AuditModel extends Model
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
     }
-    public function getAuditVerification($auditId) {
+    public function getAuditVerification($auditId)
+    {
         return $this->select('
             audit.id_audit,
             audit.id_supervisor,
@@ -83,18 +115,18 @@ class AuditModel extends Model
             follow_up.follow_up,
             follow_up.is_resolved
         ')
-        ->join('users AS auditor', 'auditor.id_user = audit.fk_auditor')
-        ->join('users AS reviewer', 'reviewer.id_user = audit.reviewed_by')
-        ->join('questions', 'audit.id_audit = questions.fk_audit')
-        ->join('answers', 'answers.fk_question = questions.id_question')
-        ->join('actions', 'actions.fk_answer = answers.id_answer')
-        ->join('follow_up', 'follow_up.fk_accions = actions.id_actions')
-        ->where('audit.id_audit', $auditId)
-        ->where('audit.status', 1)
-        
-        ->get()
-        ->getResultArray(); // Retorna los resultados como un array
-            // Depura los datos
+            ->join('users AS auditor', 'auditor.id_user = audit.fk_auditor')
+            ->join('users AS reviewer', 'reviewer.id_user = audit.reviewed_by')
+            ->join('questions', 'audit.id_audit = questions.fk_audit')
+            ->join('answers', 'answers.fk_question = questions.id_question')
+            ->join('actions', 'actions.fk_answer = answers.id_answer')
+            ->join('follow_up', 'follow_up.fk_accions = actions.id_actions')
+            ->where('audit.id_audit', $auditId)
+            ->where('audit.status', 1)
+
+            ->get()
+            ->getResultArray(); // Retorna los resultados como un array
+        // Depura los datos
 
     }
     public function getDataOfActions($auditID)
