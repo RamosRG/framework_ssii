@@ -3,8 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\ActionsModel;
-use App\Models\AnswersModel;
 use App\Models\AuditModel;
+use App\Models\AnswersModel;
+use App\Models\AuthModel;
 use App\Models\QuestionsModel;
 use App\Models\FountainModel;
 use App\Models\CategoryModel;
@@ -12,6 +13,112 @@ use App\Models\CategoryModel;
 
 class UserController extends BaseController
 {
+    public function recoverPassword($token)
+    {
+        return view('user/reset_password', ['token' => $token]);
+    }
+
+    public function requestPasswordReset()
+    {
+
+        $email = $this->request->getPost('email');
+        if (empty($email)) {
+            return $this->response->setJSON(['error' => 'El Correo es Requerido'])->setStatusCode(400);
+        }
+
+        $userModel = new AuthModel();
+
+        // Verifica si el usuario existe
+        $user = $userModel->where('email', $email)->first();
+        if (!$user) {
+            return $this->response->setJSON(['error' => 'Correo no Encontrado'])->setStatusCode(404);
+        }
+
+        // Generar un token único
+        $resetToken = bin2hex(random_bytes(32));
+        $expiration = date('Y-m-d H:i:s', strtotime('+1 hour')); // Token válido por 1 hora
+
+        // Guardar el token en la base de datos
+        $data = [
+            'reset_token' => $resetToken,
+            'reset_expires' => $expiration,
+        ];
+        $userModel->update($user['id_user'], $data);
+
+        // Enviar el correo con el enlace de restablecimiento
+        $this->sendResetEmail($email, $resetToken);
+
+        return $this->response->setJSON(['success' => 'Revisa tu Correo']);
+    }
+    public function resetPassword()
+    {
+        
+            $token = $this->request->getPost('token');
+            $newPassword = $this->request->getPost('password');
+            
+            $authModel = new AuthModel();
+            $user = $authModel->validateToken($token);
+            
+            // Verificar que el token sea válido y no haya expirado (asumiendo que se usa en la base de datos)
+            if ($user) {
+              
+                // Hash de la nueva contraseña
+                $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+
+                // Actualizar la contraseña en la base de datos
+                $updateStatus = $authModel->updatePasswordByToken($token, $hashedPassword);
+
+                if ($updateStatus) {
+                    return $this->response->setJSON(['success' => 'La contraseña se ha restablecido con éxito.']);
+                } else {
+                    return $this->response->setJSON(['error' => 'Hubo un problema al actualizar la contraseña. Inténtalo de nuevo.']);
+                }
+            } else {
+                return $this->response->setJSON(['error' => 'El token es inválido o ha expirado.']);
+            }
+        } 
+    
+        private function sendResetEmail($email, $token)
+        {
+            $resetLink = base_url("user/reset-password/{$token}");
+            $emailService = \Config\Services::email();
+        
+            $emailService->setTo($email);
+            $emailService->setFrom('orlandoramosperez26@gmail.com', 'Auditoria Por Capas');
+            $emailService->setSubject('Restablecimiento de Contraseña');
+            $emailService->setMailType('html'); // Importante para interpretar el HTML
+        
+            $emailContent = "
+                <div style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;'>
+                    <div style='max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; 
+                                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);'>
+                        <h2 style='color: #333333; text-align: center;'>Restablecimiento de Contraseña</h2>
+                        <p style='color: #555555; line-height: 1.5;'>Hola,</p>
+                        <p style='color: #555555; line-height: 1.5;'>Haz solicitado restablecer tu contraseña. Haz clic en el siguiente enlace para continuar:</p>
+                        <p style='text-align: center; margin: 20px 0;'>
+                            <a href='{$resetLink}' style='display: inline-block; padding: 10px 20px; background-color: #007BFF; color: #ffffff; 
+                                    text-decoration: none; border-radius: 5px; font-size: 16px;'>Restablecer Contraseña</a>
+                        </p>
+                        <p style='color: #555555; line-height: 1.5;'>Si no solicitaste esto, ignora este correo.</p>
+                        <hr style='margin: 20px 0; border: none; border-top: 1px solid #eeeeee;'/>
+                        <p style='color: #777777; font-size: 12px; text-align: center;'>Este es un mensaje automático, por favor no respondas a este correo.</p>
+                        <p style='color: #777777; font-size: 12px; text-align: center;'>Auditoría Por Capas &copy; " . date('Y') . "</p>
+                    </div>
+                </div>
+            ";
+        
+            $emailService->setMessage($emailContent);
+        
+            if (!$emailService->send()) {
+                log_message('error', 'Error al enviar el correo: ' . $emailService->printDebugger(['headers']));
+                return false;
+            }
+        
+            log_message('info', "Correo de restablecimiento enviado a {$email}");
+            return true;
+        }
+        
+    
 
     public function submitAuditComment()
     {
@@ -102,7 +209,7 @@ class UserController extends BaseController
     }
     public function submitAnswer()
     {
-        
+
         // Obtener los datos del POST
         $questionId = $this->request->getPost('questionId');
         $action = $this->request->getPost('action');
@@ -110,28 +217,28 @@ class UserController extends BaseController
         $date = $this->request->getPost('date');
         $isComplete = $this->request->getPost('is_complete');
         $idAnswer = $this->request->getPost('fk_answer');
-    
+
         // Verificar si el archivo de imagen ha sido recibido
         $image = $this->request->getFile('photo');
-    
+
         if ($image === null) {
             return $this->response->setJSON(['status' => 'error', 'message' => 'No se recibió ningún archivo']);
         }
-    
+
         if (!$image->isValid()) {
             return $this->response->setJSON(['status' => 'error', 'message' => $image->getErrorString()]);
         }
-    
+
         // Generar un nombre único para la imagen
         $fileName = $image->getRandomName();
-    
+
         // Ruta de destino para la imagen
         $filePath = 'accions/' . $fileName;
-    
+
         // Intentar mover el archivo
-        if ($image->move( 'accions', $fileName)) {
+        if ($image->move('accions', $fileName)) {
             log_message('debug', 'Archivo movido a: ' . $filePath); // Agregar log de depuración
-    
+
             // Preparar datos para guardar en la base de datos
             $data = [
                 'fk_answer' => $idAnswer,
@@ -141,12 +248,12 @@ class UserController extends BaseController
                 'date' => $date,
                 'evidence_accion' => $fileName,
             ];
- 
+
             $modelaccion = new ActionsModel();
-    
+
             // Verificar si el registro ya existe
             $existingRecord = $modelaccion->where('fk_answer', $idAnswer)->first();
-    
+
             if ($existingRecord) {
                 // Si el registro existe, actualizarlo
                 if ($modelaccion->update($existingRecord['id_actions'], $data)) {
@@ -166,7 +273,7 @@ class UserController extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar la imagen en el servidor']);
         }
     }
-    
+
     public function getFountain()
     {
         $fountain = new FountainModel();

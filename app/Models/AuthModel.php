@@ -11,14 +11,33 @@ class AuthModel extends Model
 
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['email', 'name', 'firstName', 'lastName', 'password', 'fk_area', 'status', 'fk_role', 'email_verified', 'verification_token', 'privileges', 'created_at', 'updated_at']; // Correcto
+    protected $allowedFields = ['email', 'name', 'firstName', 'lastName', 'password', 'fk_area', 'status', 'fk_role', 'privileges', 'created_at', 'updated_at','reset_token','reset_expires']; // Correcto
 
     protected bool $status = true;
 
     // Dates
     protected $useTimestamps = true; // Correcto
-    protected $createdField = 'create_at';
-    protected $updatedField = 'update_at';
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
+
+
+    public function validateToken($token)
+    {
+        // Verifica si el token existe y no ha expirado
+        $user = $this->where('reset_token', $token)
+                     ->where('reset_expires >=', date('Y-m-d H:i:s'))
+                     ->first();
+
+        return $user ?: false;
+    }
+
+    public function updatePasswordByToken($token, $newPassword)
+    {
+        // Actualiza la contraseña en la base de datos
+        return $this->set('password', $newPassword)
+                    ->where('reset_token', $token)
+                    ->update();
+    }
 
     public function authenticate($email, $password)
     {

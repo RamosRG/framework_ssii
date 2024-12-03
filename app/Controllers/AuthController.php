@@ -2,13 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Models\AdminModel;
 use App\Models\AuthModel;
 use App\Models\DepartamentModel;
 use CodeIgniter\Email\Email;
 
 class AuthController extends BaseController
 {
-
+    
 
     public function getPrivileges()
     {
@@ -30,15 +31,16 @@ class AuthController extends BaseController
                 'message' => 'Usuario no encontrado'
             ]);
         }
-    }public function login()
+    }
+    public function login()
     {
         $session = session();
         $model = new AuthModel();
-    
+
         // Obtener el email y la contraseña del formulario
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
-    
+
         // Autenticar al usuario
         $user = $model->authenticate($email, $password);
         if ($user) {
@@ -50,16 +52,16 @@ class AuthController extends BaseController
                 'id_user' => $user['id_user'],
                 'logged_in' => true
             ]);
-    
+
             // Determinar la URL de redirección según el rol
-            $redirectUrl = $session->get('redirect_url') 
-                ?? ($user['fk_role'] === '1' ? './manager/home' 
-                : ($user['fk_role'] === '2' ? './supervisor/home' 
-                : ($user['fk_role'] === '3' ? './user/home' 
-                : ($user['fk_role'] === '4' ? './accions/dashboard' : './default/home'))));
-            
+            $redirectUrl = $session->get('redirect_url')
+                ?? ($user['fk_role'] === '1' ? './manager/home'
+                    : ($user['fk_role'] === '2' ? './supervisor/home'
+                        : ($user['fk_role'] === '3' ? './user/home'
+                            : ($user['fk_role'] === '4' ? './accions/dashboard' : './default/home'))));
+
             $session->remove('redirect_url'); // Limpiar la URL de redirección de la sesión
-    
+
             // Si la solicitud es AJAX, responde con JSON
             if ($this->request->isAJAX()) {
                 return $this->response->setJSON([
@@ -69,7 +71,7 @@ class AuthController extends BaseController
                     'redirect' => $redirectUrl
                 ]);
             }
-    
+
             // Redirigir para solicitudes normales (no AJAX)
             return redirect()->to($redirectUrl);
         } else {
@@ -107,18 +109,17 @@ class AuthController extends BaseController
         }
     }
     public function getDepartmentsByArea($areaId)
-{
-    $model = new DepartamentModel();
-    $departments = $model->where('fk_area', $areaId)->findAll();
+    {
+        $model = new DepartamentModel();
+        $departments = $model->where('fk_area', $areaId)->findAll();
 
-    return $this->response->setJSON($departments);
-}
-public function getAreaByDepartment($areaId)
-{
-    $model = new DepartamentModel();
-    $departments = $model->where('fk_area', $areaId)->findAll();
+        return $this->response->setJSON($departments);
+    }
+    public function getAreaByDepartment($areaId)
+    {
+        $model = new DepartamentModel();
+        $departments = $model->where('fk_area', $areaId)->findAll();
 
-    return $this->response->setJSON($departments);
-}
-
+        return $this->response->setJSON($departments);
+    }
 }
