@@ -385,7 +385,7 @@ class AccionsController extends BaseController
    public function getArea()
    {
       $areas = new AreasModel();
-      $data = $areas->findAll();
+      $data = $areas->orderBy('area', 'ASC')->findAll();
 
       return $this->response->setJSON([
          'status' => 'success',
@@ -487,7 +487,7 @@ class AccionsController extends BaseController
    public function getSource()
    {
       $fountain = new FountainModel();
-      $data = $fountain->findAll();
+      $data = $fountain->orderBy('source', 'ASC')->findAll();
 
       return $this->response->setJSON([
          'status' => 'success',
@@ -497,7 +497,7 @@ class AccionsController extends BaseController
    public function getCategory()
    {
       $category = new CategoryModel();
-      $data = $category->findAll();
+      $data = $category->orderBy('category', 'ASC')->findAll();;
 
       return $this->response->setJSON([
          'status' => 'success',
@@ -587,7 +587,6 @@ class AccionsController extends BaseController
 
       $auditData = [
          'audit_title' => $this->request->getPost('name-of-audit'),
-         'fk_machinery' => $this->request->getPost('machinery'),
          'fk_shift' => $this->request->getPost('shift'),
          'fk_department' => $this->request->getPost('departament'),
          'fk_auditor' => $this->request->getPost('user_id'),

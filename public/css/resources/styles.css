@@ -75,3 +75,14 @@ tr:hover {
   color: white !important;
   /* Texto blanco */
 }
+#id-comment {
+  font-size: 1.5rem; /* Tamaño del texto */
+  color: #333; /* Color del texto */
+  background-color: #f9f9f9; /* Fondo claro */
+  padding: 10px; /* Espaciado interno */
+  border: 1px solid #ddd; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
+  text-align: center; /* Centrar el texto */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  margin: 20px 0; /* Separación superior e inferior */
+}

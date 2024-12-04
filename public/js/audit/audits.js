@@ -11,12 +11,14 @@ $(document).ready(function () {
         $("#auditor").val(audit.name + " " + audit.firstName + " " + audit.lastName);
         $("#status").val(audit.status);
         $("#departament").val(audit.department);
-        $("#machinery").val(audit.machinery);
         $("#shift").val(audit.shift);
 
         fetchAuditDetails(audit.id_audit);
         getFollowUp(audit.id_audit);
+        fetchMachineryData();
     }
+    // Función para obtener y llenar los datos de maquinaria
+
 
     function fetchAuditDetails(idAudit) {
         $.ajax({
@@ -153,13 +155,20 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (response) {
                 console.log(response); // Verificar la respuesta en la consola
-
+    
                 if (response.status === 'success') {
                     var auditDetails = response.data;
-
+    
                     // Limpiar la tabla antes de llenarla
                     $("#taken-followUp-list").empty();
-
+    
+                    // Verificar si hay un comentario y actualizar el elemento <h3>
+                    if (auditDetails.length > 0 && auditDetails[0].comment) {
+                        $("#id-comment").text(auditDetails[0].comment); // Actualiza el contenido del comentario
+                    } else {
+                        $("#id-comment").text("Sin comentario disponible"); // Texto predeterminado si no hay comentario
+                    }
+    
                     // Iterar los detalles y rellenar la tabla
                     auditDetails.forEach(function (detail) {
                         // Manejo de valores vacíos
@@ -189,14 +198,16 @@ $(document).ready(function () {
                     });
                 } else {
                     console.error('Error al obtener los detalles de la auditoría');
+                    $("#id-comment").text("Error al cargar los datos"); // Mensaje de error
                 }
             },
             error: function (xhr, status, error) {
                 console.error('Error en la solicitud AJAX:', error);
+                $("#id-comment").text("Error en la solicitud"); // Mensaje de error en caso de fallo en la solicitud
             }
         });
-       
     }
+    
     $(document).ready(function () {
         // Asociar el evento de clic al botón
         $("#save-audit").on("click", function () {

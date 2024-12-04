@@ -1,4 +1,4 @@
-function fetchUserData1() {
+function fetchUserData() {
   fetch("/capas.com/admin/getUsers", {
     method: "GET",
     headers: {
@@ -8,23 +8,31 @@ function fetchUserData1() {
     .then((response) => response.json())
     .then((data) => {
       if (data.status === "success") {
-        const userList = document.getElementById("user-list");
-        userList.innerHTML = ""; // Limpiar opciones anteriores
+        let userSelect = document.getElementById("user-list");
+        userSelect.innerHTML = ""; // Limpiar las opciones anteriores
 
-        // Añadir opción predeterminada
-        const defaultOption = document.createElement("option");
-        defaultOption.text = "Selecciona un usuario";
-        defaultOption.value = "";
+        // Añadir opción inicial
+        let defaultOption = document.createElement("option");
+        defaultOption.text = "Open this select menu";
+        defaultOption.value = ""; // Vacío para validación posterior
         defaultOption.selected = true;
         defaultOption.disabled = true;
-        userList.appendChild(defaultOption);
+        userSelect.appendChild(defaultOption);
 
-        // Llenar el select principal con los datos de los usuarios
+        // Llenar el select con los datos de los usuarios
         data.user.forEach((item) => {
-          const option = document.createElement("option");
-          option.value = item.id_user;
-          option.textContent = `${item.email}`; // Mostrar correo como opción
-          userList.appendChild(option);
+          let option = document.createElement("option");
+          option.value = item.id_user; // Usamos id_user como valor
+          option.textContent = item.email; // Mostrar email en el dropdown
+          option.setAttribute("data-email", item.email); // Agregar el correo como atributo personalizado
+          userSelect.appendChild(option);
+        });
+
+        // Inicializar Select2 con estilos
+        $('#user-list').select2({
+          placeholder: "Open this select menu", // Placeholder personalizado
+          allowClear: true, // Agregar botón de limpieza
+          theme: "classic", // Cambia el tema según tus preferencias
         });
       } else {
         console.error("Error al obtener datos de los usuarios");

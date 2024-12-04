@@ -107,6 +107,7 @@ class AuditModel extends Model
         return $this->select('
             audit.id_audit,
             audit.id_supervisor,
+            audit.comment,
             reviewer.email AS reviewer_email,
             answers.answer,
             questions.question,

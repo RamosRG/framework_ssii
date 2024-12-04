@@ -23,7 +23,7 @@ function fetchData(url, selectId, placeholder, valueField, textField) {
     .catch((error) => console.error("Error en la solicitud:", error));
 }
 
-// Funciones para obtener datos específicos
+// Función para obtener y llenar los datos del shift (turno)
 function fetchShiftData() {
   // Hacemos la solicitud AJAX
   fetch("/capas.com/accions/getShift", {
@@ -39,7 +39,7 @@ function fetchShiftData() {
         shiftSelect.empty(); // Limpiar las opciones anteriores
 
         // Añadir opción predeterminada
-        shiftSelect.append(new Option("Open this select menu", "", true));
+        shiftSelect.append(new Option("Open this select menu", "", true, true));
 
         // Llenar el select con los datos de turnos
         data.shift.forEach((item) => {
@@ -47,13 +47,12 @@ function fetchShiftData() {
           shiftSelect.append(option);
         });
 
-        // Inicializar Select2 en shift-list con estilos personalizados
+        // Inicializar Select2 con tema clásico
         shiftSelect.select2({
+          theme: "classic",
           placeholder: "Seleccione un turno",
           allowClear: true,
           width: "100%",
-          dropdownCssClass: "custom-select2-dropdown",
-          selectionCssClass: "custom-select2-selection",
         });
 
         shiftSelect.trigger("change"); // Actualizar Select2
@@ -64,6 +63,7 @@ function fetchShiftData() {
     .catch((error) => console.error("Error en la solicitud:", error));
 }
 
+// Función para obtener y llenar los datos de maquinaria
 function fetchMachineryData() {
   // Hacemos la solicitud AJAX
   fetch("/capas.com/accions/getMachinery", {
@@ -79,7 +79,7 @@ function fetchMachineryData() {
         machinerySelect.empty(); // Limpiar las opciones anteriores
 
         // Añadir opción predeterminada
-        machinerySelect.append(new Option("Open this select menu", "", true));
+        machinerySelect.append(new Option("Open this select menu", "", true, true));
 
         // Llenar el select con los datos de maquinaria
         data.machinery.forEach((item) => {
@@ -87,13 +87,12 @@ function fetchMachineryData() {
           machinerySelect.append(option);
         });
 
-        // Inicializar Select2 en machinery-list con estilos personalizados
+        // Inicializar Select2 con tema clásico
         machinerySelect.select2({
+          theme: "classic",
           placeholder: "Seleccione maquinaria",
           allowClear: true,
           width: "100%",
-          dropdownCssClass: "custom-select2-dropdown",
-          selectionCssClass: "custom-select2-selection",
         });
 
         machinerySelect.trigger("change"); // Actualizar Select2
@@ -103,42 +102,48 @@ function fetchMachineryData() {
     })
     .catch((error) => console.error("Error en la solicitud:", error));
 }
-
 function fetchUserData() {
-    fetch("/capas.com/admin/getUsers", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+  fetch("/capas.com/admin/getUsers", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === "success") {
+        let userSelect = document.getElementById("user-list");
+        userSelect.innerHTML = ""; // Limpiar las opciones anteriores
+
+        // Añadir opción inicial
+        let defaultOption = document.createElement("option");
+        defaultOption.text = "Open this select menu";
+        defaultOption.value = ""; // Vacío para validación posterior
+        defaultOption.selected = true;
+        defaultOption.disabled = true;
+        userSelect.appendChild(defaultOption);
+
+        // Llenar el select con los datos de los usuarios
+        data.user.forEach((item) => {
+          let option = document.createElement("option");
+          option.value = item.id_user; // Usamos id_user como valor
+          option.textContent = item.email; // Mostrar email en el dropdown
+          option.setAttribute("data-email", item.email); // Agregar el correo como atributo personalizado
+          userSelect.appendChild(option);
+        });
+
+        // Inicializar Select2 con estilos
+        $('#user-list').select2({
+          placeholder: "Open this select menu", // Placeholder personalizado
+          allowClear: true, // Agregar botón de limpieza
+          theme: "classic", // Cambia el tema según tus preferencias
+        });
+      } else {
+        console.error("Error al obtener datos de los usuarios");
+      }
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status === "success") {
-          let userSelect = document.getElementById("user-list");
-          userSelect.innerHTML = ""; // Limpiar las opciones anteriores
-  
-          // Añadir opción inicial
-          let defaultOption = document.createElement("option");
-          defaultOption.text = "Open this select menu";
-          defaultOption.value = ""; // Vacío para validación posterior
-          defaultOption.selected = true;
-          defaultOption.disabled = true;
-          userSelect.appendChild(defaultOption);
-  
-          // Llenar el select con los datos de los usuarios
-          data.user.forEach((item) => {
-            let option = document.createElement("option");
-            option.value = item.id_user; // Usamos id_user como valor
-            option.textContent = item.email; // Mostrar email en el dropdown
-            option.setAttribute("data-email", item.email); // Agregar el correo como atributo personalizado
-            userSelect.appendChild(option);
-          });
-        } else {
-          console.error("Error al obtener datos de los usuarios");
-        }
-      })
-      .catch((error) => console.error("Error en la solicitud:", error));
-  }
+    .catch((error) => console.error("Error en la solicitud:", error));
+}
 // Función para obtener los datos de fuentes (sources) y llenar el select
 function fetchSourceData(sourceSelect) {
   // Hacemos la solicitud AJAX
@@ -152,22 +157,27 @@ function fetchSourceData(sourceSelect) {
     .then((data) => {
       // Verificamos si la respuesta tiene la propiedad "fountain" y es un array
       if (data.status === "success" && Array.isArray(data.fountain)) {
-        // Limpiar opciones previas
-        sourceSelect.innerHTML = "";
+        let $sourceSelect = $(sourceSelect); // Convertir a jQuery
+        $sourceSelect.empty(); // Limpiar opciones previas
 
         // Añadir opción predeterminada
-        let defaultOption = document.createElement("option");
-        defaultOption.text = "Selecciona una fuente";
-        defaultOption.selected = true;
-        sourceSelect.appendChild(defaultOption);
+        $sourceSelect.append(new Option("Selecciona una fuente", "", true));
 
         // Llenar el select con las fuentes
         data.fountain.forEach((item) => {
-          let option = document.createElement("option");
-          option.value = item.id_source;
-          option.textContent = item.source;
-          sourceSelect.appendChild(option);
+          let option = new Option(item.source, item.id_source);
+          $sourceSelect.append(option);
         });
+
+        // Inicializar Select2
+        $sourceSelect.select2({
+          theme: "classic", // O cualquier tema como 'bootstrap4'
+          placeholder: "Selecciona una fuente",
+          allowClear: true,
+          width: "100%", // Para ajustar al contenedor
+        });
+
+        $sourceSelect.trigger("change"); // Actualizar el componente Select2
       } else {
         throw new Error("La respuesta no es un array de fuentes");
       }
@@ -324,7 +334,6 @@ $(document).on("click", "#createAudit .btnAudit", function (e) {
     .filter((item) => item.value.trim() !== ""); // Filtrar valores vacíos
 
   // Validaciones para maquinaria y correo electrónico
-  const machinery = formData.find((item) => item.name === "machinery");
   const email = formData.find((item) => item.name === "email");
   const userSelect = document.getElementById("user-list");
   const selectedOption = userSelect.options[userSelect.selectedIndex];
@@ -333,10 +342,6 @@ $(document).on("click", "#createAudit .btnAudit", function (e) {
 
   if (!userEmail || userEmail.value === "undefined") {
     alert("Por favor, selecciona un correo electrónico válido.");
-    return;
-  }
-  if (!machinery || machinery.value === "undefined") {
-    alert("Por favor, selecciona una maquinaria válida.");
     return;
   }
 
@@ -388,6 +393,7 @@ $(document).on("click", "#createAudit .btnAudit", function (e) {
   });
 });
 
+// Función para obtener y llenar los datos de áreas con Select2
 function fetchAreaData() {
   fetch("/capas.com/accions/getArea", {
     method: "GET",
@@ -398,30 +404,37 @@ function fetchAreaData() {
     .then((response) => response.json())
     .then((data) => {
       if (data.status === "success") {
-        let areaSelect = document.getElementById("area-list");
-        areaSelect.innerHTML = ""; // Limpiar las opciones anteriores
+        let areaSelect = $("#area-list");
+        areaSelect.empty(); // Limpiar las opciones anteriores
 
-        // Añadimos la opción inicial
-        let defaultOption = document.createElement("option");
-        defaultOption.text = "Open this select menu";
-        defaultOption.selected = true;
-        areaSelect.appendChild(defaultOption);
+        // Añadir opción predeterminada
+        areaSelect.append(new Option("Open this select menu", "", true, true));
 
         // Llenar el select con los datos de áreas
         data.areas.forEach((item) => {
-          let option = document.createElement("option");
-          option.value = item.id_area; // Usamos id_area como valor
-          option.textContent = item.area; // Usamos area como el nombre a mostrar
-          areaSelect.appendChild(option);
+          let option = new Option(item.area, item.id_area);
+          areaSelect.append(option);
         });
+
+        // Inicializar Select2 en área con tema clásico
+        areaSelect.select2({
+          theme: "classic",
+          placeholder: "Seleccione un área",
+          allowClear: true,
+          width: "100%",
+        });
+
+        areaSelect.trigger("change"); // Actualizar Select2
       } else {
         console.error("Error al obtener las áreas");
       }
     })
     .catch((error) => console.error("Error en la solicitud:", error));
 }
-document.getElementById("area-list").addEventListener("change", function () {
-  let areaId = this.value; // Obtener el ID del área seleccionada
+
+// Evento para manejar el cambio de área y cargar los departamentos
+$("#area-list").on("change", function () {
+  let areaId = $(this).val(); // Obtener el ID del área seleccionada
 
   if (areaId) {
     fetch(`/capas.com/accions/getDepartamentById/${areaId}`, {
@@ -433,22 +446,29 @@ document.getElementById("area-list").addEventListener("change", function () {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
-          let departmentSelect = document.getElementById("department-list");
-          departmentSelect.innerHTML = ""; // Limpiar las opciones anteriores
+          let departmentSelect = $("#department-list");
+          departmentSelect.empty(); // Limpiar las opciones anteriores
 
-          // Añadimos la opción inicial
-          let defaultOption = document.createElement("option");
-          defaultOption.text = "Seleccione un departamento";
-          defaultOption.selected = true;
-          departmentSelect.appendChild(defaultOption);
+          // Añadir opción predeterminada
+          departmentSelect.append(
+            new Option("Seleccione un departamento", "", true, true)
+          );
 
           // Llenar el select con los datos de departamentos
           data.departments.forEach((item) => {
-            let option = document.createElement("option");
-            option.value = item.id_department; // Usamos id_department como valor
-            option.textContent = item.department; // Usamos department como el nombre a mostrar
-            departmentSelect.appendChild(option);
+            let option = new Option(item.department, item.id_department);
+            departmentSelect.append(option);
           });
+
+          // Inicializar Select2 en departamentos con tema clásico
+          departmentSelect.select2({
+            theme: "classic",
+            placeholder: "Seleccione un departamento",
+            allowClear: true,
+            width: "100%",
+          });
+
+          departmentSelect.trigger("change"); // Actualizar Select2
         } else {
           console.error("Error al obtener los departamentos");
         }
@@ -457,6 +477,11 @@ document.getElementById("area-list").addEventListener("change", function () {
   }
 });
 
+  // Selecciona el elemento select que quieres llenar con las fuentes
+  const sourceSelect = document.getElementById("source-list");
+  if (sourceSelect) {
+    fetchSourceData(sourceSelect); // Pasa el select a la función
+  }
 // Fetch initial data on page load
 window.onload = function () {
   fetchShiftData();
@@ -465,11 +490,7 @@ window.onload = function () {
   fetchCategoryData();
   fetchUserData();
 
-  // Selecciona el elemento select que quieres llenar con las fuentes
-  const sourceSelect = document.getElementById("source-list");
-  if (sourceSelect) {
-    fetchSourceData(sourceSelect); // Pasa el select a la función
-  }
+
 
   const dateField = document.getElementById("date-field");
   dateField.value = new Date().toISOString().split("T")[0];

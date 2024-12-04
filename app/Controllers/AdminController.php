@@ -12,13 +12,15 @@ class AdminController extends Controller
     public function getUsers()
     {
         $adminModel = new AdminModel();
-        $data = $adminModel->findAll(); // Obtén todas las áreas
-
+        // Ordena los usuarios por la columna 'email' en orden ascendente
+        $data = $adminModel->orderBy('email', 'ASC')->findAll();
+    
         return $this->response->setJSON([
             'status' => 'success',
             'user' => $data
         ]);
     }
+    
     public function addQuestion()
     {
         return view('accions/add_question');

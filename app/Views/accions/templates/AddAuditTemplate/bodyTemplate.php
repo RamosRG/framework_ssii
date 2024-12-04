@@ -9,13 +9,7 @@
                     <input id="name-of-audit" class="w3-input w3-border w3-round" type="text" name="name-of-audit" required>
                 </div>
                 <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
-                    <div style="flex: 1;">
-                        <label for="machinery"><b>MACHINERY</b></label>
-                        <select id="machinery-list" name="machinery" class="w3-input w3-border w3-round">
-                            <option selected>Open this select menu</option>
-                            <!-- Aquí se llenarán las opciones con JavaScript -->
-                        </select>
-                    </div>
+                    
                     <div style="flex: 1;">
                         <label for="shift"><b>SHIFT</b></label>
                         <select id="shift-list" name="shift" class="w3-input w3-border w3-round">
@@ -62,15 +56,14 @@
                 <br>
                 <div style="flex: 1;">
                     <label for="area"><b>USER</b></label>
-                    <select id="user-list" name="email" class="w3-input w3-border w3-round">
-                        <option selected>Open this select menu</option>
+                    <select id="user-list" name="email" class="js-example-responsive" style="width: 100%"></select>
                         <!-- Aquí se llenarán las opciones con JavaScript -->
                     </select>
                     
                 </div>
                 <br>
                 <div class="w3-center">
-                    <button class="w3-button w3-blue btnAudit" type="submit">Crear Auditoria</button>
+                    <button class="w3-button w3-blue btnAudit w3-block w3-round" type="submit">Crear Auditoria</button>
                 </div>
             </form>
         </div>

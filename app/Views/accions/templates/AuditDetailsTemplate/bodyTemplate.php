@@ -107,6 +107,8 @@
                         <!-- Aquí se insertarán las filas dinámicamente -->
                     </tbody>
                 </table>
+                <strong><p>COMENTARIO DEL AUDITOR</p></strong>
+                <h3  id="id-comment"></h3>
             </div>
         </div>
 

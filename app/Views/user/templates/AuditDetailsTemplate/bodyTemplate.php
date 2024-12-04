@@ -6,36 +6,38 @@
         <div class="w3-row-padding">
             <div class="w3-third form-group">
                 <label for="no_audit"><b>Audit Number</b></label>
-                <input id="no_audit" class="w3-input w3-border w3-round" type="text" name="no_audit" >
+                <input id="no_audit" class="w3-input w3-border w3-round" type="text" name="no_audit">
             </div>
             <div class="w3-third form-group">
                 <label for="date_start"><b>Date Start</b></label>
-                <input id="date_start" class="w3-input w3-border w3-round" type="text" name="date_start" >
+                <input id="date_start" class="w3-input w3-border w3-round" type="text" name="date_start">
             </div>
             <div class="w3-third form-group">
                 <label for="date_end"><b>Date Finish</b></label>
-                <input id="date_end" class="w3-input w3-border w3-round" type="text" name="date_end" >
+                <input id="date_end" class="w3-input w3-border w3-round" type="text" name="date_end">
             </div>
         </div>
         <div class="w3-row-padding">
             <div class="form-group">
                 <label for="auditor"><b>Auditor</b></label>
-                <input id="auditor" class="w3-input w3-border w3-round" type="text" name="auditor" >
+                <input id="auditor" class="w3-input w3-border w3-round" type="text" name="auditor">
             </div>
         </div>
         <!-- Additional Information -->
         <div class="w3-row-padding">
             <div class="w3-third form-group">
                 <label for="departament"><b>Department</b></label>
-                <input id="departament" class="w3-input w3-border w3-round" type="text" name="departament" >
+                <input id="departament" class="w3-input w3-border w3-round" type="text" name="departament">
             </div>
             <div class="w3-third form-group">
                 <label for="machinery"><b>Machinery</b></label>
-                <input id="machinery" class="w3-input w3-border w3-round" type="text" name="machinery" >
+                <select id="machinery-list" name="machinery" class="w3-input w3-border w3-round" data-live-search="true">
+                        <option selected>Open this select menu</option>
+                    </select>
             </div>
             <div class="w3-third form-group">
                 <label for="shift"><b>Shift</b></label>
-                <input id="shift" class="w3-input w3-border w3-round" type="text" name="shift" >
+                <input id="shift" class="w3-input w3-border w3-round" type="text" name="shift">
             </div>
         </div>
 
@@ -89,21 +91,21 @@
             </div>
 
             <!-- Select principal para escoger al responsable -->
-            <select id="user-list" name="user" class="w3-input w3-border w3-round">
+            <select id="user-list" name="user" class="js-example-responsive" style="width: 100%">
                 <option selected>Selecciona un usuario</option>
                 <!-- Opciones dinámicas se llenarán aquí -->
             </select>
-
             <div>
                 <br>
                 <button id="send-data" class="w3-button w3-green w3-block w3-round w3-animate-input">
                     Enviar al Supervisor
                 </button>
             </div>
+            <br>
         </div>
 
-       <!-- Verificación y Seguimiento -->
-       <div class="verification w3-container w3-card w3-white">
+        <!-- Verificación y Seguimiento -->
+        <div class="verification w3-container w3-card w3-white">
             <h3 class="w3-text-indigo">Verificación y Seguimiento</h3>
             <div class="responsive-table">
                 <table>
@@ -118,7 +120,7 @@
                     </thead>
                     <tbody id="taken-followUp-list">
 
-                        
+
                         <!-- Aquí se insertarán las filas dinámicamente -->
                     </tbody>
                 </table>
@@ -133,7 +135,7 @@
                         <tr>
                             <th>Añadir comentarios</th>
                         </tr>
-                  
+
                     </thead>
                     <tbody>
                         <tr>

@@ -114,11 +114,11 @@ $(document).ready(function () {
                     // Iterar los detalles y rellenar la tabla
                     auditDetails.forEach(function (detail) {
                         // Manejo de valores vacíos
+                        var question = detail.question || "Sin descripción";
                         var actionDescription = detail.action_description || "Sin descripción";
                         var evidenceAccion = detail.evidence_accion
                             ? `<img src="../accions/${detail.evidence_accion}" alt="Evidencia" style="width: 100px; height: auto;">`
                             : "No hay evidencia";
-                        var linea = detail.linea || "N/A";
                         var followUp = detail.follow_up || "Sin seguimiento";
                         var isResolved = detail.is_resolved === "1"
                             ? '<i class="fa fa-check-circle" style="color: green;"></i>'
@@ -127,9 +127,9 @@ $(document).ready(function () {
                         // Crear la fila de la tabla
                         var questionsRow = `
                             <tr>
+                                <td>${question}</td>
                                 <td>${actionDescription}</td>
                                 <td>${evidenceAccion}</td>
-                                <td>${linea}</td>
                                 <td>${followUp}</td>
                                 <td>${isResolved}</td>
                             </tr>

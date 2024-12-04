@@ -44,16 +44,53 @@ $(document).ready(function () {
             },
         });
         fetchTakenActions(idAudit);
+        fetchMachineryData();
     }
 
-
+    function fetchMachineryData() {
+        // Hacemos la solicitud AJAX
+        fetch("/capas.com/accions/getMachinery", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status === "success") {
+              let machinerySelect = $("#machinery-list");
+              machinerySelect.empty(); // Limpiar las opciones anteriores
+      
+              // Añadir opción predeterminada
+              machinerySelect.append(new Option("Open this select menu", "", true, true));
+      
+              // Llenar el select con los datos de maquinaria
+              data.machinery.forEach((item) => {
+                let option = new Option(item.machinery, item.id_machinery);
+                machinerySelect.append(option);
+              });
+      
+              // Inicializar Select2 con tema clásico
+              machinerySelect.select2({
+                theme: "classic",
+                placeholder: "Seleccione maquinaria",
+                allowClear: true,
+                width: "100%",
+              });
+      
+              machinerySelect.trigger("change"); // Actualizar Select2
+            } else {
+              console.error("Error al obtener datos de maquinaria");
+            }
+          })
+          .catch((error) => console.error("Error en la solicitud:", error));
+      }
     function populateAuditDetails(auditDetails) {
         const audit = auditDetails[0];
         $("#tittle").text(audit.audit_title);
         $("#auditor").val(`${audit.name} ${audit.firstName} ${audit.lastName}`).prop('disabled', true);
         $("#status").val(audit.status).prop('disabled', true);
         $("#departament").val(audit.department).prop('disabled', true);
-        $("#machinery").val(audit.machinery).prop('disabled', true);
         $("#shift").val(audit.shift).prop('disabled', true);
         $("#date_start").val(audit.date_start).prop('disabled', true);
         $("#date_end").val(audit.date_end).prop('disabled', true);
