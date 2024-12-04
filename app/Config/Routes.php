@@ -8,9 +8,9 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 
 $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
-    // Rutas públicas para recuperación de contraseña
     $routes->post('requestPasswordReset', 'UserController::requestPasswordReset');
     $routes->post('resetPassword', 'UserController::resetPassword');
+    $routes->get('forgotpassword', 'UserController::forgotpassword');
     $routes->get('reset-password/(:any)', 'UserController::recoverPassword/$1');
 });
 
@@ -39,7 +39,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'auth'], 
 
 
 $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'auth'], function($routes) {
-    $routes->get('forgotpassword', 'UserController::forgotpassword');
     $routes->get('home', 'UserController::home');
     $routes->get('Assignedaudit', 'UserController::Assignedaudit');
     $routes->get('auditDetails/(:num)', 'UserController::auditDetails/$1');

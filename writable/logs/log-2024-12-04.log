@@ -1,0 +1,163 @@
+INFO - 2024-12-04 01:22:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:22:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:22:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:22:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:22:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:22:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:22:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:22:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:22:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:26:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:26:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:26:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:26:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:26:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:26:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:27:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:27:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:27:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:28:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:29:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:29:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:29:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-04 01:29:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-12-04 01:30:07 --> mysqli_sql_exception: Unknown column 'reset_token' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('UPDATE `users` ...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `users` ...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `users` ...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(2516): CodeIgniter\Database\BaseConnection->query('UPDATE `users` ...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(1028): CodeIgniter\Model->doUpdate(Array, Array)
+#6 D:\laragon\www\capas.com\system\Model.php(865): CodeIgniter\BaseModel->update(Array, Array)
+#7 D:\laragon\www\capas.com\app\Controllers\UserController.php(46): CodeIgniter\Model->update('33', Array)
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\UserController->requestPasswordReset()
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-12-04 01:30:07 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'reset_token' in 'field list'
+[Method: POST, Route: user/requestPasswordReset]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2516): CodeIgniter\Database\BaseConnection->query('UPDATE `users` SET `reset_token` = :reset_token:, `reset_expires` = :reset_expires:, `updated_at` = :updated_at:
+WHERE `users`.`id_user` IN :users.id_user:', [...], false)
+ 2 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 3 SYSTEMPATH\BaseModel.php(1028): CodeIgniter\Model->doUpdate([...], [...])
+ 4 SYSTEMPATH\Model.php(865): CodeIgniter\BaseModel->update([...], [...])
+ 5 APPPATH\Controllers\UserController.php(46): CodeIgniter\Model->update('33', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->requestPasswordReset()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-04 01:30:07 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'reset_token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `users` SET `reset_token` = \'8caaab18e00a8827e3b119b7941f29e0e251e356c8dbbced88c0fe001b5b2a4d\', `reset_expires` = \'2024-12-04 02:30:07\', `updated_at` = \'2024-12-04 01:30:07\'
+WHERE `users`.`id_user` IN (\'33\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `users` SET `reset_token` = \'8caaab18e00a8827e3b119b7941f29e0e251e356c8dbbced88c0fe001b5b2a4d\', `reset_expires` = \'2024-12-04 02:30:07\', `updated_at` = \'2024-12-04 01:30:07\'
+WHERE `users`.`id_user` IN (\'33\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2516): CodeIgniter\Database\BaseConnection->query('UPDATE `users` SET `reset_token` = :reset_token:, `reset_expires` = :reset_expires:, `updated_at` = :updated_at:
+WHERE `users`.`id_user` IN :users.id_user:', [...], false)
+ 4 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 5 SYSTEMPATH\BaseModel.php(1028): CodeIgniter\Model->doUpdate([...], [...])
+ 6 SYSTEMPATH\Model.php(865): CodeIgniter\BaseModel->update([...], [...])
+ 7 APPPATH\Controllers\UserController.php(46): CodeIgniter\Model->update('33', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->requestPasswordReset()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-04 01:30:07 --> [Caused by] mysqli_sql_exception: Unknown column 'reset_token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('UPDATE `users` SET `reset_token` = \'8caaab18e00a8827e3b119b7941f29e0e251e356c8dbbced88c0fe001b5b2a4d\', `reset_expires` = \'2024-12-04 02:30:07\', `updated_at` = \'2024-12-04 01:30:07\'
+WHERE `users`.`id_user` IN (\'33\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `users` SET `reset_token` = \'8caaab18e00a8827e3b119b7941f29e0e251e356c8dbbced88c0fe001b5b2a4d\', `reset_expires` = \'2024-12-04 02:30:07\', `updated_at` = \'2024-12-04 01:30:07\'
+WHERE `users`.`id_user` IN (\'33\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `users` SET `reset_token` = \'8caaab18e00a8827e3b119b7941f29e0e251e356c8dbbced88c0fe001b5b2a4d\', `reset_expires` = \'2024-12-04 02:30:07\', `updated_at` = \'2024-12-04 01:30:07\'
+WHERE `users`.`id_user` IN (\'33\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2516): CodeIgniter\Database\BaseConnection->query('UPDATE `users` SET `reset_token` = :reset_token:, `reset_expires` = :reset_expires:, `updated_at` = :updated_at:
+WHERE `users`.`id_user` IN :users.id_user:', [...], false)
+ 5 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 6 SYSTEMPATH\BaseModel.php(1028): CodeIgniter\Model->doUpdate([...], [...])
+ 7 SYSTEMPATH\Model.php(865): CodeIgniter\BaseModel->update([...], [...])
+ 8 APPPATH\Controllers\UserController.php(46): CodeIgniter\Model->update('33', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->requestPasswordReset()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-12-04 01:30:21 --> mysqli_sql_exception: Unknown column 'reset_token' in 'field list' in D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('UPDATE `users` ...', 0)
+#1 D:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `users` ...')
+#2 D:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `users` ...')
+#3 D:\laragon\www\capas.com\system\Database\BaseBuilder.php(2516): CodeIgniter\Database\BaseConnection->query('UPDATE `users` ...', Array, false)
+#4 D:\laragon\www\capas.com\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 D:\laragon\www\capas.com\system\BaseModel.php(1028): CodeIgniter\Model->doUpdate(Array, Array)
+#6 D:\laragon\www\capas.com\system\Model.php(865): CodeIgniter\BaseModel->update(Array, Array)
+#7 D:\laragon\www\capas.com\app\Controllers\UserController.php(46): CodeIgniter\Model->update('8', Array)
+#8 D:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\UserController->requestPasswordReset()
+#9 D:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#10 D:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 D:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-12-04 01:30:21 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'reset_token' in 'field list'
+[Method: POST, Route: user/requestPasswordReset]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2516): CodeIgniter\Database\BaseConnection->query('UPDATE `users` SET `reset_token` = :reset_token:, `reset_expires` = :reset_expires:, `updated_at` = :updated_at:
+WHERE `users`.`id_user` IN :users.id_user:', [...], false)
+ 2 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 3 SYSTEMPATH\BaseModel.php(1028): CodeIgniter\Model->doUpdate([...], [...])
+ 4 SYSTEMPATH\Model.php(865): CodeIgniter\BaseModel->update([...], [...])
+ 5 APPPATH\Controllers\UserController.php(46): CodeIgniter\Model->update('8', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->requestPasswordReset()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-04 01:30:21 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'reset_token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `users` SET `reset_token` = \'3428f9c15100a7f1bfddeae2ab77453d6a5fbec23b63fbb55b8d65dca48cf8f4\', `reset_expires` = \'2024-12-04 02:30:21\', `updated_at` = \'2024-12-04 01:30:21\'
+WHERE `users`.`id_user` IN (\'8\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `users` SET `reset_token` = \'3428f9c15100a7f1bfddeae2ab77453d6a5fbec23b63fbb55b8d65dca48cf8f4\', `reset_expires` = \'2024-12-04 02:30:21\', `updated_at` = \'2024-12-04 01:30:21\'
+WHERE `users`.`id_user` IN (\'8\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2516): CodeIgniter\Database\BaseConnection->query('UPDATE `users` SET `reset_token` = :reset_token:, `reset_expires` = :reset_expires:, `updated_at` = :updated_at:
+WHERE `users`.`id_user` IN :users.id_user:', [...], false)
+ 4 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 5 SYSTEMPATH\BaseModel.php(1028): CodeIgniter\Model->doUpdate([...], [...])
+ 6 SYSTEMPATH\Model.php(865): CodeIgniter\BaseModel->update([...], [...])
+ 7 APPPATH\Controllers\UserController.php(46): CodeIgniter\Model->update('8', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->requestPasswordReset()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-04 01:30:21 --> [Caused by] mysqli_sql_exception: Unknown column 'reset_token' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('UPDATE `users` SET `reset_token` = \'3428f9c15100a7f1bfddeae2ab77453d6a5fbec23b63fbb55b8d65dca48cf8f4\', `reset_expires` = \'2024-12-04 02:30:21\', `updated_at` = \'2024-12-04 01:30:21\'
+WHERE `users`.`id_user` IN (\'8\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `users` SET `reset_token` = \'3428f9c15100a7f1bfddeae2ab77453d6a5fbec23b63fbb55b8d65dca48cf8f4\', `reset_expires` = \'2024-12-04 02:30:21\', `updated_at` = \'2024-12-04 01:30:21\'
+WHERE `users`.`id_user` IN (\'8\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `users` SET `reset_token` = \'3428f9c15100a7f1bfddeae2ab77453d6a5fbec23b63fbb55b8d65dca48cf8f4\', `reset_expires` = \'2024-12-04 02:30:21\', `updated_at` = \'2024-12-04 01:30:21\'
+WHERE `users`.`id_user` IN (\'8\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2516): CodeIgniter\Database\BaseConnection->query('UPDATE `users` SET `reset_token` = :reset_token:, `reset_expires` = :reset_expires:, `updated_at` = :updated_at:
+WHERE `users`.`id_user` IN :users.id_user:', [...], false)
+ 5 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 6 SYSTEMPATH\BaseModel.php(1028): CodeIgniter\Model->doUpdate([...], [...])
+ 7 SYSTEMPATH\Model.php(865): CodeIgniter\BaseModel->update([...], [...])
+ 8 APPPATH\Controllers\UserController.php(46): CodeIgniter\Model->update('8', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->requestPasswordReset()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
