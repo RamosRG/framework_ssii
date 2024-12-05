@@ -42,7 +42,7 @@ class AuditModel extends Model
         ->join('actions', 'actions.fk_answer = answers.id_answer', 'left')
         ->join('follow_up', 'follow_up.fk_accions = actions.id_actions', 'left')
         ->where('audit.id_audit', $auditId)
-        ->where('audit.status', 0)
+        ->where('audit.fk_status', 0)
         ->get()
         ->getResultArray();
     }
@@ -68,8 +68,8 @@ class AuditModel extends Model
             ->join('actions', 'actions.fk_answer = answers.id_answer')
             ->join('follow_up', 'follow_up.fk_accions = actions.id_actions')
             ->where('audit.id_audit', $auditId)
-            ->where('audit.status', 0)
-
+            ->where('audit.fk_status', 1)
+            ->orWhere('audit.fk_status', 2)
             ->get()
             ->getResultArray(); // Retorna los resultados como un array
         // Depura los datos
@@ -77,14 +77,14 @@ class AuditModel extends Model
     }
     public function getAuditFinished($id): mixed
     {
-        return $this->select('audit.id_audit, audit.no_audit, audit.date, audit.audit_title, audit.`status`, users.`name`,id_audit, users.firstName, users.lastName,
+        return $this->select('audit.id_audit, audit.no_audit, audit.date, audit.audit_title, audit.`fk_status`, users.`name`,id_audit, users.firstName, users.lastName,
  department.department, machinery.machinery, shift.shift')
             ->join('users', 'users.id_user = audit.fk_auditor')  // Asegura que el auditor esté relacionado
             ->join('department', 'department.id_department = audit.fk_department') // INNER JOIN con department
             ->join('machinery', 'machinery.id_machinery = audit.fk_machinery') // INNER JOIN con Machinery
             ->join('shift', 'shift.id_shift = audit.fk_shift') // INNER JOIN con Shift
             ->where('audit.id_audit', $id) // Filtra por el ID de la auditoría
-            ->where('audit.status', 0) // Filtra por el estado de la auditoría
+            ->where('audit.fk_status', 2) // Filtra por el estado de la auditoría
             ->where('department.status', 1) // Filtra por el estado del departmento
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
@@ -92,12 +92,12 @@ class AuditModel extends Model
     public function getDataOfAuditsInactives()
     {
         return $this->select('audit.id_audit, audit.no_audit, audit.audit_title, users.name,users.firstName, users.lastName, 
-            audit.date, audit.fk_auditor, audit.status, department.department, machinery.machinery, shift.shift')
+            audit.date, audit.fk_auditor, audit.fk_status, department.department, machinery.machinery, shift.shift')
             ->join('users', 'users.id_user = audit.fk_auditor')  // Asegura que el auditor esté relacionado
             ->join('department', 'department.id_department = audit.fk_department') // Realiza el INNER JOIN
             ->join('machinery', 'machinery.id_machinery = audit.fk_machinery') // Realiza el INNER JOIN
             ->join('shift', 'shift.id_shift = audit.fk_shift') // Realiza el INNER JOIN
-            ->where('audit.status', 0) // Filtra por el estado de la auditoría
+            ->where('audit.fk_status', 2) // Filtra por el estado de la auditoría
             ->where('department.status', 1) // Filtra por el estado del department  
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
@@ -123,7 +123,8 @@ class AuditModel extends Model
             ->join('actions', 'actions.fk_answer = answers.id_answer')
             ->join('follow_up', 'follow_up.fk_accions = actions.id_actions')
             ->where('audit.id_audit', $auditId)
-            ->where('audit.status', 1)
+            ->where('audit.fk_status', 0)
+            ->orWhere('audit.fk_status', 1)
 
             ->get()
             ->getResultArray(); // Retorna los resultados como un array
@@ -189,7 +190,7 @@ class AuditModel extends Model
             ->join('shift', 'audit.fk_shift = shift.id_shift')
             ->join('category', 'category.id_category = questions.fk_category')
             ->where('audit.id_audit', $id_audit)
-            ->where('audit.status', 1)
+            ->where('audit.fk_status', 1)
             ->where('questions.status', 1)
             ->orderBy('audit.created_at', 'DESC') // Order by created_at in descending order
             ->findAll();
@@ -198,10 +199,10 @@ class AuditModel extends Model
     public function getAuditByStatus($idUser)
     {
         return $this->select('audit.id_audit, audit.no_audit, audit.audit_title, audit.fk_machinery, audit.fk_shift, audit.DATE, audit.fk_department,
-                                    audit.status, audit.fk_auditor, users.name, users.firstName, users.lastName ')
+                                    audit.fk_status, audit.fk_auditor, users.name, users.firstName, users.lastName ')
             ->join('users', 'users.id_user = audit.fk_auditor')  // Asegura que el auditor esté relacionado
             ->where('audit.fk_auditor', value: $idUser) // Filtra por el id del usuario
-            ->where('audit.`status`', 1) // Filtra por el estado de la auditoria
+            ->where('audit.`fk_status`', 0) // Filtra por el estado de la auditoria
 
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
@@ -214,12 +215,13 @@ class AuditModel extends Model
     public function getDataOfAudits()
     {
         return $this->select('audit.id_audit, audit.no_audit, audit.audit_title, users.name,users.firstName, users.lastName, 
-            audit.date, audit.fk_auditor, audit.status, department.department, machinery.machinery, shift.shift')
+            audit.date, audit.fk_auditor, audit.fk_status, department.department, machinery.machinery, shift.shift')
             ->join('users', 'users.id_user = audit.fk_auditor')  // Asegura que el auditor esté relacionado
             ->join('department', 'department.id_department = audit.fk_department') // Realiza el INNER JOIN
             ->join('machinery', 'machinery.id_machinery = audit.fk_machinery') // Realiza el INNER JOIN
             ->join('shift', 'shift.id_shift = audit.fk_shift') // Realiza el INNER JOIN
-            ->where('audit.status', 1) // Filtra por el estado de la auditoría
+            ->where('audit.fk_status', 0) // Filtra por el estado de la auditoría
+            ->orWhere('audit.fk_status', 1) // Filtra por el estado de la auditoría
             ->where('department.status', 1) // Filtra por el estado del department  
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
@@ -227,14 +229,15 @@ class AuditModel extends Model
 
     public function getAuditByNumber($id): mixed
     {
-        return $this->select('audit.id_audit, audit.no_audit, audit.date, audit.audit_title, audit.`status`, users.`name`,id_audit, users.firstName, users.lastName,
- department.department, machinery.machinery, shift.shift')
+        return $this->select('audit.id_audit, audit.no_audit, audit.date, audit.audit_title, audit.`fk_status`, users.`name`,id_audit, users.firstName, users.lastName,
+                                        department.department, machinery.machinery, shift.shift')
             ->join('users', 'users.id_user = audit.fk_auditor')  // Asegura que el auditor esté relacionado
             ->join('department', 'department.id_department = audit.fk_department') // INNER JOIN con department
             ->join('machinery', 'machinery.id_machinery = audit.fk_machinery') // INNER JOIN con Machinery
             ->join('shift', 'shift.id_shift = audit.fk_shift') // INNER JOIN con Shift
             ->where('audit.id_audit', $id) // Filtra por el ID de la auditoría
-            ->where('audit.status', 1) // Filtra por el estado de la auditoría
+            ->where('audit.fk_status', 0) // Filtra por el estado de la auditoría
+            ->orWhere('audit.fk_status', 1) // Filtra por el estado de la auditoría
             ->where('department.status', 1) // Filtra por el estado del departmento
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
@@ -255,15 +258,15 @@ class AuditModel extends Model
     {
         return $this->select('department.department, COUNT(audit.id_audit) as audit_count')
             ->join('department', 'department.id_department = audit.fk_department')
-            ->where('audit.status', 1)
+            ->where('audit.fk_status', 1)
             ->groupBy('department.department')
             ->findAll();
     }
 
     public function getAuditsByStatus()
     {
-        return $this->select('audit.status, COUNT(audit.id_audit) as audit_count')
-            ->groupBy('audit.status')
+        return $this->select('audit.fk_status, COUNT(audit.id_audit) as audit_count')
+            ->groupBy('audit.fk_status')
             ->findAll();
     }
 
@@ -271,7 +274,7 @@ class AuditModel extends Model
     {
         return $this->select('shift.shift, COUNT(audit.id_audit) as audit_count')
             ->join('shift', 'shift.id_shift = audit.fk_shift')
-            ->where('audit.status', 1)
+            ->where('audit.fk_status', 1)
             ->groupBy('shift.shift')
             ->findAll();
     }

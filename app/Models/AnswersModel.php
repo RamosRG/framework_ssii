@@ -49,7 +49,8 @@ class AnswersModel extends Model
         ->join('users', 'users.id_user = audit.fk_auditor', 'LEFT')
         ->join('actions', 'answers.id_answer = actions.fk_answer', 'LEFT')
         ->where('audit.id_audit', $idAudit)
-            ->where('audit.status', 1)
+            ->where('audit.fk_status', 0)
+            ->orWhere('audit.fk_status', 1)
             ->get()
             ->getResultArray(); // Devuelve el resultado como un array
     }

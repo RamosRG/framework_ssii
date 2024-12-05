@@ -9,31 +9,40 @@ $(document).ready(function () {
   var table = $('#auditTable').DataTable({
     "ajax": {
       "url": "/capas.com/accions/getAudits", // URL de la función que devuelve los datos
-      "dataSrc": "" // Fuente de los datos (en tu caso es 'data')
+      "dataSrc": "" // Fuente de los datos (en tu caso es un arreglo JSON)
     },
     "columns": [
-      { "data": "no_audit" },       // Coincide con la propiedad en el JSON
+      { "data": "no_audit" }, // Coincide con la propiedad en el JSON
       {
         "data": function(row) {
-            return row.name + " " + row.firstName + " " + row.lastName;
+          return row.name + " " + row.firstName + " " + row.lastName;
         }
-    },            // Coincide con la propiedad en el JSON
-      { "data": "date" },           // Coincide con la propiedad en el JSON
-      { "data": "shift" },          // Coincide con la propiedad en el JSON
-      { "data": "machinery" },      // Coincide con la propiedad en el JSON
-      { "data": "department" },    // Coincide con la propiedad en el JSON
+      }, // Nombre completo generado a partir de las propiedades en el JSON
+      { "data": "date" }, // Fecha del JSON
+      { "data": "shift" }, // Turno
+      { "data": "machinery" }, // Maquinaria
+      { "data": "department" }, // Departamento
       {
-        "data": "status",   // Cambiar "status" por "audit_status" para que coincida
+        "data": "fk_status", // Manejo de estados
         "render": function (data) {
-          return data == 1 ? `<i class="fa fa-plus" style="font-size:24px;color:blue">` : '<i class="fa fa-remove w3-red" style="font-size:24px"></i>'
+          if (data == 0) {
+            return '<i class="fa fa-folder-open-o" style="font-size:24px; color:red;"></i>';
+          } else if (data == 1) {
+            return '<i class="	fa fa-clock-o" style="font-size:24px; color:blue;"></i>';
+          } else if (data == 2) {
+            return '<i class="fa fa-check-circle" style="font-size:24px; color:green;"></i>';
+          } else {
+            return '<i class="fa fa-question-circle" style="font-size:24px; color:red;"></i>'; // Manejo de estado desconocido
+          }
         }
       },
       {
-        "defaultContent": '<button class=" btn-getAudit w3-button w3-yellow w3-round fa fa-bars"></button>'
+        "defaultContent": '<button class="btn-getAudit w3-button w3-yellow w3-round fa fa-bars"></button>'
       }
     ]
   });
 });
+
 
 $(document).ready(function () {
   // Inicializar DataTable y asignarla a la variable 'table'

@@ -94,24 +94,6 @@ $(document).off("click", ".btn-accions").on("click", ".btn-accions", function ()
   const idAnswer = $row.find(`input[name="id_answer"]`).val(); // Busca el id_answer solo dentro de la fila
   
   const imageFile = $row.find(".file-input").data('imageFile'); // Obtener el archivo
-
-  // Verifica si la foto es válida antes de enviarla
-  if (!imageFile) {
-    console.log("No se ha seleccionado ninguna foto.");
-    alert("Por favor, selecciona una foto antes de enviar.");
-    return;
-  }
-
-  // Verifica que todos los campos obligatorios estén completos
-  if (!action || !responsable || !date || !isComplete) {
-    Swal.fire({
-      icon: "warning",
-      title: "Faltan datos",
-      text: "Por favor, completa todos los campos antes de enviar.",
-    });
-    return;
-  }
-
   // Crea un FormData para enviar los datos
   const formData = new FormData();
   formData.append("fk_answer", idAnswer);

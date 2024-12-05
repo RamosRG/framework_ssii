@@ -133,7 +133,7 @@ class UserController extends BaseController
         try {
             $updated = $auditModel->update($idAudit, [
                 'comment' => $comment,
-                'status' => 0, // Si es necesario
+                'fk_status' => 2, // Si es necesario
             ]);
 
             if ($updated) {

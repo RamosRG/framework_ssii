@@ -35,9 +35,8 @@ class SupervisorController extends BaseController
                     'follow_up' => $audit->comentario ?? null,
                     'date_response' => $audit->date ?? null,
                     'is_resolved' => isset($audit->mejorado) ? (int)$audit->mejorado : null,
-                    'responsable' => $audit->responsable ?? null,
                 ];
-    
+   
                 // Insertar en `follow_up`
                 if (!$followUpModel->insert($data)) {
                     return $this->response->setJSON([

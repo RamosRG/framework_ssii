@@ -158,9 +158,9 @@ class AccionsController extends BaseController
       }
 
       $auditModel = new AuditModel();
-
       // Obtener las acciones tomadas
       $follow = $auditModel->getAuditCompleteVerification($idAudit);
+
       // Ver los datos en la consola para depurar
 
       if (empty($follow)) {
@@ -610,7 +610,7 @@ class AccionsController extends BaseController
                   'fk_audit' => $auditId,
                   'fk_category' => $questionData['id_category'], // Usar el ID de categoría de la pregunta
                   'question' => $questionData['question'],
-                  'status' => 1,
+                  'status' => 0,
                   'created_at' => $this->request->getPost('date'),
                   'fk_source' => $questionData['source'] ?? null,
                ];

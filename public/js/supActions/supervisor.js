@@ -51,20 +51,21 @@ function fetchAuditDetails(auditID) {
                                 <td>${item.action_description}</td>
                                 <td>${item.evidence_accion ? `<img src="../accions/${item.evidence_accion}" alt="Evidencia" style="width: 100px;">` : 'No hay imagen'}</td>
                                 <td><input type="date" name="date" class="w3-input w3-border w3-round" value="${item.date_start}"></td>
-                                <td><input type="checkbox" class="w3-check" ${item.mejorado ? 'checked' : ''}></td>
+                                <td><input type="checkbox" class="w3-check" value="1" ${item.mejorado ? 'checked' : ''}></td>
                                 <td><input type="text" name="comentario" class="w3-input w3-border w3-round"></td>
                                 <td>
-                                    <select class="w3-select w3-border w3-round" onchange="console.log('Responsable seleccionado:', this.value)">
-                <option value="">Selecciona un responsable</option>
-                ${users.map(user => `
-                    <option value="${user.id_user}" ${user.id_user == item.supervisor_id ? 'selected' : ''}>
-                        ${user.name} ${user.firstName}
-                    </option>`).join('')}
-            </select>
+                                    <select class="w3-select w3-border w3-round">
+                                        <option value="">Selecciona un responsable</option>
+                                        ${users.map(user => `
+                                            <option value="${user.id_user}" ${user.id_user == item.supervisor_id ? 'selected' : ''}>
+                                                ${user.name} ${user.firstName}
+                                            </option>`).join('')}
+                                    </select>
                                 </td>
                             </tr>
                         `;
                         tableBody.append(row);
+                       
                     });
                 });
             } else {
@@ -84,11 +85,10 @@ $('#saveButton').on('click', function () {
     $('#audit-table tbody tr').each(function () {
         const row = $(this);
         const responsable = row.find('select').val();
-        console.log('Responsable seleccionado:', responsable); // Aquí es más útil
         const rowData = {
             id_action: row.data('id-action'),
             date: row.find('input[name="date"]').val(),
-            mejorado: row.find('td:nth-child(8) input[type="checkbox"]').is(':checked') ? 1 : 0,
+            mejorado: row.find('input[type="checkbox"]').is(':checked') ? 1 : 0,
             comentario: row.find('input[name="comentario"]').val(),
             responsable: responsable,
         };

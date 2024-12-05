@@ -17,9 +17,17 @@ $(document).ready(function () {
       { "data": "machinery" },      // Coincide con la propiedad en el JSON
       { "data": "department" },    // Coincide con la propiedad en el JSON
       {
-        "data": "status",   // Cambiar "status" por "audit_status" para que coincida
+        "data": "fk_status",   // Cambiar "status" por "audit_status" para que coincida
         "render": function (data) {
-          return data == 0 ? `<i class="fa fa-remove" style="font-size:24px;color:red">` : '<i class="fa fa-remove w3-red" style="font-size:24px"></i>'
+          if (data == 0) {
+            return '<i class="fa fa-folder-open-o" style="font-size:24px; color:red;"></i>';
+          } else if (data == 1) {
+            return '<i class="	fa fa-clock-o" style="font-size:24px; color:blue;"></i>';
+          } else if (data == 2) {
+            return '<i class="fa fa-check-circle" style="font-size:24px; color:green;"></i>';
+          } else {
+            return '<i class="fa fa-question-circle" style="font-size:24px; color:red;"></i>'; // Manejo de estado desconocido
+          }
         }
       },
       {
