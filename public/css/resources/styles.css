@@ -86,3 +86,14 @@ tr:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
   margin: 20px 0; /* Separación superior e inferior */
 }
+#loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}

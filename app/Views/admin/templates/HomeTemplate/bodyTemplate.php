@@ -1,3 +1,4 @@
+
 <div class="w3-main">
   <div class="w3-container" id="contact" style="margin-top:5rem">
     <h1 class="w3-xxxlarge w3-text-indigo"><b>Show USERS.</b></h1>
@@ -7,9 +8,12 @@
     </a>
   </div>
   <br>
-
+  <div id="loader" style="display: none; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+  <img src="../public/images/load.gif" alt="Cargando..." />
+</div>
   <!-- DataTables Example -->
   <div class="w3-responsive">
+
     <table id="userTable" class="display" style="width:95%">
       <thead>
         <tr>
@@ -26,6 +30,11 @@
         </tr>
       </thead>
       <tbody>
+      <tr id="loaderRow">
+        <td colspan="10" style="text-align: center;">
+          <img src="../public/images/load.gif" alt="Cargando datos..." />
+        </td>
+      </tr>
       </tbody>
       <tfoot>
         <tr>
