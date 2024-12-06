@@ -77,7 +77,7 @@ function populateTakenActions(actions, id_audit) {
       // Muestra una vista previa de la imagen
       const imageUrl = URL.createObjectURL(file);
       fileInput.after(`<img src="${imageUrl}" alt="Vista previa de la imagen" style="width: 100px; height: auto; margin-top: 10px;">`);
-      
+
       // Guarda el archivo para enviarlo más tarde
       fileInput.data('imageFile', file);
     }
@@ -92,7 +92,7 @@ $(document).off("click", ".btn-accions").on("click", ".btn-accions", function ()
   const date = $row.find(`input[name="date_${questionId}"]`).val();
   const isComplete = $row.find(`input[name="is_complete_${questionId}"]:checked`).val() === "1" ? 1 : 0;
   const idAnswer = $row.find(`input[name="id_answer"]`).val(); // Busca el id_answer solo dentro de la fila
-  
+
   const imageFile = $row.find(".file-input").data('imageFile'); // Obtener el archivo
   // Crea un FormData para enviar los datos
   const formData = new FormData();

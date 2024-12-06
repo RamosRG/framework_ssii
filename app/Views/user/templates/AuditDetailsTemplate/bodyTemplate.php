@@ -22,6 +22,7 @@
                 <label for="auditor"><b>Auditor</b></label>
                 <input id="auditor" class="w3-input w3-border w3-round" type="text" name="auditor">
             </div>
+
         </div>
         <!-- Additional Information -->
         <div class="w3-row-padding">
@@ -32,8 +33,8 @@
             <div class="w3-third form-group">
                 <label for="machinery"><b>Machinery</b></label>
                 <select id="machinery-list" name="machinery" class="w3-input w3-border w3-round" data-live-search="true">
-                        <option selected>Open this select menu</option>
-                    </select>
+                    <option selected>Open this select menu</option>
+                </select>
             </div>
             <div class="w3-third form-group">
                 <label for="shift"><b>Shift</b></label>
@@ -140,6 +141,12 @@
                     <tbody>
                         <tr>
                             <td>
+                                <div class="form-group">
+                                    <label for="status"><b>Status</b></label>
+                                    <select id="status-list" name="status" class="w3-input w3-border w3-round" data-live-search="true">
+                                        <option selected>Open this select menu</option>
+                                    </select>
+                                </div>
                                 <input type="text" id="audit-commentario" class="w3-input w3-border w3-round"
                                     placeholder="Escribe tu comentario aquí">
                             </td>

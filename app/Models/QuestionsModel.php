@@ -65,8 +65,6 @@ class QuestionsModel extends Model
         $builder->join('audit', 'audit.id_audit = answers.fk_audit');
         $builder->join('actions', 'actions.fk_answer = answers.id_answer');
         $builder->where('audit.id_audit', $idAudit);
-        $builder->where('audit.fk_status', 1);
-        $builder->orWhere('audit.fk_status', 0);
         $builder->where('actions.supervisor_id', $supervisorId);
 
         return $builder->get()->getResultArray();
@@ -149,8 +147,7 @@ class QuestionsModel extends Model
             ->join('machinery', 'machinery.id_machinery = audit.fk_machinery')
             ->join('department', 'department.id_department = audit.fk_department')
             ->where('audit.id_audit', $id_audit)
-            ->where('audit.fk_status', 0)
-            ->orWhere('audit.fk_status', 1)
+            ->whereIn('audit.fk_status', [0, 1]) // Filtra por los estados de la auditoría (0 y 1)
             ->findAll();
     }
 }

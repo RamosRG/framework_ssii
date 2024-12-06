@@ -45,7 +45,39 @@ $(document).ready(function () {
         });
         fetchTakenActions(idAudit);
         fetchMachineryData();
+        fetchStatus();
     }
+    function fetchStatus() {
+        fetch("/capas.com/accions/getStatus", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status === "success") {
+                const statusSelect = document.getElementById("status-list");
+                statusSelect.innerHTML = ""; // Limpiar opciones anteriores
+    
+                // Opción predeterminada
+                const defaultOption = new Option("Select status", "", true, true);
+                statusSelect.add(defaultOption);
+    
+                // Iterar sobre el arreglo "areas" para agregar opciones
+                data.areas.forEach((item) => {
+                    const option = new Option(item.status, item.id_status);
+                    statusSelect.add(option);
+                });
+            } else {
+                console.error("Error: no se recibieron datos válidos");
+            }
+        })
+        .catch((error) => console.error("Error en la solicitud:", error));
+    }
+    
+    
+    
 
     function fetchMachineryData() {
         // Hacemos la solicitud AJAX
