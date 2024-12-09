@@ -66,9 +66,8 @@ class AuditModel extends Model
             ->join('answers', 'answers.fk_question = questions.id_question')
             ->join('actions', 'actions.fk_answer = answers.id_answer')
             ->join('follow_up', 'follow_up.fk_accions = actions.id_actions')
-            ->where('audit.id_audit', $auditId)
-            ->where('audit.fk_status', 1)
             ->orWhere('audit.fk_status', 2)
+            ->where('audit.id_audit', $auditId)
             ->get()
             ->getResultArray(); // Retorna los resultados como un array
         // Depura los datos
