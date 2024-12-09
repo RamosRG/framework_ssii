@@ -61,6 +61,7 @@ $routes->group('accions', ['namespace' => 'App\Controllers', 'filter' => 'auth']
     $routes->get('generarPDF/(:num)', 'AccionsController::generarPDF/$1');
     $routes->get('getCompletedVerificaciones/(:num)', 'AccionsController::getCompletedVerificaciones/$1');
     $routes->get('getRole', 'AccionsController::getRole');
+    $routes->get('getStatus', 'AccionsController::getStatus');
     $routes->get('createWeeklyAudit', 'AccionsController::createWeeklyAudit');
     $routes->get('AuditCompleteDetails', 'AccionsController::AuditCompleteDetails');
     $routes->get('getAll', 'AccionsController::getAllActions');

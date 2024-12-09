@@ -15,7 +15,6 @@ $(document).ready(function () {
 
         fetchAuditDetails(audit.id_audit);
         getFollowUp(audit.id_audit);
-        fetchMachineryData();
     }
     // Función para obtener y llenar los datos de maquinaria
 
@@ -150,7 +149,7 @@ $(document).ready(function () {
                     });
                 } else {
                     console.error('Error al obtener los detalles de la auditoría');
-                    $("#id-comment").text("Error al cargar los datos"); // Mensaje de error
+                    $("#id-comment").text("El supervisor no ha respondido la auditoria"); // Mensaje de error
                 }
             },
             error: function (xhr, status, error) {

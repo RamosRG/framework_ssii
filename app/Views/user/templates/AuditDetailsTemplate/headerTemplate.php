@@ -88,48 +88,6 @@
             overflow-x: auto;
         }
 
-        /* Estilo del modal */
-        .photo-modal {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 20;
-            background: rgba(0, 0, 0, 0.8);
-            /* Fondo oscuro semitransparente */
-            padding: 0;
-            box-shadow: none;
-            border-radius: 0;
-        }
-
-        .modal-video {
-            object-fit: cover;
-            /* Ajusta el video al contenedor */
-            width: 100%;
-            height: 100%;
-            /* Usa todo el espacio disponible */
-            background: black;
-        }
-
-
-        .overlay {
-            position: fixed;
-            display: none;
-            /* Muestra solo cuando se necesita */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 10;
-        }
-
-
         .accions th {
             background-color: #4caf50 !important;
             /* Fondo verde */

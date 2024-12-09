@@ -17,7 +17,6 @@ class UserController extends BaseController
     {
         return view('user/reset_password', ['token' => $token]);
     }
-
     public function requestPasswordReset()
     {
 
@@ -52,43 +51,42 @@ class UserController extends BaseController
     }
     public function resetPassword()
     {
-        
-            $token = $this->request->getPost('token');
-            $newPassword = $this->request->getPost('password');
-            
-            $authModel = new AuthModel();
-            $user = $authModel->validateToken($token);
-            
-            // Verificar que el token sea válido y no haya expirado (asumiendo que se usa en la base de datos)
-            if ($user) {
-              
-                // Hash de la nueva contraseña
-                $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
 
-                // Actualizar la contraseña en la base de datos
-                $updateStatus = $authModel->updatePasswordByToken($token, $hashedPassword);
+        $token = $this->request->getPost('token');
+        $newPassword = $this->request->getPost('password');
 
-                if ($updateStatus) {
-                    return $this->response->setJSON(['success' => 'La contraseña se ha restablecido con éxito.']);
-                } else {
-                    return $this->response->setJSON(['error' => 'Hubo un problema al actualizar la contraseña. Inténtalo de nuevo.']);
-                }
+        $authModel = new AuthModel();
+        $user = $authModel->validateToken($token);
+
+        // Verificar que el token sea válido y no haya expirado (asumiendo que se usa en la base de datos)
+        if ($user) {
+
+            // Hash de la nueva contraseña
+            $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+
+            // Actualizar la contraseña en la base de datos
+            $updateStatus = $authModel->updatePasswordByToken($token, $hashedPassword);
+
+            if ($updateStatus) {
+                return $this->response->setJSON(['success' => 'La contraseña se ha restablecido con éxito.']);
             } else {
-                return $this->response->setJSON(['error' => 'El token es inválido o ha expirado.']);
+                return $this->response->setJSON(['error' => 'Hubo un problema al actualizar la contraseña. Inténtalo de nuevo.']);
             }
-        } 
-    
-        private function sendResetEmail($email, $token)
-        {
-            $resetLink = base_url("user/reset-password/{$token}");
-            $emailService = \Config\Services::email();
-        
-            $emailService->setTo($email);
-            $emailService->setFrom('orlandoramosperez26@gmail.com', 'Auditoria Por Capas');
-            $emailService->setSubject('Restablecimiento de Contraseña');
-            $emailService->setMailType('html'); // Importante para interpretar el HTML
-        
-            $emailContent = "
+        } else {
+            return $this->response->setJSON(['error' => 'El token es inválido o ha expirado.']);
+        }
+    }
+    private function sendResetEmail($email, $token)
+    {
+        $resetLink = base_url("/user/reset-password/{$token}");
+        $emailService = \Config\Services::email();
+
+        $emailService->setTo($email);
+        $emailService->setFrom('orlandoramosperez26@gmail.com', 'Auditoria Por Capas');
+        $emailService->setSubject('Restablecimiento de Contraseña');
+        $emailService->setMailType('html'); // Importante para interpretar el HTML
+
+        $emailContent = "
                 <div style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;'>
                     <div style='max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; 
                                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);'>
@@ -106,50 +104,49 @@ class UserController extends BaseController
                     </div>
                 </div>
             ";
-        
-            $emailService->setMessage($emailContent);
-        
-            if (!$emailService->send()) {
-                log_message('error', 'Error al enviar el correo: ' . $emailService->printDebugger(['headers']));
-                return false;
-            }
-        
-            log_message('info', "Correo de restablecimiento enviado a {$email}");
-            return true;
+
+        $emailService->setMessage($emailContent);
+
+        if (!$emailService->send()) {
+            log_message('error', 'Error al enviar el correo: ' . $emailService->printDebugger(['headers']));
+            return false;
         }
-        
-    
+
+        log_message('info', "Correo de restablecimiento enviado a {$email}");
+        return true;
+    }
 
     public function submitAuditComment()
     {
         // Obtener los datos enviados como JSON
         $request = $this->request->getJSON();
         $idAudit = $request->id_audit ?? null; // ID de la auditoría
-        $comment = $request->comment ?? null; // Comentario proporcionado
+        $comment = $request->comment ?? 'No hay comentario disponible'; // Comentario proporcionado
+        $status = $request->status ?? null; // Valor del status
 
-
-        // Cargar el modelo y actualizar el comentario
+        // Cargar el modelo y actualizar el comentario y el status
         $auditModel = new AuditModel();
         try {
             $updated = $auditModel->update($idAudit, [
                 'comment' => $comment,
-                'fk_status' => 2, // Si es necesario
+                'fk_status' => $status, // Actualizar el status recibido
             ]);
 
             if ($updated) {
                 return $this->response->setJSON([
                     'status' => 'success',
-                    'message' => 'Comentario actualizado.',
+                    'message' => 'Comentario y estado actualizados.',
                     'data' => [
                         'id_audit' => $idAudit,
                         'comment' => $comment,
+                        'status' => $status, // Devolver el status actualizado
                     ],
                 ]);
             }
 
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'No se pudo actualizar el comentario. Verifica el ID de auditoría.',
+                'message' => 'No se pudo actualizar el comentario o el estado. Verifica el ID de auditoría.',
             ]);
         } catch (\Exception $e) {
             // Manejar errores de base de datos u otros errores
@@ -159,6 +156,7 @@ class UserController extends BaseController
             ]);
         }
     }
+
     public function getAuditDetails($idAudit, $supervisorId)
     {
         $actionsModel = new QuestionsModel();
@@ -233,7 +231,7 @@ class UserController extends BaseController
         $fileName = $image->getRandomName();
 
         // Ruta de destino para la imagen
-        $filePath = 'accions/' . $fileName;
+        $filePath = '../accions/' . $fileName;
 
         // Intentar mover el archivo
         if ($image->move('accions', $fileName)) {
@@ -273,7 +271,6 @@ class UserController extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar la imagen en el servidor']);
         }
     }
-
     public function getFountain()
     {
         $fountain = new FountainModel();
@@ -335,7 +332,7 @@ class UserController extends BaseController
             $file->move('questions', $newName, true); // Mueve y sobrescribe si existe
 
             // Obtener la ruta completa de la imagen
-            $imagePath = '../questions/' . $newName;
+            $imagePath = '../public/questions/' . $newName;
 
             // Guardar los datos en la base de datos (ajusta según tu estructura de base de datos)
             $answersModel = new AnswersModel();

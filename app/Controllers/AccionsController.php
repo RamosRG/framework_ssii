@@ -12,6 +12,7 @@ use App\Models\FountainModel;
 use App\Models\QuestionsModel;
 use App\Models\AreasModel;
 use App\Models\RoleModel;
+use App\Models\StatusModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -53,7 +54,43 @@ class AccionsController extends BaseController
       // Enviar el PDF al navegador para descarga
       $dompdf->stream('Auditoria_' . $auditId . '.pdf', ["Attachment" => true]);
    }
+   public function generateWeeklyAudit()
+   {
+      $auditModel = new AuditModel();
+      $questionsModel = new QuestionsModel();
 
+      // Verificar si ya existe una auditoría creada esta semana
+      $currentWeek = date('W');
+      $currentYear = date('Y');
+      $existingAudit = $auditModel->where('year', $currentYear)
+         ->where('week', $currentWeek)
+         ->first();
+
+      if ($existingAudit) {
+         // Si la auditoría ya existe esta semana, no se crea una nueva
+         return "La auditoría ya existe para esta semana.";
+      }
+
+      // Crear una nueva auditoría para la semana actual
+      $newAuditId = $auditModel->insert([
+         'week' => $currentWeek,
+         'year' => $currentYear,
+         'status' => 'active',
+         'created_at' => date('Y-m-d H:i:s')
+      ]);
+
+      // Copiar preguntas activas a la nueva auditoría
+      $questions = $questionsModel->where('active', 1)->findAll();
+      foreach ($questions as $question) {
+         $questionsModel->insert([
+            'audit_id' => $newAuditId,
+            'question_text' => $question['question_text'],
+            'active' => $question['active']
+         ]);
+      }
+
+      return "Auditoría semanal creada exitosamente.";
+   }
    public function createWeeklyAudit()
    {
       $db = \Config\Database::connect();
@@ -321,43 +358,7 @@ class AccionsController extends BaseController
    {
       return view('accions/edit_audit');
    }
-   public function generateWeeklyAudit()
-   {
-      $auditModel = new AuditModel();
-      $questionsModel = new QuestionsModel();
-
-      // Verificar si ya existe una auditoría creada esta semana
-      $currentWeek = date('W');
-      $currentYear = date('Y');
-      $existingAudit = $auditModel->where('year', $currentYear)
-         ->where('week', $currentWeek)
-         ->first();
-
-      if ($existingAudit) {
-         // Si la auditoría ya existe esta semana, no se crea una nueva
-         return "La auditoría ya existe para esta semana.";
-      }
-
-      // Crear una nueva auditoría para la semana actual
-      $newAuditId = $auditModel->insert([
-         'week' => $currentWeek,
-         'year' => $currentYear,
-         'status' => 'active',
-         'created_at' => date('Y-m-d H:i:s')
-      ]);
-
-      // Copiar preguntas activas a la nueva auditoría
-      $questions = $questionsModel->where('active', 1)->findAll();
-      foreach ($questions as $question) {
-         $questionsModel->insert([
-            'audit_id' => $newAuditId,
-            'question_text' => $question['question_text'],
-            'active' => $question['active']
-         ]);
-      }
-
-      return "Auditoría semanal creada exitosamente.";
-   }
+ 
    public function dashboard()
    {
       return view("accions/dashboard");
@@ -386,6 +387,16 @@ class AccionsController extends BaseController
    {
       $areas = new AreasModel();
       $data = $areas->orderBy('area', 'ASC')->findAll();
+print_r($data);
+      return $this->response->setJSON([
+         'status' => 'success',
+         'areas' => $data  // Aquí usas 'areas'
+      ]);
+   }
+   public function getStatus()
+   {
+      $status = new StatusModel();
+      $data = $status->orderBy('status', 'ASC')->findAll();
 
       return $this->response->setJSON([
          'status' => 'success',

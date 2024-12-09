@@ -1,3 +1,5 @@
+let userId = null;
+
 function fetchUserData() {
   fetch("/capas.com/admin/getUsers", {
     method: "GET",
@@ -46,6 +48,8 @@ function collectTableData() {
   const urlParams = new URLSearchParams(window.location.search);
   const id_audit = urlParams.get("id_audit"); // Obtener id_audit de la URL
 
+
+
   if (!userId) {
     Swal.fire({
       icon: "warning",
@@ -66,11 +70,9 @@ function collectTableData() {
     return null;
   }
 
-  console.log("ID del usuario:", userId);
-  console.log("ID de auditoría:", id_audit);
 
   // Retornar los datos para ser enviados
-  return { userId, id_audit }; 
+  return { userId, id_audit };
 }
 
 document.getElementById("send-data").addEventListener("click", function () {
@@ -119,71 +121,76 @@ function sendDataToSupervisor(data) {
 }
 
 $(document).ready(function () {
-    // Asociar el evento de clic al botón
-    $("#save-audit").on("click", function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const id_audit = urlParams.get("id_audit");
+  // Asociar el evento de clic al botón
+  $("#save-audit").on("click", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id_audit = urlParams.get("id_audit");
 
-        if (!id_audit) {
-            alert("No se encontró el ID de auditoría.");
-            return;
-        }
+    if (!id_audit) {
+      alert("No se encontró el ID de auditoría.");
+      return;
+    }
+    saveAuditComment(id_audit, userId); // Llamar a la función para guardar el comentario
 
-        saveAuditComment(id_audit); // Llamar a la función para guardar el comentario
-    });
+  });
 });
 
 // Función para guardar el comentario de auditoría
-function saveAuditComment(idAudit) {
-    // Obtener el comentario
-    const comment = $("#audit-commentario").val();
+function saveAuditComment(idAudit, idUser) {
+  // Obtener el comentario
+  const comment = $("#audit-commentario").val();
+  // Obtener el valor seleccionado del select de status
+  const status = $("#status-list").val();
 
-    // Preparar los datos para enviar al servidor
-    const data = {
-        id_audit: idAudit,
-        comment: comment,
-    };
+  // Preparar los datos para enviar al servidor
+  const data = {
+    id_audit: idAudit,
+    id_auditor: idUser,
+    comment: comment,
+    status: status, // Agregar el status
+  };
 
-    // Enviar la solicitud AJAX con fetch
-    fetch("../user/submitAuditComment", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+  // Enviar la solicitud AJAX con fetch
+  fetch("../user/submitAuditComment", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Error en la respuesta del servidor');
+      }
+      return response.json(); // Convertir la respuesta a JSON
     })
-        .then((response) => {
-            if (!response.ok) {
-            }
-            return response.json(); // Convertir la respuesta a JSON
-        })
-        .then((result) => {
-            if (result.status === "success") {
-                Swal.fire({
-                    icon: "success",
-                    title: "Datos enviados correctamente",
-                    text: result.message,
-                    showConfirmButton: false,
-                    timer: 1500,
-                }).then(() => {
-                    window.location.href = "/capas.com/accions/showaudit"; // Redirigir a la página de inicio
-                });
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error al enviar los datos",
-                    text: result.message,
-                    confirmButtonText: "Aceptar",
-                });
-            }
-        })
-        .catch((error) => {
-            console.error("Error en la solicitud:", error);
-            Swal.fire({
-                icon: "error",
-                title: "Error en la conexión",
-                text: "Hubo un problema al enviar los datos. Inténtalo nuevamente.",
-                confirmButtonText: "Aceptar",
-            });
+    .then((result) => {
+      if (result.status === "success") {
+        Swal.fire({
+          icon: "success",
+          title: "Datos enviados correctamente",
+          text: result.message,
+          showConfirmButton: false,
+          timer: 1500,
+        }).then(() => {
+          window.location.href = "/capas.com/user/Assignedaudit"; // Redirigir a la página de inicio
         });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error al enviar los datos",
+          text: result.message,
+          confirmButtonText: "Aceptar",
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error en la conexión",
+        text: "Hubo un problema al enviar los datos. Inténtalo nuevamente.",
+        confirmButtonText: "Aceptar",
+      });
+    });
 }

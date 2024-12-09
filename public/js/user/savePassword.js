@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const baseUrl = '<?php echo base_url(); ?>'; // Asegúrate de que esta línea se ejecute dentro de una vista PHP
 
         try {
-            const response = await fetch("../../user/resetPassword", {
+            const response = await fetch("../user/resetPassword", {
                 method: "POST",
                 body: formData,
             });

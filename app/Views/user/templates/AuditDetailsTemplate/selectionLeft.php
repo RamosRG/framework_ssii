@@ -6,7 +6,7 @@
     <a href="../user/home" class="w3-bar-item w3-button fa fa-home" > Home</a>
     <a href="../user/dashboard" class="w3-bar-item w3-button fa fa-dashboard" > Dashboard</a>
     <a href="../user/showAuditFinisheds" class="w3-bar-item w3-button fa fa-list" > Concluded Audits</a>
-    <a href="../auth/logout" class="w3-bar-item w3-button fa fa-external-link-square"> Log Out</a>
+    <a href="./auth/logout" class="w3-bar-item w3-button fa fa-external-link-square"> Log Out</a>
 </nav>
 
 <div class="w3-main">

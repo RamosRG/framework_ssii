@@ -1,9 +1,17 @@
 $(document).ready(function () {
+    $("#loader").show();
     // Inicializa DataTable solo una vez
     var table = $('#userTable').DataTable({
         "ajax": {
             "url": "/capas.com/auth/getData", // URL de la función que devuelve los datos
-            "dataSrc": "" // Fuente de los datos
+            "dataSrc": "",
+            beforeSend: function () {
+                $('#loader').show(); // Mostrar loader antes de la solicitud AJAX
+            },
+            complete: function () {
+                $('#loader').hide(); // Ocultar loader después de completar la solicitud
+            }, // Fuente de los datos
+            
         },
         "columns": [
             { "data": "email" },

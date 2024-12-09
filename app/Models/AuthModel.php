@@ -11,7 +11,7 @@ class AuthModel extends Model
 
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['email', 'name', 'firstName', 'lastName', 'password', 'fk_area', 'status', 'fk_role', 'privileges', 'created_at', 'updated_at','reset_token','reset_expires']; // Correcto
+    protected $allowedFields = ['name', 'firstName', 'lastName', 'password', 'fk_deparment', 'status', 'fk_role', 'email', 'created_at', 'updated_at', 'reset_token','reset_expires']; // Correcto
 
     protected bool $status = true;
 
