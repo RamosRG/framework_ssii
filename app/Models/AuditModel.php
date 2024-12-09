@@ -142,6 +142,8 @@ class AuditModel extends Model
         $builder->join('answers', 'answers.fk_question = questions.id_question');
         $builder->join('actions', 'actions.fk_answer = answers.id_answer');
         $builder->where('audit.id_audit', $auditID);
+        $builder->where('audit.fk_status', 0);
+        $builder->orWhere('audit.fk_status', 1);
 
         return $builder->get()->getResultArray();
     }
