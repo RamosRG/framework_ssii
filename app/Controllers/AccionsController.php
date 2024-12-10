@@ -19,6 +19,21 @@ use Dompdf\Options;
 
 class AccionsController extends BaseController
 {
+   public function getDashboardData()
+   {
+       $model = new AuditModel();
+
+       // Datos para cada gráfica
+       $data = [
+           'statusCounts' => $model->getAuditsByStatusDashboard(),
+           'areaCounts' => $model->getAuditsByDepartmentDashboard(),
+           'shiftCounts' => $model->getAuditsByShiftDashboard(),
+           'departmentCounts' => $model->getAuditsByMachinery(),
+           'actionProgress' => $model->getMonthlyTrends(),
+       ];
+
+       return $this->response->setJSON($data);
+   }
    public function generarPDF($auditId)
    {
       $auditModel = new AuditModel();
@@ -124,7 +139,7 @@ class AccionsController extends BaseController
          'fk_shift'     => $lastAudit->fk_shift,
          'fk_department' => $lastAudit->fk_department,
          'fk_machinery' => $lastAudit->fk_machinery,
-         'status'       => '1',        // Estado inicial de la nueva auditoría
+         'fk_status'       => '0',        // Estado inicial de la nueva auditoría
          'created_at'    => date('Y-m-d H:i:s'),
          'updated_at'    => date('Y-m-d H:i:s'),
       ];
@@ -387,7 +402,6 @@ class AccionsController extends BaseController
    {
       $areas = new AreasModel();
       $data = $areas->orderBy('area', 'ASC')->findAll();
-print_r($data);
       return $this->response->setJSON([
          'status' => 'success',
          'areas' => $data  // Aquí usas 'areas'
@@ -751,26 +765,5 @@ print_r($data);
          'enProgreso' => $auditModel->getInProgressAuditsCount(),
          'historial' => $auditModel->getAuditHistory()
       ];
-   }
-   public function getDashboardData()
-   {
-      $auditModel = new AuditModel();
-
-      // Obtener todos los datos para el dashboard
-      $auditsByDepartment = $this->getAuditsByDepartment($auditModel);
-      $auditsByStatus = $this->getAuditsByStatus($auditModel);
-      $auditsByShift = $this->getAuditsByShift($auditModel);
-      $auditoriasData = $this->getAuditoriasData($auditModel);
-
-      // Enviar los datos en formato JSON
-      return $this->response->setJSON([
-         'status' => 'success',
-         'data' => [
-            'auditsByDepartment' => $auditsByDepartment,
-            'auditsByStatus' => $auditsByStatus,
-            'auditsByShift' => $auditsByShift,
-            'auditoriasData' => $auditoriasData
-         ]
-      ]);
    }
 }

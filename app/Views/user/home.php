@@ -24,7 +24,7 @@
             <input type="hidden" id="userId"> <!-- Reemplaza "12345" con el valor real del ID -->
             <div class="button-container">
                 <button id="auditForWeek" class="w3-button w3-light-blue w3-round-large fa fa-calendar"  style="font-size:24px" > AUDIT WEEKLY</button>
-                <button class="w3-button w3-light-blue w3-round-large fa fa-dashboard" style="font-size:24px" > DASHBOARD</button>
+                <button id="dashboard" class="w3-button w3-light-blue w3-round-large fa fa-dashboard" style="font-size:24px" > DASHBOARD</button>
                 <button class="w3-button w3-light-blue w3-round-large fa fa-thumbs-o-up" style="font-size:24px"> CONCLUDED AUDITS</button>
                 <button class="w3-button w3-light-blue w3-round-large fa fa-external-link-square" style="font-size:24px"> LOG OUT</button>
             </div>

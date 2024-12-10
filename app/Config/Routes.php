@@ -41,6 +41,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'auth'], 
 $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'auth'], function($routes) {
     $routes->get('home', 'UserController::home');
     $routes->get('Assignedaudit', 'UserController::Assignedaudit');
+    $routes->get('getDashboardData', 'UserController::getDashboardData');
+    $routes->get('dashboard', 'UserController::dashboard');
     $routes->get('auditDetails/(:num)', 'UserController::auditDetails/$1');
     $routes->get('showAudit', 'UserController::showAudit');
     $routes->get('takenActions/(:num)', 'UserController::takenActions/$1');
@@ -61,6 +63,7 @@ $routes->group('accions', ['namespace' => 'App\Controllers', 'filter' => 'auth']
     $routes->get('generarPDF/(:num)', 'AccionsController::generarPDF/$1');
     $routes->get('getCompletedVerificaciones/(:num)', 'AccionsController::getCompletedVerificaciones/$1');
     $routes->get('getRole', 'AccionsController::getRole');
+    $routes->get('getDashboardData', 'AccionsController::getDashboardData');
     $routes->get('getStatus', 'AccionsController::getStatus');
     $routes->get('createWeeklyAudit', 'AccionsController::createWeeklyAudit');
     $routes->get('AuditCompleteDetails', 'AccionsController::AuditCompleteDetails');

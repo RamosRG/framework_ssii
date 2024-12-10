@@ -29,7 +29,7 @@ function populateTakenActions(actions, id_audit) {
         <td>${action.answer || ""}</td>
         <td>
           ${action.evidence
-        ? `<img src="${action.evidence}" alt="Evidencia" style="width: 100px; height: auto;">`
+        ? `<img src="../public/images${action.evidence}" alt="Evidencia" style="width: 100px; height: auto;">`
         : "Sin evidencia"}
         </td>
         <td>

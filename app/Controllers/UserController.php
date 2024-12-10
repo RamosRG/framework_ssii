@@ -13,6 +13,47 @@ use App\Models\CategoryModel;
 
 class UserController extends BaseController
 {
+    public function dashboard(){
+        return view('dashboard');
+
+    }
+    public function getDashboardData()
+    {
+        $userId = session()->get('id_user'); // Obtiene el ID del usuario logueado
+    
+        // Validación básica
+        if (!$userId) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Usuario no autenticado.',
+            ]);
+        }
+    
+        // Modelos para obtener datos
+        $auditModel = new AuditModel();
+        $answersModel = new AnswersModel();
+        $actionsModel = new ActionsModel();
+    
+        // Auditorías asignadas al usuario
+        $audits = $auditModel->where('fk_auditor', $userId)->findAll();
+    
+        // Preguntas respondidas y no respondidas
+        $totalAnswers = $answersModel->countAllResults();
+        $answered = $answersModel->where('is_complete', 1)->countAllResults();
+        $notAnswered = $totalAnswers - $answered;
+    
+        // Acciones pendientes
+        $pendingActions = $actionsModel->where('is_complete', 0)->countAllResults();
+    
+        return $this->response->setJSON([
+            'status' => 'success',
+            'audits' => $audits,
+            'answered' => $answered,
+            'notAnswered' => $notAnswered,
+            'pendingActions' => $pendingActions,
+        ]);
+    }
+    
     public function recoverPassword($token)
     {
         return view('user/reset_password', ['token' => $token]);
@@ -207,7 +248,6 @@ class UserController extends BaseController
     }
     public function submitAnswer()
     {
-
         // Obtener los datos del POST
         $questionId = $this->request->getPost('questionId');
         $action = $this->request->getPost('action');
@@ -216,61 +256,64 @@ class UserController extends BaseController
         $isComplete = $this->request->getPost('is_complete');
         $idAnswer = $this->request->getPost('fk_answer');
 
+    
+
         // Verificar si el archivo de imagen ha sido recibido
         $image = $this->request->getFile('photo');
+        if ($image && $image->isValid()) {
+            // Generar un nombre único para la imagen
+            $fileName = $image->getRandomName();
 
-        if ($image === null) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'No se recibió ningún archivo']);
-        }
+            // Ruta de destino para la imagen
+            $directoryPath = FCPATH . 'public/images/accions/';
+            $relativePath = 'images/accions/' . $fileName; // Ruta relativa para guardar en la base de datos
 
-        if (!$image->isValid()) {
-            return $this->response->setJSON(['status' => 'error', 'message' => $image->getErrorString()]);
-        }
+            // Crear directorio si no existe
+            if (!is_dir($directoryPath)) {
+                mkdir($directoryPath, 0755, true);
+            }
 
-        // Generar un nombre único para la imagen
-        $fileName = $image->getRandomName();
-
-        // Ruta de destino para la imagen
-        $filePath = '../accions/' . $fileName;
-
-        // Intentar mover el archivo
-        if ($image->move('accions', $fileName)) {
-            log_message('debug', 'Archivo movido a: ' . $filePath); // Agregar log de depuración
-
-            // Preparar datos para guardar en la base de datos
-            $data = [
-                'fk_answer' => $idAnswer,
-                'action_description' => $action,
-                'responsable' => $responsable,
-                'is_complete' => $isComplete,
-                'date' => $date,
-                'evidence_accion' => $fileName,
-            ];
-
-            $modelaccion = new ActionsModel();
-
-            // Verificar si el registro ya existe
-            $existingRecord = $modelaccion->where('fk_answer', $idAnswer)->first();
-
-            if ($existingRecord) {
-                // Si el registro existe, actualizarlo
-                if ($modelaccion->update($existingRecord['id_actions'], $data)) {
-                    return $this->response->setJSON(['status' => 'success', 'message' => 'Datos actualizados correctamente']);
-                } else {
-                    return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo actualizar los datos en la base de datos']);
-                }
-            } else {
-                // Si el registro no existe, insertarlo
-                if ($modelaccion->insert($data)) {
-                    return $this->response->setJSON(['status' => 'success', 'message' => 'Imagen y datos guardados correctamente']);
-                } else {
-                    return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar los datos en la base de datos']);
-                }
+            // Intentar mover el archivo
+            if (!$image->move($directoryPath, $fileName)) {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar la imagen en el servidor']);
             }
         } else {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar la imagen en el servidor']);
+            // Si no se recibe una imagen válida, establecer el campo de evidencia como null
+            $relativePath = null;
+        }
+
+        // Preparar datos para guardar en la base de datos
+        $data = [
+            'fk_answer' => $idAnswer,
+            'action_description' => $action,
+            'responsable' => $responsable,
+            'is_complete' => $isComplete,
+            'date' => $date,
+            'evidence_accion' => $relativePath, // Guardar la ruta relativa o null
+        ];
+
+        $modelaccion = new ActionsModel();
+
+        // Verificar si el registro ya existe
+        $existingRecord = $modelaccion->where('fk_answer', $idAnswer)->first();
+
+        if ($existingRecord) {
+            // Si el registro existe, actualizarlo
+            if ($modelaccion->update($existingRecord['id_actions'], $data)) {
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Datos actualizados correctamente']);
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo actualizar los datos en la base de datos']);
+            }
+        } else {
+            // Si el registro no existe, insertarlo
+            if ($modelaccion->insert($data)) {
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Imagen y datos guardados correctamente']);
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'No se pudo guardar los datos en la base de datos']);
+            }
         }
     }
+
     public function getFountain()
     {
         $fountain = new FountainModel();
@@ -316,11 +359,10 @@ class UserController extends BaseController
     }
     public function uploadPhoto()
     {
-
         // Obtener los datos del formulario
         $fkQuestion = $this->request->getPost('fk_question');
         $answer = $this->request->getPost('answer');
-        $isComplete = $this->request->getPost('compliaceCheckBox');
+        $isComplete = $this->request->getPost('complianceCheckBox'); // Revisión del nombre
 
         // Manejar el archivo subido
         $file = $this->request->getFile('photo');
@@ -329,12 +371,22 @@ class UserController extends BaseController
         if ($file && $file->isValid()) {
             // Generar un nombre de archivo único basado en el ID de la pregunta para evitar duplicados
             $newName = "photo_" . $fkQuestion . ".png";
-            $file->move('questions', $newName, true); // Mueve y sobrescribe si existe
+
+            // Ruta del directorio de destino
+            $directory = FCPATH . 'public/images/questions/';
+
+            // Crear directorio si no existe
+            if (!is_dir($directory)) {
+                mkdir($directory, 0755, true); // Crear directorio con permisos adecuados
+            }
+
+            // Mover el archivo al directorio 'questions'
+            $file->move($directory, $newName); // Sobrescribe si ya existe
 
             // Obtener la ruta completa de la imagen
-            $imagePath = '../public/questions/' . $newName;
+            $imagePath = '/questions/' . $newName;
 
-            // Guardar los datos en la base de datos (ajusta según tu estructura de base de datos)
+            // Guardar los datos en la base de datos
             $answersModel = new AnswersModel();
 
             // Verificar si ya existe un registro para esta pregunta
@@ -345,7 +397,7 @@ class UserController extends BaseController
                 'fk_question' => $fkQuestion,
                 'is_complete' => $isComplete,
                 'answer' => $answer,
-                'evidence' => $imagePath // Guardar la ruta de la imagen en la base de datos
+                'evidence' => $imagePath // Guardar la ruta relativa de la imagen
             ];
 
             // Verificar si ya existe una respuesta
@@ -367,6 +419,7 @@ class UserController extends BaseController
         // Manejo de errores si el archivo no es válido
         return $this->response->setJSON(['status' => 'error', 'message' => 'Error al subir la foto.']);
     }
+
     public function showAudit()
     {
 

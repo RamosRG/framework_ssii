@@ -346,7 +346,7 @@ function getFollowUp(idAudit) {
                     var question = detail.question || "Sin descripción";
                     var actionDescription = detail.action_description || "Sin descripción";
                     var evidenceAccion = detail.evidence_accion
-                        ? `<img src="../accions/${detail.evidence_accion}" alt="Evidencia" style="width: 100px; height: auto;">`
+                        ? `<img src="../public/${detail.evidence_accion}" alt="Evidencia" style="width: 100px;">`
                         : "No hay evidencia";
                     var followUp = detail.follow_up || "Sin seguimiento";
                     var isResolved = detail.is_resolved === "1"

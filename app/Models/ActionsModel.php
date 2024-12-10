@@ -25,6 +25,11 @@ class ActionsModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
     
-
+    public function getActionsProgress()
+    {
+        return $this->select('is_complete, COUNT(*) as total')
+                    ->groupBy('is_complete')
+                    ->findAll();
+    }
 
 }
