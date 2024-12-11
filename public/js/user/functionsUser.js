@@ -169,59 +169,23 @@ $(document).ready(function () {
       confirmButtonText: "Ok",
     });
   }
-});
-
-// Botón para obtener auditorías asignadas
+  
+// Botón para redirigir al dashboard
 $("#dashboard").on("click", function () {
   var userId = sessionStorage.getItem("id_user");
 
   if (!userId) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Error!',
-      text: 'Usuario no autenticado o sesión expirada.',
-      confirmButtonText: 'OK'
-    });
-    window.location.href = "../user/dashboard";
-    return;
+      Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Usuario no autenticado o sesión expirada.',
+          confirmButtonText: 'OK'
+      });
+      window.location.href = "../user/dashboard"; // Redirige al dashboard general
+      return;
   }
 
+  // Redirige al dashboard del usuario
+  window.location.href = "../user/dashboard/" + userId;
 });
-
-// Cargar datos del dashboard al cargar la página
-$(document).ready(function () {
-  $.ajax({
-    url: "<?= base_url('../accions/getDashboardData') ?>",
-    method: "GET",
-    dataType: "json",
-    success: function (data) {
-      // Actualizar valores en las tarjetas
-      $('#totalAudits').text(data.audits.length || 0);
-      $('#answeredQuestions').text(data.answered || 0);
-      $('#pendingActions').text(data.pendingActions || 0);
-
-      // Configuración del gráfico
-      const ctx = document.getElementById('auditChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          labels: ['Respondidas', 'No Respondidas', 'Acciones Pendientes'],
-          datasets: [{
-            label: 'Resumen',
-            data: [data.answered || 0, data.notAnswered || 0, data.pendingActions || 0],
-            backgroundColor: ['#28a745', '#ffc107', '#dc3545'],
-          }]
-        },
-      });
-    },
-    error: function (err) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error!',
-        text: 'No se pudieron cargar los datos del dashboard.',
-        confirmButtonText: 'OK'
-      });
-      console.error("Error al obtener los datos:", err);
-    }
-  });
 });

@@ -14,7 +14,7 @@ use App\Models\CategoryModel;
 class UserController extends BaseController
 {
     public function dashboard(){
-        return view('dashboard');
+        return view('user/dashboard');
 
     }
     public function getDashboardData()
@@ -52,8 +52,7 @@ class UserController extends BaseController
             'notAnswered' => $notAnswered,
             'pendingActions' => $pendingActions,
         ]);
-    }
-    
+    } 
     public function recoverPassword($token)
     {
         return view('user/reset_password', ['token' => $token]);
@@ -197,7 +196,6 @@ class UserController extends BaseController
             ]);
         }
     }
-
     public function getAuditDetails($idAudit, $supervisorId)
     {
         $actionsModel = new QuestionsModel();

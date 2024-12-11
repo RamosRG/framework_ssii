@@ -120,3 +120,19 @@ K. Choudhary, S. Kumar, and A. Yadav, "Responsive web design framework: A compar
 R. B. L. Gupta and S. Chaurasia, "Performance analysis of Bootstrap and Foundation responsive CSS frameworks: An empirical study," 2018 International Conference on Computational Techniques, Electronics and Mechanical Systems (CTEMS), Belgaum, India, 2018, pp. 151-154. doi: 10.1109/CTEMS.2018.8769203.
 
 M. Z. Mahmood and M. E. M. Elchouli, "Comparative study on front-end frameworks and their impact on performance," 2019 IEEE Jordan International Joint Conference on Electrical Engineering and Information Technology (JEEIT), Amman, Jordan, 2019, pp. 541-545. doi: 10.1109/JEEIT.2019.8717463.
+
+---------------W3Schools--------------------------
+
+W3Schools. "About W3Schools." Disponible en: https://www.w3schools.com/about/
+W3Schools. "Tutorials for Web Development." Disponible en: https://www.w3schools.com/
+
+
+---------StarUML-------------
+StarUML. "StarUML Features." Disponible en: https://staruml.io/
+Fowler, Martin. UML Distilled: A Brief Guide to the Standard Object Modeling Language. Addison-Wesley, 2004.
+
+SweetAlert2. "SweetAlert2 Documentation." Disponible en: https://sweetalert2.github.io/
+
+
+
+

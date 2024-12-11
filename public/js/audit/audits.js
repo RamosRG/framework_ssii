@@ -61,11 +61,11 @@ $(document).ready(function () {
                         // Rellenar la tabla de acciones tomadas si existen
                         if (detail.action_description && detail.evidence_accion && detail.responsable && detail.compliance && detail.action_created_at && detail.action_updated_at) {
                             var evidenceActionImage = detail.evidence_accion
-                                ? `<img src="${detail.evidence_accion}" alt="Evidence Action" style="width: 100px; height: auto;">`
+                                ? `<img src="../public/${detail.evidence_accion}" alt="Evidence Action" style="width: 100px; height: auto;">`
                                 : "No hay evidencia";
 
                             var evidenceQuestion = detail.evidence_answer
-                                ? `<img src="${detail.evidence_answer}" alt="Evidence Question" style="width: 100px; height: auto;">`
+                                ? `<img src="../public/images${detail.evidence_answer}" alt="Evidence Question" style="width: 100px; height: auto;">`
                                 : "No hay evidencia";
 
                             var iscomplete = detail.action_compliance === "Yes"
@@ -126,7 +126,7 @@ $(document).ready(function () {
                         var question = detail.question || "Sin descripción";
                         var actionDescription = detail.action_description || "Sin descripción";
                         var evidenceAccion = detail.evidence_accion
-                            ? `<img src="../accions/${detail.evidence_accion}" alt="Evidencia" style="width: 100px; height: auto;">`
+                            ? `<img src="../public/${detail.evidence_accion}" alt="Evidencia" style="width: 100px; height: auto;">`
                             : "No hay evidencia";
                         var followUp = detail.follow_up || "Sin seguimiento";
                         var isResolved = detail.is_resolved === "1"

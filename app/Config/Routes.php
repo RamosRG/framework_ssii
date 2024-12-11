@@ -42,7 +42,7 @@ $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'auth'], f
     $routes->get('home', 'UserController::home');
     $routes->get('Assignedaudit', 'UserController::Assignedaudit');
     $routes->get('getDashboardData', 'UserController::getDashboardData');
-    $routes->get('dashboard', 'UserController::dashboard');
+    $routes->get('dashboard/(:num)', 'UserController::dashboard/$1');
     $routes->get('auditDetails/(:num)', 'UserController::auditDetails/$1');
     $routes->get('showAudit', 'UserController::showAudit');
     $routes->get('takenActions/(:num)', 'UserController::takenActions/$1');
