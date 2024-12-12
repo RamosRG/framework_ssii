@@ -116,3 +116,16 @@ $routes->group('supervisor', ['namespace' => 'App\Controllers', 'filter' => 'aut
     
     
 });
+
+$routes->group('manager', ['namespace' => 'App\Controllers', 'filter' => 'auth'], function($routes) {
+
+    $routes->get('auditToReview/(:num)', 'ManagerController::auditToReview/$1');
+    $routes->get('accionsOfAudit', 'ManagerController::accionsOfAudit');
+    $routes->get('home', 'ManagerController::home');
+    $routes->get('showActiveAudit', 'ManagerController::showActiveAudit');
+    $routes->get('auditForSupervisor', 'ManagerController::auditForSupervisor');
+    $routes->get('showAudit', 'ManagerController::showAudit');
+    $routes->post('finishData', 'ManagerController::finishData');
+    
+    
+});

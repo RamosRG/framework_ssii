@@ -132,6 +132,14 @@ StarUML. "StarUML Features." Disponible en: https://staruml.io/
 Fowler, Martin. UML Distilled: A Brief Guide to the Standard Object Modeling Language. Addison-Wesley, 2004.
 
 SweetAlert2. "SweetAlert2 Documentation." Disponible en: https://sweetalert2.github.io/
+Select2. "Select2 Documentation." Disponible en: https://select2.org/
+CodeIgniter. "Filters in CodeIgniter 4." Disponible en: https://codeigniter.com/user_guide/incoming/filters.html
+https://codeigniter.com/user_guide/incoming/routing.html
+https://codeigniter.com/user_guide/dbmgmt/migration.html
+ompdf. "Dompdf Documentation." Disponible en: https://github.com/dompdf/dompdf
+https://codeigniter.com/user_guide/general/logging.html
+Composer. "Getting Started with Composer." Disponible en: https://getcomposer.org/
+
 
 
 

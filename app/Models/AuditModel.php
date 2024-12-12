@@ -18,7 +18,35 @@ class AuditModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
- 
+    public function getAuditsByAuditor()
+    {
+        return $this->select('users.name as auditor, COUNT(*) as total')
+            ->join('users', 'audit.fk_auditor = users.id_user') // Cambia fk_auditor al nombre de tu columna real
+            ->groupBy('users.name')
+            ->findAll();
+    }
+
+
+    public function getReviewedByLayers()
+    {
+        return $this->select(' audit.reviewed_by, COUNT(*) as total, users.name')
+            ->join('users', 'audit.reviewed_by = users.id_user') // Cambia fk_auditor al nombre de tu columna real
+            ->groupBy('reviewed_by')
+            ->findAll();
+    }
+
+ public function getAreaCounts()
+{
+    return $this->db->table('area')
+        ->select('area.area as area, COUNT(department.id_department) as department_count, COUNT(audit.id_audit) as audit_count') // Counting departments and audits
+        ->join('department', 'department.fk_area = area.id_area', 'left')
+        ->join('audit', 'audit.fk_department = department.id_department', 'left')
+        ->groupBy('area.id_area')  // Make sure to group by the actual area ID
+        ->get()
+        ->getResultArray();
+}
+
+
     public function getAuditsByStatusDashboard()
     {
         return $this->select('audit_status.status, COUNT(*) as total')
@@ -343,15 +371,6 @@ class AuditModel extends Model
     {
         return $this->where('status', 'En Progreso')->countAllResults();
     }
-
-    // Method to get audits by layer, assuming a 'layer' or equivalent column exists
-    public function getAuditsByLayer()
-    {
-        return $this->select('layer, COUNT(id_audit) as total, AVG(compliance) as cumplimiento')
-            ->groupBy('layer')
-            ->findAll();
-    }
-
     // Method to retrieve audit history
     public function getAuditHistory()
     {

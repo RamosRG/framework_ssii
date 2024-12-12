@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Tests\\Unit\\AuditModelTest::testInsertAudit":8,"Tests\\Unit\\AuditModelTest::testFetchAudits":8},"times":{"Tests\\Unit\\AuditModelTest::testInsertAudit":0.38,"Tests\\Unit\\AuditModelTest::testFetchAudits":0.002}}

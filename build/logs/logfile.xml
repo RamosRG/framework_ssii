@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Tests\Unit\AuditModelTest" file="C:\laragon\www\capas.com\tests\unit\AuditModelTest.php" tests="2" assertions="0" errors="2" failures="0" skipped="0" time="0.424391">
+    <testcase name="testInsertAudit" file="C:\laragon\www\capas.com\tests\unit\AuditModelTest.php" line="17" class="Tests\Unit\AuditModelTest" classname="Tests.Unit.AuditModelTest" assertions="0" time="0.420735">
+      <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Unit\AuditModelTest::testInsertAudit&#13;
+CodeIgniter\Database\Exceptions\DatabaseException: no such table: db_audit
+&#13;
+C:\laragon\www\capas.com\system\Database\BaseConnection.php:688
+C:\laragon\www\capas.com\system\Database\BaseBuilder.php:2340
+C:\laragon\www\capas.com\system\Model.php:394
+C:\laragon\www\capas.com\system\BaseModel.php:840
+C:\laragon\www\capas.com\system\Model.php:802
+C:\laragon\www\capas.com\tests\unit\AuditModelTest.php:30</error>
+    </testcase>
+    <testcase name="testFetchAudits" file="C:\laragon\www\capas.com\tests\unit\AuditModelTest.php" line="33" class="Tests\Unit\AuditModelTest" classname="Tests.Unit.AuditModelTest" assertions="0" time="0.003656">
+      <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Unit\AuditModelTest::testFetchAudits&#13;
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: no such table: db_audit
+&#13;
+C:\laragon\www\capas.com\system\Database\BaseConnection.php:688
+C:\laragon\www\capas.com\system\Database\BaseBuilder.php:1644
+C:\laragon\www\capas.com\system\Model.php:286
+C:\laragon\www\capas.com\system\BaseModel.php:676
+C:\laragon\www\capas.com\tests\unit\AuditModelTest.php:35</error>
+    </testcase>
+  </testsuite>
+</testsuites>

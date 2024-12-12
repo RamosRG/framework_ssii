@@ -23,14 +23,17 @@ class AccionsController extends BaseController
    {
        $model = new AuditModel();
 
-       // Datos para cada gráfica
        $data = [
-           'statusCounts' => $model->getAuditsByStatusDashboard(),
-           'areaCounts' => $model->getAuditsByDepartmentDashboard(),
-           'shiftCounts' => $model->getAuditsByShiftDashboard(),
-           'departmentCounts' => $model->getAuditsByMachinery(),
-           'actionProgress' => $model->getMonthlyTrends(),
-       ];
+        'statusCounts' => $model->getAuditsByStatusDashboard(),
+        'departmentCounts' => $model->getAuditsByDepartmentDashboard(),
+        'shiftCounts' => $model->getAuditsByShiftDashboard(),
+        'machineryCounts' => $model->getAuditsByMachinery(),
+        'actionProgress' => $model->getMonthlyTrends(),
+        'auditorCounts' => $model->getAuditsByAuditor(),
+        'reviewedByCounts' => $model->getReviewedByLayers(),
+        'areaCounts' => $model->getAreaCounts(),
+    ];
+
 
        return $this->response->setJSON($data);
    }

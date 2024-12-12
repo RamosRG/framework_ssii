@@ -1,0 +1,983 @@
+ERROR - 2024-12-12 16:42:22 --> mysqli_sql_exception: Unknown column 'department' in 'field list' in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\laragon\www\capas.com\app\Database\Seeds\TestSeeder.php(23): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\laragon\www\capas.com\system\Database\Seeder.php(147): App\Database\Seeds\TestSeeder->run()
+#6 C:\laragon\www\capas.com\system\Commands\Database\Seed.php(79): CodeIgniter\Database\Seeder->call('App\\Database\\Se...')
+#7 C:\laragon\www\capas.com\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Seed->run(Array)
+#8 C:\laragon\www\capas.com\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#9 C:\laragon\www\capas.com\system\Boot.php(351): CodeIgniter\CLI\Console->run()
+#10 C:\laragon\www\capas.com\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#11 C:\laragon\www\capas.com\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#12 {main}
+ERROR - 2024-12-12 16:53:44 --> Error connecting to the database: Error: Class "SQLite3" not found in C:\laragon\www\capas.com\system\Database\SQLite3\Connection.php:93
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\BaseConnection.php(421): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#1 C:\laragon\www\capas.com\system\Database\SQLite3\Connection.php(63): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(616): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `db...', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\capas.com\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\capas.com\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\capas.com\tests\unit\AuditModelTest.php(30): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestCase.php(1232): Tests\Unit\AuditModelTest->testInsertAudit()
+#9 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestCase.php(513): PHPUnit\Framework\TestCase->runTest()
+#10 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestRunner\TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
+#11 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestCase.php(360): PHPUnit\Framework\TestRunner->run(Object(Tests\Unit\AuditModelTest))
+#12 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestSuite.php(369): PHPUnit\Framework\TestCase->run()
+#13 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#14 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\TextUI\Application.php(210): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#15 C:\laragon\www\capas.com\vendor\phpunit\phpunit\phpunit(104): PHPUnit\TextUI\Application->run(Array)
+#16 C:\laragon\www\capas.com\vendor\bin\phpunit(122): include('C:\\laragon\\www\\...')
+#17 {main}
+ERROR - 2024-12-12 16:53:46 --> Error connecting to the database: Error: Class "SQLite3" not found in C:\laragon\www\capas.com\system\Database\SQLite3\Connection.php:93
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\BaseConnection.php(421): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#1 C:\laragon\www\capas.com\system\Database\SQLite3\Connection.php(63): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(616): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\capas.com\tests\unit\AuditModelTest.php(35): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestCase.php(1232): Tests\Unit\AuditModelTest->testFetchAudits()
+#8 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestCase.php(513): PHPUnit\Framework\TestCase->runTest()
+#9 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestRunner\TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
+#10 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestCase.php(360): PHPUnit\Framework\TestRunner->run(Object(Tests\Unit\AuditModelTest))
+#11 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestSuite.php(369): PHPUnit\Framework\TestCase->run()
+#12 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#13 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\TextUI\Application.php(210): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#14 C:\laragon\www\capas.com\vendor\phpunit\phpunit\phpunit(104): PHPUnit\TextUI\Application->run(Array)
+#15 C:\laragon\www\capas.com\vendor\bin\phpunit(122): include('C:\\laragon\\www\\...')
+#16 {main}
+ERROR - 2024-12-12 17:00:36 --> SQLite3Exception: no such table: db_audit in C:\laragon\www\capas.com\system\Database\SQLite3\Connection.php:157
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\SQLite3\Connection.php(157): SQLite3->exec('INSERT INTO `db...')
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\SQLite3\Connection->execute('INSERT INTO `db...')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `db...')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `db...', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\capas.com\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\capas.com\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\capas.com\tests\unit\AuditModelTest.php(30): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestCase.php(1232): Tests\Unit\AuditModelTest->testInsertAudit()
+#9 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestCase.php(513): PHPUnit\Framework\TestCase->runTest()
+#10 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestRunner\TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
+#11 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestCase.php(360): PHPUnit\Framework\TestRunner->run(Object(Tests\Unit\AuditModelTest))
+#12 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestSuite.php(369): PHPUnit\Framework\TestCase->run()
+#13 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#14 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\TextUI\Application.php(210): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#15 C:\laragon\www\capas.com\vendor\phpunit\phpunit\phpunit(104): PHPUnit\TextUI\Application->run(Array)
+#16 C:\laragon\www\capas.com\vendor\bin\phpunit(122): include('C:\\laragon\\www\\...')
+#17 {main}
+ERROR - 2024-12-12 17:00:36 --> SQLite3Exception: Unable to prepare statement: no such table: db_audit in C:\laragon\www\capas.com\system\Database\SQLite3\Connection.php:158
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\SQLite3\Connection.php(158): SQLite3->query('SELECT *\nFROM `...')
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *\nFROM `...')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\capas.com\tests\unit\AuditModelTest.php(35): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestCase.php(1232): Tests\Unit\AuditModelTest->testFetchAudits()
+#8 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestCase.php(513): PHPUnit\Framework\TestCase->runTest()
+#9 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestRunner\TestRunner.php(87): PHPUnit\Framework\TestCase->runBare()
+#10 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestCase.php(360): PHPUnit\Framework\TestRunner->run(Object(Tests\Unit\AuditModelTest))
+#11 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\Framework\TestSuite.php(369): PHPUnit\Framework\TestCase->run()
+#12 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(64): PHPUnit\Framework\TestSuite->run()
+#13 C:\laragon\www\capas.com\vendor\phpunit\phpunit\src\TextUI\Application.php(210): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#14 C:\laragon\www\capas.com\vendor\phpunit\phpunit\phpunit(104): PHPUnit\TextUI\Application->run(Array)
+#15 C:\laragon\www\capas.com\vendor\bin\phpunit(122): include('C:\\laragon\\www\\...')
+#16 {main}
+ERROR - 2024-12-12 17:06:25 --> mysqli_sql_exception: Failed to open the referenced table 'answer' in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('CREATE TABLE `a...', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `a...')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `a...')
+#3 C:\laragon\www\capas.com\system\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `a...')
+#4 C:\laragon\www\capas.com\app\Database\Migrations\2024-09-13-185647_AuditoriaCapas.php(21): CodeIgniter\Database\Forge->createTable('accions')
+#5 C:\laragon\www\capas.com\system\Database\MigrationRunner.php(867): App\Database\Migrations\AuditoriaCapas->up()
+#6 C:\laragon\www\capas.com\system\Database\MigrationRunner.php(183): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+#7 C:\laragon\www\capas.com\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 C:\laragon\www\capas.com\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 C:\laragon\www\capas.com\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 C:\laragon\www\capas.com\system\Boot.php(351): CodeIgniter\CLI\Console->run()
+#11 C:\laragon\www\capas.com\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#12 C:\laragon\www\capas.com\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#13 {main}
+INFO - 2024-12-12 17:22:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:22:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:22:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:27:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:27:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:27:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:27:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:27:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:27:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:27:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:27:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:27:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:27:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:27:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:27:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:29:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:29:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:29:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:29:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:29:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:29:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:30:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:30:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:30:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:30:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:31:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:31:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:31:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:31:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:32:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:32:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:32:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:32:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:34:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:34:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:36:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:36:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:36:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:36:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:37:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:37:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:47:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:47:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:47:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:47:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:47:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:47:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:47:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:48:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:48:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:49:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:49:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:49:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:50:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:50:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:50:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:50:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:50:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:50:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:50:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:50:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:50:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:50:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:50:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:51:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:51:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:51:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:51:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:51:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:54:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:54:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 17:54:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:02:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:02:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:02:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:02:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-12-12 18:02:39 --> mysqli_sql_exception: Unknown column 'audit.created_by' in 'on clause' in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`....', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`....')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`....')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`....', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\capas.com\app\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\capas.com\app\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+#9 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-12-12 18:02:39 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit.created_by' in 'on clause'
+[Method: GET, Route: accions/getDashboardData]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', [], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 18:02:39 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit.created_by' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', [], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 18:02:39 --> [Caused by] mysqli_sql_exception: Unknown column 'audit.created_by' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', [], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-12-12 18:02:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:02:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-12-12 18:02:44 --> mysqli_sql_exception: Unknown column 'audit.created_by' in 'on clause' in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`....', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`....')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`....')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`....', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\capas.com\app\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\capas.com\app\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+#9 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-12-12 18:02:44 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit.created_by' in 'on clause'
+[Method: GET, Route: accions/getDashboardData]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', [], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 18:02:44 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit.created_by' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', [], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 18:02:44 --> [Caused by] mysqli_sql_exception: Unknown column 'audit.created_by' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', [], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-12-12 18:03:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:04:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:04:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-12-12 18:04:02 --> mysqli_sql_exception: Unknown column 'audit.created_by' in 'on clause' in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`....', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`....')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`....')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`....', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\capas.com\app\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\capas.com\app\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+#9 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-12-12 18:04:02 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit.created_by' in 'on clause'
+[Method: GET, Route: accions/getDashboardData]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', [], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 18:04:02 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit.created_by' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', [], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 18:04:02 --> [Caused by] mysqli_sql_exception: Unknown column 'audit.created_by' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', [], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-12-12 18:04:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-12-12 18:04:06 --> mysqli_sql_exception: Unknown column 'audit.created_by' in 'on clause' in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`....', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`....')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`....')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`....', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\capas.com\app\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\capas.com\app\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+#9 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-12-12 18:04:06 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit.created_by' in 'on clause'
+[Method: GET, Route: accions/getDashboardData]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', [], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 18:04:06 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'audit.created_by' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', [], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 18:04:06 --> [Caused by] mysqli_sql_exception: Unknown column 'audit.created_by' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `users`.`name` as `auditor`, COUNT(*) as total
+FROM `audit`
+JOIN `users` ON `audit`.`created_by` = `users`.`id_user`
+GROUP BY `users`.`name`', [], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\AuditModel.php(26): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(32): App\Models\AuditModel->getAuditsByAuditor()
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-12-12 18:07:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:07:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-12-12 18:07:50 --> mysqli_sql_exception: Table 'auditoria_capas.layer' doesn't exist in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `layer`....', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `layer`....')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `layer`....')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `layer`....', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\capas.com\app\Models\AuditModel.php(42): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\capas.com\app\Controllers\AccionsController.php(34): App\Models\AuditModel->getAuditsByLayer()
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+#9 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#10 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-12-12 18:07:50 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'auditoria_capas.layer' doesn't exist
+[Method: GET, Route: accions/getDashboardData]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `layer`.`name` as `layer`, COUNT(*) as total
+FROM `audit`
+JOIN `layer` ON `audit`.`fk_layer` = `layer`.`id_layer`
+GROUP BY `layer`.`name`', [], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\AuditModel.php(42): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Controllers\AccionsController.php(34): App\Models\AuditModel->getAuditsByLayer()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 18:07:50 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'auditoria_capas.layer' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `layer`.`name` as `layer`, COUNT(*) as total
+FROM `audit`
+JOIN `layer` ON `audit`.`fk_layer` = `layer`.`id_layer`
+GROUP BY `layer`.`name`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `layer`.`name` as `layer`, COUNT(*) as total
+FROM `audit`
+JOIN `layer` ON `audit`.`fk_layer` = `layer`.`id_layer`
+GROUP BY `layer`.`name`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `layer`.`name` as `layer`, COUNT(*) as total
+FROM `audit`
+JOIN `layer` ON `audit`.`fk_layer` = `layer`.`id_layer`
+GROUP BY `layer`.`name`', [], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\AuditModel.php(42): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Controllers\AccionsController.php(34): App\Models\AuditModel->getAuditsByLayer()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 18:07:50 --> [Caused by] mysqli_sql_exception: Table 'auditoria_capas.layer' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `layer`.`name` as `layer`, COUNT(*) as total
+FROM `audit`
+JOIN `layer` ON `audit`.`fk_layer` = `layer`.`id_layer`
+GROUP BY `layer`.`name`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `layer`.`name` as `layer`, COUNT(*) as total
+FROM `audit`
+JOIN `layer` ON `audit`.`fk_layer` = `layer`.`id_layer`
+GROUP BY `layer`.`name`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `layer`.`name` as `layer`, COUNT(*) as total
+FROM `audit`
+JOIN `layer` ON `audit`.`fk_layer` = `layer`.`id_layer`
+GROUP BY `layer`.`name`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `layer`.`name` as `layer`, COUNT(*) as total
+FROM `audit`
+JOIN `layer` ON `audit`.`fk_layer` = `layer`.`id_layer`
+GROUP BY `layer`.`name`', [], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\AuditModel.php(42): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Controllers\AccionsController.php(34): App\Models\AuditModel->getAuditsByLayer()
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-12-12 18:11:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:11:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:12:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:12:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:13:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:13:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:26:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:26:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:26:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:26:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:27:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:27:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:30:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:30:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:31:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:31:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-12-12 18:31:11 --> mysqli_sql_exception: Unknown column 'area.name' in 'field list' in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `area`.`...', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `area`.`...')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `area`.`...')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `area`.`...', Array, false)
+#4 C:\laragon\www\capas.com\app\Models\AuditModel.php(45): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\capas.com\app\Controllers\AccionsController.php(34): App\Models\AuditModel->getAreaCounts()
+#6 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+#7 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2024-12-12 18:31:11 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'area.name' in 'field list'
+[Method: GET, Route: accions/getDashboardData]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `area`.`name` as `area`, COUNT(department.id_department) as department_count, COUNT(audit.id_audit) as audit_count
+FROM `area`
+LEFT JOIN `department` ON `department`.`fk_area` = `area`.`id_area`
+LEFT JOIN `audit` ON `audit`.`fk_department` = `department`.`id_department`
+GROUP BY `area`.`id_area`', [], false)
+ 2 APPPATH\Models\AuditModel.php(45): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\AccionsController.php(34): App\Models\AuditModel->getAreaCounts()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 18:31:11 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'area.name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `area`.`name` as `area`, COUNT(department.id_department) as department_count, COUNT(audit.id_audit) as audit_count
+FROM `area`
+LEFT JOIN `department` ON `department`.`fk_area` = `area`.`id_area`
+LEFT JOIN `audit` ON `audit`.`fk_department` = `department`.`id_department`
+GROUP BY `area`.`id_area`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `area`.`name` as `area`, COUNT(department.id_department) as department_count, COUNT(audit.id_audit) as audit_count
+FROM `area`
+LEFT JOIN `department` ON `department`.`fk_area` = `area`.`id_area`
+LEFT JOIN `audit` ON `audit`.`fk_department` = `department`.`id_department`
+GROUP BY `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `area`.`name` as `area`, COUNT(department.id_department) as department_count, COUNT(audit.id_audit) as audit_count
+FROM `area`
+LEFT JOIN `department` ON `department`.`fk_area` = `area`.`id_area`
+LEFT JOIN `audit` ON `audit`.`fk_department` = `department`.`id_department`
+GROUP BY `area`.`id_area`', [], false)
+ 4 APPPATH\Models\AuditModel.php(45): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Controllers\AccionsController.php(34): App\Models\AuditModel->getAreaCounts()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 18:31:11 --> [Caused by] mysqli_sql_exception: Unknown column 'area.name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `area`.`name` as `area`, COUNT(department.id_department) as department_count, COUNT(audit.id_audit) as audit_count
+FROM `area`
+LEFT JOIN `department` ON `department`.`fk_area` = `area`.`id_area`
+LEFT JOIN `audit` ON `audit`.`fk_department` = `department`.`id_department`
+GROUP BY `area`.`id_area`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `area`.`name` as `area`, COUNT(department.id_department) as department_count, COUNT(audit.id_audit) as audit_count
+FROM `area`
+LEFT JOIN `department` ON `department`.`fk_area` = `area`.`id_area`
+LEFT JOIN `audit` ON `audit`.`fk_department` = `department`.`id_department`
+GROUP BY `area`.`id_area`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `area`.`name` as `area`, COUNT(department.id_department) as department_count, COUNT(audit.id_audit) as audit_count
+FROM `area`
+LEFT JOIN `department` ON `department`.`fk_area` = `area`.`id_area`
+LEFT JOIN `audit` ON `audit`.`fk_department` = `department`.`id_department`
+GROUP BY `area`.`id_area`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `area`.`name` as `area`, COUNT(department.id_department) as department_count, COUNT(audit.id_audit) as audit_count
+FROM `area`
+LEFT JOIN `department` ON `department`.`fk_area` = `area`.`id_area`
+LEFT JOIN `audit` ON `audit`.`fk_department` = `department`.`id_department`
+GROUP BY `area`.`id_area`', [], false)
+ 5 APPPATH\Models\AuditModel.php(45): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\AccionsController.php(34): App\Models\AuditModel->getAreaCounts()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AccionsController->getDashboardData()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccionsController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-12-12 18:31:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:31:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:33:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:33:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:37:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:37:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:43:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:43:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:46:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:46:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:46:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:46:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:46:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:46:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:46:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:47:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 18:47:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:09:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:09:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:09:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:09:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:09:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:09:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:10:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:10:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:10:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:10:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:10:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:10:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:10:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:10:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:10:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:10:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:10:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:11:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:11:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:12:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:12:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:13:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-12-12 19:13:42 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-12-12 19:13:42 --> 220 smtp.gmail.com ESMTP 5614622812f47-3eb9644366asm492345b6e.7 - gsmtp
+
+hello: 250-smtp.gmail.com at your service, [136.226.1.12]
+250-SIZE 35882577
+250-8BITMIME
+250-STARTTLS
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+starttls: 220 2.0.0 Ready to start TLS
+
+hello: 250-smtp.gmail.com at your service, [136.226.1.12]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+from: 250 2.1.0 OK 5614622812f47-3eb9644366asm492345b6e.7 - gsmtp
+
+to: 555-5.5.2 Syntax error, cannot decode response. For more information, go to
+555-5.5.2  https://support.google.com/a/answer/3221692 and review RFC 5321
+555 5.5.2 specifications. 5614622812f47-3eb9644366asm492345b6e.7 - gsmtp
+
+The following SMTP error was encountered: 555-5.5.2 Syntax error, cannot decode response. For more information, go to
+555-5.5.2  https://support.google.com/a/answer/3221692 and review RFC 5321
+555 5.5.2 specifications. 5614622812f47-3eb9644366asm492345b6e.7 - gsmtp
+
+quit: 221 2.0.0 closing connection 5614622812f47-3eb9644366asm492345b6e.7 - gsmtp
+
+INFO - 2024-12-12 19:13:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:13:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:13:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:14:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:14:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:14:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:14:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:14:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:14:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:14:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:15:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:15:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:15:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:15:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:15:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:17:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:17:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:17:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:18:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:18:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:18:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-12-12 19:18:35 --> mysqli_sql_exception: Column 'evidence_accion' cannot be null in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `ac...', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ac...')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ac...')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ac...', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\capas.com\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\capas.com\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\capas.com\app\Controllers\UserController.php(307): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\UserController->submitAnswer()
+#9 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#10 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-12-12 19:18:35 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'evidence_accion' cannot be null
+[Method: POST, Route: user/submitAnswer]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (:fk_answer:, :action_description:, :responsable:, :is_complete:, :evidence_accion:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\UserController.php(307): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->submitAnswer()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 19:18:35 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'evidence_accion' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (\'50\', \'Ajustar cordon\', \'Carmen\', \'1\', NULL, \'2024-12-12 19:18:35\', \'2024-12-12 19:18:35\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (\'50\', \'Ajustar cordon\', \'Carmen\', \'1\', NULL, \'2024-12-12 19:18:35\', \'2024-12-12 19:18:35\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (:fk_answer:, :action_description:, :responsable:, :is_complete:, :evidence_accion:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\UserController.php(307): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->submitAnswer()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 19:18:35 --> [Caused by] mysqli_sql_exception: Column 'evidence_accion' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (\'50\', \'Ajustar cordon\', \'Carmen\', \'1\', NULL, \'2024-12-12 19:18:35\', \'2024-12-12 19:18:35\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (\'50\', \'Ajustar cordon\', \'Carmen\', \'1\', NULL, \'2024-12-12 19:18:35\', \'2024-12-12 19:18:35\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (\'50\', \'Ajustar cordon\', \'Carmen\', \'1\', NULL, \'2024-12-12 19:18:35\', \'2024-12-12 19:18:35\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (:fk_answer:, :action_description:, :responsable:, :is_complete:, :evidence_accion:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\UserController.php(307): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->submitAnswer()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-12-12 19:18:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-12-12 19:18:42 --> mysqli_sql_exception: Column 'evidence_accion' cannot be null in C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\laragon\www\capas.com\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `ac...', 0)
+#1 C:\laragon\www\capas.com\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ac...')
+#2 C:\laragon\www\capas.com\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ac...')
+#3 C:\laragon\www\capas.com\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ac...', Array, false)
+#4 C:\laragon\www\capas.com\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\capas.com\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\capas.com\system\Model.php(802): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\capas.com\app\Controllers\UserController.php(307): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\capas.com\system\CodeIgniter.php(933): App\Controllers\UserController->submitAnswer()
+#9 C:\laragon\www\capas.com\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#10 C:\laragon\www\capas.com\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\capas.com\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#12 C:\laragon\www\capas.com\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\laragon\www\capas.com\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2024-12-12 19:18:42 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'evidence_accion' cannot be null
+[Method: POST, Route: user/submitAnswer]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (:fk_answer:, :action_description:, :responsable:, :is_complete:, :evidence_accion:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\UserController.php(307): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->submitAnswer()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 19:18:42 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'evidence_accion' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (\'50\', \'Ajustar cordon\', \'Carmen\', \'1\', NULL, \'2024-12-12 19:18:42\', \'2024-12-12 19:18:42\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (\'50\', \'Ajustar cordon\', \'Carmen\', \'1\', NULL, \'2024-12-12 19:18:42\', \'2024-12-12 19:18:42\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (:fk_answer:, :action_description:, :responsable:, :is_complete:, :evidence_accion:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\UserController.php(307): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->submitAnswer()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-12-12 19:18:42 --> [Caused by] mysqli_sql_exception: Column 'evidence_accion' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (\'50\', \'Ajustar cordon\', \'Carmen\', \'1\', NULL, \'2024-12-12 19:18:42\', \'2024-12-12 19:18:42\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (\'50\', \'Ajustar cordon\', \'Carmen\', \'1\', NULL, \'2024-12-12 19:18:42\', \'2024-12-12 19:18:42\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (\'50\', \'Ajustar cordon\', \'Carmen\', \'1\', NULL, \'2024-12-12 19:18:42\', \'2024-12-12 19:18:42\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `actions` (`fk_answer`, `action_description`, `responsable`, `is_complete`, `evidence_accion`, `created_at`, `updated_at`) VALUES (:fk_answer:, :action_description:, :responsable:, :is_complete:, :evidence_accion:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(802): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\UserController.php(307): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserController->submitAnswer()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-12-12 19:19:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:19:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:19:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:19:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:20:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:20:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:20:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:20:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:20:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:20:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:20:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:20:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:20:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:21:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:23:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:23:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:23:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:23:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:23:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:23:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:23:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:24:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:24:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-12-12 19:25:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

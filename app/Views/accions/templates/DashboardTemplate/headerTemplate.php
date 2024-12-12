@@ -49,30 +49,66 @@
             background-color: #303f9f !important;
         }
 
-        #dashboard {
+          #dashboard {
             padding: 20px;
-            background-color: #f8f9fa;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .chart-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+            gap: 20px;
+        }
+
+        .chart-item {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
         canvas {
-            margin: 15px 0;
-            /* Reducido el margen superior e inferior */
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin: 0 auto;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
 
-        #historial-auditorias {
-            list-style-type: none;
-            padding: 0;
+        h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
         }
 
-        #historial-auditorias li {
-            padding: 8px;
-            background-color: #e9ecef;
-            margin-bottom: 5px;
-            border-radius: 4px;
+        /* Ajuste para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .chart-container {
+                grid-template-columns: 1fr; /* Una sola columna */
+            }
+
+            h2 {
+                font-size: 1em;
+            }
+
+            canvas {
+                max-width: 300px;
+            }
+        }
+
+        /* Ajuste para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 0.9em;
+            }
+
+            canvas {
+                max-width: 250px;
+            }
         }
     </style>
 </head>
