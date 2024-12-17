@@ -15,7 +15,7 @@ $routes->group('user', ['namespace' => 'App\Controllers'], function($routes) {
 });
 
 $routes->group('auth', ['namespace' => 'App\Controllers'], function($routes) {
-    $routes->post('login', 'AuthController::login');
+    $routes->post('auth/login', 'AuthController::login');
     $routes->get('logout', 'AuthController::logout');
     $routes->get('getPrivileges', 'AuthController::getPrivileges');
     $routes->get('forgotPassword', 'AuthController::forgotPassword');
